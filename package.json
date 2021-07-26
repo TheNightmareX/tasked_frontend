@@ -11,6 +11,7 @@
     "@vuex-orm/core": "^1.0.0-draft.14",
     "roboto-fontface": "*",
     "vue": "^3.0.5",
+    "vue-router": "^4.0.10",
     "vuetify": "^3.0.0-alpha.0",
     "vuex": "^4.0.2"
   },
