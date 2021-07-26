@@ -8,9 +8,11 @@
   },
   "dependencies": {
     "@mdi/font": "5.9.55",
+    "@vuex-orm/core": "^1.0.0-draft.14",
     "roboto-fontface": "*",
     "vue": "^3.0.5",
-    "vuetify": "^3.0.0-alpha.0"
+    "vuetify": "^3.0.0-alpha.0",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.2.5",
