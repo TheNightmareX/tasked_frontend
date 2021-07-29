@@ -1,9 +1,15 @@
 import { createStore } from "vuex";
 
+// Polyfill For My PR https://github.com/vuejs/vuex/pull/2033
 declare module "vuex" {
-  export function createStore<Options extends StoreOptions<unknown>>(
-    options: Options
-  ): EnhancedStore<
+  interface StricterPayload<Type extends string = string> extends Payload {
+    type: Type;
+  }
+
+  export function createStore<Options extends StoreOptions<any>>(
+    options: Options,
+    stricterTypes: true
+  ): StricterStore<
     Options extends StoreOptions<infer State> ? State : never,
     NonNullable<Options["getters"]>,
     NonNullable<Options["mutations"]>,
@@ -11,26 +17,23 @@ declare module "vuex" {
     NonNullable<Options["modules"]>
   >;
 
-  interface EnhancedStore<
-    State,
-    Getters extends GetterTree<State, State>,
-    Mutations extends MutationTree<State>,
-    Actions extends ActionTree<State, State>,
-    Modules extends ModuleTree<State>
-  > extends Store<unknown> {
-    readonly state: NestedState<State, State, Modules>;
-    readonly getters: NamespacedGetterReturnTypes<
-      State,
-      State,
-      Getters,
-      Modules
-    >;
+  export interface StricterStore<
+    RootState,
+    Getters extends GetterTree<RootState, RootState>,
+    Mutations extends MutationTree<RootState>,
+    Actions extends ActionTree<RootState, RootState>,
+    Modules extends ModuleTree<RootState>
+  > extends Omit<
+      Store<RootState>,
+      "state" | "getters" | "dispatch" | "commit"
+    > {
+    readonly state: StoreState<RootState, RootState, Modules>;
+    readonly getters: StoreGetters<RootState, RootState, Getters, Modules>;
 
-    commit: EnhancedCommit<State, Mutations, Modules>;
-    dispatch: EnhancedDispatch<State, State, Actions, Modules>;
+    dispatch: StricterDispatch<RootState, RootState, Actions, Modules>;
+    commit: StricterCommit<RootState, Mutations, Modules>;
   }
-
-  type NestedState<
+  type StoreState<
     State,
     RootState,
     Modules extends ModuleTree<RootState>
@@ -38,7 +41,7 @@ declare module "vuex" {
     {
       [Name in keyof Modules]: Modules[Name]["state"] &
         (Modules[Name]["modules"] extends ModuleTree<RootState>
-          ? NestedState<
+          ? StoreState<
               Modules[Name]["state"],
               RootState,
               Modules[Name]["modules"]
@@ -46,7 +49,7 @@ declare module "vuex" {
           : {});
     };
 
-  type NamespacedGetterReturnTypes<
+  type StoreGetters<
     State,
     RootState,
     Getters extends GetterTree<State, RootState>,
@@ -71,96 +74,133 @@ declare module "vuex" {
         : never;
     };
 
-  interface EnhancedCommit<
-    RootState,
-    Mutations extends MutationTree<RootState>,
-    Modules extends ModuleTree<RootState>
+  interface StricterDispatch<
+    State = any,
+    RootState = any,
+    Actions extends ActionTree<State, RootState> = any,
+    Modules extends ModuleTree<RootState> = any
   > {
-    <Type extends keyof Mutations>(
+    <Type extends DispatchType<State, RootState, Actions, Modules>>(
       type: Type,
-      payload?: Parameters<Mutations[Type]>[1],
-      options?: CommitOptions
-    ): void;
+      payload?: ExtractPayloadType<
+        DispatchAction<State, RootState, Actions, Modules, Type>
+      >,
+      options?: DispatchOptions
+    ): ReturnType<DispatchAction<State, RootState, Actions, Modules, Type>>;
 
-    <Path extends ExtractNamespacedPaths<RootState, Modules, "mutations">>(
-      type: Path,
-      payload?: ResolveNamespacedPath<
-        Path,
-        "mutations",
-        RootState,
-        Modules
-      > extends infer Mutation
-        ? Mutation extends (...args: [infer State, infer Payload]) => void
-          ? Payload
-          : never
-        : never,
-      options?: CommitOptions
-    ): void;
+    <Type extends DispatchType<State, RootState, Actions, Modules>>(
+      payloadWithType: StricterPayload<Type> &
+        ExtractPayloadType<
+          DispatchAction<State, RootState, Actions, Modules, Type>
+        >,
+      options?: DispatchOptions
+    ): Promise<any>;
   }
-
-  interface EnhancedDispatch<
+  type DispatchType<
     State,
     RootState,
     Actions extends ActionTree<State, RootState>,
     Modules extends ModuleTree<RootState>
-  > {
-    <Type extends keyof Actions>(
-      type: Type,
-      payload?: Parameters<
-        ExtractActionHandler<State, RootState, Actions[Type]>
-      >[1]
-    ): ReturnType<ExtractActionHandler<State, RootState, Actions[Type]>>;
-
-    <Path extends ExtractNamespacedPaths<RootState, Modules, "actions">>(
-      type: Path,
-      payload?: ResolveNamespacedPath<
-        Path,
+  > =
+    | (string & keyof Actions)
+    | ExtractNamespacedPaths<RootState, Modules, "actions">;
+  type DispatchAction<
+    State,
+    RootState,
+    Actions extends ActionTree<State, RootState>,
+    Modules extends ModuleTree<RootState>,
+    Type extends DispatchType<State, RootState, Actions, Modules>
+  > = Type extends string & keyof Actions
+    ? EnsureActionHandler<State, RootState, Actions[Type]>
+    : Type extends ExtractNamespacedPaths<RootState, Modules, "actions">
+    ? ResolveNamespacedPath<
+        Type,
         "actions",
         RootState,
         Modules
-      > extends infer Action_
-        ? Action_ extends Action<State, RootState>
-          ? Parameters<ExtractActionHandler<State, RootState, Action_>>[1]
-          : never
+      > extends infer ActionType
+      ? ActionType extends Action<State, RootState>
+        ? EnsureActionHandler<State, RootState, ActionType>
         : never
-    ): ResolveNamespacedPath<
-      Path,
-      "actions",
-      RootState,
-      Modules
-    > extends infer Action_
-      ? Action_ extends Action<State, RootState>
-        ? ReturnType<ExtractActionHandler<State, RootState, Action_>>
-        : never
-      : never;
-  }
-
-  type ExtractActionHandler<
+      : never
+    : never;
+  type EnsureActionHandler<
     State,
     RootState,
-    Action_ extends Action<State, RootState>
-  > = Action_ extends ActionObject<State, RootState>
-    ? Action_["handler"]
-    : Action_;
+    ActionType extends Action<State, RootState>
+  > = ActionType extends ActionObject<State, RootState>
+    ? ActionType["handler"]
+    : ActionType;
+
+  export interface StricterCommit<
+    RootState = any,
+    Mutations extends MutationTree<RootState> = any,
+    Modules extends ModuleTree<RootState> = any
+  > {
+    <Type extends CommitType<RootState, Mutations, Modules>>(
+      type: Type,
+      payload?: ExtractPayloadType<
+        CommitMutation<RootState, Mutations, Modules, Type>
+      >,
+      options?: CommitOptions
+    ): void;
+
+    <Type extends CommitType<RootState, Mutations, Modules>>(
+      payloadWithType: StricterPayload<Type> &
+        ExtractPayloadType<CommitMutation<RootState, Mutations, Modules, Type>>,
+      options?: CommitOptions
+    ): void;
+  }
+  type CommitType<
+    RootState,
+    Mutations extends MutationTree<RootState>,
+    Modules extends ModuleTree<RootState>
+  > =
+    | (string & keyof Mutations)
+    | ExtractNamespacedPaths<RootState, Modules, "mutations">;
+  type CommitMutation<
+    RootState,
+    Mutations extends MutationTree<RootState>,
+    Modules extends ModuleTree<RootState>,
+    Type extends CommitType<RootState, Mutations, Modules>
+  > = Type extends string & keyof Mutations
+    ? Mutations[Type]
+    : Type extends ExtractNamespacedPaths<RootState, Modules, "mutations">
+    ? ResolveNamespacedPath<
+        Type,
+        "mutations",
+        RootState,
+        Modules
+      > extends infer MutationType
+      ? MutationType extends Mutation<any>
+        ? MutationType
+        : never
+      : never
+    : never;
+
+  type ExtractPayloadType<
+    T extends (_: any, payload: any, ...args: any[]) => any
+  > = Parameters<T>[1];
 
   type ExtractNamespacedPaths<
     RootState,
     Modules extends ModuleTree<RootState>,
     KeysFrom extends keyof Module<unknown, unknown>
   > = {
-    [Name in string & keyof Modules]:
-      | `${Name}/${string & keyof Modules[Name][KeysFrom]}`
-      | `${Name}/${Modules[Name]["modules"] extends ModuleTree<RootState>
-          ? ExtractNamespacedPaths<
-              RootState,
-              Modules[Name]["modules"],
-              KeysFrom
-            >
-          : never}`;
+    [Name in string & keyof Modules]: Modules[Name]["namespaced"] extends true
+      ?
+          | `${Name}/${string & keyof Modules[Name][KeysFrom]}`
+          | `${Name}/${Modules[Name]["modules"] extends ModuleTree<RootState>
+              ? ExtractNamespacedPaths<
+                  RootState,
+                  Modules[Name]["modules"],
+                  KeysFrom
+                >
+              : never}`
+      : never;
   } extends infer T
     ? T[keyof T]
     : never;
-
   type ResolveNamespacedPath<
     Path extends string,
     KeysFrom extends keyof Module<unknown, unknown>,
@@ -178,9 +218,6 @@ declare module "vuex" {
     : never;
 }
 
-const store = createStore({});
-export default store;
-
 declare module "vuex" {
   export function useStore(): typeof store;
 }
@@ -189,3 +226,6 @@ declare module "@vue/runtime-core" {
     $store: typeof store;
   }
 }
+
+const store = createStore({}, true);
+export default store;
