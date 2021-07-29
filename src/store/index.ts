@@ -228,4 +228,5 @@ declare module "@vue/runtime-core" {
 }
 
 const store = createStore({}, true);
+
 export default store;
