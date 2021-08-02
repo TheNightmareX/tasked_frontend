@@ -1,0 +1,31 @@
+:host > nz-layout {
+  height: 100%;
+}
+
+nz-header {
+  padding-left: unset;
+}
+nz-header > .menu {
+  float: left;
+}
+
+#logo {
+  font-weight: 500;
+  font-size: large;
+  width: var(--sider-width);
+  text-align: center;
+  float: left;
+}
+#logo > span {
+  color: white;
+  opacity: 0.9;
+  cursor: pointer;
+  user-select: none;
+}
+
+nz-sider {
+  width: var(--sider-width);
+}
+nz-sider > .menu {
+  height: 100%;
+}
