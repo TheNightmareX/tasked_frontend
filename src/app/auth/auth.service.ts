@@ -14,11 +14,8 @@ interface AuthInfo {
 export class AuthService {
   token: string | null;
 
-  constructor(
-    private http: HttpClient,
-    private localStorageService: LocalStorageService,
-  ) {
-    this.token = this.localStorageService.load(
+  constructor(private http: HttpClient, private storage: LocalStorageService) {
+    this.token = this.storage.load(
       'token',
       null,
       (v): v is string | null => v == null || typeof v == 'string',
