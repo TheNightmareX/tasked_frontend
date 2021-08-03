@@ -5,6 +5,7 @@
   </nz-header>
   <nz-layout>
     <nz-sider
+      *ngIf="authService.token"
       nzCollapsible
       [nzCollapsedWidth]="0"
       nzTheme="light"

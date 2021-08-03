@@ -1,0 +1,24 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+div.header > h2 {
+  text-align: center;
+}
+div.header {
+  flex-grow: 0.5;
+}
+
+div.content {
+  flex-grow: 0.7;
+}
+
+div.buttons {
+  flex-grow: 1;
+}
+
+div.footer {
+  margin-bottom: 20px;
+}
