@@ -72,7 +72,8 @@
               "browserTarget": "tasked:build:production"
             },
             "development": {
-              "browserTarget": "tasked:build:development"
+              "browserTarget": "tasked:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
