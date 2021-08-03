@@ -5,6 +5,12 @@
   align-items: center;
 }
 
+div.container {
+  width: 76%;
+  max-width: 426px;
+  height: 100%;
+}
+
 div.pusher {
   height: 13%;
 }
