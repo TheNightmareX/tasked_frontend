@@ -1,0 +1,119 @@
+<form nz-form (ngSubmit)="submit()" #form="ngForm">
+  <app-auth-form-layout>
+    <ng-container ngProjectAs="title">Signup</ng-container>
+
+    <ng-container ngProjectAs="content">
+      <!-- username -->
+      <nz-form-item>
+        <nz-form-control
+          nzHasFeedback
+          nzErrorTip="Must consist of alphanumeric, underscores or hyphens"
+        >
+          <nz-input-group nzPrefixIcon="user">
+            <input
+              nz-input
+              [(ngModel)]="data.username"
+              name="username"
+              type="text"
+              placeholder="Username"
+              autocomplete="username"
+              required
+              maxlength="15"
+              pattern="^([a-zA-Z0-9_-])+$"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <!-- password -->
+      <nz-form-item>
+        <nz-form-control nzHasFeedback nzErrorTip="Must be 6-20 characters">
+          <nz-input-group nzPrefixIcon="lock">
+            <input
+              nz-input
+              [(ngModel)]="data.password"
+              name="password"
+              type="password"
+              placeholder="Password"
+              autocomplete="new-password"
+              required
+              minlength="6"
+              maxlength="20"
+              (ngModelChange)="passwordConfirm.reset()"
+              #password="ngModel"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <!-- password-confirm -->
+      <nz-form-item>
+        <nz-form-control nzHasFeedback>
+          <nz-input-group nzPrefixIcon="info-circle">
+            <input
+              nz-input
+              [(ngModel)]="data.passwordConfirm"
+              name="password-confirm"
+              type="password"
+              placeholder="Confirm Password"
+              autocomplete="new-password"
+              [disabled]="!password.valid || false"
+              required
+              [appEqual]="data.password"
+              #passwordConfirm="ngModel"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <!-- nickname -->
+      <nz-form-item>
+        <nz-form-control nzHasFeedback>
+          <nz-input-group nzPrefixIcon="tag">
+            <input
+              nz-input
+              [(ngModel)]="data.nickname"
+              name="nickname"
+              type="text"
+              placeholder="Nickname"
+              autocomplete="nickname"
+              maxlength="15"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <!-- gender -->
+      <nz-form-item>
+        <nz-form-control>
+          <nz-radio-group
+            [(ngModel)]="data.gender"
+            nzButtonStyle="outline"
+            name="gender"
+          >
+            <label
+              nz-radio-button
+              *ngFor="let item of genderSelections"
+              [nzValue]="item.value"
+            >
+              {{ item.text }}
+            </label>
+          </nz-radio-group>
+        </nz-form-control>
+      </nz-form-item>
+    </ng-container>
+
+    <ng-container ngProjectAs="buttons">
+      <button
+        nz-button
+        nzBlock
+        nzType="primary"
+        [disabled]="!form.valid"
+        [nzLoading]="isLoading"
+        type="submit"
+      >
+        Register
+      </button>
+    </ng-container>
+
+    <ng-container ngProjectAs="footer">
+      Have an account? <a routerLink="../login/">Login</a> right now!
+    </ng-container>
+  </app-auth-form-layout>
+</form>

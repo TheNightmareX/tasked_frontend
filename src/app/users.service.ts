@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { UserCreateDto } from './user-create.dto';
 import { User } from './user.interface';
 
 @Injectable({
@@ -7,6 +8,10 @@ import { User } from './user.interface';
 })
 export class UsersService {
   constructor(private http: HttpClient) {}
+
+  create(data: UserCreateDto) {
+    return this.http.post<User>(this.url(), data);
+  }
 
   retrieve(username: string) {
     return this.http.get<User>(this.url(username));

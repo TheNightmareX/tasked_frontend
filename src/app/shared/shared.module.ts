@@ -3,14 +3,16 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { EqualDirective } from './equal.directive';
 import { LayoutComponent } from './layout/layout.component';
 
 const modules = [CommonModule, FormsModule];
 const components = [LayoutComponent];
+const directives = [EqualDirective];
 
 @NgModule({
-  declarations: [components],
+  declarations: [components, directives],
   imports: [modules, NzLayoutModule, NzMenuModule],
-  exports: [modules, components],
+  exports: [modules, components, directives],
 })
 export class SharedModule {}
