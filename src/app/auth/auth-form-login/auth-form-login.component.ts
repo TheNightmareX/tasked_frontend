@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { forkJoin, of, timer } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { forkJoin, of, Subject, timer } from 'rxjs';
+import { catchError, map, throttleTime } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth.service';
 
 @Component({
@@ -12,8 +12,10 @@ import { AuthService } from 'src/app/auth.service';
 })
 export class AuthFormLoginComponent implements OnInit {
   data = { username: '', password: '' };
+
   isLoading = false;
-  isCooling = false;
+
+  submit$ = new Subject<Event>();
 
   constructor(
     private router: Router,
@@ -21,27 +23,21 @@ export class AuthFormLoginComponent implements OnInit {
     private messenger: NzMessageService,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.submit$.pipe(throttleTime(1000)).subscribe(() => this.submit());
+  }
 
-  submit() {
-    if (this.isCooling) return;
-    this.isCooling = true;
-
+  private submit() {
     const { username, password } = this.data;
-
     this.isLoading = true;
     forkJoin([
-      this.auth.login(username, password).pipe(catchError(() => of(undefined))),
+      this.auth.login(username, password).pipe(catchError(() => of(null))),
       timer(1000),
     ])
       .pipe(map(([token]) => token))
       .subscribe((token) => {
-        if (token) {
-          this.router.navigate(['/']);
-        } else {
-          this.messenger.error('Invalid username or password');
-          timer(500).subscribe(() => (this.isCooling = false));
-        }
+        if (token) this.router.navigate(['/']);
+        else this.messenger.error('Invalid username or password');
         this.isLoading = false;
       });
   }

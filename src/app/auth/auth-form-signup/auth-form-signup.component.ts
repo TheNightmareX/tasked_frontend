@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { forkJoin, of, timer } from 'rxjs';
-import { catchError, concatMap, map } from 'rxjs/operators';
+import { forkJoin, of, Subject, timer } from 'rxjs';
+import { catchError, concatMap, map, throttleTime } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth.service';
 import { Gender } from 'src/app/gender.enum';
 import { UserCreateDto } from 'src/app/user-create.dto';
@@ -19,6 +19,7 @@ export class AuthFormSignupComponent implements OnInit {
     { text: 'Female', value: Gender.Female },
     { text: 'Alien', value: Gender.Unknown },
   ];
+
   data = {
     username: '',
     nickname: undefined as string | undefined,
@@ -26,8 +27,10 @@ export class AuthFormSignupComponent implements OnInit {
     passwordConfirm: '',
     gender: Gender.Unknown,
   };
+
   isLoading = false;
-  isCooling = false;
+
+  submit$ = new Subject<Event>();
 
   constructor(
     private users: UsersService,
@@ -36,13 +39,12 @@ export class AuthFormSignupComponent implements OnInit {
     private router: Router,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.submit$.pipe(throttleTime(1000)).subscribe(() => this.submit());
+  }
 
-  submit() {
-    if (this.isCooling) return;
-    this.isCooling = true;
+  private submit() {
     this.isLoading = true;
-
     const { username, password, nickname, gender } = this.data;
     const data: UserCreateDto = { username, password, nickname, gender };
     forkJoin([
@@ -54,16 +56,10 @@ export class AuthFormSignupComponent implements OnInit {
       timer(1000),
     ])
       .pipe(map(([user]) => user))
-      .subscribe((result) => {
+      .subscribe((user) => {
+        if (user) this.router.navigate(['/']);
+        else this.messanger.error('Username is already taken');
         this.isLoading = false;
-        if (result) {
-          this.router.navigate(['/']);
-        } else {
-          this.messanger.error('Username is already taken');
-          timer(1000).subscribe(() => {
-            this.isCooling = false;
-          });
-        }
       });
   }
 }

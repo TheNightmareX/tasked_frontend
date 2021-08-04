@@ -1,4 +1,4 @@
-<form nz-form (ngSubmit)="submit()" #form="ngForm">
+<form nz-form (ngSubmit)="submit$.next()" #form="ngForm">
   <app-auth-form-layout>
     <ng-container ngProjectAs="title">Signup</ng-container>
 
