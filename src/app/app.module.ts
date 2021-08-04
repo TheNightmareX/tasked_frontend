@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { NotFoundComponent } from './not-found.component';
+import { SharedModule } from './shared/shared.module';
 
 registerLocaleData(en);
 
@@ -26,6 +27,7 @@ const icons = [PartitionOutline];
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    SharedModule,
     NzIconModule.forRoot(icons),
     NzLayoutModule,
     NzMenuModule,

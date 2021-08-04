@@ -1,6 +1,4 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { LockOutline, UserOutline } from '@ant-design/icons-angular/icons/';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
@@ -9,6 +7,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { SharedModule } from '../shared/shared.module';
 import { AuthFormLayoutComponent } from './auth-form-layout/auth-form-layout.component';
 import { AuthFormLoginComponent } from './auth-form-login/auth-form-login.component';
 import { AuthRoutingModule } from './auth-routing.module';
@@ -23,8 +22,7 @@ const icons = [UserOutline, LockOutline];
     AuthFormLoginComponent,
   ],
   imports: [
-    CommonModule,
-    FormsModule,
+    SharedModule,
     NzIconModule.forChild(icons),
     NzFormModule,
     NzInputModule,
