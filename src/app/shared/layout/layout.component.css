@@ -13,7 +13,8 @@ nz-header {
 nz-header > #logo {
   font-weight: 500;
   font-size: large;
-  width: var(--sider-width);
+  width: 35vw;
+  max-width: var(--sider-width);
   text-align: center;
   float: left;
 }
