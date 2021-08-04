@@ -13,6 +13,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthInterceptor } from './auth.interceptor';
 import { AuthModule } from './auth/auth.module';
 import { NotFoundComponent } from './not-found.component';
 import { SharedModule } from './shared/shared.module';
@@ -36,7 +37,7 @@ const icons = [PartitionOutline];
     AuthModule,
     AppRoutingModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, AuthInterceptor],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, share } from 'rxjs/operators';
+import { concatMap, map, share } from 'rxjs/operators';
 import { LocalStorageService } from './local-storage.service';
+import { User } from './user.interface';
+import { UsersService } from './users.service';
 
 interface AuthInfo {
   token: string;
@@ -16,7 +18,16 @@ export class AuthService {
     return this.#token;
   }
 
-  constructor(private http: HttpClient, private storage: LocalStorageService) {
+  #user: User | null = null;
+  get user() {
+    return this.#user;
+  }
+
+  constructor(
+    private http: HttpClient,
+    private storage: LocalStorageService,
+    private users: UsersService,
+  ) {
     this.#token = this.storage.load(
       'token',
       null,
@@ -26,7 +37,7 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    const token$ = this.http
+    const data$ = this.http
       .put<AuthInfo>(
         '/api/auth/',
         { username, password },
@@ -34,14 +45,18 @@ export class AuthService {
       )
       .pipe(
         map((info) => info.token),
+        concatMap((token) =>
+          this.users
+            .retrieve(username)
+            .pipe(map((user) => [user, token] as const)),
+        ),
         share(),
       );
-
-    token$.subscribe((token) => {
+    data$.subscribe(([user, token]) => {
+      this.#user = user;
       this.#token = token;
     });
-
-    return token$;
+    return data$;
   }
 
   logout() {
