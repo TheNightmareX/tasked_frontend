@@ -1,16 +1,21 @@
 :host {
-  display: flex;
+  display: block;
   height: 100%;
-  flex-direction: column;
-  align-items: center;
 }
 
 div.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 76%;
   max-width: 426px;
   height: 100%;
+  margin: 0 auto;
 }
-
-div.pusher {
+div.container > .pusher {
   height: 10%;
+}
+div.container > main {
+  width: 100%;
+  height: 100%;
 }
