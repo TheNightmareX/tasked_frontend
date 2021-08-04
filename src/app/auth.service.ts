@@ -1,15 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { LocalStorageService } from '../local-storage.service';
-import { AuthModule } from './auth.module';
+import { LocalStorageService } from './local-storage.service';
 
 interface AuthInfo {
   token: string;
 }
 
 @Injectable({
-  providedIn: AuthModule,
+  providedIn: 'root',
 })
 export class AuthService {
   token: string | null;

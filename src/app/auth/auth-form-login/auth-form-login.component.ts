@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { forkJoin, of, timer } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { AuthService } from '../auth.service';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-auth-form-login',
