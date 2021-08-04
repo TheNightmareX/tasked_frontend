@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { map, share } from 'rxjs/operators';
 import { LocalStorageService } from './local-storage.service';
 
 interface AuthInfo {
@@ -11,24 +11,40 @@ interface AuthInfo {
   providedIn: 'root',
 })
 export class AuthService {
-  token: string | null;
+  #token: string | null = null;
+  get token() {
+    return this.#token;
+  }
 
   constructor(private http: HttpClient, private storage: LocalStorageService) {
-    this.token = this.storage.load(
+    this.#token = this.storage.load(
       'token',
       null,
       (v): v is string | null => v == null || typeof v == 'string',
-      () => this.token,
+      () => this.#token,
     );
   }
 
-  obtainToken(username: string, password: string) {
-    return this.http
+  login(username: string, password: string) {
+    const token$ = this.http
       .put<AuthInfo>(
         '/api/auth/',
         { username, password },
         { observe: 'body', responseType: 'json' },
       )
-      .pipe(map((info) => info.token));
+      .pipe(
+        map((info) => info.token),
+        share(),
+      );
+
+    token$.subscribe((token) => {
+      this.#token = token;
+    });
+
+    return token$;
+  }
+
+  logout() {
+    this.#token = null;
   }
 }

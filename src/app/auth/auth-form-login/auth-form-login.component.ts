@@ -32,14 +32,13 @@ export class AuthFormLoginComponent implements OnInit {
     this.isLoading = true;
     forkJoin([
       this.authService
-        .obtainToken(username, password)
+        .login(username, password)
         .pipe(catchError(() => of(undefined))),
       timer(1000),
     ])
       .pipe(map(([token]) => token))
       .subscribe((token) => {
         if (token) {
-          this.authService.token = token;
           this.router.navigate(['/']);
         } else {
           this.messenger.error('Invalid username or password');
