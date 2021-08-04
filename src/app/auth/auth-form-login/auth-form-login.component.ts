@@ -17,7 +17,7 @@ export class AuthFormLoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService,
+    private auth: AuthService,
     private messenger: NzMessageService,
   ) {}
 
@@ -31,9 +31,7 @@ export class AuthFormLoginComponent implements OnInit {
 
     this.isLoading = true;
     forkJoin([
-      this.authService
-        .login(username, password)
-        .pipe(catchError(() => of(undefined))),
+      this.auth.login(username, password).pipe(catchError(() => of(undefined))),
       timer(1000),
     ])
       .pipe(map(([token]) => token))
