@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { concatMap, map, share } from 'rxjs/operators';
+import { concatMap, map, tap } from 'rxjs/operators';
 import { LocalStorageService } from './local-storage.service';
 import { User } from './user.interface';
 import { UsersService } from './users.service';
@@ -37,7 +37,7 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    const data$ = this.http
+    return this.http
       .put<AuthInfo>(
         '/auth/',
         { username, password },
@@ -50,13 +50,11 @@ export class AuthService {
             .retrieve(username)
             .pipe(map((user) => [user, token] as const)),
         ),
-        share(),
+        tap(([user, token]) => {
+          this.#user = user;
+          this.#token = token;
+        }),
       );
-    data$.subscribe(([user, token]) => {
-      this.#user = user;
-      this.#token = token;
-    });
-    return data$;
   }
 
   logout() {
