@@ -13,7 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { HttpInterceptorsModule } from './http-interceptors/http-interceptors.module';
-import { NotFoundComponent } from './not-found.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { SharedModule } from './shared/shared.module';
 
 registerLocaleData(en);
