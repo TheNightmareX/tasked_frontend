@@ -1,5 +1,5 @@
 import { registerLocaleData } from '@angular/common';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import en from '@angular/common/locales/en';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,10 +11,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthInterceptor } from './auth.interceptor';
 import { AuthModule } from './auth/auth.module';
+import { HttpInterceptorsModule } from './http-interceptors/http-interceptors.module';
 import { NotFoundComponent } from './not-found.component';
-import { PrefixInterceptor } from './prefix.interceptor';
 import { SharedModule } from './shared/shared.module';
 
 registerLocaleData(en);
@@ -27,6 +26,7 @@ const icons = [PartitionOutline];
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    HttpInterceptorsModule,
     SharedModule,
     NzIconModule.forRoot(icons),
     NzResultModule,
@@ -34,11 +34,7 @@ const icons = [PartitionOutline];
     AuthModule,
     AppRoutingModule,
   ],
-  providers: [
-    { provide: NZ_I18N, useValue: en_US },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: PrefixInterceptor, multi: true },
-  ],
+  providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
