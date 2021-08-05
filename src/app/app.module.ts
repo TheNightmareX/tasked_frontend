@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { AuthModule } from './auth/auth.module';
 import { NotFoundComponent } from './not-found.component';
+import { PrefixInterceptor } from './prefix.interceptor';
 import { SharedModule } from './shared/shared.module';
 
 registerLocaleData(en);
@@ -36,6 +37,7 @@ const icons = [PartitionOutline];
   providers: [
     { provide: NZ_I18N, useValue: en_US },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: PrefixInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

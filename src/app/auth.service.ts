@@ -39,7 +39,7 @@ export class AuthService {
   login(username: string, password: string) {
     const data$ = this.http
       .put<AuthInfo>(
-        '/api/auth/',
+        '/auth/',
         { username, password },
         { observe: 'body', responseType: 'json' },
       )

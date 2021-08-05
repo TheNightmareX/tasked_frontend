@@ -18,7 +18,7 @@ export class UsersService {
   }
 
   private url(username?: string) {
-    const BASE = '/api/users/';
+    const BASE = '/users/';
     return username ? BASE + username + '/' : BASE;
   }
 }
