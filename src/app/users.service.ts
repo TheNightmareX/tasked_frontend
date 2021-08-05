@@ -9,6 +9,10 @@ import { User } from './user.interface';
 export class UsersService {
   constructor(private http: HttpClient) {}
 
+  loadCurrent() {
+    return this.http.get<User>(this.url('~current'));
+  }
+
   create(data: UserCreateDto) {
     return this.http.post<User>(this.url(), data);
   }

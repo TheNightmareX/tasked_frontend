@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { concatMap, map, tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { LocalStorageService } from './local-storage.service';
 import { User } from './user.interface';
 import { UsersService } from './users.service';
@@ -37,27 +37,24 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    return this.http
-      .put<AuthInfo>(
-        '/auth/',
-        { username, password },
-        { observe: 'body', responseType: 'json' },
-      )
-      .pipe(
-        map((info) => info.token),
-        concatMap((token) =>
-          this.users
-            .retrieve(username)
-            .pipe(map((user) => [user, token] as const)),
-        ),
-        tap(([user, token]) => {
-          this.#user = user;
-          this.#token = token;
-        }),
-      );
+    return this.http.put<AuthInfo>('/auth/', { username, password }).pipe(
+      map((info) => info.token),
+      tap((token) => {
+        this.#token = token;
+      }),
+    );
   }
 
   logout() {
     this.#token = null;
+    this.#user = null;
+  }
+
+  loadUser() {
+    return this.users.loadCurrent().pipe(
+      tap((user) => {
+        this.#user = user;
+      }),
+    );
   }
 }
