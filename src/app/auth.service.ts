@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
 import { LocalStorageService } from './local-storage.service';
-import { User } from './user.interface';
+import { User } from './user.entity';
 import { UsersService } from './users.service';
 
 interface AuthInfo {

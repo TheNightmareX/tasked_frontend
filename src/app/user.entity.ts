@@ -1,16 +1,14 @@
 import { Expose } from 'class-transformer';
+import { BaseEntity } from './base.entity';
 import { Gender } from './gender.enum';
 
-export class UserCreateDto {
+export class User extends BaseEntity {
   @Expose()
   username!: string;
 
   @Expose()
-  nickname?: string;
+  nickname!: string | null;
 
   @Expose()
-  password!: string;
-
-  @Expose()
-  gender?: Gender;
+  gender!: Gender;
 }
