@@ -1,14 +1,22 @@
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgModule, Provider, Type } from '@angular/core';
 import { AuthInterceptor } from './auth.interceptor';
 import { ListInterceptor } from './list.interceptor';
 import { PrefixInterceptor } from './prefix.interceptor';
+import { TransformerInterceptor } from './transformer.interceptor';
+
+const register = (type: Type<HttpInterceptor>): Provider => ({
+  provide: HTTP_INTERCEPTORS,
+  useClass: type,
+  multi: true,
+});
 
 @NgModule({
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ListInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: PrefixInterceptor, multi: true },
+    register(AuthInterceptor),
+    register(ListInterceptor),
+    register(TransformerInterceptor),
+    register(PrefixInterceptor),
   ],
 })
 export class HttpInterceptorsModule {}
