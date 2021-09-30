@@ -35,7 +35,7 @@ export class AuthFormSignupComponent implements OnInit {
   constructor(
     private users: UsersService,
     private auth: AuthService,
-    private messanger: NzMessageService,
+    private messenger: NzMessageService,
     private router: Router,
   ) {}
 
@@ -58,7 +58,7 @@ export class AuthFormSignupComponent implements OnInit {
       .pipe(map(([user]) => user))
       .subscribe((user) => {
         if (user) this.router.navigate(['/']);
-        else this.messanger.error('Username is already taken');
+        else this.messenger.error('Username is already taken');
         this.isLoading = false;
       });
   }
