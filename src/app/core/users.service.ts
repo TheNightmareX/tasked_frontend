@@ -1,8 +1,8 @@
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TRANSFORM } from './http-interceptors/transformer.interceptor';
-import { UserCreateDto } from './user-create.dto';
-import { User } from './user.entity';
+import { TRANSFORM } from '../http-interceptors/transformer.interceptor';
+import { UserCreateDto } from '../user-create.dto';
+import { User } from '../user.entity';
 
 @Injectable({
   providedIn: 'root',

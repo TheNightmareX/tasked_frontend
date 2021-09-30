@@ -12,8 +12,8 @@ import { NzResultModule } from 'ng-zorro-antd/result';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
+import { CoreModule } from './core/core.module';
 import { HttpInterceptorsModule } from './http-interceptors/http-interceptors.module';
-import { NotFoundComponent } from './not-found/not-found.component';
 import { SharedModule } from './shared/shared.module';
 
 registerLocaleData(en);
@@ -21,16 +21,15 @@ registerLocaleData(en);
 const icons = [PartitionOutline];
 
 @NgModule({
-  declarations: [AppComponent, NotFoundComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     HttpInterceptorsModule,
+    CoreModule,
     SharedModule,
     NzIconModule.forRoot(icons),
-    NzResultModule,
-    NzButtonModule,
     AuthModule,
     AppRoutingModule,
   ],

@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { forkJoin, of, Subject, timer } from 'rxjs';
 import { catchError, concatMap, map, throttleTime } from 'rxjs/operators';
-import { AuthService } from 'src/app/auth.service';
+import { AuthService } from 'src/app/core/auth.service';
+import { UsersService } from 'src/app/core/users.service';
 import { Gender } from 'src/app/gender.enum';
 import { UserCreateDto } from 'src/app/user-create.dto';
-import { UsersService } from 'src/app/users.service';
 
 @Component({
   selector: 'app-auth-form-signup',

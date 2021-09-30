@@ -8,8 +8,8 @@ import {
 import { Injectable } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { TransformerService } from '../core/transformer.service';
 import { ListResult } from '../list-result.dto';
-import { TransformerService } from '../transformer.service';
 
 @Injectable()
 export class ListInterceptor implements HttpInterceptor {

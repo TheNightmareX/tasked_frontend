@@ -8,8 +8,8 @@ import {
 import { Injectable, Type } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { BaseEntity } from '../base.entity';
+import { TransformerService } from '../core/transformer.service';
 import { ListResult } from '../list-result.dto';
-import { TransformerService } from '../transformer.service';
 
 export const TRANSFORM = new HttpContextToken<Type<BaseEntity> | null>(
   () => null,
