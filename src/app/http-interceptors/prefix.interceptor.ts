@@ -10,7 +10,8 @@ export class PrefixInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler) {
-    request = request.clone({ url: '/api' + request.url });
+    const url = request.url == '/graphql/' ? request.url : '/api' + request.url;
+    request = request.clone({ url });
     return next.handle(request);
   }
 }
