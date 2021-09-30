@@ -5,16 +5,17 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PartitionOutline } from '@ant-design/icons-angular/icons/';
-import { NzButtonModule } from 'ng-zorro-antd/button';
 import { en_US, NZ_I18N } from 'ng-zorro-antd/i18n';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzResultModule } from 'ng-zorro-antd/result';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { HttpInterceptorsModule } from './http-interceptors/http-interceptors.module';
 import { SharedModule } from './shared/shared.module';
+import { APOLLO_OPTIONS } from 'apollo-angular';
+import { InMemoryCache } from '@apollo/client';
+import { HttpLink } from 'apollo-angular/http';
 
 registerLocaleData(en);
 
@@ -33,7 +34,17 @@ const icons = [PartitionOutline];
     AuthModule,
     AppRoutingModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory: (httpLink: HttpLink) => ({
+        link: httpLink.create({ uri: '/graphql/' }),
+        cache: new InMemoryCache(),
+      }),
+      deps: [HttpLink],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
