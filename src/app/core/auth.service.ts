@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
 import { User } from '../user.entity';
+import { CoreModule } from './core.module';
 import { LocalStorageService } from './local-storage.service';
 import { UsersService } from './users.service';
 
@@ -10,7 +11,7 @@ interface AuthInfo {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: CoreModule,
 })
 export class AuthService {
   #token: string | null = null;

@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 import { TRANSFORM } from '../http-interceptors/transformer.interceptor';
 import { UserCreateDto } from '../user-create.dto';
 import { User } from '../user.entity';
+import { CoreModule } from './core.module';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: CoreModule,
 })
 export class UsersService {
   private get context() {

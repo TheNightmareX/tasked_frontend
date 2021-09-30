@@ -1,8 +1,9 @@
 import { Injectable, Type } from '@angular/core';
 import { plainToClass } from 'class-transformer';
+import { CoreModule } from './core.module';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: CoreModule,
 })
 export class TransformerService {
   constructor() {}
