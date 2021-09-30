@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
-import { AuthGQL, UserScalarsFragment } from '../graphql';
+import { AuthGQL, UserScalarFieldsFragment } from '../graphql';
 import { CoreModule } from './core.module';
 import { LocalStorageService } from './local-storage.service';
 
@@ -13,7 +13,7 @@ export class AuthService {
     return this.#token;
   }
 
-  #user: UserScalarsFragment | null = null;
+  #user: UserScalarFieldsFragment | null = null;
   get user() {
     return this.#user;
   }

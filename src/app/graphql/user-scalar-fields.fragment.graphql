@@ -1,4 +1,4 @@
-fragment UserScalars on User {
+fragment userScalarFields on User {
   id
   username
   nickname
