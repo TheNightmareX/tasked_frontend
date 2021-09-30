@@ -4,9 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { forkJoin, of, Subject, timer } from 'rxjs';
 import { catchError, concatMap, map, throttleTime } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/auth.service';
-import { UsersService } from 'src/app/core/users.service';
-import { Gender } from 'src/app/gender.enum';
-import { UserCreateDto } from 'src/app/user-create.dto';
+import { UserCreateInput, Gender, CreateUserGQL } from 'src/app/core/graphql';
 
 @Component({
   selector: 'app-auth-form-signup',
@@ -33,10 +31,10 @@ export class AuthFormSignupComponent implements OnInit {
   submit$ = new Subject<Event>();
 
   constructor(
-    private users: UsersService,
     private auth: AuthService,
     private messenger: NzMessageService,
     private router: Router,
+    private createUserSql: CreateUserGQL,
   ) {}
 
   ngOnInit() {
@@ -46,16 +44,16 @@ export class AuthFormSignupComponent implements OnInit {
   private submit() {
     this.isLoading = true;
     const { username, password, nickname, gender } = this.data;
-    const data: UserCreateDto = { username, password, nickname, gender };
+    const data: UserCreateInput = { username, password, nickname, gender };
     forkJoin([
-      this.users.create(data).pipe(
+      this.createUserSql.mutate({ data }).pipe(
         concatMap(() => this.auth.login(username, password)),
-        map(([user]) => user),
+        map((data) => data.user),
         catchError(() => of(null)),
       ),
       timer(1000),
     ])
-      .pipe(map(([user]) => user))
+      .pipe(map((values) => values[0]))
       .subscribe((user) => {
         if (user) this.router.navigate(['/']);
         else this.messenger.error('Username is already taken');

@@ -1,14 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
-import { User } from '../user.entity';
 import { CoreModule } from './core.module';
+import { UserScalarsFragment, AuthGQL } from './graphql';
 import { LocalStorageService } from './local-storage.service';
-import { UsersService } from './users.service';
-
-interface AuthInfo {
-  token: string;
-}
 
 @Injectable({
   providedIn: CoreModule,
@@ -19,16 +13,12 @@ export class AuthService {
     return this.#token;
   }
 
-  #user: User | null = null;
+  #user: UserScalarsFragment | null = null;
   get user() {
     return this.#user;
   }
 
-  constructor(
-    private http: HttpClient,
-    private storage: LocalStorageService,
-    private users: UsersService,
-  ) {
+  constructor(private storage: LocalStorageService, private authGql: AuthGQL) {
     this.#token = this.storage.load(
       'token',
       null,
@@ -38,10 +28,11 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    return this.http.put<AuthInfo>('/auth/', { username, password }).pipe(
-      map((info) => info.token),
-      tap((token) => {
+    return this.authGql.mutate({ username, password }).pipe(
+      map(({ data }) => data!.auth),
+      tap(({ token, user }) => {
         this.#token = token;
+        this.#user = user;
       }),
     );
   }
@@ -49,13 +40,5 @@ export class AuthService {
   logout() {
     this.#token = null;
     this.#user = null;
-  }
-
-  loadUser() {
-    return this.users.loadCurrent().pipe(
-      tap((user) => {
-        this.#user = user;
-      }),
-    );
   }
 }
