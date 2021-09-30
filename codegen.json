@@ -2,7 +2,7 @@
   "schema": "http://localhost:3000/graphql",
   "documents": "src/**/*.graphql",
   "generates": {
-    "./src/app/core/graphql/index.ts": {
+    "./src/app/graphql/index.ts": {
       "plugins": [
         "typescript",
         "typescript-operations",

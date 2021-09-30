@@ -4,7 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { forkJoin, of, Subject, timer } from 'rxjs';
 import { catchError, concatMap, map, throttleTime } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/auth.service';
-import { UserCreateInput, Gender, CreateUserGQL } from 'src/app/core/graphql';
+import { UserCreateInput, Gender, CreateUserGQL } from 'src/app/graphql';
 
 @Component({
   selector: 'app-auth-form-signup',

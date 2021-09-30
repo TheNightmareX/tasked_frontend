@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
+import { AuthGQL, UserScalarsFragment } from '../graphql';
 import { CoreModule } from './core.module';
-import { UserScalarsFragment, AuthGQL } from './graphql';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
