@@ -14,7 +14,7 @@ import { CoreModule } from './core/core.module';
 import { HttpInterceptorsModule } from './http-interceptors/http-interceptors.module';
 import { SharedModule } from './shared/shared.module';
 import { APOLLO_OPTIONS } from 'apollo-angular';
-import { InMemoryCache } from '@apollo/client';
+import { InMemoryCache } from '@apollo/client/core';
 import { HttpLink } from 'apollo-angular/http';
 
 registerLocaleData(en);
