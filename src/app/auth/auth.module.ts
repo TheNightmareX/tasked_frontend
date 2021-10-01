@@ -14,7 +14,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     AuthComponent,
@@ -34,6 +35,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatInputModule,
     MatProgressSpinnerModule,
     MatSelectModule,
+    MatIconModule,
+    MatTooltipModule,
   ],
 })
 export class AuthModule {}

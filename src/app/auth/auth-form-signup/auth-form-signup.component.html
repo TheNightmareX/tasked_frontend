@@ -3,7 +3,7 @@
     <ng-container ngProjectAs="title">Signup</ng-container>
 
     <ng-container ngProjectAs="content">
-      <mat-form-field>
+      <mat-form-field appearance="standard">
         <mat-label>Username</mat-label>
         <input
           matInput
@@ -14,10 +14,18 @@
           maxlength="15"
           pattern="^([a-zA-Z0-9_-])+$"
           [(ngModel)]="data.username"
+          #username="ngModel"
         />
+        <mat-hint>Consist of alphanumeric, underscores or hyphens</mat-hint>
+        <mat-icon
+          matSuffix
+          matTooltip="Credentials for login which is immutable and unique"
+        >
+          help_outline
+        </mat-icon>
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field appearance="standard">
         <mat-label>Password</mat-label>
         <input
           matInput
@@ -31,9 +39,10 @@
           [(ngModel)]="data.password"
           #password="ngModel"
         />
+        <mat-hint>Consist of 6 - 20 characters</mat-hint>
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field appearance="standard">
         <mat-label>Confirm Password</mat-label>
         <input
           matInput
@@ -46,9 +55,10 @@
           [(ngModel)]="data.passwordConfirm"
           #passwordConfirm="ngModel"
         />
+        <mat-hint>Repeat the password</mat-hint>
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field appearance="standard">
         <mat-label>Nickname</mat-label>
         <input
           matInput
@@ -58,6 +68,13 @@
           maxlength="15"
           [(ngModel)]="data.nickname"
         />
+        <mat-hint>Consist of 1 - 15 characters</mat-hint>
+        <mat-icon
+          matSuffix
+          matTooltip="[Optional] Something that will be displayed to others instead of your username and can be updated whenever you like"
+        >
+          help_outline
+        </mat-icon>
       </mat-form-field>
 
       <mat-form-field>
