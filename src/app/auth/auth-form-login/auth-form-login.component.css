@@ -2,6 +2,7 @@ mat-card {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 400px;
   height: 286px;
   padding: 28px 0;
 }
