@@ -7,11 +7,11 @@
         <mat-label>Username</mat-label>
         <input
           matInput
-          [(ngModel)]="data.username"
           name="username"
           type="text"
           autocomplete="username"
           required
+          [(ngModel)]="data.username"
           #username="ngModel"
         />
       </mat-form-field>
@@ -20,11 +20,11 @@
         <mat-label>Password</mat-label>
         <input
           matInput
-          [(ngModel)]="data.password"
           name="password"
           type="password"
           autocomplete="current-password"
           required
+          [(ngModel)]="data.password"
           #password="ngModel"
         />
       </mat-form-field>

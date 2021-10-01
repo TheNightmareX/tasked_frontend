@@ -7,13 +7,13 @@
         <mat-label>Username</mat-label>
         <input
           matInput
-          [(ngModel)]="data.username"
           name="username"
           type="text"
           autocomplete="username"
           required
           maxlength="15"
           pattern="^([a-zA-Z0-9_-])+$"
+          [(ngModel)]="data.username"
         />
       </mat-form-field>
 
@@ -21,7 +21,6 @@
         <mat-label>Password</mat-label>
         <input
           matInput
-          [(ngModel)]="data.password"
           name="password"
           type="password"
           autocomplete="new-password"
@@ -29,6 +28,7 @@
           minlength="6"
           maxlength="20"
           (ngModelChange)="passwordConfirm.reset()"
+          [(ngModel)]="data.password"
           #password="ngModel"
         />
       </mat-form-field>
@@ -37,13 +37,13 @@
         <mat-label>Confirm Password</mat-label>
         <input
           matInput
-          [(ngModel)]="data.passwordConfirm"
           name="passwordConfirm"
           type="password"
           autocomplete="new-password"
           [disabled]="!password.valid || false"
           required
           [appEqual]="data.password"
+          [(ngModel)]="data.passwordConfirm"
           #passwordConfirm="ngModel"
         />
       </mat-form-field>
@@ -52,11 +52,11 @@
         <mat-label>Nickname</mat-label>
         <input
           matInput
-          [(ngModel)]="data.nickname"
           name="nickname"
           type="text"
           autocomplete="nickname"
           maxlength="15"
+          [(ngModel)]="data.nickname"
         />
       </mat-form-field>
 
