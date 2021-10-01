@@ -40,7 +40,12 @@
         color="primary"
         type="submit"
       >
-        Submit
+        <mat-spinner
+          *ngIf="loading"
+          [diameter]="30"
+          style="display: inline-block"
+        ></mat-spinner>
+        <ng-container *ngIf="!loading">Submit</ng-container>
       </button>
     </div>
   </mat-card>
