@@ -37,8 +37,7 @@ export class AuthFormLoginComponent implements OnInit {
         if (token) this.router.navigate(['/']);
         else
           this.snackbar.open('Invalid username or password', undefined, {
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
+            duration: 5000,
           });
         this.loading = false;
       });
