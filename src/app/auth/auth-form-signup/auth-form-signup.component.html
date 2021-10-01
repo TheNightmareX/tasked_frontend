@@ -16,7 +16,9 @@
           [(ngModel)]="data.username"
           #username="ngModel"
         />
-        <mat-hint>Consist of alphanumeric, underscores or hyphens</mat-hint>
+        <mat-error *ngIf="!username.valid">
+          Must consist of alphanumeric, underscores or hyphens
+        </mat-error>
         <mat-icon
           matSuffix
           matTooltip="Credentials for login which is immutable and unique"
@@ -39,7 +41,9 @@
           [(ngModel)]="data.password"
           #password="ngModel"
         />
-        <mat-hint>Consist of 6 - 20 characters</mat-hint>
+        <mat-error *ngIf="!password.valid">
+          Must consist of 6 - 20 characters
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="standard">
@@ -55,7 +59,9 @@
           [(ngModel)]="data.passwordConfirm"
           #passwordConfirm="ngModel"
         />
-        <mat-hint>Repeat the password</mat-hint>
+        <mat-error *ngIf="!passwordConfirm.valid">
+          Must match the previous password above
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="standard">
@@ -68,7 +74,6 @@
           maxlength="15"
           [(ngModel)]="data.nickname"
         />
-        <mat-hint>Consist of 1 - 15 characters</mat-hint>
         <mat-icon
           matSuffix
           matTooltip="[Optional] Something that will be displayed to others instead of your username and can be updated whenever you like"
