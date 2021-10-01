@@ -1,25 +1,15 @@
-<nz-layout>
-  <nz-header>
-    <div id="logo"><span routerLink="/">Tasked</span></div>
-    <ul nz-menu nzMode="horizontal" nzTheme="dark" class="menu"></ul>
-  </nz-header>
-  <nz-layout class="nz-layout-has-sider">
-    <nz-sider
-      *ngIf="hasSider"
-      nzCollapsible
-      [nzCollapsedWidth]="0"
-      nzTheme="light"
-      nzBreakpoint="md"
-    >
-      <ul nz-menu nzMode="inline" nzTheme="light" class="menu">
-        <li nz-menu-item nzMatchRouter routerLink="/classrooms/">
-          <i nz-icon nzType="partition"></i>
-          <span>Classrooms</span>
-        </li>
-      </ul>
-    </nz-sider>
-    <nz-content>
-      <ng-content></ng-content>
-    </nz-content>
-  </nz-layout>
-</nz-layout>
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Tasked</span>
+</mat-toolbar>
+
+<mat-sidenav-container style="flex-grow: 1">
+  <mat-sidenav #sidenav mode="side">
+    <ng-content select="sidenav"></ng-content>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

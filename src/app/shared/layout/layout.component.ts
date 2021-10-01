@@ -6,8 +6,6 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./layout.component.css'],
 })
 export class LayoutComponent implements OnInit {
-  @Input() hasSider = true;
-
   constructor() {}
 
   ngOnInit() {}
