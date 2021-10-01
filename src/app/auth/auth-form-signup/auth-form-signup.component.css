@@ -1,9 +1,4 @@
-:host {
-  display: block;
-  height: 67%;
-  max-height: 527px;
-}
-
-:host > form {
-  height: 100%;
+app-auth-form-layout {
+  width: 400px;
+  height: 508px;
 }

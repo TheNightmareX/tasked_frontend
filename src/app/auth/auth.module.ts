@@ -13,6 +13,7 @@ import { AuthComponent } from './auth.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
   ],
 })
 export class AuthModule {}

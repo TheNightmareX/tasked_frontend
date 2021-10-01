@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
 import { forkJoin, of, Subject, timer } from 'rxjs';
 import { catchError, concatMap, map, throttleTime } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/auth.service';
-import { UserCreateInput, Gender, CreateUserGQL } from 'src/app/graphql';
+import { CreateUserGQL, Gender, UserCreateInput } from 'src/app/graphql';
+import { NotificationType } from 'src/app/notification-type.enum';
 
 @Component({
   selector: 'app-auth-form-signup',
@@ -25,13 +27,13 @@ export class AuthFormSignupComponent implements OnInit {
     gender: Gender.Unknown,
   };
 
-  isLoading = false;
+  loading = false;
 
   submit$ = new Subject<Event>();
 
   constructor(
     private auth: AuthService,
-    private messenger: NzMessageService,
+    private notifier: NotifierService,
     private router: Router,
     private createUserSql: CreateUserGQL,
   ) {}
@@ -41,7 +43,7 @@ export class AuthFormSignupComponent implements OnInit {
   }
 
   private submit() {
-    this.isLoading = true;
+    this.loading = true;
     const { username, password, nickname, gender } = this.data;
     const data: UserCreateInput = { username, password, nickname, gender };
     forkJoin([
@@ -55,8 +57,12 @@ export class AuthFormSignupComponent implements OnInit {
       .pipe(map((values) => values[0]))
       .subscribe((user) => {
         if (user) this.router.navigate(['/']);
-        else this.messenger.error('Username is already taken');
-        this.isLoading = false;
+        else
+          this.notifier.notify(
+            NotificationType.Error,
+            'Username is already taken',
+          );
+        this.loading = false;
       });
   }
 }
