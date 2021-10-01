@@ -1,10 +1,8 @@
 <form (ngSubmit)="submit$.next()" #form="ngForm">
-  <mat-card>
-    <div class="header">
-      <h1 class="mat-h1">Login</h1>
-    </div>
+  <app-auth-form-layout>
+    <ng-container ngProjectAs="title">Login</ng-container>
 
-    <div class="content">
+    <ng-container ngProjectAs="content">
       <mat-form-field>
         <mat-label>Username</mat-label>
         <input
@@ -30,9 +28,9 @@
           #password="ngModel"
         />
       </mat-form-field>
-    </div>
+    </ng-container>
 
-    <div class="actions">
+    <ng-container ngProjectAs="actions">
       <button
         mat-raised-button
         class="uppercase"
@@ -42,6 +40,6 @@
       >
         <span *appLoading="loading; diameter: 30">Submit</span>
       </button>
-    </div>
-  </mat-card>
+    </ng-container>
+  </app-auth-form-layout>
 </form>
