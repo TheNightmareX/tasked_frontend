@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { forkJoin, of, Subject, timer } from 'rxjs';
 import { catchError, map, throttleTime } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-auth-form-login',
@@ -11,15 +12,13 @@ import { AuthService } from 'src/app/core/auth.service';
 })
 export class AuthFormLoginComponent implements OnInit {
   data = { username: '', password: '' };
-
-  isLoading = false;
-
+  loading = false;
   submit$ = new Subject<Event>();
 
   constructor(
     private router: Router,
     private auth: AuthService,
-    private messenger: NzMessageService,
+    private snackbar: MatSnackBar,
   ) {}
 
   ngOnInit() {
@@ -28,7 +27,7 @@ export class AuthFormLoginComponent implements OnInit {
 
   private submit() {
     const { username, password } = this.data;
-    this.isLoading = true;
+    this.loading = true;
     forkJoin([
       this.auth.login(username, password).pipe(catchError(() => of(null))),
       timer(1000),
@@ -36,8 +35,12 @@ export class AuthFormLoginComponent implements OnInit {
       .pipe(map(([token]) => token))
       .subscribe((token) => {
         if (token) this.router.navigate(['/']);
-        else this.messenger.error('Invalid username or password');
-        this.isLoading = false;
+        else
+          this.snackbar.open('Invalid username or password', undefined, {
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+          });
+        this.loading = false;
       });
   }
 }

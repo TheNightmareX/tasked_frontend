@@ -1,55 +1,47 @@
-<form nz-form (ngSubmit)="submit$.next()" #form="ngForm">
-  <app-auth-form-layout>
-    <ng-container ngProjectAs="title">Login</ng-container>
+<form (ngSubmit)="submit$.next()" #form="ngForm">
+  <mat-card>
+    <div class="header">
+      <h1 class="mat-h1">Login</h1>
+    </div>
 
-    <ng-container ngProjectAs="content">
-      <nz-form-item>
-        <nz-form-control>
-          <nz-input-group nzPrefixIcon="user">
-            <input
-              nz-input
-              [(ngModel)]="data.username"
-              name="username"
-              type="text"
-              placeholder="Username"
-              autocomplete="username"
-              required
-            />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control>
-          <nz-input-group nzPrefixIcon="lock">
-            <input
-              nz-input
-              [(ngModel)]="data.password"
-              name="password"
-              type="password"
-              placeholder="Password"
-              autocomplete="current-password"
-              required
-            />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-    </ng-container>
+    <div class="content">
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          [(ngModel)]="data.username"
+          name="username"
+          type="text"
+          autocomplete="username"
+          required
+          #username="ngModel"
+        />
+      </mat-form-field>
 
-    <ng-container ngProjectAs="buttons">
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          [(ngModel)]="data.password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          required
+          #password="ngModel"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="actions">
       <button
-        nz-button
-        nzBlock
-        nzType="primary"
-        [disabled]="!form.valid"
-        [nzLoading]="isLoading"
+        mat-raised-button
+        class="uppercase"
+        [disabled]="form.invalid || loading"
+        color="primary"
         type="submit"
       >
         Submit
       </button>
-    </ng-container>
-
-    <ng-container ngProjectAs="footer">
-      No accounts? <a routerLink="../signup/">Sign up</a> for free!
-    </ng-container>
-  </app-auth-form-layout>
+    </div>
+  </mat-card>
 </form>
