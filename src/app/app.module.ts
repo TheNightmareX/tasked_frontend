@@ -4,9 +4,6 @@ import en from '@angular/common/locales/en';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PartitionOutline } from '@ant-design/icons-angular/icons/';
-import { en_US, NZ_I18N } from 'ng-zorro-antd/i18n';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
@@ -19,8 +16,6 @@ import { HttpLink } from 'apollo-angular/http';
 
 registerLocaleData(en);
 
-const icons = [PartitionOutline];
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -30,12 +25,10 @@ const icons = [PartitionOutline];
     HttpInterceptorsModule,
     CoreModule,
     SharedModule,
-    NzIconModule.forRoot(icons),
     AuthModule,
     AppRoutingModule,
   ],
   providers: [
-    { provide: NZ_I18N, useValue: en_US },
     {
       provide: APOLLO_OPTIONS,
       useFactory: (httpLink: HttpLink) => ({
