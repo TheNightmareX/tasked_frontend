@@ -22,10 +22,13 @@ registerLocaleData(en);
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    HttpInterceptorsModule,
+
     CoreModule,
     SharedModule,
+    HttpInterceptorsModule,
+
     AuthModule,
+
     AppRoutingModule,
   ],
   providers: [
