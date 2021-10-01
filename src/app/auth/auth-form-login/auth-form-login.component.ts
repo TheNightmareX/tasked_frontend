@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
 import { forkJoin, of, Subject, timer } from 'rxjs';
 import { catchError, map, throttleTime } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationType } from 'src/app/notification-type.enum';
 
 @Component({
   selector: 'app-auth-form-login',
@@ -18,7 +19,7 @@ export class AuthFormLoginComponent implements OnInit {
   constructor(
     private router: Router,
     private auth: AuthService,
-    private snackbar: MatSnackBar,
+    private notifier: NotifierService,
   ) {}
 
   ngOnInit() {
@@ -36,9 +37,10 @@ export class AuthFormLoginComponent implements OnInit {
       .subscribe((token) => {
         if (token) this.router.navigate(['/']);
         else
-          this.snackbar.open('Invalid username or password', undefined, {
-            duration: 5000,
-          });
+          this.notifier.notify(
+            NotificationType.Error,
+            'Invalid username or password',
+          );
         this.loading = false;
       });
   }

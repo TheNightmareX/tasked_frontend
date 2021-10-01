@@ -4,15 +4,16 @@ import en from '@angular/common/locales/en';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InMemoryCache } from '@apollo/client/core';
+import { NotifierModule } from 'angular-notifier';
+import { APOLLO_OPTIONS } from 'apollo-angular';
+import { HttpLink } from 'apollo-angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { HttpInterceptorsModule } from './http-interceptors/http-interceptors.module';
 import { SharedModule } from './shared/shared.module';
-import { APOLLO_OPTIONS } from 'apollo-angular';
-import { InMemoryCache } from '@apollo/client/core';
-import { HttpLink } from 'apollo-angular/http';
 
 registerLocaleData(en);
 
@@ -22,6 +23,8 @@ registerLocaleData(en);
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+
+    NotifierModule,
 
     CoreModule,
     SharedModule,
