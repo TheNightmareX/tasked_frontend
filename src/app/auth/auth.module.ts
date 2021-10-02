@@ -14,6 +14,7 @@ import { AuthFormSignupComponent } from './auth-form-signup/auth-form-signup.com
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
 import { MatListModule } from '@angular/material/list';
+import { AuthSidenavComponent } from './auth-sidenav/auth-sidenav.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MatListModule } from '@angular/material/list';
     AuthFormLayoutComponent,
     AuthFormLoginComponent,
     AuthFormSignupComponent,
+    AuthSidenavComponent,
   ],
   imports: [
     SharedModule,
