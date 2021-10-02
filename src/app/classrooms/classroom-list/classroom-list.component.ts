@@ -6,11 +6,11 @@ import { ListClassroomsQuery, ListClassroomsGQL } from 'src/app/graphql';
 type Classroom = ListClassroomsQuery['classrooms']['results'][number];
 
 @Component({
-  selector: 'app-classrooms-sidenav',
-  templateUrl: './classrooms-sidenav.component.html',
-  styleUrls: ['./classrooms-sidenav.component.css'],
+  selector: 'app-classroom-list',
+  templateUrl: './classroom-list.component.html',
+  styleUrls: ['./classroom-list.component.css'],
 })
-export class ClassroomsSidenavComponent implements OnInit {
+export class ClassroomListComponent implements OnInit {
   classrooms: Observable<Classroom[]> = of([]);
 
   constructor(private listClassroomsGql: ListClassroomsGQL) {}
