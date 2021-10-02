@@ -13,6 +13,7 @@ import { AuthFormLoginComponent } from './auth-form-login/auth-form-login.compon
 import { AuthFormSignupComponent } from './auth-form-signup/auth-form-signup.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AuthComponent } from './auth.component';
     MatSelectModule,
     MatIconModule,
     MatTooltipModule,
+    MatListModule,
   ],
 })
 export class AuthModule {}
