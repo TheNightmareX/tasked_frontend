@@ -9,9 +9,11 @@ import { CoreModule } from './core.module';
 })
 export class BreakpointsService {
   mobile$: Observable<boolean>;
+  phone$: Observable<boolean>;
 
   constructor(private observer: BreakpointObserver) {
     this.mobile$ = this.observe(Breakpoints.Small, Breakpoints.XSmall);
+    this.phone$ = this.observe(Breakpoints.XSmall);
   }
 
   private observe(...values: string[]) {

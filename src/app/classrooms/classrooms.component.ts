@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BreakpointsService } from '../core/breakpoints.service';
 
 @Component({
   selector: 'app-classrooms',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./classrooms.component.css'],
 })
 export class ClassroomsComponent implements OnInit {
-  constructor() {}
+  constructor(public breakpoints: BreakpointsService) {}
 
   ngOnInit() {}
 }
