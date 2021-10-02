@@ -1,4 +1,4 @@
-query ListClassrooms($limit: Int, $offset: Int) {
+query ClassroomList($limit: Int, $offset: Int) {
   classrooms(limit: $limit, offset: $offset) {
     results {
       id

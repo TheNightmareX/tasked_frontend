@@ -1,9 +1,9 @@
 import { Component, OnInit, TrackByFunction } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ListClassroomsQuery, ListClassroomsGQL } from 'src/app/graphql';
+import { ClassroomListGQL, ClassroomListQuery } from 'src/app/graphql';
 
-type Classroom = ListClassroomsQuery['classrooms']['results'][number];
+type Classroom = ClassroomListQuery['classrooms']['results'][number];
 
 @Component({
   selector: 'app-classroom-list',
@@ -13,12 +13,12 @@ type Classroom = ListClassroomsQuery['classrooms']['results'][number];
 export class ClassroomListComponent implements OnInit {
   classrooms$: Observable<Classroom[]> = of([]);
 
-  constructor(private listClassroomsGql: ListClassroomsGQL) {}
+  constructor(private classroomListGql: ClassroomListGQL) {}
 
   trackByClassroom: TrackByFunction<Classroom> = (_, { id }) => id;
 
   ngOnInit() {
-    this.classrooms$ = this.listClassroomsGql
+    this.classrooms$ = this.classroomListGql
       .fetch()
       .pipe(map(({ data }) => data.classrooms.results));
   }
