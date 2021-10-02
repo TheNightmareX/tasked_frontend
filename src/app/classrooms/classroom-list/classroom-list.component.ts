@@ -11,14 +11,14 @@ type Classroom = ListClassroomsQuery['classrooms']['results'][number];
   styleUrls: ['./classroom-list.component.css'],
 })
 export class ClassroomListComponent implements OnInit {
-  classrooms: Observable<Classroom[]> = of([]);
+  classrooms$: Observable<Classroom[]> = of([]);
 
   constructor(private listClassroomsGql: ListClassroomsGQL) {}
 
   trackByClassroom: TrackByFunction<Classroom> = (_, { id }) => id;
 
   ngOnInit() {
-    this.classrooms = this.listClassroomsGql
+    this.classrooms$ = this.listClassroomsGql
       .fetch()
       .pipe(map(({ data }) => data.classrooms.results));
   }

@@ -8,10 +8,10 @@ import { CoreModule } from './core.module';
   providedIn: CoreModule,
 })
 export class BreakpointsService {
-  mobile: Observable<boolean> = of(false);
+  mobile$: Observable<boolean> = of(false);
 
   constructor(observer: BreakpointObserver) {
-    this.mobile = observer
+    this.mobile$ = observer
       .observe([Breakpoints.Small, Breakpoints.XSmall])
       .pipe(map((state) => state.matches));
   }
