@@ -15,3 +15,13 @@ body {
 .uppercase {
   text-transform: uppercase;
 }
+
+.router-link-active {
+  background-color: rgba(123, 31, 162, 0.15) !important;
+  color: rgb(209, 118, 225) !important;
+}
+.router-link-active:hover {
+  background-color: rgba(123, 31, 162, 0.3) !important;
+}
+
+/* Colors from https://github.com/angular/material.angular.io */
