@@ -8,9 +8,8 @@ describe('AuthSidenavComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AuthSidenavComponent ]
-    })
-    .compileComponents();
+      declarations: [AuthSidenavComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
