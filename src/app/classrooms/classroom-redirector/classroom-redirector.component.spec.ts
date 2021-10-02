@@ -8,9 +8,8 @@ describe('ClassroomRedirectorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ClassroomRedirectorComponent ]
-    })
-    .compileComponents();
+      declarations: [ClassroomRedirectorComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
