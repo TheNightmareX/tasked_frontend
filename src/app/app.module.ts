@@ -11,8 +11,8 @@ import { HttpLink } from 'apollo-angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
+import { ClassroomsModule } from './classrooms/classrooms.module';
 import { CoreModule } from './core/core.module';
-import { DashboardModule } from './dashboard/dashboard.module';
 import { HttpInterceptorsModule } from './http-interceptors/http-interceptors.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -32,7 +32,7 @@ registerLocaleData(en);
     HttpInterceptorsModule,
 
     AuthModule,
-    DashboardModule,
+    ClassroomsModule,
     AppRoutingModule,
   ],
   providers: [
