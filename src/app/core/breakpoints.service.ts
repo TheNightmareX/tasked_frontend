@@ -1,6 +1,6 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CoreModule } from './core.module';
 
@@ -8,7 +8,7 @@ import { CoreModule } from './core.module';
   providedIn: CoreModule,
 })
 export class BreakpointsService {
-  mobile$: Observable<boolean> = of(false);
+  mobile$: Observable<boolean>;
 
   constructor(observer: BreakpointObserver) {
     this.mobile$ = observer
