@@ -10,9 +10,11 @@ import { CoreModule } from './core.module';
 export class BreakpointsService {
   mobile$: Observable<boolean>;
 
-  constructor(observer: BreakpointObserver) {
-    this.mobile$ = observer
-      .observe([Breakpoints.Small, Breakpoints.XSmall])
-      .pipe(map((state) => state.matches));
+  constructor(private observer: BreakpointObserver) {
+    this.mobile$ = this.observe(Breakpoints.Small, Breakpoints.XSmall);
+  }
+
+  private observe(...values: string[]) {
+    return this.observer.observe(values).pipe(map((state) => state.matches));
   }
 }
