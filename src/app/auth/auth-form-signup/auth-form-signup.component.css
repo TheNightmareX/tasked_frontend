@@ -1,4 +1,5 @@
 app-auth-form-layout {
-  width: 400px;
+  width: 100vw;
+  max-width: 400px;
   height: 578px;
 }
