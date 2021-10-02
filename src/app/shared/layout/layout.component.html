@@ -7,7 +7,7 @@
 </mat-toolbar>
 
 <mat-sidenav-container style="flex-grow: 1">
-  <mat-sidenav opened mode="side" #sidenav>
+  <mat-sidenav [opened]="!(breakpoints.mobile | async)" mode="side" #sidenav>
     <ng-content select="sidenav"></ng-content>
   </mat-sidenav>
   <mat-sidenav-content>

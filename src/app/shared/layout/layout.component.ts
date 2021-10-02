@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BreakpointsService } from 'src/app/core/breakpoints.service';
 
 @Component({
   selector: 'app-layout',
@@ -6,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./layout.component.css'],
 })
 export class LayoutComponent implements OnInit {
-  constructor() {}
+  constructor(public breakpoints: BreakpointsService) {}
 
   ngOnInit() {}
 }
