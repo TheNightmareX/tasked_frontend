@@ -4,6 +4,10 @@
   height: 100%;
 }
 
+mat-toolbar > .spacer {
+  width: 1%;
+}
+
 mat-sidenav {
   display: flex;
   flex-direction: column;
