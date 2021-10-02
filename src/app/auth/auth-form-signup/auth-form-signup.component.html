@@ -84,7 +84,7 @@
 
       <mat-form-field color="accent" appearance="standard">
         <mat-label>Gender</mat-label>
-        <mat-select formGroupName="">
+        <mat-select name="gender" [(ngModel)]="data.gender">
           <mat-option
             *ngFor="let item of genderSelections"
             [value]="item.value"
