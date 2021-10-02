@@ -4,6 +4,9 @@
   height: 100%;
 }
 
+mat-toolbar {
+  z-index: 2;
+}
 mat-toolbar > .spacer {
   width: 1%;
 }
