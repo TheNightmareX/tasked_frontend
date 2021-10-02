@@ -28,6 +28,24 @@
       </mat-form-field>
 
       <mat-form-field color="accent" appearance="standard">
+        <mat-label>Nickname</mat-label>
+        <input
+          matInput
+          name="nickname"
+          type="text"
+          autocomplete="nickname"
+          maxlength="15"
+          [(ngModel)]="data.nickname"
+        />
+        <mat-icon
+          matSuffix
+          matTooltip="[Optional] Something that will be displayed to others instead of your username and can be updated whenever you like"
+        >
+          help_outline
+        </mat-icon>
+      </mat-form-field>
+
+      <mat-form-field color="accent" appearance="standard">
         <mat-label>Password</mat-label>
         <input
           matInput
@@ -62,24 +80,6 @@
         <mat-error *ngIf="!passwordConfirm.valid">
           Must match the previous password above
         </mat-error>
-      </mat-form-field>
-
-      <mat-form-field color="accent" appearance="standard">
-        <mat-label>Nickname</mat-label>
-        <input
-          matInput
-          name="nickname"
-          type="text"
-          autocomplete="nickname"
-          maxlength="15"
-          [(ngModel)]="data.nickname"
-        />
-        <mat-icon
-          matSuffix
-          matTooltip="[Optional] Something that will be displayed to others instead of your username and can be updated whenever you like"
-        >
-          help_outline
-        </mat-icon>
       </mat-form-field>
 
       <mat-form-field color="accent" appearance="standard">
