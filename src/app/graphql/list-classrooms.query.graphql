@@ -1,0 +1,9 @@
+query ListClassrooms($limit: Int, $offset: Int) {
+  classrooms(limit: $limit, offset: $offset) {
+    results {
+      id
+      name
+      description
+    }
+  }
+}

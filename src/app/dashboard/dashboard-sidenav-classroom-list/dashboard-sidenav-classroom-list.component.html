@@ -1,0 +1,11 @@
+<mat-nav-list>
+  <a
+    mat-list-item
+    *ngFor="let classroom of classrooms | async; trackBy: trackByClassroom"
+    [routerLink]="['/classrooms', classroom.id]"
+    routerLinkActive="router-link-active"
+  >
+    <span matLine>{{ classroom.name }}</span>
+    <span matLine>{{ classroom.description }}</span>
+  </a>
+</mat-nav-list>
