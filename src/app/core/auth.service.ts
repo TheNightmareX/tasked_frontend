@@ -10,14 +10,14 @@ type User = UserScalarFieldsFragment;
   providedIn: CoreModule,
 })
 export class AuthService {
-  token: string | null = null;
-  user: User | null = null;
+  token?: string;
+  user?: User;
 
   constructor(private storage: LocalStorageService, private authGql: AuthGQL) {
     this.token = this.storage.load(
       'token',
-      null,
-      (v): v is string | null => v == null || typeof v == 'string',
+      undefined,
+      (v): v is this['token'] => v == undefined || typeof v == 'string',
       () => this.token,
     );
   }
@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   logout() {
-    this.token = null;
-    this.user = null;
+    this.token = undefined;
+    this.user = undefined;
   }
 }
