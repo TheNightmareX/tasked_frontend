@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,7 +11,7 @@ import { EqualDirective } from './equal.directive';
 import { LayoutComponent } from './layout/layout.component';
 import { LoadingDirective } from './loading.directive';
 
-const modules = [CommonModule, FormsModule];
+const modules = [CommonModule, FormsModule, FlexLayoutModule];
 const components = [LayoutComponent];
 const directives = [EqualDirective, LoadingDirective];
 
