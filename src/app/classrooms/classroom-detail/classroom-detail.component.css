@@ -1,14 +1,22 @@
 :host {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .spacer {
   flex-grow: 1;
 }
 
-main {
+mat-drawer-container {
+  flex-grow: 1;
+}
+mat-drawer-container > mat-drawer {
+  background-color: var(--bg-color);
+}
+mat-drawer-container > mat-drawer-content > main {
   padding: 20px 50px;
 }
-main.phone {
+mat-drawer-container > mat-drawer-content > main.phone {
   padding: 20px 15px;
 }

@@ -1,9 +1,29 @@
 <mat-toolbar>
   <span>Title</span>
   <span class="spacer"></span>
+  <button
+    mat-icon-button
+    (click)="drawer.toggle()"
+    *ngIf="breakpoints.phone$ | async"
+  >
+    <mat-icon>people</mat-icon>
+  </button>
   <button mat-icon-button>
     <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>
 
-<main [class.phone]="breakpoints.phone$ | async"></main>
+<mat-drawer-container>
+  <mat-drawer
+    [opened]="!(breakpoints.phone$ | async)"
+    mode="side"
+    position="end"
+    #drawer
+  >
+    <app-classroom-membership-list></app-classroom-membership-list>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <main [class.phone]="breakpoints.phone$ | async"></main>
+  </mat-drawer-content>
+</mat-drawer-container>
