@@ -1,13 +1,14 @@
 <mat-toolbar>
-  <div fxFlex></div>
+  <div fxFlex>
+    <button mat-icon-button (click)="drawer.toggle()">
+      <mat-icon>people</mat-icon>
+    </button>
+  </div>
   <div fxFlex fxGrow="0">
     <span>{{ (classroom$ | async)?.name }}</span>
   </div>
   <div fxFlex fxLayout>
     <div fxFlex></div>
-    <button mat-icon-button (click)="drawer.toggle()">
-      <mat-icon>people</mat-icon>
-    </button>
     <button mat-icon-button>
       <mat-icon>logout</mat-icon>
     </button>
