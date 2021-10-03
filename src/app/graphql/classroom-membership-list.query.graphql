@@ -1,0 +1,19 @@
+query ClassroomMembershipList($id: ID!) {
+  classroom(id: $id) {
+    creator {
+      username
+    }
+    memberships {
+      total
+      results {
+        owner {
+          username
+          nickname
+          gender
+        }
+        displayName
+        role
+      }
+    }
+  }
+}

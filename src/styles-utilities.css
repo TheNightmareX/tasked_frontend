@@ -1,3 +1,13 @@
 .uppercase {
   text-transform: uppercase;
 }
+
+.text-blue {
+  color: var(--text-color-blue);
+}
+.text-pink {
+  color: var(--text-color-pink);
+}
+.text-primary {
+  color: var(--text-color-primary);
+}
