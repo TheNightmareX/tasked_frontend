@@ -11,6 +11,7 @@ mat-drawer-container > mat-drawer {
   background-color: var(--bg-color);
 }
 mat-drawer-container > mat-drawer-content > main {
+  height: 100%;
   padding: 20px 50px;
 }
 mat-drawer-container > mat-drawer-content > main.phone {
