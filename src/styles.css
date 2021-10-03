@@ -4,6 +4,7 @@
 @import '../node_modules/angular-notifier/styles.css';
 
 @import './styles-variables.css';
+@import './styles-utilities.css';
 
 html,
 body {
@@ -12,10 +13,6 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
-}
-
-.uppercase {
-  text-transform: uppercase;
 }
 
 .router-link-active {
