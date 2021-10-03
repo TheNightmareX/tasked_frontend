@@ -2,6 +2,10 @@
   display: block;
 }
 
+.spacer {
+  flex-grow: 1;
+}
+
 main {
   padding: 20px 50px;
 }

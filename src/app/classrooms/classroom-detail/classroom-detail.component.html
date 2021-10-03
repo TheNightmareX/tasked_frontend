@@ -1,5 +1,9 @@
 <mat-toolbar>
-  <mat-toolbar-row></mat-toolbar-row>
+  <span>Title</span>
+  <span class="spacer"></span>
+  <button mat-icon-button>
+    <mat-icon>logout</mat-icon>
+  </button>
 </mat-toolbar>
 
 <main [class.phone]="breakpoints.phone$ | async"></main>

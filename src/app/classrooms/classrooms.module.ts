@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -22,6 +23,7 @@ import { ClassroomsComponent } from './classrooms.component';
     MatListModule,
     MatIconModule,
     MatToolbarModule,
+    MatButtonModule,
   ],
 })
 export class ClassroomsModule {}
