@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ClassroomsStateService } from '../core/classrooms-state.service';
 
 @Component({
   selector: 'app-classrooms',
@@ -6,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./classrooms.component.css'],
 })
 export class ClassroomsComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router, private state: ClassroomsStateService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.state.activeId)
+      this.router.navigate(['/classrooms', this.state.activeId]);
+    else {
+      // TODO: do something
+    }
+  }
 }

@@ -9,7 +9,6 @@ import { SharedModule } from '../shared/shared.module';
 import { ClassroomDetailComponent } from './classroom-detail/classroom-detail.component';
 import { ClassroomListComponent } from './classroom-list/classroom-list.component';
 import { ClassroomMembershipListComponent } from './classroom-membership-list/classroom-membership-list.component';
-import { ClassroomRedirectorComponent } from './classroom-redirector/classroom-redirector.component';
 import { ClassroomsRoutingModule } from './classrooms-routing.module';
 import { ClassroomsComponent } from './classrooms.component';
 
@@ -17,7 +16,6 @@ import { ClassroomsComponent } from './classrooms.component';
   declarations: [
     ClassroomsComponent,
     ClassroomListComponent,
-    ClassroomRedirectorComponent,
     ClassroomDetailComponent,
     ClassroomMembershipListComponent,
   ],
