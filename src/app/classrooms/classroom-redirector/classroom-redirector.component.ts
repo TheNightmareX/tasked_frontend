@@ -11,7 +11,8 @@ export class ClassroomRedirectorComponent implements OnInit {
   constructor(private router: Router, private state: ClassroomsStateService) {}
 
   ngOnInit() {
-    if (this.state.activeId) this.router.navigate(['./', this.state.activeId]);
+    if (this.state.activeId)
+      this.router.navigate(['/classrooms', this.state.activeId]);
     else {
       // TODO: do something
     }
