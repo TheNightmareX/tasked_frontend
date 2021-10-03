@@ -1,11 +1,7 @@
 <mat-toolbar>
   <span>{{ (classroom$ | async)?.name }}</span>
   <span fxFlex></span>
-  <button
-    mat-icon-button
-    (click)="drawer.toggle()"
-    *ngIf="breakpoints.mobile$ | async"
-  >
+  <button mat-icon-button (click)="drawer.toggle()">
     <mat-icon>people</mat-icon>
   </button>
   <button mat-icon-button>
