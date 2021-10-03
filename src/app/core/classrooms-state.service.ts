@@ -3,7 +3,7 @@ import { CoreModule } from './core.module';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
-  providedIn: CoreModule,
+  providedIn: 'root',
 })
 export class ClassroomsStateService {
   activeId?: number;

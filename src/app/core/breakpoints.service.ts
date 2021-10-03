@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { CoreModule } from './core.module';
 
 @Injectable({
-  providedIn: CoreModule,
+  providedIn: 'root',
 })
 export class BreakpointsService {
   mobile$: Observable<boolean>;

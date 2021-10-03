@@ -8,7 +8,7 @@ import { LocalStorageService } from './local-storage.service';
 type User = UserScalarFieldsFragment;
 
 @Injectable({
-  providedIn: CoreModule,
+  providedIn: 'root',
 })
 export class AuthService {
   token?: string;

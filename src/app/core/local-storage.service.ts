@@ -3,7 +3,7 @@ import { fromEvent } from 'rxjs';
 import { CoreModule } from './core.module';
 
 @Injectable({
-  providedIn: CoreModule,
+  providedIn: 'root',
 })
 export class LocalStorageService {
   private readonly windowUnloadEvent$ = fromEvent(
