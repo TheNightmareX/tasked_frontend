@@ -6,6 +6,8 @@
     routerLinkActive="router-link-active"
   >
     <span matLine>{{ classroom.name }}</span>
-    <span matLine>{{ classroom.description }}</span>
+    <span matLine>{{
+      classroom.creator.nickname ?? classroom.creator.username
+    }}</span>
   </a>
 </mat-nav-list>

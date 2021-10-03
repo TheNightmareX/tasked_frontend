@@ -3,7 +3,10 @@ query ClassroomList($limit: Int, $offset: Int) {
     results {
       id
       name
-      description
+      creator {
+        username
+        nickname
+      }
     }
   }
 }
