@@ -1,6 +1,6 @@
 <mat-toolbar>
-  <span>Title</span>
-  <span class="spacer"></span>
+  <span>{{ (classroom$ | async)?.name }}</span>
+  <span fxFlex fxGrow="1"></span>
   <button
     mat-icon-button
     (click)="drawer.toggle()"

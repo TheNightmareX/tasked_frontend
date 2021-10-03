@@ -1,0 +1,7 @@
+query ClassroomDetail($id: ID!) {
+  classroom(id: $id) {
+    id
+    name
+    description
+  }
+}
