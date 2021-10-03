@@ -2,10 +2,3 @@
   display: block;
   height: 100%;
 }
-
-main {
-  padding: 20px 50px;
-}
-main.phone {
-  padding: 20px 15px;
-}

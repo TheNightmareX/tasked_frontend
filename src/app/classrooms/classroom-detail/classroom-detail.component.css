@@ -1,0 +1,10 @@
+:host {
+  display: block;
+}
+
+main {
+  padding: 20px 50px;
+}
+main.phone {
+  padding: 20px 15px;
+}

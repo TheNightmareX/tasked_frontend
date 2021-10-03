@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { SharedModule } from '../shared/shared.module';
 import { ClassroomDetailComponent } from './classroom-detail/classroom-detail.component';
 import { ClassroomListComponent } from './classroom-list/classroom-list.component';
@@ -20,6 +21,7 @@ import { ClassroomsComponent } from './classrooms.component';
     ClassroomsRoutingModule,
     MatListModule,
     MatIconModule,
+    MatToolbarModule,
   ],
 })
 export class ClassroomsModule {}

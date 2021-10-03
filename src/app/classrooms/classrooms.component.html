@@ -2,7 +2,5 @@
   <ng-container ngProjectAs="sidenav">
     <app-classroom-list></app-classroom-list>
   </ng-container>
-  <main [class.phone]="breakpoints.phone$ | async">
-    <router-outlet></router-outlet>
-  </main>
+  <router-outlet></router-outlet>
 </app-layout>

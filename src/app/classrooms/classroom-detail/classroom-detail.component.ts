@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
+import { BreakpointsService } from 'src/app/core/breakpoints.service';
 import { ClassroomsStateService } from 'src/app/core/classrooms-state.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { ClassroomsStateService } from 'src/app/core/classrooms-state.service';
 })
 export class ClassroomDetailComponent implements OnInit {
   constructor(
+    public breakpoints: BreakpointsService,
     private route: ActivatedRoute,
     private state: ClassroomsStateService,
   ) {}
