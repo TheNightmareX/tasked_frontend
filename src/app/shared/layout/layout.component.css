@@ -7,9 +7,6 @@
 mat-toolbar {
   z-index: 2;
 }
-mat-toolbar > .spacer {
-  width: 1%;
-}
 mat-toolbar > .logo {
   cursor: pointer;
 }
