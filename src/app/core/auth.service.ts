@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { AuthGQL, UserScalarFieldsFragment } from '../graphql';
+import { AuthGQL, MeGQL, UserScalarFieldsFragment } from '../graphql';
 import { CoreModule } from './core.module';
 import { LocalStorageService } from './local-storage.service';
 
@@ -11,15 +12,22 @@ type User = UserScalarFieldsFragment;
 })
 export class AuthService {
   token?: string;
-  user?: User;
+  user$: Observable<User | undefined>;
 
-  constructor(private storage: LocalStorageService, private authGql: AuthGQL) {
+  constructor(
+    private storage: LocalStorageService,
+    private authGql: AuthGQL,
+    private meGql: MeGQL,
+  ) {
     this.token = this.storage.load(
       'token',
       undefined,
       (v): v is this['token'] => v == undefined || typeof v == 'string',
       () => this.token,
     );
+    this.user$ = this.token
+      ? this.meGql.fetch().pipe(map(({ data }) => data.me))
+      : of(undefined);
   }
 
   login(username: string, password: string) {
@@ -27,13 +35,13 @@ export class AuthService {
       map(({ data }) => data!.auth),
       tap(({ token, user }) => {
         this.token = token;
-        this.user = user;
+        this.user$ = of(user);
       }),
     );
   }
 
   logout() {
     this.token = undefined;
-    this.user = undefined;
+    this.user$ = of(undefined);
   }
 }
