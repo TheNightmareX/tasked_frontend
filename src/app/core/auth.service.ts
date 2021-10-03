@@ -12,7 +12,7 @@ type User = UserScalarFieldsFragment;
 })
 export class AuthService {
   token?: string;
-  user$: Observable<User | undefined>;
+  user$?: Observable<User>;
 
   constructor(
     private storage: LocalStorageService,
@@ -25,9 +25,8 @@ export class AuthService {
       (v): v is this['token'] => v == undefined || typeof v == 'string',
       () => this.token,
     );
-    this.user$ = this.token
-      ? this.meGql.fetch().pipe(map(({ data }) => data.me))
-      : of(undefined);
+    if (this.token)
+      this.user$ = this.meGql.fetch().pipe(map(({ data }) => data.me));
   }
 
   login(username: string, password: string) {
@@ -42,6 +41,6 @@ export class AuthService {
 
   logout() {
     this.token = undefined;
-    this.user$ = of(undefined);
+    this.user$ = undefined;
   }
 }
