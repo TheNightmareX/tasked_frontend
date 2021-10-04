@@ -4,6 +4,10 @@
   </button>
   <span fxFlex="1%"></span>
   <span class="logo" routerLink="/">Tasked</span>
+  <span fxFlex></span>
+  <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="auth.user$ | async">
+    <mat-icon>account_circle</mat-icon>
+  </button>
 </mat-toolbar>
 
 <mat-sidenav-container style="flex-grow: 1">
@@ -19,3 +23,7 @@
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<mat-menu #menu>
+  <app-profile-menu></app-profile-menu>
+</mat-menu>
