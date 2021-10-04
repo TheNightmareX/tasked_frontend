@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { forkJoin, of, Subject, timer } from 'rxjs';
-import { catchError, map, throttleTime } from 'rxjs/operators';
+import { catchError, map, tap, throttleTime } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/auth.service';
 import { NotificationType } from 'src/app/notification-type.enum';
 
@@ -33,9 +33,9 @@ export class AuthFormLoginComponent implements OnInit {
       this.auth.login(username, password).pipe(catchError(() => of(null))),
       timer(1000),
     ])
-      .pipe(map(([token]) => token))
-      .subscribe((token) => {
-        if (token) this.router.navigate(['/']);
+      .pipe(map(([data]) => data))
+      .subscribe((data) => {
+        if (data) this.router.navigate(['/']);
         else
           this.notifier.notify(
             NotificationType.Error,
