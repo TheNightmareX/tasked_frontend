@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { of, ReplaySubject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { LocalStorageService } from '../core/local-storage.service';
 import { AuthGQL, MeGQL, UserScalarFieldsFragment } from '../graphql';
-import { LocalStorageService } from './local-storage.service';
 
 type User = UserScalarFieldsFragment;
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ClassroomsStateService } from '../core/classrooms-state.service';
+import { ClassroomsStateService } from './classrooms-state.service';
 
 @Component({
   selector: 'app-classrooms',

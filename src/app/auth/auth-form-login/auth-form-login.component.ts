@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { forkJoin, of, Subject, timer } from 'rxjs';
-import { catchError, map, tap, throttleTime } from 'rxjs/operators';
-import { AuthService } from 'src/app/core/auth.service';
+import { catchError, map, throttleTime } from 'rxjs/operators';
+import { AuthService } from 'src/app/auth/auth.service';
 import { NotificationType } from 'src/app/notification-type.enum';
 
 @Component({

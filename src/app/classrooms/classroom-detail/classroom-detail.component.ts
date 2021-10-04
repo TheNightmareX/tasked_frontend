@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
+import { ClassroomsStateService } from 'src/app/classrooms/classrooms-state.service';
 import { BreakpointsService } from 'src/app/core/breakpoints.service';
-import { ClassroomsStateService } from 'src/app/core/classrooms-state.service';
 import { ClassroomDetailGQL, ClassroomDetailQuery } from 'src/app/graphql';
 
 type Classroom = ClassroomDetailQuery['classroom'];

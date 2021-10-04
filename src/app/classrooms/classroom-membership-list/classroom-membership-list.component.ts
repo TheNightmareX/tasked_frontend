@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ClassroomsStateService } from 'src/app/core/classrooms-state.service';
+import { ClassroomsStateService } from 'src/app/classrooms/classrooms-state.service';
 import {
   ClassroomMembershipListGQL,
   ClassroomMembershipListQuery,

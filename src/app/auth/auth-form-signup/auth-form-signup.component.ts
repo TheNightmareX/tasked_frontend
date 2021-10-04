@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { forkJoin, of, Subject, timer } from 'rxjs';
 import { catchError, concatMap, map, throttleTime } from 'rxjs/operators';
-import { AuthService } from 'src/app/core/auth.service';
+import { AuthService } from 'src/app/auth/auth.service';
 import { CreateUserGQL, Gender, UserCreateInput } from 'src/app/graphql';
 import { NotificationType } from 'src/app/notification-type.enum';
 
