@@ -10,16 +10,16 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { EqualDirective } from './equal.directive';
+import { LayoutProfileMenuComponent } from './layout-profile-menu/layout-profile-menu.component';
 import { LayoutComponent } from './layout/layout.component';
 import { LoadingDirective } from './loading.directive';
-import { ProfileMenuComponent } from './profile-menu/profile-menu.component';
 
 const modules = [CommonModule, FormsModule, FlexLayoutModule];
 const components = [LayoutComponent];
 const directives = [EqualDirective, LoadingDirective];
 
 @NgModule({
-  declarations: [components, directives, ProfileMenuComponent],
+  declarations: [components, directives, LayoutProfileMenuComponent],
   imports: [
     modules,
     RouterModule,

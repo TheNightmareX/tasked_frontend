@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
-  selector: 'app-profile-menu',
-  templateUrl: './profile-menu.component.html',
-  styleUrls: ['./profile-menu.component.css'],
+  selector: 'app-layout-profile-menu',
+  templateUrl: './layout-profile-menu.component.html',
+  styleUrls: ['./layout-profile-menu.component.css'],
 })
-export class ProfileMenuComponent implements OnInit {
+export class LayoutProfileMenuComponent implements OnInit {
   constructor(public auth: AuthService, private router: Router) {}
 
   ngOnInit() {}
