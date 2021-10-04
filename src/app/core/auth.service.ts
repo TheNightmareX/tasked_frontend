@@ -11,7 +11,7 @@ type User = UserScalarFieldsFragment;
 })
 export class AuthService {
   token?: string;
-  user$ = new ReplaySubject<User | undefined>();
+  user$ = new ReplaySubject<User | undefined>(1);
 
   constructor(
     private storage: LocalStorageService,
