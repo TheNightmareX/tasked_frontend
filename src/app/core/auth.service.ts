@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { of, ReplaySubject } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { AuthGQL, MeGQL, UserScalarFieldsFragment } from '../graphql';
-import { CoreModule } from './core.module';
 import { LocalStorageService } from './local-storage.service';
 
 type User = UserScalarFieldsFragment;
@@ -12,7 +11,7 @@ type User = UserScalarFieldsFragment;
 })
 export class AuthService {
   token?: string;
-  user$?: Observable<User>;
+  user$ = new ReplaySubject<User | undefined>();
 
   constructor(
     private storage: LocalStorageService,
@@ -25,8 +24,19 @@ export class AuthService {
       (v): v is this['token'] => v == undefined || typeof v == 'string',
       () => this.token,
     );
+  }
+
+  refetch() {
     if (this.token)
-      this.user$ = this.meGql.fetch().pipe(map(({ data }) => data.me));
+      this.meGql
+        .fetch()
+        .pipe(
+          map(({ data }) => data.me),
+          catchError(() => of(undefined)),
+        )
+        .subscribe(this.user$);
+    else this.user$.next(undefined);
+    return this.user$;
   }
 
   login(username: string, password: string) {
@@ -34,13 +44,13 @@ export class AuthService {
       map(({ data }) => data!.auth),
       tap(({ token, user }) => {
         this.token = token;
-        this.user$ = of(user);
+        this.user$.next(user);
       }),
     );
   }
 
   logout() {
     this.token = undefined;
-    this.user$ = undefined;
+    this.user$.next(undefined);
   }
 }
