@@ -61,7 +61,6 @@ export class FormProfileComponent
   }
 
   validate() {
-    console.debug(this.form);
     return this.form.valid ? null : { profile: 'error' };
   }
 
