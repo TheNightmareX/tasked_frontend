@@ -1,4 +1,10 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   ControlValueAccessor,
   NgForm,
@@ -6,6 +12,8 @@ import {
   NG_VALUE_ACCESSOR,
   Validator,
 } from '@angular/forms';
+import { of } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { Gender } from 'src/app/graphql';
 import { FormProfileData } from './form-profile-data.interface';
 
@@ -27,7 +35,7 @@ import { FormProfileData } from './form-profile-data.interface';
   ],
 })
 export class FormProfileComponent
-  implements OnInit, ControlValueAccessor, Validator
+  implements OnInit, AfterViewInit, ControlValueAccessor, Validator
 {
   data: FormProfileData = {
     username: '',
@@ -51,9 +59,21 @@ export class FormProfileComponent
   private onChange = (v: unknown) => {};
   private onTouched = () => {};
 
+  /**
+   * `.form.valid` will be `true` when `.validate()` is called first time, but
+   * we must return a `false` in the first validation, so here it is.
+   */
+  private valid = false;
+
   constructor() {}
 
   ngOnInit() {}
+
+  ngAfterViewInit() {
+    this.form
+      .statusChanges!.pipe(map(() => !!this.form.valid))
+      .subscribe((valid) => (this.valid = valid));
+  }
 
   propagate() {
     // wait for the validation
@@ -64,9 +84,7 @@ export class FormProfileComponent
   }
 
   validate() {
-    // It takes some time for the `.valid` to initialize to `false` while
-    // `.touched` is `false` by default.
-    return this.form.touched && this.form.valid ? null : { profile: 'error' };
+    return this.valid ? null : { profile: 'error' };
   }
 
   writeValue(data: FormProfileComponent) {
