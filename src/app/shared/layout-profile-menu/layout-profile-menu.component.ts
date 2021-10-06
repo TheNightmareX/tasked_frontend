@@ -13,7 +13,7 @@ export class LayoutProfileMenuComponent implements OnInit {
   ngOnInit() {}
 
   logout() {
-    this.router.navigate(['/auth']);
     this.auth.logout();
+    this.router.navigate(['/auth']);
   }
 }
