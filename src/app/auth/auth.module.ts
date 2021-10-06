@@ -17,6 +17,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { AuthSidenavComponent } from './auth-sidenav/auth-sidenav.component';
 import { AuthComponent } from './auth.component';
 import { AuthInterceptor } from './auth.interceptor';
+import { FormProfileComponent } from './form-profile/form-profile.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AuthInterceptor } from './auth.interceptor';
     AuthFormLoginComponent,
     AuthFormSignupComponent,
     AuthSidenavComponent,
+    FormProfileComponent,
   ],
   imports: [
     SharedModule,
@@ -39,6 +41,7 @@ import { AuthInterceptor } from './auth.interceptor';
     MatTooltipModule,
     MatListModule,
   ],
+  exports: [FormProfileComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

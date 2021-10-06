@@ -1,13 +1,12 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { forkJoin, of, Subject, timer } from 'rxjs';
 import { catchError, concatMap, map, throttleTime } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
-import { GENDER_SELECTIONS } from 'src/app/constants/gender-selection.token';
 import { CreateUserGQL, Gender, UserCreateInput } from 'src/app/graphql';
 import { NotificationType } from 'src/app/notification-type.enum';
-import { Selection } from 'src/app/selection.interface';
+import { FormProfileData } from '../form-profile/form-profile-data.interface';
 
 @Component({
   selector: 'app-auth-form-signup',
@@ -15,9 +14,8 @@ import { Selection } from 'src/app/selection.interface';
   styleUrls: ['./auth-form-signup.component.css'],
 })
 export class AuthFormSignupComponent implements OnInit {
-  data = {
+  data: FormProfileData = {
     username: '',
-    nickname: undefined as string | undefined,
     password: '',
     passwordConfirm: '',
     gender: Gender.Unknown,
@@ -28,7 +26,6 @@ export class AuthFormSignupComponent implements OnInit {
   submit$ = new Subject<Event>();
 
   constructor(
-    @Inject(GENDER_SELECTIONS) public genderSelections: Selection[],
     private auth: AuthService,
     private notifier: NotifierService,
     private router: Router,
