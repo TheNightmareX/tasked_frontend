@@ -1,5 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  ControlValueAccessor,
+  NgForm,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  Validator,
+} from '@angular/forms';
 import { Gender } from 'src/app/graphql';
 import { FormProfileData } from './form-profile-data.interface';
 
@@ -13,9 +19,16 @@ import { FormProfileData } from './form-profile-data.interface';
       useExisting: FormProfileComponent,
       multi: true,
     },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: FormProfileComponent,
+      multi: true,
+    },
   ],
 })
-export class FormProfileComponent implements OnInit, ControlValueAccessor {
+export class FormProfileComponent
+  implements OnInit, ControlValueAccessor, Validator
+{
   data: FormProfileData = {
     username: '',
     password: '',
@@ -32,6 +45,9 @@ export class FormProfileComponent implements OnInit, ControlValueAccessor {
   @Input()
   update: boolean = false;
 
+  @ViewChild(NgForm)
+  private form!: NgForm;
+
   private onChange = (v: unknown) => {};
   private onTouched = () => {};
 
@@ -42,6 +58,11 @@ export class FormProfileComponent implements OnInit, ControlValueAccessor {
   propagate() {
     this.onChange(this.data);
     this.onTouched();
+  }
+
+  validate() {
+    console.debug(this.form);
+    return this.form.valid ? null : { profile: 'error' };
   }
 
   writeValue(data: FormProfileComponent) {
