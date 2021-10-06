@@ -56,12 +56,17 @@ export class FormProfileComponent
   ngOnInit() {}
 
   propagate() {
-    this.onChange(this.data);
-    this.onTouched();
+    // wait for the validation
+    setTimeout(() => {
+      this.onChange(this.data);
+      this.onTouched();
+    });
   }
 
   validate() {
-    return this.form.valid ? null : { profile: 'error' };
+    // It takes some time for the `.valid` to initialize to `false` while
+    // `.touched` is `false` by default.
+    return this.form.touched && this.form.valid ? null : { profile: 'error' };
   }
 
   writeValue(data: FormProfileComponent) {
