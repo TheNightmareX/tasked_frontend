@@ -9,7 +9,7 @@
     maxlength="15"
     pattern="^([a-zA-Z0-9_-])+$"
     [(ngModel)]="data.username"
-    (ngModelChange)="dataChange.emit(data)"
+    (ngModelChange)="propagate()"
     #username="ngModel"
     [disabled]="update"
   />
@@ -33,7 +33,7 @@
     autocomplete="nickname"
     maxlength="15"
     [(ngModel)]="data.nickname"
-    (ngModelChange)="dataChange.emit(data)"
+    (ngModelChange)="propagate()"
   />
   <mat-icon
     matSuffix
@@ -55,7 +55,7 @@
     maxlength="20"
     [(ngModel)]="data.password"
     (ngModelChange)="passwordConfirm.reset()"
-    (ngModelChange)="dataChange.emit(data)"
+    (ngModelChange)="propagate()"
     #password="ngModel"
   />
   <mat-error *ngIf="!password.valid">
@@ -74,7 +74,7 @@
     required
     [appEqual]="data.password"
     [(ngModel)]="data.passwordConfirm"
-    (ngModelChange)="dataChange.emit(data)"
+    (ngModelChange)="propagate()"
     #passwordConfirm="ngModel"
   />
   <mat-error *ngIf="!passwordConfirm.valid">
