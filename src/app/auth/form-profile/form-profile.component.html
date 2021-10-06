@@ -11,6 +11,7 @@
     [(ngModel)]="data.username"
     (ngModelChange)="dataChange.emit(data)"
     #username="ngModel"
+    [disabled]="update"
   />
   <mat-error *ngIf="!username.valid">
     Must consist of alphanumeric, underscores or hyphens

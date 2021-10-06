@@ -1,14 +1,5 @@
-import {
-  Component,
-  EventEmitter,
-  Inject,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
-import { GENDER_SELECTIONS } from 'src/app/constants/gender-selection.token';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Gender } from 'src/app/graphql';
-import { Selection } from 'src/app/selection.interface';
 import { FormProfileData } from './form-profile-data.interface';
 
 @Component({
@@ -30,9 +21,13 @@ export class FormProfileComponent implements OnInit {
   @Input()
   update: boolean = false;
 
-  constructor(
-    @Inject(GENDER_SELECTIONS) public genderSelections: Selection[],
-  ) {}
+  genderSelections = [
+    { text: 'Male', value: Gender.Male },
+    { text: 'Female', value: Gender.Female },
+    { text: 'Alien', value: Gender.Unknown },
+  ];
+
+  constructor() {}
 
   ngOnInit() {}
 }
