@@ -16,7 +16,7 @@ mat-sidenav {
   flex-direction: column;
   align-items: stretch;
   width: 286px;
-  background-color: var(--bg-color);
+  background-color: transparent;
 }
 
 /* Colors from https://github.com/angular/material.angular.io */
