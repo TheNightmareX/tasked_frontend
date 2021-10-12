@@ -1,7 +1,7 @@
 <!-- TODO: open a profile edit dialog here -->
 <button mat-menu-item>
   <mat-icon>edit</mat-icon>
-  <span>{{ (auth.user$ | async)?.username }}</span>
+  <span>{{ auth.user?.username }}</span>
 </button>
 <mat-divider></mat-divider>
 <button mat-menu-item (click)="logout()">

@@ -11,7 +11,7 @@ type User = UserScalarFieldsFragment;
 })
 export class AuthService {
   token?: string;
-  user$ = new ReplaySubject<User | undefined>(1);
+  user?: User;
 
   constructor(
     private storage: LocalStorageService,
@@ -27,16 +27,15 @@ export class AuthService {
   }
 
   refetch() {
-    if (this.token)
-      this.meGql
-        .fetch()
-        .pipe(
+    return this.token
+      ? this.meGql.fetch().pipe(
           map(({ data }) => data.me),
           catchError(() => of(undefined)),
+          tap((user) => {
+            this.user = user;
+          }),
         )
-        .subscribe(this.user$);
-    else this.user$.next(undefined);
-    return this.user$;
+      : of(undefined);
   }
 
   login(username: string, password: string) {
@@ -44,13 +43,13 @@ export class AuthService {
       map(({ data }) => data!.auth),
       tap(({ token, user }) => {
         this.token = token;
-        this.user$.next(user);
+        this.user = user;
       }),
     );
   }
 
   logout() {
     this.token = undefined;
-    this.user$.next(undefined);
+    this.user = undefined;
   }
 }

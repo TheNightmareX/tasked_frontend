@@ -5,7 +5,7 @@
   <span fxFlex="1%"></span>
   <span class="logo" routerLink="/">Tasked</span>
   <span fxFlex></span>
-  <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="auth.user$ | async">
+  <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="auth.user">
     <mat-icon>account_circle</mat-icon>
   </button>
 </mat-toolbar>

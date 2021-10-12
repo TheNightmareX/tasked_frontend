@@ -16,9 +16,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    return this.authService.user$.pipe(
-      map((user) => !!user || this.router.parseUrl('/auth')),
-    );
+    return !!this.authService.user || this.router.parseUrl('/auth');
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
