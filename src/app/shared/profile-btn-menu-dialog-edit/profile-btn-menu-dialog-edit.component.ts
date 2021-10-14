@@ -5,7 +5,7 @@ import { FormDataService } from 'src/app/core/form-data.service';
 import {
   Gender,
   UpdateUserGQL,
-  UserScalarFieldsFragment,
+  CommonUserFragment,
   UserUpdateInput,
 } from 'src/app/graphql';
 import { FormProfileData } from '../form-profile/form-profile-data.interface';
@@ -46,7 +46,7 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
       });
   }
 
-  private cleanData(user: UserScalarFieldsFragment) {
+  private cleanData(user: CommonUserFragment) {
     const data: UserUpdateInput = this.formDataService.pick(this.data, [
       'nickname',
       'password',

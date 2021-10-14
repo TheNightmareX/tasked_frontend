@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { of, ReplaySubject } from 'rxjs';
+import { of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { LocalStorageService } from '../core/local-storage.service';
-import { AuthGQL, MeGQL, UserScalarFieldsFragment } from '../graphql';
+import { AuthGQL, CommonUserFragment, MeGQL } from '../graphql';
 
-type User = UserScalarFieldsFragment;
+type User = CommonUserFragment;
 
 @Injectable({
   providedIn: 'root',

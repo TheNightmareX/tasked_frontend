@@ -2,13 +2,9 @@ import { gql } from 'apollo-angular';
 import { Injectable } from '@angular/core';
 import * as Apollo from 'apollo-angular';
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]: Maybe<T[SubKey]> };
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -51,7 +47,7 @@ export type AffairCreateInput = {
 export enum ApplicationStatus {
   Accepted = 'Accepted',
   Pending = 'Pending',
-  Rejected = 'Rejected',
+  Rejected = 'Rejected'
 }
 
 export type Assignment = {
@@ -97,16 +93,19 @@ export type Classroom = {
   updatedAt: Scalars['DateTime'];
 };
 
+
 export type ClassroomAffairsArgs = {
   isActivated?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type ClassroomJoinApplicationsArgs = {
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type ClassroomMembershipsArgs = {
   limit?: Maybe<Scalars['Int']>;
@@ -126,7 +125,7 @@ export type ClassroomUpdateInput = {
 export enum Gender {
   Female = 'Female',
   Male = 'Male',
-  Unknown = 'Unknown',
+  Unknown = 'Unknown'
 }
 
 export type JoinApplication = {
@@ -187,91 +186,112 @@ export type Mutation = {
   updateUser: User;
 };
 
+
 export type MutationAcceptJoinApplicationArgs = {
   id: Scalars['ID'];
 };
+
 
 export type MutationAuthArgs = {
   password: Scalars['String'];
   username: Scalars['String'];
 };
 
+
 export type MutationCompleteAssignmentArgs = {
   id: Scalars['ID'];
 };
+
 
 export type MutationCreateAffairArgs = {
   data: AffairCreateInput;
 };
 
+
 export type MutationCreateAssignmentArgs = {
   data: AssignmentCreateInput;
 };
+
 
 export type MutationCreateClassroomArgs = {
   data: ClassroomCreateInput;
 };
 
+
 export type MutationCreateJoinApplicationArgs = {
   data: JoinApplicationCreateInput;
 };
+
 
 export type MutationCreateTaskArgs = {
   data: TaskCreateInput;
 };
 
+
 export type MutationCreateUserArgs = {
   data: UserCreateInput;
 };
+
 
 export type MutationDeleteAffairArgs = {
   id: Scalars['ID'];
 };
 
+
 export type MutationDeleteAssignmentArgs = {
   id: Scalars['ID'];
 };
+
 
 export type MutationDeleteClassroomArgs = {
   id: Scalars['ID'];
 };
 
+
 export type MutationDeleteMembershipArgs = {
   id: Scalars['ID'];
 };
+
 
 export type MutationDeleteTaskArgs = {
   id: Scalars['ID'];
 };
 
+
 export type MutationRejectJoinApplicationArgs = {
   id: Scalars['ID'];
 };
+
 
 export type MutationUpdateAffairArgs = {
   data: AffairCreateInput;
   id: Scalars['ID'];
 };
 
+
 export type MutationUpdateAssignmentArgs = {
   data: AssignmentUpdateInput;
   id: Scalars['ID'];
 };
+
 
 export type MutationUpdateClassroomArgs = {
   data: ClassroomUpdateInput;
   id: Scalars['ID'];
 };
 
+
 export type MutationUpdateJoinApplicationArgs = {
   data: JoinApplicationUpdateInput;
   id: Scalars['ID'];
 };
 
+
 export type MutationUpdateTaskArgs = {
   data: TaskUpdateInput;
   id: Scalars['ID'];
 };
+
 
 export type MutationUpdateUserArgs = {
   data: UserUpdateInput;
@@ -339,9 +359,11 @@ export type Query = {
   users: PaginatedUsers;
 };
 
+
 export type QueryAffairArgs = {
   id: Scalars['ID'];
 };
+
 
 export type QueryAffairsArgs = {
   isActivated?: Maybe<Scalars['Boolean']>;
@@ -349,54 +371,66 @@ export type QueryAffairsArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type QueryAssignmentArgs = {
   id: Scalars['ID'];
 };
+
 
 export type QueryAssignmentsArgs = {
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type QueryClassroomArgs = {
   id: Scalars['ID'];
 };
+
 
 export type QueryClassroomsArgs = {
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type QueryJoinApplicationArgs = {
   id: Scalars['ID'];
 };
+
 
 export type QueryJoinApplicationsArgs = {
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type QueryMembershipArgs = {
   id: Scalars['ID'];
 };
+
 
 export type QueryMembershipsArgs = {
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type QueryTaskArgs = {
   id: Scalars['ID'];
 };
+
 
 export type QueryTasksArgs = {
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type QueryUserArgs = {
   id: Scalars['ID'];
 };
+
 
 export type QueryUsersArgs = {
   limit?: Maybe<Scalars['Int']>;
@@ -405,7 +439,7 @@ export type QueryUsersArgs = {
 
 export enum Role {
   Student = 'Student',
-  Teacher = 'Teacher',
+  Teacher = 'Teacher'
 }
 
 export type Task = {
@@ -417,6 +451,7 @@ export type Task = {
   title: Scalars['String'];
   updatedAt: Scalars['DateTime'];
 };
+
 
 export type TaskAssignmentsArgs = {
   limit?: Maybe<Scalars['Int']>;
@@ -448,25 +483,30 @@ export type User = {
   username: Scalars['String'];
 };
 
+
 export type UserAssignmentsArgs = {
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type UserClassroomsArgs = {
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type UserJoinApplicationsArgs = {
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
 
+
 export type UserMembershipsArgs = {
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type UserTasksArgs = {
   limit?: Maybe<Scalars['Int']>;
@@ -491,332 +531,215 @@ export type AuthMutationVariables = Exact<{
   password: Scalars['String'];
 }>;
 
-export type AuthMutation = {
-  __typename?: 'Mutation';
-  auth: {
-    __typename?: 'AuthResult';
-    token: string;
-    user: {
-      __typename?: 'User';
-      id: string;
-      username: string;
-      nickname?: string | null | undefined;
-      gender: Gender;
-      createdAt: any;
-      updatedAt: any;
-    };
-  };
-};
+
+export type AuthMutation = { __typename?: 'Mutation', auth: { __typename?: 'AuthResult', token: string, user: { __typename?: 'User', id: string, username: string, nickname?: string | null | undefined, gender: Gender, createdAt: any, updatedAt: any } } };
 
 export type ClassroomDetailQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
-export type ClassroomDetailQuery = {
-  __typename?: 'Query';
-  classroom: {
-    __typename?: 'Classroom';
-    id: string;
-    name: string;
-    description?: string | null | undefined;
-  };
-};
+
+export type ClassroomDetailQuery = { __typename?: 'Query', classroom: { __typename?: 'Classroom', id: string, name: string, description?: string | null | undefined } };
 
 export type ClassroomListQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 }>;
 
-export type ClassroomListQuery = {
-  __typename?: 'Query';
-  classrooms: {
-    __typename?: 'PaginatedClassrooms';
-    results: Array<{
-      __typename?: 'Classroom';
-      id: string;
-      name: string;
-      creator: {
-        __typename?: 'User';
-        id: string;
-        username: string;
-        nickname?: string | null | undefined;
-      };
-    }>;
-  };
-};
+
+export type ClassroomListQuery = { __typename?: 'Query', classrooms: { __typename?: 'PaginatedClassrooms', results: Array<{ __typename?: 'Classroom', id: string, name: string, creator: { __typename?: 'User', id: string, username: string, nickname?: string | null | undefined } }> } };
 
 export type ClassroomMembershipListQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
-export type ClassroomMembershipListQuery = {
-  __typename?: 'Query';
-  classroom: {
-    __typename?: 'Classroom';
-    creator: { __typename?: 'User'; id: string; username: string };
-    memberships: {
-      __typename?: 'PaginatedMemberships';
-      total: number;
-      results: Array<{
-        __typename?: 'Membership';
-        displayName?: string | null | undefined;
-        role: Role;
-        owner: {
-          __typename?: 'User';
-          id: string;
-          username: string;
-          nickname?: string | null | undefined;
-          gender: Gender;
-        };
-      }>;
-    };
-  };
-};
+
+export type ClassroomMembershipListQuery = { __typename?: 'Query', classroom: { __typename?: 'Classroom', creator: { __typename?: 'User', id: string, username: string }, memberships: { __typename?: 'PaginatedMemberships', total: number, results: Array<{ __typename?: 'Membership', displayName?: string | null | undefined, role: Role, owner: { __typename?: 'User', id: string, username: string, nickname?: string | null | undefined, gender: Gender } }> } } };
 
 export type CreateUserMutationVariables = Exact<{
   data: UserCreateInput;
 }>;
 
-export type CreateUserMutation = {
-  __typename?: 'Mutation';
-  createUser: {
-    __typename?: 'User';
-    id: string;
-    username: string;
-    nickname?: string | null | undefined;
-    gender: Gender;
-    createdAt: any;
-    updatedAt: any;
-  };
-};
 
-export type MeQueryVariables = Exact<{ [key: string]: never }>;
+export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'User', id: string, username: string, nickname?: string | null | undefined, gender: Gender, createdAt: any, updatedAt: any } };
 
-export type MeQuery = {
-  __typename?: 'Query';
-  me: {
-    __typename?: 'User';
-    id: string;
-    username: string;
-    nickname?: string | null | undefined;
-    gender: Gender;
-    createdAt: any;
-    updatedAt: any;
-  };
-};
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeQuery = { __typename?: 'Query', me: { __typename?: 'User', id: string, username: string, nickname?: string | null | undefined, gender: Gender, createdAt: any, updatedAt: any } };
 
 export type UpdateUserMutationVariables = Exact<{
   id: Scalars['ID'];
   data: UserUpdateInput;
 }>;
 
-export type UpdateUserMutation = {
-  __typename?: 'Mutation';
-  updateUser: {
-    __typename?: 'User';
-    id: string;
-    username: string;
-    nickname?: string | null | undefined;
-    gender: Gender;
-    createdAt: any;
-    updatedAt: any;
-  };
-};
 
-export type UserScalarFieldsFragment = {
-  __typename?: 'User';
-  id: string;
-  username: string;
-  nickname?: string | null | undefined;
-  gender: Gender;
-  createdAt: any;
-  updatedAt: any;
-};
+export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: string, username: string, nickname?: string | null | undefined, gender: Gender, createdAt: any, updatedAt: any } };
 
-export const UserScalarFieldsFragmentDoc = gql`
-  fragment userScalarFields on User {
-    id
-    username
-    nickname
-    gender
-    createdAt
-    updatedAt
-  }
-`;
+export type CommonUserFragment = { __typename?: 'User', id: string, username: string, nickname?: string | null | undefined, gender: Gender, createdAt: any, updatedAt: any };
+
+export const CommonUserFragmentDoc = gql`
+    fragment CommonUser on User {
+  id
+  username
+  nickname
+  gender
+  createdAt
+  updatedAt
+}
+    `;
 export const AuthDocument = gql`
-  mutation Auth($username: String!, $password: String!) {
-    auth(username: $username, password: $password) {
-      token
-      user {
-        ...userScalarFields
-      }
+    mutation Auth($username: String!, $password: String!) {
+  auth(username: $username, password: $password) {
+    token
+    user {
+      ...CommonUser
     }
   }
-  ${UserScalarFieldsFragmentDoc}
-`;
+}
+    ${CommonUserFragmentDoc}`;
 
-@Injectable({
-  providedIn: 'root',
-})
-export class AuthGQL extends Apollo.Mutation<
-  AuthMutation,
-  AuthMutationVariables
-> {
-  document = AuthDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AuthGQL extends Apollo.Mutation<AuthMutation, AuthMutationVariables> {
+    document = AuthDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const ClassroomDetailDocument = gql`
+    query ClassroomDetail($id: ID!) {
+  classroom(id: $id) {
+    id
+    name
+    description
   }
 }
-export const ClassroomDetailDocument = gql`
-  query ClassroomDetail($id: ID!) {
-    classroom(id: $id) {
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class ClassroomDetailGQL extends Apollo.Query<ClassroomDetailQuery, ClassroomDetailQueryVariables> {
+    document = ClassroomDetailDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const ClassroomListDocument = gql`
+    query ClassroomList($limit: Int, $offset: Int) {
+  classrooms(limit: $limit, offset: $offset) {
+    results {
       id
       name
-      description
-    }
-  }
-`;
-
-@Injectable({
-  providedIn: 'root',
-})
-export class ClassroomDetailGQL extends Apollo.Query<
-  ClassroomDetailQuery,
-  ClassroomDetailQueryVariables
-> {
-  document = ClassroomDetailDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
-  }
-}
-export const ClassroomListDocument = gql`
-  query ClassroomList($limit: Int, $offset: Int) {
-    classrooms(limit: $limit, offset: $offset) {
-      results {
-        id
-        name
-        creator {
-          id
-          username
-          nickname
-        }
-      }
-    }
-  }
-`;
-
-@Injectable({
-  providedIn: 'root',
-})
-export class ClassroomListGQL extends Apollo.Query<
-  ClassroomListQuery,
-  ClassroomListQueryVariables
-> {
-  document = ClassroomListDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
-  }
-}
-export const ClassroomMembershipListDocument = gql`
-  query ClassroomMembershipList($id: ID!) {
-    classroom(id: $id) {
       creator {
         id
         username
+        nickname
       }
-      memberships {
-        total
-        results {
-          owner {
-            id
-            username
-            nickname
-            gender
-          }
-          displayName
-          role
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class ClassroomListGQL extends Apollo.Query<ClassroomListQuery, ClassroomListQueryVariables> {
+    document = ClassroomListDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const ClassroomMembershipListDocument = gql`
+    query ClassroomMembershipList($id: ID!) {
+  classroom(id: $id) {
+    creator {
+      id
+      username
+    }
+    memberships {
+      total
+      results {
+        owner {
+          id
+          username
+          nickname
+          gender
         }
+        displayName
+        role
       }
     }
   }
-`;
-
-@Injectable({
-  providedIn: 'root',
-})
-export class ClassroomMembershipListGQL extends Apollo.Query<
-  ClassroomMembershipListQuery,
-  ClassroomMembershipListQueryVariables
-> {
-  document = ClassroomMembershipListDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
-  }
 }
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class ClassroomMembershipListGQL extends Apollo.Query<ClassroomMembershipListQuery, ClassroomMembershipListQueryVariables> {
+    document = ClassroomMembershipListDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const CreateUserDocument = gql`
-  mutation CreateUser($data: UserCreateInput!) {
-    createUser(data: $data) {
-      ...userScalarFields
-    }
-  }
-  ${UserScalarFieldsFragmentDoc}
-`;
-
-@Injectable({
-  providedIn: 'root',
-})
-export class CreateUserGQL extends Apollo.Mutation<
-  CreateUserMutation,
-  CreateUserMutationVariables
-> {
-  document = CreateUserDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    mutation CreateUser($data: UserCreateInput!) {
+  createUser(data: $data) {
+    ...CommonUser
   }
 }
+    ${CommonUserFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateUserGQL extends Apollo.Mutation<CreateUserMutation, CreateUserMutationVariables> {
+    document = CreateUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const MeDocument = gql`
-  query Me {
-    me {
-      ...userScalarFields
-    }
-  }
-  ${UserScalarFieldsFragmentDoc}
-`;
-
-@Injectable({
-  providedIn: 'root',
-})
-export class MeGQL extends Apollo.Query<MeQuery, MeQueryVariables> {
-  document = MeDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    query Me {
+  me {
+    ...CommonUser
   }
 }
+    ${CommonUserFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class MeGQL extends Apollo.Query<MeQuery, MeQueryVariables> {
+    document = MeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const UpdateUserDocument = gql`
-  mutation UpdateUser($id: ID!, $data: UserUpdateInput!) {
-    updateUser(id: $id, data: $data) {
-      ...userScalarFields
-    }
-  }
-  ${UserScalarFieldsFragmentDoc}
-`;
-
-@Injectable({
-  providedIn: 'root',
-})
-export class UpdateUserGQL extends Apollo.Mutation<
-  UpdateUserMutation,
-  UpdateUserMutationVariables
-> {
-  document = UpdateUserDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    mutation UpdateUser($id: ID!, $data: UserUpdateInput!) {
+  updateUser(id: $id, data: $data) {
+    ...CommonUser
   }
 }
+    ${CommonUserFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateUserGQL extends Apollo.Mutation<UpdateUserMutation, UpdateUserMutationVariables> {
+    document = UpdateUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
