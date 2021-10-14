@@ -1,5 +1,7 @@
 :host {
   display: block;
+  width: 90vw;
+  max-width: 400px;
   margin-top: -16vh;
 }
 
@@ -23,9 +25,6 @@ mat-card > .header {
 mat-card > .content {
   width: 85%;
   flex-grow: 1;
-}
-mat-card > .content > mat-form-field {
-  width: 100%;
 }
 mat-card > .actions {
   width: 80%;
