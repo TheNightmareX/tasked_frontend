@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { concatMap, map, take, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FormDataService } from 'src/app/core/form-data.service';
 import {
   Gender,
+  UpdateUserGQL,
   UserScalarFieldsFragment,
   UserUpdateInput,
 } from 'src/app/graphql';
-import { UpdateUserGQL } from '../../graphql';
 import { FormProfileData } from '../form-profile/form-profile-data.interface';
 
 @Component({
-  selector: 'app-layout-profile-dialog-edit',
-  templateUrl: './layout-profile-dialog-edit.component.html',
-  styleUrls: ['./layout-profile-dialog-edit.component.css'],
+  selector: 'app-profile-btn-menu-dialog-edit',
+  templateUrl: './profile-btn-menu-dialog-edit.component.html',
+  styleUrls: ['./profile-btn-menu-dialog-edit.component.css'],
 })
-export class LayoutProfileDialogEditComponent implements OnInit {
+export class ProfileBtnMenuDialogEditComponent implements OnInit {
   data: FormProfileData = {
     username: '',
     password: '',

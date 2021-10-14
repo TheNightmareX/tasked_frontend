@@ -5,14 +5,14 @@ import { NotifierService } from 'angular-notifier';
 import dayjs from 'dayjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { NotificationType } from 'src/app/notification-type.enum';
-import { LayoutProfileDialogEditComponent } from '../layout-profile-dialog-edit/layout-profile-dialog-edit.component';
+import { ProfileBtnMenuDialogEditComponent } from '../profile-btn-menu-dialog-edit/profile-btn-menu-dialog-edit.component';
 
 @Component({
-  selector: 'app-layout-profile-menu',
-  templateUrl: './layout-profile-menu.component.html',
-  styleUrls: ['./layout-profile-menu.component.css'],
+  selector: 'app-profile-btn-menu',
+  templateUrl: './profile-btn-menu.component.html',
+  styleUrls: ['./profile-btn-menu.component.css'],
 })
-export class LayoutProfileMenuComponent implements OnInit {
+export class ProfileBtnMenuComponent implements OnInit {
   constructor(
     public auth: AuthService,
     private router: Router,
@@ -33,7 +33,7 @@ export class LayoutProfileMenuComponent implements OnInit {
         'Cannot update frequently within 3 days',
       );
     else {
-      this.dialog.open(LayoutProfileDialogEditComponent);
+      this.dialog.open(ProfileBtnMenuDialogEditComponent);
     }
   }
 

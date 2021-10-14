@@ -17,22 +17,24 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { EqualDirective } from './equal.directive';
 import { FormProfileComponent } from './form-profile/form-profile.component';
-import { LayoutProfileDialogEditComponent } from './layout-profile-dialog-edit/layout-profile-dialog-edit.component';
-import { LayoutProfileMenuComponent } from './layout-profile-menu/layout-profile-menu.component';
 import { LayoutComponent } from './layout/layout.component';
 import { LoadingDirective } from './loading.directive';
+import { ProfileBtnComponent } from './profile-btn/profile-btn.component';
+import { ProfileBtnMenuComponent } from './profile-btn-menu/profile-btn-menu.component';
+import { ProfileBtnMenuDialogEditComponent } from './profile-btn-menu-dialog-edit/profile-btn-menu-dialog-edit.component';
 
 const modules = [CommonModule, FormsModule, FlexLayoutModule];
-const components = [LayoutComponent, FormProfileComponent];
+const components = [
+  LayoutComponent,
+  FormProfileComponent,
+  ProfileBtnComponent,
+  ProfileBtnMenuComponent,
+  ProfileBtnMenuDialogEditComponent,
+];
 const directives = [EqualDirective, LoadingDirective];
 
 @NgModule({
-  declarations: [
-    components,
-    directives,
-    LayoutProfileMenuComponent,
-    LayoutProfileDialogEditComponent,
-  ],
+  declarations: [components, directives],
   imports: [
     modules,
     RouterModule,
