@@ -1,0 +1,25 @@
+<form fxLayout="column" (ngSubmit)="submit()" #form="ngForm">
+  <h1 mat-dialog-title>Profile</h1>
+
+  <div mat-dialog-content>
+    <app-form-profile
+      name="profile"
+      [(ngModel)]="data"
+      [update]="true"
+    ></app-form-profile>
+  </div>
+
+  <div fxFlex></div>
+
+  <div mat-dialog-actions fxLayout="row-reverse">
+    <button
+      mat-button
+      class="uppercase"
+      color="accent"
+      [disabled]="!form.valid"
+      type="submit"
+    >
+      Update
+    </button>
+  </div>
+</form>

@@ -568,6 +568,14 @@ export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type MeQuery = { __typename?: 'Query', me: { __typename?: 'User', id: string, username: string, nickname?: string | null | undefined, gender: Gender, createdAt: any, updatedAt: any } };
 
+export type UpdateUserMutationVariables = Exact<{
+  id: Scalars['ID'];
+  data: UserUpdateInput;
+}>;
+
+
+export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: string, username: string, nickname?: string | null | undefined, gender: Gender, createdAt: any, updatedAt: any } };
+
 export type UserScalarFieldsFragment = { __typename?: 'User', id: string, username: string, nickname?: string | null | undefined, gender: Gender, createdAt: any, updatedAt: any };
 
 export const UserScalarFieldsFragmentDoc = gql`
@@ -709,6 +717,24 @@ export const MeDocument = gql`
   })
   export class MeGQL extends Apollo.Query<MeQuery, MeQueryVariables> {
     document = MeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateUserDocument = gql`
+    mutation UpdateUser($id: ID!, $data: UserUpdateInput!) {
+  updateUser(id: $id, data: $data) {
+    ...userScalarFields
+  }
+}
+    ${UserScalarFieldsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateUserGQL extends Apollo.Mutation<UpdateUserMutation, UpdateUserMutationVariables> {
+    document = UpdateUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

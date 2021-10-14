@@ -1,9 +1,12 @@
-<!-- TODO: open a profile edit dialog here -->
-<button mat-menu-item>
-  <mat-icon>edit</mat-icon>
+<div mat-menu-item>
+  <mat-icon>person</mat-icon>
   <span>{{ auth.user?.username }}</span>
-</button>
+</div>
 <mat-divider></mat-divider>
+<button mat-menu-item (click)="openEditDialog()">
+  <mat-icon>edit</mat-icon>
+  <span>Profile</span>
+</button>
 <button mat-menu-item (click)="logout()">
   <mat-icon>logout</mat-icon>
   <span>Logout</span>
