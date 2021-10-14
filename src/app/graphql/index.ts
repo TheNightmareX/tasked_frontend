@@ -537,6 +537,7 @@ export type ClassroomListQuery = {
       name: string;
       creator: {
         __typename?: 'User';
+        id: string;
         username: string;
         nickname?: string | null | undefined;
       };
@@ -552,7 +553,7 @@ export type ClassroomMembershipListQuery = {
   __typename?: 'Query';
   classroom: {
     __typename?: 'Classroom';
-    creator: { __typename?: 'User'; username: string };
+    creator: { __typename?: 'User'; id: string; username: string };
     memberships: {
       __typename?: 'PaginatedMemberships';
       total: number;
@@ -562,6 +563,7 @@ export type ClassroomMembershipListQuery = {
         role: Role;
         owner: {
           __typename?: 'User';
+          id: string;
           username: string;
           nickname?: string | null | undefined;
           gender: Gender;
@@ -696,6 +698,7 @@ export const ClassroomListDocument = gql`
         id
         name
         creator {
+          id
           username
           nickname
         }
@@ -721,12 +724,14 @@ export const ClassroomMembershipListDocument = gql`
   query ClassroomMembershipList($id: ID!) {
     classroom(id: $id) {
       creator {
+        id
         username
       }
       memberships {
         total
         results {
           owner {
+            id
             username
             nickname
             gender

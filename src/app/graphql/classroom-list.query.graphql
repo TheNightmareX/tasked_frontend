@@ -4,6 +4,7 @@ query ClassroomList($limit: Int, $offset: Int) {
       id
       name
       creator {
+        id
         username
         nickname
       }

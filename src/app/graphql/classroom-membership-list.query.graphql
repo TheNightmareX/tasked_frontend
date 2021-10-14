@@ -1,12 +1,14 @@
 query ClassroomMembershipList($id: ID!) {
   classroom(id: $id) {
     creator {
+      id
       username
     }
     memberships {
       total
       results {
         owner {
+          id
           username
           nickname
           gender
