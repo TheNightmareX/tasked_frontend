@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Apollo } from 'apollo-angular';
 import { of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { LocalStorageService } from '../core/local-storage.service';
@@ -17,6 +18,7 @@ export class AuthService {
     private storage: LocalStorageService,
     private authGql: AuthGQL,
     private meGql: MeGQL,
+    private apollo: Apollo,
   ) {
     this.token = this.storage.load(
       'token',
@@ -51,5 +53,6 @@ export class AuthService {
   logout() {
     this.token = undefined;
     this.user = undefined;
+    this.apollo.client.resetStore();
   }
 }
