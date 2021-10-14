@@ -41,9 +41,7 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
     this.updateUserGql
       .mutate({ id, data })
       .pipe(map(({ data }) => data!.updateUser))
-      .subscribe((user) => {
-        this.auth.user = user;
-      });
+      .subscribe();
   }
 
   private cleanData(user: CommonUserFragment) {

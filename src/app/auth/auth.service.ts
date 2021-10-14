@@ -26,16 +26,16 @@ export class AuthService {
     );
   }
 
-  refetch() {
-    return this.token
-      ? this.meGql.fetch().pipe(
-          map(({ data }) => data.me),
-          catchError(() => of(undefined)),
-          tap((user) => {
-            this.user = user;
-          }),
-        )
-      : of(undefined);
+  init() {
+    this.meGql
+      .watch()
+      .valueChanges.pipe(
+        map(({ data }) => data.me),
+        catchError(() => of(undefined)),
+      )
+      .subscribe((user) => {
+        this.user = user;
+      });
   }
 
   login(username: string, password: string) {

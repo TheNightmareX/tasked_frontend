@@ -32,8 +32,8 @@ export class ClassroomMembershipListComponent implements OnInit {
 
   ngOnInit() {
     this.classroom$ = this.classroomMembershipListGql
-      .fetch({ id: this.state.activeId! + '' })
-      .pipe(map(({ data }) => data.classroom));
+      .watch({ id: this.state.activeId! + '' })
+      .valueChanges.pipe(map(({ data }) => data.classroom));
     this.memberships$ = this.classroom$.pipe(
       map((classroom) => classroom.memberships.results),
       map((memberships) => [...memberships].sort(this.membershipComparer)),

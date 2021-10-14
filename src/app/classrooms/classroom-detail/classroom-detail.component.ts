@@ -33,8 +33,8 @@ export class ClassroomDetailComponent implements OnInit {
       .subscribe((classroomId) => {
         this.state.activeId = classroomId;
         this.classroom$ = this.classroomDetailGql
-          .fetch({ id: classroomId + '' })
-          .pipe(map(({ data }) => data.classroom));
+          .watch({ id: classroomId + '' })
+          .valueChanges.pipe(map(({ data }) => data.classroom));
       });
   }
 }

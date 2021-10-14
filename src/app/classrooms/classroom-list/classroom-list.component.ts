@@ -19,7 +19,7 @@ export class ClassroomListComponent implements OnInit {
 
   ngOnInit() {
     this.classrooms$ = this.classroomListGql
-      .fetch()
-      .pipe(map(({ data }) => data.classrooms.results));
+      .watch()
+      .valueChanges.pipe(map(({ data }) => data.classrooms.results));
   }
 }

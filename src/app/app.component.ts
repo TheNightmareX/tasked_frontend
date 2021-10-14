@@ -10,6 +10,6 @@ export class AppComponent implements OnInit {
   constructor(private auth: AuthService) {}
 
   ngOnInit() {
-    this.auth.refetch();
+    this.auth.init();
   }
 }
