@@ -32,7 +32,10 @@ export class AuthService {
     this.userQuery = this.meGql.watch();
     this.user$ = this.userQuery.valueChanges.pipe(
       map(({ data }) => data.me),
-      catchError(() => of(undefined)),
+      catchError(() => {
+        this.token = undefined;
+        return of(undefined);
+      }),
       tap((user) => {
         this.user = user;
       }),
