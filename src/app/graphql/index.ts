@@ -541,6 +541,7 @@ export type ClassroomMembershipListQuery = {
   __typename?: 'Query';
   classroom: {
     __typename?: 'Classroom';
+    id: string;
     creator: { __typename?: 'User'; id: string; username: string };
     memberships: {
       __typename?: 'PaginatedMemberships';
@@ -707,6 +708,7 @@ export class ClassroomListGQL extends Apollo.Query<
 export const ClassroomMembershipListDocument = gql`
   query ClassroomMembershipList($id: ID!) {
     classroom(id: $id) {
+      id
       creator {
         id
         username

@@ -1,5 +1,6 @@
 query ClassroomMembershipList($id: ID!) {
   classroom(id: $id) {
+    id
     creator {
       id
       username
