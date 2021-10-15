@@ -3,9 +3,9 @@ import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FormDataService } from 'src/app/core/form-data.service';
 import {
+  CommonUserFragment,
   Gender,
   UpdateUserGQL,
-  CommonUserFragment,
   UserUpdateInput,
 } from 'src/app/graphql';
 import { FormProfileData } from '../form-profile/form-profile-data.interface';
