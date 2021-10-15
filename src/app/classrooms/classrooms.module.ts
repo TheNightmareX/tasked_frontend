@@ -6,9 +6,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SharedModule } from '../shared/shared.module';
+import { ClassroomDetailMembershipListComponent } from './classroom-detail-membership-list/classroom-detail-membership-list.component';
 import { ClassroomDetailComponent } from './classroom-detail/classroom-detail.component';
 import { ClassroomListComponent } from './classroom-list/classroom-list.component';
-import { ClassroomMembershipListComponent } from './classroom-membership-list/classroom-membership-list.component';
 import { ClassroomsRoutingModule } from './classrooms-routing.module';
 import { ClassroomsComponent } from './classrooms.component';
 
@@ -17,7 +17,7 @@ import { ClassroomsComponent } from './classrooms.component';
     ClassroomsComponent,
     ClassroomListComponent,
     ClassroomDetailComponent,
-    ClassroomMembershipListComponent,
+    ClassroomDetailMembershipListComponent,
   ],
   imports: [
     SharedModule,

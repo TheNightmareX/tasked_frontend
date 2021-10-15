@@ -1,25 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ClassroomsStateService } from 'src/app/classrooms/classrooms-state.service';
 import {
+  Role,
+  Gender,
   ClassroomMembershipListGQL,
   ClassroomMembershipListQuery,
-  Gender,
-  Role,
 } from 'src/app/graphql';
+import { ClassroomsStateService } from '../classrooms-state.service';
 
 type Membership =
   ClassroomMembershipListQuery['classroom']['memberships']['results'][number];
-
 type Classroom = ClassroomMembershipListQuery['classroom'];
 
 @Component({
-  selector: 'app-classroom-membership-list',
-  templateUrl: './classroom-membership-list.component.html',
-  styleUrls: ['./classroom-membership-list.component.css'],
+  selector: 'app-classroom-detail-membership-list',
+  templateUrl: './classroom-detail-membership-list.component.html',
+  styleUrls: ['./classroom-detail-membership-list.component.css'],
 })
-export class ClassroomMembershipListComponent implements OnInit {
+export class ClassroomDetailMembershipListComponent implements OnInit {
   classroom$: Observable<Classroom> = of();
   memberships$: Observable<Membership[]> = of();
   Role = Role;
