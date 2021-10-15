@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QueryRef } from 'apollo-angular';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
   ClassroomMembershipListGQL,
@@ -21,8 +21,8 @@ type Classroom = ClassroomMembershipListQuery['classroom'];
   styleUrls: ['./classroom-detail-membership-list.component.css'],
 })
 export class ClassroomDetailMembershipListComponent implements OnInit {
-  classroom$: Observable<Classroom> = of();
-  memberships$: Observable<Membership[]> = of();
+  classroom$!: Observable<Classroom>;
+  memberships$!: Observable<Membership[]>;
 
   Role = Role;
   Gender = Gender;

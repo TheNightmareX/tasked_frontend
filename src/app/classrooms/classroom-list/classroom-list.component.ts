@@ -1,6 +1,6 @@
 import { Component, OnInit, TrackByFunction } from '@angular/core';
 import { QueryRef } from 'apollo-angular';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
   ClassroomListGQL,
@@ -16,7 +16,7 @@ type Classroom = ClassroomListQuery['classrooms']['results'][number];
   styleUrls: ['./classroom-list.component.css'],
 })
 export class ClassroomListComponent implements OnInit {
-  classrooms$: Observable<Classroom[]> = of();
+  classrooms$!: Observable<Classroom[]>;
 
   private classroomsQuery!: QueryRef<
     ClassroomListQuery,
