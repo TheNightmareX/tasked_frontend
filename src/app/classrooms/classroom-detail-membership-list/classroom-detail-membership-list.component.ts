@@ -19,25 +19,31 @@ type Classroom = ClassroomMembershipListQuery['classroom'];
   styleUrls: ['./classroom-detail-membership-list.component.css'],
 })
 export class ClassroomDetailMembershipListComponent implements OnInit {
-  classroom$: Observable<Classroom> = of();
-  memberships$: Observable<Membership[]> = of();
+  classroom$: Observable<Classroom>;
+  memberships$: Observable<Membership[]>;
+
   Role = Role;
   Gender = Gender;
+
+  private query;
 
   constructor(
     private state: ClassroomsStateService,
     private classroomMembershipListGql: ClassroomMembershipListGQL,
-  ) {}
-
-  ngOnInit() {
-    this.classroom$ = this.classroomMembershipListGql
-      .watch({ id: this.state.activeId! + '' })
-      .valueChanges.pipe(map(({ data }) => data.classroom));
+  ) {
+    this.query = this.classroomMembershipListGql.watch({
+      id: this.state.activeId! + '',
+    });
+    this.classroom$ = this.query.valueChanges.pipe(
+      map(({ data }) => data.classroom),
+    );
     this.memberships$ = this.classroom$.pipe(
       map((classroom) => classroom.memberships.results),
       map((memberships) => [...memberships].sort(this.membershipComparer)),
     );
   }
+
+  ngOnInit() {}
 
   getDisplayName(membership: Membership) {
     return (
