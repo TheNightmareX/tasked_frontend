@@ -1,7 +1,12 @@
 import { Component, OnInit, TrackByFunction } from '@angular/core';
+import { QueryRef } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ClassroomListGQL, ClassroomListQuery } from 'src/app/graphql';
+import {
+  ClassroomListGQL,
+  ClassroomListQuery,
+  ClassroomListQueryVariables,
+} from 'src/app/graphql';
 
 type Classroom = ClassroomListQuery['classrooms']['results'][number];
 
@@ -11,18 +16,21 @@ type Classroom = ClassroomListQuery['classrooms']['results'][number];
   styleUrls: ['./classroom-list.component.css'],
 })
 export class ClassroomListComponent implements OnInit {
-  classrooms$: Observable<Classroom[]>;
+  classrooms$!: Observable<Classroom[]>;
 
-  private classroomsQuery;
+  private classroomsQuery!: QueryRef<
+    ClassroomListQuery,
+    ClassroomListQueryVariables
+  >;
 
-  constructor(private classroomListGql: ClassroomListGQL) {
+  constructor(private classroomListGql: ClassroomListGQL) {}
+
+  trackByClassroom: TrackByFunction<Classroom> = (_, { id }) => id;
+
+  ngOnInit() {
     this.classroomsQuery = this.classroomListGql.watch();
     this.classrooms$ = this.classroomsQuery.valueChanges.pipe(
       map(({ data }) => data.classrooms.results),
     );
   }
-
-  trackByClassroom: TrackByFunction<Classroom> = (_, { id }) => id;
-
-  ngOnInit() {}
 }

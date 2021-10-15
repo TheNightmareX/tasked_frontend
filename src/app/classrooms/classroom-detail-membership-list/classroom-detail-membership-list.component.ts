@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { QueryRef } from 'apollo-angular';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
-  Role,
-  Gender,
   ClassroomMembershipListGQL,
   ClassroomMembershipListQuery,
+  ClassroomMembershipListQueryVariables,
+  Gender,
+  Role,
 } from 'src/app/graphql';
 import { ClassroomsStateService } from '../classrooms-state.service';
 
@@ -19,18 +21,23 @@ type Classroom = ClassroomMembershipListQuery['classroom'];
   styleUrls: ['./classroom-detail-membership-list.component.css'],
 })
 export class ClassroomDetailMembershipListComponent implements OnInit {
-  classroom$: Observable<Classroom>;
-  memberships$: Observable<Membership[]>;
+  classroom$!: Observable<Classroom>;
+  memberships$!: Observable<Membership[]>;
 
   Role = Role;
   Gender = Gender;
 
-  private query;
+  private query!: QueryRef<
+    ClassroomMembershipListQuery,
+    ClassroomMembershipListQueryVariables
+  >;
 
   constructor(
     private state: ClassroomsStateService,
     private classroomMembershipListGql: ClassroomMembershipListGQL,
-  ) {
+  ) {}
+
+  ngOnInit() {
     this.query = this.classroomMembershipListGql.watch({
       id: this.state.activeId!,
     });
@@ -42,8 +49,6 @@ export class ClassroomDetailMembershipListComponent implements OnInit {
       map((memberships) => [...memberships].sort(this.membershipComparer)),
     );
   }
-
-  ngOnInit() {}
 
   getDisplayName(membership: Membership) {
     return (
