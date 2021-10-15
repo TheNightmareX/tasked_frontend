@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { QueryRef } from 'apollo-angular';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { ClassroomsStateService } from 'src/app/classrooms/classrooms-state.service';
 import { BreakpointsService } from 'src/app/core/breakpoints.service';
@@ -19,7 +19,7 @@ type Classroom = ClassroomDetailQuery['classroom'];
   styleUrls: ['./classroom-detail.component.css'],
 })
 export class ClassroomDetailComponent implements OnInit {
-  classroom$!: Observable<Classroom>;
+  classroom$: Observable<Classroom> = of();
 
   private classroomQuery!: QueryRef<
     ClassroomDetailQuery,
