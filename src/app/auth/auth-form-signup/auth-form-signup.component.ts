@@ -43,18 +43,17 @@ export class AuthFormSignupComponent implements OnInit {
     forkJoin([
       this.createUserSql.mutate({ data }).pipe(
         concatMap(() => this.auth.login(username, password)),
-        map((data) => data.user),
         catchError(() => of(null)),
       ),
       timer(1000),
     ])
       .pipe(map((values) => values[0]))
-      .subscribe((user) => {
-        if (user) this.router.navigate(['/']);
+      .subscribe((result) => {
+        if (result) this.router.navigate(['/']);
         else
           this.notifier.notify(
             NotificationType.Error,
-            'Username is already taken',
+            `Username "${username}" is already taken`,
           );
         this.loading = false;
       });
