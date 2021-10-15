@@ -35,11 +35,10 @@ export class ClassroomDetailComponent implements OnInit {
       .pipe(
         map((params) => params.get('id')),
         filter((value): value is string => !!value),
-        map((value) => +value),
       )
       .subscribe((classroomId) => {
         this.state.activeId = classroomId;
-        this.classroomQuery.refetch({ id: classroomId + '' });
+        this.classroomQuery.refetch({ id: classroomId });
       });
   }
 }

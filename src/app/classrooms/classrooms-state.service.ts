@@ -5,13 +5,13 @@ import { LocalStorageService } from '../core/local-storage.service';
   providedIn: 'root',
 })
 export class ClassroomsStateService {
-  activeId?: number;
+  activeId?: string;
 
   constructor(storage: LocalStorageService) {
-    this.activeId = storage.load<number | undefined>(
+    this.activeId = storage.load<this['activeId']>(
       'classroom',
       undefined,
-      (value): value is this['activeId'] => typeof value == 'number',
+      (value): value is this['activeId'] => typeof value == 'string',
       () => this.activeId,
     );
   }

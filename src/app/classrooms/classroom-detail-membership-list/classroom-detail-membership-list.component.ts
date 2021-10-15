@@ -32,7 +32,7 @@ export class ClassroomDetailMembershipListComponent implements OnInit {
     private classroomMembershipListGql: ClassroomMembershipListGQL,
   ) {
     this.query = this.classroomMembershipListGql.watch({
-      id: this.state.activeId! + '',
+      id: this.state.activeId!,
     });
     this.classroom$ = this.query.valueChanges.pipe(
       map(({ data }) => data.classroom),
