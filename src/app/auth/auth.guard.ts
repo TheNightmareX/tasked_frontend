@@ -16,9 +16,12 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   constructor(private auth: AuthService, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    return this.auth.user$.pipe(
-      map((user) => !!user || this.router.parseUrl('/auth')),
-    );
+    const redirection = this.router.parseUrl('/auth');
+    // Check the token first because subscribing `user$` may cause a request
+    // when the cache is cleared.
+    return this.auth.token
+      ? this.auth.user$.pipe(map((user) => !!user || redirection))
+      : redirection;
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
