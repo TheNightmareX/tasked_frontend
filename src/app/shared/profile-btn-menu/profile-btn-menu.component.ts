@@ -23,14 +23,12 @@ export class ProfileBtnMenuComponent implements OnInit {
   ngOnInit() {}
 
   openEditDialog() {
-    const DAY = 3;
-    const canUpdate = dayjs(this.auth.user?.updatedAt).isBefore(
-      dayjs().subtract(DAY, 'day'),
-    );
+    const qualifiedDate = dayjs(this.auth.user!.updatedAt).add(3, 'day');
+    const canUpdate = dayjs().isAfter(qualifiedDate);
     if (!canUpdate)
       this.notifier.notify(
         NotificationType.Error,
-        'Cannot update frequently within 3 days',
+        `Cannot update before ${qualifiedDate.toDate().toLocaleString()}`,
       );
     else {
       this.dialog.open(ProfileBtnMenuDialogEditComponent);
