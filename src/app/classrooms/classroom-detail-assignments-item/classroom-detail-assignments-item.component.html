@@ -1,7 +1,7 @@
 <mat-list-item class="hoverable" matRipple [matRippleTrigger]="trigger">
   <div class="ripple-trigger" #trigger></div>
 
-  <div>
+  <div class="actions">
     <button
       mat-icon-button
       [matTooltip]="completionTooltip"
@@ -11,7 +11,7 @@
     </button>
   </div>
 
-  <div fxFlex fxFlexOffset="1%">
+  <div class="content" fxFlex fxFlexOffset="1%">
     <div matLine>
       {{ assignment?.task?.title }}
     </div>
@@ -34,7 +34,7 @@
     </div>
   </div>
 
-  <div>
+  <div class="actions">
     <button
       mat-icon-button
       [matTooltip]="importanceTooltip"
