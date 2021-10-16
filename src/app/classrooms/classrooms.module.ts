@@ -1,10 +1,4 @@
 import { NgModule } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { SharedModule } from '../shared/shared.module';
 import { ClassroomDetailMembershipListComponent } from './classroom-detail-membership-list/classroom-detail-membership-list.component';
 import { ClassroomDetailComponent } from './classroom-detail/classroom-detail.component';
@@ -19,15 +13,6 @@ import { ClassroomsComponent } from './classrooms.component';
     ClassroomDetailComponent,
     ClassroomDetailMembershipListComponent,
   ],
-  imports: [
-    SharedModule,
-    ClassroomsRoutingModule,
-    MatListModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatTabsModule,
-  ],
+  imports: [SharedModule, ClassroomsRoutingModule],
 })
 export class ClassroomsModule {}

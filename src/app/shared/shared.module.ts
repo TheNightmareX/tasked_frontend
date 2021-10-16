@@ -22,8 +22,32 @@ import { LoadingDirective } from './loading.directive';
 import { ProfileBtnComponent } from './profile-btn/profile-btn.component';
 import { ProfileBtnMenuComponent } from './profile-btn-menu/profile-btn-menu.component';
 import { ProfileBtnMenuDialogEditComponent } from './profile-btn-menu-dialog-edit/profile-btn-menu-dialog-edit.component';
+import { MatListModule } from '@angular/material/list';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
 
-const modules = [CommonModule, FormsModule, FlexLayoutModule];
+const modules = [
+  CommonModule,
+  FormsModule,
+  FlexLayoutModule,
+  [
+    MatListModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatTabsModule,
+    MatMenuModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatTooltipModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatCardModule,
+  ],
+];
 const components = [
   LayoutComponent,
   FormProfileComponent,
@@ -35,22 +59,7 @@ const directives = [EqualDirective, LoadingDirective];
 
 @NgModule({
   declarations: [components, directives],
-  imports: [
-    modules,
-    RouterModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatMenuModule,
-    MatDividerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatTooltipModule,
-    MatDialogModule,
-    MatProgressSpinnerModule,
-  ],
+  imports: [modules, RouterModule],
   exports: [modules, components, directives],
 })
 export class SharedModule {}
