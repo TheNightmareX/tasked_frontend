@@ -37,9 +37,11 @@ export class ClassroomDetailAssignmentsComponent implements OnInit {
     });
     const assignments$ = this.query.valueChanges.pipe(
       map(({ data }) =>
-        [...data.classroom.assignments.results].sort((a, b) =>
-          a.isImportant == b.isImportant ? 0 : a.isImportant ? -1 : 1,
-        ),
+        [...data.classroom.assignments.results]
+          .sort((a, b) => (a.isPublic == b.isPublic ? 0 : a.isPublic ? -1 : 1))
+          .sort((a, b) =>
+            a.isImportant == b.isImportant ? 0 : a.isImportant ? -1 : 1,
+          ),
       ),
     );
     this.assignmentsPending$ = assignments$.pipe(
