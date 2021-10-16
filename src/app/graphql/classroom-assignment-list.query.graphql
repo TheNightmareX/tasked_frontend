@@ -1,0 +1,33 @@
+query ClassroomAssignmentList(
+  $id: ID!
+  $isCompleted: Boolean
+  $isPublic: Boolean
+  $isOwn: Boolean
+) {
+  classroom(id: $id) {
+    id
+    assignments(isCompleted: $isCompleted, isPublic: $isPublic, isOwn: $isOwn) {
+      total
+      results {
+        id
+        recipient {
+          id
+        }
+        task {
+          id
+          title
+          description
+          creator {
+            id
+            username
+            nickname
+          }
+        }
+        isPublic
+        isCompleted
+        isImportant
+        createdAt
+      }
+    }
+  }
+}

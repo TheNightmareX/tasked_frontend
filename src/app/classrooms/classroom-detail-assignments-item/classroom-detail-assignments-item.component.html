@@ -1,0 +1,46 @@
+<mat-list-item class="hoverable" matRipple [matRippleTrigger]="trigger">
+  <div class="trigger" #trigger></div>
+
+  <div>
+    <button
+      mat-icon-button
+      [matTooltip]="completionTooltip"
+      (click)="switchCompletion()"
+    >
+      <mat-icon>{{ completionIcon }}</mat-icon>
+    </button>
+  </div>
+
+  <div fxFlex fxFlexOffset="1%">
+    <div matLine>
+      {{ assignment?.task?.title }}
+    </div>
+    <div matLine style="opacity: 70%">
+      <span>
+        <mat-icon inline>calendar_today</mat-icon>
+        <span>
+          {{ assignment?.createdAt | date }}
+        </span>
+      </span>
+      <span>
+        <mat-icon inline>person</mat-icon>
+        <span>
+          {{
+            assignment?.task?.creator?.nickname ??
+              assignment?.task?.creator?.username
+          }}
+        </span>
+      </span>
+    </div>
+  </div>
+
+  <div>
+    <button
+      mat-icon-button
+      [matTooltip]="importanceTooltip"
+      (click)="switchImportance()"
+    >
+      <mat-icon>{{ importanceIcon }}</mat-icon>
+    </button>
+  </div>
+</mat-list-item>

@@ -25,12 +25,14 @@ import { ProfileBtnMenuDialogEditComponent } from './profile-btn-menu-dialog-edi
 import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
+import { MatRippleModule } from '@angular/material/core';
 
 const modules = [
   CommonModule,
   FormsModule,
   FlexLayoutModule,
   [
+    MatRippleModule,
     MatListModule,
     MatIconModule,
     MatToolbarModule,

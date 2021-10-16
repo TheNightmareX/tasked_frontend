@@ -28,8 +28,9 @@
   <mat-drawer-content>
     <main [class.phone]="breakpoints.phone$ | async" fxLayout="row">
       <mat-tab-group fxFlex="100%">
-        <mat-tab label="Schedule"></mat-tab>
-        <mat-tab label="Assignments"></mat-tab>
+        <mat-tab label="Assignments">
+          <app-classroom-detail-assignments></app-classroom-detail-assignments>
+        </mat-tab>
       </mat-tab-group>
     </main>
   </mat-drawer-content>

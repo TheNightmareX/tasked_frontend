@@ -60,6 +60,7 @@ export type Assignment = {
   createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
   isCompleted: Scalars['Boolean'];
+  isImportant: Scalars['Boolean'];
   isPublic: Scalars['Boolean'];
   recipient: User;
   task: Task;
@@ -68,12 +69,15 @@ export type Assignment = {
 
 export type AssignmentCreateInput = {
   classroom: Scalars['ID'];
+  isImportant?: Maybe<Scalars['Boolean']>;
   isPublic?: Maybe<Scalars['Boolean']>;
   recipient: Scalars['ID'];
   task: Scalars['ID'];
 };
 
 export type AssignmentUpdateInput = {
+  isCompleted?: Maybe<Scalars['Boolean']>;
+  isImportant?: Maybe<Scalars['Boolean']>;
   isPublic?: Maybe<Scalars['Boolean']>;
 };
 
@@ -175,7 +179,6 @@ export type Mutation = {
   __typename?: 'Mutation';
   acceptJoinApplication: AcceptJoinApplicationResult;
   auth: AuthResult;
-  completeAssignment: Assignment;
   createAffair: Affair;
   createAssignment: Assignment;
   createClassroom: Classroom;
@@ -203,10 +206,6 @@ export type MutationAcceptJoinApplicationArgs = {
 export type MutationAuthArgs = {
   password: Scalars['String'];
   username: Scalars['String'];
-};
-
-export type MutationCompleteAssignmentArgs = {
-  id: Scalars['ID'];
 };
 
 export type MutationCreateAffairArgs = {
@@ -505,6 +504,22 @@ export type UserUpdateInput = {
   password?: Maybe<Scalars['String']>;
 };
 
+export type AssignmentUpdateMutationVariables = Exact<{
+  id: Scalars['ID'];
+  data: AssignmentUpdateInput;
+}>;
+
+export type AssignmentUpdateMutation = {
+  __typename?: 'Mutation';
+  updateAssignment: {
+    __typename?: 'Assignment';
+    id: string;
+    isCompleted: boolean;
+    isImportant: boolean;
+    isPublic: boolean;
+  };
+};
+
 export type AuthMutationVariables = Exact<{
   username: Scalars['String'];
   password: Scalars['String'];
@@ -513,6 +528,46 @@ export type AuthMutationVariables = Exact<{
 export type AuthMutation = {
   __typename?: 'Mutation';
   auth: { __typename?: 'AuthResult'; token: string };
+};
+
+export type ClassroomAssignmentListQueryVariables = Exact<{
+  id: Scalars['ID'];
+  isCompleted?: Maybe<Scalars['Boolean']>;
+  isPublic?: Maybe<Scalars['Boolean']>;
+  isOwn?: Maybe<Scalars['Boolean']>;
+}>;
+
+export type ClassroomAssignmentListQuery = {
+  __typename?: 'Query';
+  classroom: {
+    __typename?: 'Classroom';
+    id: string;
+    assignments: {
+      __typename?: 'PaginatedAssignments';
+      total: number;
+      results: Array<{
+        __typename?: 'Assignment';
+        id: string;
+        isPublic: boolean;
+        isCompleted: boolean;
+        isImportant: boolean;
+        createdAt: any;
+        recipient: { __typename?: 'User'; id: string };
+        task: {
+          __typename?: 'Task';
+          id: string;
+          title: string;
+          description?: string | null | undefined;
+          creator: {
+            __typename?: 'User';
+            id: string;
+            username: string;
+            nickname?: string | null | undefined;
+          };
+        };
+      }>;
+    };
+  };
 };
 
 export type ClassroomDetailQueryVariables = Exact<{
@@ -651,6 +706,30 @@ export const UserFragmentDoc = gql`
     updatedAt
   }
 `;
+export const AssignmentUpdateDocument = gql`
+  mutation AssignmentUpdate($id: ID!, $data: AssignmentUpdateInput!) {
+    updateAssignment(id: $id, data: $data) {
+      id
+      isCompleted
+      isImportant
+      isPublic
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AssignmentUpdateGQL extends Apollo.Mutation<
+  AssignmentUpdateMutation,
+  AssignmentUpdateMutationVariables
+> {
+  document = AssignmentUpdateDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const AuthDocument = gql`
   mutation Auth($username: String!, $password: String!) {
     auth(username: $username, password: $password) {
@@ -667,6 +746,59 @@ export class AuthGQL extends Apollo.Mutation<
   AuthMutationVariables
 > {
   document = AuthDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const ClassroomAssignmentListDocument = gql`
+  query ClassroomAssignmentList(
+    $id: ID!
+    $isCompleted: Boolean
+    $isPublic: Boolean
+    $isOwn: Boolean
+  ) {
+    classroom(id: $id) {
+      id
+      assignments(
+        isCompleted: $isCompleted
+        isPublic: $isPublic
+        isOwn: $isOwn
+      ) {
+        total
+        results {
+          id
+          recipient {
+            id
+          }
+          task {
+            id
+            title
+            description
+            creator {
+              id
+              username
+              nickname
+            }
+          }
+          isPublic
+          isCompleted
+          isImportant
+          createdAt
+        }
+      }
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ClassroomAssignmentListGQL extends Apollo.Query<
+  ClassroomAssignmentListQuery,
+  ClassroomAssignmentListQueryVariables
+> {
+  document = ClassroomAssignmentListDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

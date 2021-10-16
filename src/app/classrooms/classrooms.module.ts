@@ -5,6 +5,8 @@ import { ClassroomDetailComponent } from './classroom-detail/classroom-detail.co
 import { ClassroomListComponent } from './classroom-list/classroom-list.component';
 import { ClassroomsRoutingModule } from './classrooms-routing.module';
 import { ClassroomsComponent } from './classrooms.component';
+import { ClassroomDetailAssignmentsComponent } from './classroom-detail-assignments/classroom-detail-assignments.component';
+import { ClassroomDetailAssignmentsItemComponent } from './classroom-detail-assignments-item/classroom-detail-assignments-item.component';
 
 @NgModule({
   declarations: [
@@ -12,6 +14,8 @@ import { ClassroomsComponent } from './classrooms.component';
     ClassroomListComponent,
     ClassroomDetailComponent,
     ClassroomDetailMembershipListComponent,
+    ClassroomDetailAssignmentsComponent,
+    ClassroomDetailAssignmentsItemComponent,
   ],
   imports: [SharedModule, ClassroomsRoutingModule],
 })
