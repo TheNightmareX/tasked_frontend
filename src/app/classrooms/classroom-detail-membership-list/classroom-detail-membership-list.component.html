@@ -2,7 +2,7 @@
   <mat-list-item *ngFor="let membership of memberships$ | async">
     <mat-icon
       [color]="
-        membership.owner.username == (classroom$ | async)?.creator?.username
+        membership.owner.id == (classroom$ | async)?.creator?.id
           ? 'accent'
           : null
       "

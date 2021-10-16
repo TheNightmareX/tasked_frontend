@@ -86,6 +86,7 @@ export type AuthResult = {
 export type Classroom = {
   __typename?: 'Classroom';
   affairs: PaginatedAffairs;
+  assignments: PaginatedAssignments;
   createdAt: Scalars['DateTime'];
   creator: User;
   deletedAt?: Maybe<Scalars['DateTime']>;
@@ -99,6 +100,14 @@ export type Classroom = {
 
 export type ClassroomAffairsArgs = {
   isActivated?: Maybe<Scalars['Boolean']>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+export type ClassroomAssignmentsArgs = {
+  isCompleted?: Maybe<Scalars['Boolean']>;
+  isOwn?: Maybe<Scalars['Boolean']>;
+  isPublic?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -354,6 +363,9 @@ export type QueryAssignmentArgs = {
 };
 
 export type QueryAssignmentsArgs = {
+  isCompleted?: Maybe<Scalars['Boolean']>;
+  isOwn?: Maybe<Scalars['Boolean']>;
+  isPublic?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -412,6 +424,7 @@ export type Task = {
   __typename?: 'Task';
   assignments: Assignment;
   createdAt: Scalars['DateTime'];
+  creator: User;
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   title: Scalars['String'];
@@ -419,6 +432,9 @@ export type Task = {
 };
 
 export type TaskAssignmentsArgs = {
+  isCompleted?: Maybe<Scalars['Boolean']>;
+  isOwn?: Maybe<Scalars['Boolean']>;
+  isPublic?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -449,6 +465,9 @@ export type User = {
 };
 
 export type UserAssignmentsArgs = {
+  isCompleted?: Maybe<Scalars['Boolean']>;
+  isOwn?: Maybe<Scalars['Boolean']>;
+  isPublic?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -542,7 +561,7 @@ export type ClassroomMembershipListQuery = {
   classroom: {
     __typename?: 'Classroom';
     id: string;
-    creator: { __typename?: 'User'; id: string; username: string };
+    creator: { __typename?: 'User'; id: string };
     memberships: {
       __typename?: 'PaginatedMemberships';
       total: number;
@@ -711,7 +730,6 @@ export const ClassroomMembershipListDocument = gql`
       id
       creator {
         id
-        username
       }
       memberships {
         total
