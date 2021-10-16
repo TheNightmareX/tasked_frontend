@@ -11,3 +11,8 @@
 .text-primary {
   color: var(--text-color-primary);
 }
+
+.hoverable:hover {
+  background-color: var(--bg-color-hover);
+  cursor: pointer;
+}

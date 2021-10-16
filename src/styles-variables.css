@@ -3,4 +3,5 @@
   --text-color-primary: rgb(209, 118, 225);
   --text-color-blue: rgb(103, 121, 222);
   --text-color-pink: rgb(187, 86, 121);
+  --bg-color-hover: rgba(255, 255, 255, 0.04);
 }
