@@ -17,7 +17,7 @@ body {
 
 .router-link-active {
   background-color: rgba(123, 31, 162, 0.15) !important;
-  color: var(--text-color-primary) !important;
+  color: var(--text-color--primary) !important;
 }
 .router-link-active:hover {
   background-color: rgba(123, 31, 162, 0.3) !important;

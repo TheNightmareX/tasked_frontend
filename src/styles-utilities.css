@@ -3,16 +3,16 @@
 }
 
 .text-blue {
-  color: var(--text-color-blue);
+  color: var(--text-color--blue);
 }
 .text-pink {
-  color: var(--text-color-pink);
+  color: var(--text-color--pink);
 }
 .text-primary {
-  color: var(--text-color-primary);
+  color: var(--text-color--primary);
 }
 
 .hoverable:hover {
-  background-color: var(--bg-color-hover);
+  background-color: var(--bg-color--hover);
   cursor: pointer;
 }
