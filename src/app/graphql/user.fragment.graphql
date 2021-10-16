@@ -1,4 +1,4 @@
-fragment CommonUser on User {
+fragment User on User {
   id
   username
   nickname

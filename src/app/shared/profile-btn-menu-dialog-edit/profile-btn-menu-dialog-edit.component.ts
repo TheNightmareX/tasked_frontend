@@ -3,7 +3,7 @@ import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FormDataService } from 'src/app/core/form-data.service';
 import {
-  CommonUserFragment,
+  UserFragment,
   Gender,
   UpdateUserGQL,
   UserUpdateInput,
@@ -44,7 +44,7 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
       .subscribe();
   }
 
-  private cleanData(user: CommonUserFragment) {
+  private cleanData(user: UserFragment) {
     const data: UserUpdateInput = this.formDataService.pick(this.data, [
       'nickname',
       'password',

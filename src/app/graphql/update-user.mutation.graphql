@@ -1,5 +1,5 @@
 mutation UpdateUser($id: ID!, $data: UserUpdateInput!) {
   updateUser(id: $id, data: $data) {
-    ...CommonUser
+    ...User
   }
 }

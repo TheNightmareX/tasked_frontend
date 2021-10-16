@@ -581,6 +581,16 @@ export type ClassroomMembershipListQuery = {
   };
 };
 
+export type UserFragment = {
+  __typename?: 'User';
+  id: string;
+  username: string;
+  nickname?: string | null | undefined;
+  gender: Gender;
+  createdAt: any;
+  updatedAt: any;
+};
+
 export type CreateUserMutationVariables = Exact<{
   data: UserCreateInput;
 }>;
@@ -631,18 +641,8 @@ export type UpdateUserMutation = {
   };
 };
 
-export type CommonUserFragment = {
-  __typename?: 'User';
-  id: string;
-  username: string;
-  nickname?: string | null | undefined;
-  gender: Gender;
-  createdAt: any;
-  updatedAt: any;
-};
-
-export const CommonUserFragmentDoc = gql`
-  fragment CommonUser on User {
+export const UserFragmentDoc = gql`
+  fragment User on User {
     id
     username
     nickname
@@ -764,10 +764,10 @@ export class ClassroomMembershipListGQL extends Apollo.Query<
 export const CreateUserDocument = gql`
   mutation CreateUser($data: UserCreateInput!) {
     createUser(data: $data) {
-      ...CommonUser
+      ...User
     }
   }
-  ${CommonUserFragmentDoc}
+  ${UserFragmentDoc}
 `;
 
 @Injectable({
@@ -786,10 +786,10 @@ export class CreateUserGQL extends Apollo.Mutation<
 export const MeDocument = gql`
   query Me {
     me {
-      ...CommonUser
+      ...User
     }
   }
-  ${CommonUserFragmentDoc}
+  ${UserFragmentDoc}
 `;
 
 @Injectable({
@@ -805,10 +805,10 @@ export class MeGQL extends Apollo.Query<MeQuery, MeQueryVariables> {
 export const UpdateUserDocument = gql`
   mutation UpdateUser($id: ID!, $data: UserUpdateInput!) {
     updateUser(id: $id, data: $data) {
-      ...CommonUser
+      ...User
     }
   }
-  ${CommonUserFragmentDoc}
+  ${UserFragmentDoc}
 `;
 
 @Injectable({

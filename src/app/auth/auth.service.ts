@@ -3,9 +3,9 @@ import { Apollo } from 'apollo-angular';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { LocalStorageService } from '../core/local-storage.service';
-import { AuthGQL, CommonUserFragment, MeGQL } from '../graphql';
+import { AuthGQL, MeGQL, MeQuery } from '../graphql';
 
-type User = CommonUserFragment;
+type User = MeQuery['me'];
 
 @Injectable({
   providedIn: 'root',
