@@ -11,6 +11,11 @@
   opacity: 0.7;
 }
 
+.content {
+  /* Prevent the text from pushing the button out of the screen */
+  width: 0;
+}
+
 .actions {
   z-index: 1;
 }
