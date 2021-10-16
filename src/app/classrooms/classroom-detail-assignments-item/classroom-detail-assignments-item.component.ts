@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
+import { timer } from 'rxjs';
+import { concatMap } from 'rxjs/operators';
 import {
   AssignmentUpdateGQL,
   AssignmentUpdateInput,
@@ -63,25 +65,29 @@ export class ClassroomDetailAssignmentsItemComponent implements OnInit {
     const { id, isImportant, isPublic, isCompleted } = this.assignment;
 
     this.loading = true;
-    this.updateGql
-      .mutate(
-        {
-          id: this.assignment!.id,
-          data,
-        },
-        {
-          optimisticResponse: {
-            __typename: 'Mutation',
-            updateAssignment: {
-              __typename: 'Assignment',
-              id,
-              isCompleted,
-              isImportant,
-              isPublic,
-              ...data,
+    timer(200)
+      .pipe(
+        concatMap(() =>
+          this.updateGql.mutate(
+            {
+              id: this.assignment!.id,
+              data,
             },
-          },
-        },
+            {
+              optimisticResponse: {
+                __typename: 'Mutation',
+                updateAssignment: {
+                  __typename: 'Assignment',
+                  id,
+                  isCompleted,
+                  isImportant,
+                  isPublic,
+                  ...data,
+                },
+              },
+            },
+          ),
+        ),
       )
       .subscribe({
         complete: () => {
