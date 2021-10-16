@@ -2,13 +2,13 @@
   text-transform: uppercase;
 }
 
-.text-blue {
+.text--blue {
   color: var(--text-color--blue);
 }
-.text-pink {
+.text--pink {
   color: var(--text-color--pink);
 }
-.text-primary {
+.text--primary {
   color: var(--text-color--primary);
 }
 

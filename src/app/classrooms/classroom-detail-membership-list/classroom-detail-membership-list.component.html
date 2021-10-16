@@ -11,8 +11,8 @@
       {{ membership.role == Role.Student ? 'person' : 'manage_accounts' }}
     </mat-icon>
     <span
-      [class.text-blue]="membership.owner.gender == Gender.Male"
-      [class.text-pink]="membership.owner.gender == Gender.Female"
+      [class.text--blue]="membership.owner.gender == Gender.Male"
+      [class.text--pink]="membership.owner.gender == Gender.Female"
       matLine
     >
       {{ getDisplayName(membership) }}
