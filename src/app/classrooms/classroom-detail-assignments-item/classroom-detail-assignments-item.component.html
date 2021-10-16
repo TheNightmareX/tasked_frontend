@@ -1,4 +1,6 @@
-<button mat-list-item>
+<mat-list-item class="hoverable" matRipple [matRippleTrigger]="trigger">
+  <div class="trigger" #trigger></div>
+
   <div>
     <button
       mat-icon-button
@@ -41,4 +43,4 @@
       <mat-icon>{{ importanceIcon }}</mat-icon>
     </button>
   </div>
-</button>
+</mat-list-item>
