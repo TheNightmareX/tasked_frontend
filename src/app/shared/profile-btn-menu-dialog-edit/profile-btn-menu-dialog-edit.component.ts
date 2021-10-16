@@ -3,9 +3,9 @@ import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FormDataService } from 'src/app/core/form-data.service';
 import {
-  UserFragment,
   Gender,
-  UpdateUserGQL,
+  UserFragment,
+  UserUpdateGQL,
   UserUpdateInput,
 } from 'src/app/graphql';
 import { FormProfileData } from '../form-profile/form-profile-data.interface';
@@ -26,7 +26,7 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
   constructor(
     public auth: AuthService,
     private formDataService: FormDataService,
-    private updateUserGql: UpdateUserGQL,
+    private userUpdateGql: UserUpdateGQL,
   ) {}
 
   ngOnInit() {
@@ -38,7 +38,7 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
   submit() {
     const id = this.auth.user!.id + '';
     const data = this.cleanData(this.auth.user!);
-    this.updateUserGql
+    this.userUpdateGql
       .mutate({ id, data })
       .pipe(map(({ data }) => data!.updateUser))
       .subscribe();

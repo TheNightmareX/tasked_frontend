@@ -581,33 +581,6 @@ export type ClassroomMembershipListQuery = {
   };
 };
 
-export type UserFragment = {
-  __typename?: 'User';
-  id: string;
-  username: string;
-  nickname?: string | null | undefined;
-  gender: Gender;
-  createdAt: any;
-  updatedAt: any;
-};
-
-export type CreateUserMutationVariables = Exact<{
-  data: UserCreateInput;
-}>;
-
-export type CreateUserMutation = {
-  __typename?: 'Mutation';
-  createUser: {
-    __typename?: 'User';
-    id: string;
-    username: string;
-    nickname?: string | null | undefined;
-    gender: Gender;
-    createdAt: any;
-    updatedAt: any;
-  };
-};
-
 export type MeQueryVariables = Exact<{ [key: string]: never }>;
 
 export type MeQuery = {
@@ -623,12 +596,29 @@ export type MeQuery = {
   };
 };
 
-export type UpdateUserMutationVariables = Exact<{
+export type UserCreateMutationVariables = Exact<{
+  data: UserCreateInput;
+}>;
+
+export type UserCreateMutation = {
+  __typename?: 'Mutation';
+  createUser: {
+    __typename?: 'User';
+    id: string;
+    username: string;
+    nickname?: string | null | undefined;
+    gender: Gender;
+    createdAt: any;
+    updatedAt: any;
+  };
+};
+
+export type UserUpdateMutationVariables = Exact<{
   id: Scalars['ID'];
   data: UserUpdateInput;
 }>;
 
-export type UpdateUserMutation = {
+export type UserUpdateMutation = {
   __typename?: 'Mutation';
   updateUser: {
     __typename?: 'User';
@@ -639,6 +629,16 @@ export type UpdateUserMutation = {
     createdAt: any;
     updatedAt: any;
   };
+};
+
+export type UserFragment = {
+  __typename?: 'User';
+  id: string;
+  username: string;
+  nickname?: string | null | undefined;
+  gender: Gender;
+  createdAt: any;
+  updatedAt: any;
 };
 
 export const UserFragmentDoc = gql`
@@ -761,28 +761,6 @@ export class ClassroomMembershipListGQL extends Apollo.Query<
     super(apollo);
   }
 }
-export const CreateUserDocument = gql`
-  mutation CreateUser($data: UserCreateInput!) {
-    createUser(data: $data) {
-      ...User
-    }
-  }
-  ${UserFragmentDoc}
-`;
-
-@Injectable({
-  providedIn: 'root',
-})
-export class CreateUserGQL extends Apollo.Mutation<
-  CreateUserMutation,
-  CreateUserMutationVariables
-> {
-  document = CreateUserDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
-  }
-}
 export const MeDocument = gql`
   query Me {
     me {
@@ -802,8 +780,30 @@ export class MeGQL extends Apollo.Query<MeQuery, MeQueryVariables> {
     super(apollo);
   }
 }
-export const UpdateUserDocument = gql`
-  mutation UpdateUser($id: ID!, $data: UserUpdateInput!) {
+export const UserCreateDocument = gql`
+  mutation UserCreate($data: UserCreateInput!) {
+    createUser(data: $data) {
+      ...User
+    }
+  }
+  ${UserFragmentDoc}
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class UserCreateGQL extends Apollo.Mutation<
+  UserCreateMutation,
+  UserCreateMutationVariables
+> {
+  document = UserCreateDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const UserUpdateDocument = gql`
+  mutation UserUpdate($id: ID!, $data: UserUpdateInput!) {
     updateUser(id: $id, data: $data) {
       ...User
     }
@@ -814,11 +814,11 @@ export const UpdateUserDocument = gql`
 @Injectable({
   providedIn: 'root',
 })
-export class UpdateUserGQL extends Apollo.Mutation<
-  UpdateUserMutation,
-  UpdateUserMutationVariables
+export class UserUpdateGQL extends Apollo.Mutation<
+  UserUpdateMutation,
+  UserUpdateMutationVariables
 > {
-  document = UpdateUserDocument;
+  document = UserUpdateDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

@@ -4,7 +4,7 @@ import { NotifierService } from 'angular-notifier';
 import { forkJoin, of, Subject, timer } from 'rxjs';
 import { catchError, concatMap, map, throttleTime } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
-import { CreateUserGQL, Gender, UserCreateInput } from 'src/app/graphql';
+import { Gender, UserCreateGQL, UserCreateInput } from 'src/app/graphql';
 import { NotificationType } from 'src/app/notification-type.enum';
 import { FormProfileData } from '../../shared/form-profile/form-profile-data.interface';
 
@@ -29,7 +29,7 @@ export class AuthFormSignupComponent implements OnInit {
     private auth: AuthService,
     private notifier: NotifierService,
     private router: Router,
-    private createUserSql: CreateUserGQL,
+    private userCreateGql: UserCreateGQL,
   ) {}
 
   ngOnInit() {
@@ -41,7 +41,7 @@ export class AuthFormSignupComponent implements OnInit {
     const { username, password, nickname, gender } = this.data;
     const data: UserCreateInput = { username, password, nickname, gender };
     forkJoin([
-      this.createUserSql.mutate({ data }).pipe(
+      this.userCreateGql.mutate({ data }).pipe(
         concatMap(() => this.auth.login(username, password)),
         catchError(() => of(null)),
       ),
