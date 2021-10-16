@@ -28,7 +28,7 @@ export class ProfileBtnMenuComponent implements OnInit {
     if (!canUpdate)
       this.notifier.notify(
         NotificationType.Error,
-        `Cannot update before ${qualifiedDate.toDate().toLocaleString()}`,
+        `Unable to update until ${qualifiedDate.toDate().toLocaleString()}`,
       );
     else {
       this.dialog.open(ProfileBtnMenuDialogEditComponent);
