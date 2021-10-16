@@ -1,5 +1,5 @@
 <mat-list-item class="hoverable" matRipple [matRippleTrigger]="trigger">
-  <div class="trigger" #trigger></div>
+  <div class="ripple-trigger" #trigger></div>
 
   <div>
     <button
@@ -15,7 +15,7 @@
     <div matLine>
       {{ assignment?.task?.title }}
     </div>
-    <div matLine style="opacity: 70%">
+    <div matLine class="info">
       <span>
         <mat-icon inline>calendar_today</mat-icon>
         <span>
