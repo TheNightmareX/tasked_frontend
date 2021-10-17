@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import dayjs from 'dayjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FormDataService } from 'src/app/core/form-data.service';
@@ -22,6 +23,14 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
     passwordConfirm: '',
     gender: Gender.Unknown,
   };
+
+  get qualifiedDate() {
+    return dayjs(this.auth.user!.updatedAt).add(3, 'day');
+  }
+
+  get canUpdate() {
+    return dayjs().isAfter(this.qualifiedDate);
+  }
 
   constructor(
     public auth: AuthService,
