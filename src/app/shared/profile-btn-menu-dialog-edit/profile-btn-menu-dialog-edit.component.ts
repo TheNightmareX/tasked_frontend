@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import dayjs from 'dayjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FormDataService } from 'src/app/core/form-data.service';
 import {
@@ -24,8 +24,10 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
     gender: Gender.Unknown,
   };
 
+  userSnapshot!: UserFragment;
+
   get qualifiedDate() {
-    return dayjs(this.auth.user!.updatedAt).add(3, 'day');
+    return dayjs(this.userSnapshot.updatedAt).add(3, 'day');
   }
 
   get canUpdate() {
@@ -39,14 +41,17 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.data.username = this.auth.user!.username;
-    this.data.nickname = this.auth.user!.nickname ?? '';
-    this.data.gender = this.auth.user!.gender;
+    this.auth.user$.pipe(take(1)).subscribe((user) => {
+      this.userSnapshot = user!;
+      this.data.username = this.userSnapshot.username;
+      this.data.nickname = this.userSnapshot.nickname ?? '';
+      this.data.gender = this.userSnapshot.gender;
+    });
   }
 
   submit() {
-    const id = this.auth.user!.id + '';
-    const data = this.cleanData(this.auth.user!);
+    const id = this.userSnapshot.id + '';
+    const data = this.cleanData(this.userSnapshot);
     this.userUpdateGql
       .mutate({ id, data })
       .pipe(map(({ data }) => data!.updateUser))

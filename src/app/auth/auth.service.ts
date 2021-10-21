@@ -13,7 +13,6 @@ type User = MeQuery['me'];
 export class AuthService {
   token?: string;
   user$: Observable<User | undefined>;
-  user?: User;
 
   private userQuery;
 
@@ -35,9 +34,6 @@ export class AuthService {
       catchError(() => {
         this.token = undefined;
         return of(undefined);
-      }),
-      tap((user) => {
-        this.user = user;
       }),
     );
   }
