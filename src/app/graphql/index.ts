@@ -640,7 +640,6 @@ export type ClassroomMembershipListQuery = {
   classroom: {
     __typename?: 'Classroom';
     id: string;
-    creator: { __typename?: 'User'; id: string };
     memberships: {
       __typename?: 'PaginatedMemberships';
       total: number;
@@ -894,9 +893,6 @@ export const ClassroomMembershipListDocument = gql`
   query ClassroomMembershipList($id: ID!) {
     classroom(id: $id) {
       id
-      creator {
-        id
-      }
       memberships {
         total
         results {

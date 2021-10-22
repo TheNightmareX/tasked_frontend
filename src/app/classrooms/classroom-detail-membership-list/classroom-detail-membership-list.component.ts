@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { QueryRef } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
+  ClassroomDetailGQL,
+  ClassroomDetailQuery,
   ClassroomMembershipListGQL,
   ClassroomMembershipListQuery,
-  ClassroomMembershipListQueryVariables,
   Gender,
   Role,
 } from 'src/app/graphql';
@@ -13,7 +13,7 @@ import { ClassroomsStateService } from '../classrooms-state.service';
 
 type Membership =
   ClassroomMembershipListQuery['classroom']['memberships']['results'][number];
-type Classroom = ClassroomMembershipListQuery['classroom'];
+type Classroom = ClassroomDetailQuery['classroom'];
 
 @Component({
   selector: 'app-classroom-detail-membership-list',
@@ -27,27 +27,25 @@ export class ClassroomDetailMembershipListComponent implements OnInit {
   Role = Role;
   Gender = Gender;
 
-  private query!: QueryRef<
-    ClassroomMembershipListQuery,
-    ClassroomMembershipListQueryVariables
-  >;
-
   constructor(
     private state: ClassroomsStateService,
     private classroomMembershipListGql: ClassroomMembershipListGQL,
+    private classroomGql: ClassroomDetailGQL,
   ) {}
 
   ngOnInit() {
-    this.query = this.classroomMembershipListGql.watch({
-      id: this.state.activeId!,
-    });
-    this.classroom$ = this.query.valueChanges.pipe(
-      map(({ data }) => data.classroom),
-    );
-    this.memberships$ = this.classroom$.pipe(
-      map((classroom) => classroom.memberships.results),
-      map((memberships) => [...memberships].sort(this.membershipComparer)),
-    );
+    this.classroom$ = this.classroomGql
+      .watch({ id: this.state.activeId! })
+      .valueChanges.pipe(map(({ data }) => data.classroom));
+    this.memberships$ = this.classroomMembershipListGql
+      .watch({
+        id: this.state.activeId!,
+      })
+      .valueChanges.pipe(
+        map(({ data }) =>
+          [...data.classroom.memberships.results].sort(this.membershipComparer),
+        ),
+      );
   }
 
   getDisplayName(membership: Membership) {
