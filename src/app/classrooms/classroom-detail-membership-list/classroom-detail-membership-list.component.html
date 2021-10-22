@@ -1,24 +1,6 @@
 <mat-list>
-  <mat-list-item *ngFor="let membership of memberships$ | async">
-    <mat-icon
-      [color]="
-        membership.owner.id == (classroom$ | async)?.creator?.id
-          ? 'accent'
-          : null
-      "
-      matListIcon
-    >
-      {{ membership.role == Role.Student ? 'person' : 'manage_accounts' }}
-    </mat-icon>
-    <span
-      [class.text--blue]="membership.owner.gender == Gender.Male"
-      [class.text--pink]="membership.owner.gender == Gender.Female"
-      matLine
-    >
-      {{ getDisplayName(membership) }}
-    </span>
-    <span matLine>
-      {{ membership.role }}
-    </span>
-  </mat-list-item>
+  <app-classroom-detail-membership-list-item
+    *ngFor="let membership of memberships$ | async"
+    [membership]="membership"
+  ></app-classroom-detail-membership-list-item>
 </mat-list>

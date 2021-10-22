@@ -1,0 +1,11 @@
+<mat-list-item>
+  <mat-icon [color]="color$ | async" matListIcon>
+    {{ icon }}
+  </mat-icon>
+  <span [class]="class" matLine>
+    {{ name }}
+  </span>
+  <span matLine>
+    {{ membership.role }}
+  </span>
+</mat-list-item>
