@@ -1,4 +1,5 @@
 import { Component, OnInit, TrackByFunction } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { QueryRef } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -23,7 +24,10 @@ export class ClassroomListComponent implements OnInit {
     ClassroomListQueryVariables
   >;
 
-  constructor(private classroomListGql: ClassroomListGQL) {}
+  constructor(
+    private router: Router,
+    private classroomListGql: ClassroomListGQL,
+  ) {}
 
   trackByClassroom: TrackByFunction<Classroom> = (_, { id }) => id;
 
@@ -32,5 +36,27 @@ export class ClassroomListComponent implements OnInit {
     this.classrooms$ = this.classroomsQuery.valueChanges.pipe(
       map(({ data }) => data.classrooms.results),
     );
+  }
+
+  deactivateIfActivated(classroom: Classroom) {
+    if (this.isRouteActive(this.getRouterCommands(classroom.id)))
+      this.router.navigate(this.getRouterCommands());
+  }
+
+  getRouterCommands(id?: string) {
+    const commands = ['/classrooms'];
+    if (id) commands.push(id);
+    return commands;
+  }
+
+  private isRouteActive(commands: unknown[]) {
+    const tree = this.router.createUrlTree(commands);
+    const isActive = this.router.isActive(tree, {
+      paths: 'exact',
+      fragment: 'ignored',
+      matrixParams: 'ignored',
+      queryParams: 'ignored',
+    });
+    return isActive;
   }
 }

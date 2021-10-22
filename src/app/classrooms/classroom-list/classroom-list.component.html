@@ -2,8 +2,9 @@
   <a
     mat-list-item
     *ngFor="let classroom of classrooms$ | async; trackBy: trackByClassroom"
-    [routerLink]="['/classrooms', classroom.id]"
+    [routerLink]="getRouterCommands(classroom.id)"
     routerLinkActive="router-link-active"
+    (click)="deactivateIfActivated(classroom)"
   >
     <span matLine>{{ classroom.name }}</span>
     <span matLine>{{
