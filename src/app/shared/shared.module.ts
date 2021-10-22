@@ -26,6 +26,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatRippleModule } from '@angular/material/core';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
 const modules = [
   CommonModule,
@@ -48,6 +49,7 @@ const modules = [
     MatDialogModule,
     MatProgressSpinnerModule,
     MatCardModule,
+    MatBottomSheetModule,
   ],
 ];
 const components = [

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit, Optional } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { NotifierService } from 'angular-notifier';
 import dayjs, { Dayjs } from 'dayjs';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
+import { BreakpointsService } from 'src/app/core/breakpoints.service';
 import { FormDataService } from 'src/app/core/form-data.service';
 import {
   Gender,
@@ -21,6 +22,9 @@ import { FormProfileData } from '../form-profile/form-profile-data.interface';
   styleUrls: ['./profile-btn-menu-dialog-edit.component.css'],
 })
 export class ProfileBtnMenuDialogEditComponent implements OnInit {
+  @HostBinding('class.dialog')
+  hostClassDialog?: boolean;
+
   data: FormProfileData = {
     username: '',
     password: '',
@@ -33,13 +37,18 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
 
   constructor(
     public auth: AuthService,
+    public breakpoints: BreakpointsService,
     private notifier: NotifierService,
     private formDataService: FormDataService,
     private userUpdateGql: UserUpdateGQL,
-    private dialogRef: MatDialogRef<ProfileBtnMenuDialogEditComponent>,
+    @Optional()
+    private dialogRef?: MatDialogRef<ProfileBtnMenuDialogEditComponent>,
   ) {}
 
   ngOnInit() {
+    this.breakpoints.phone$.pipe(take(1)).subscribe((isPhone) => {
+      this.hostClassDialog = !isPhone;
+    });
     this.auth.user$.pipe(take(1)).subscribe((user) => {
       this.data.username = user!.username;
       this.data.nickname = user!.nickname ?? '';
@@ -59,7 +68,7 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
       const data = this.cleanData(user!);
       this.userUpdateGql.mutate({ id, data }).subscribe(() => {
         this.notifier.notify(NotificationType.Success, 'Profile updated');
-        this.dialogRef.close();
+        this.dialogRef?.close();
       });
     });
   }

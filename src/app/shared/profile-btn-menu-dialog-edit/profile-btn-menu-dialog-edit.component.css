@@ -1,5 +1,7 @@
 :host {
   display: block;
+}
+:host.dialog {
   width: 60vw;
   max-width: 360px;
   height: 560px;

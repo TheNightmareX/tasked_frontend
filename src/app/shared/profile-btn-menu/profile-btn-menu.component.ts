@@ -3,6 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ProfileBtnMenuDialogEditComponent } from '../profile-btn-menu-dialog-edit/profile-btn-menu-dialog-edit.component';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { BreakpointsService } from 'src/app/core/breakpoints.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile-btn-menu',
@@ -13,13 +16,18 @@ export class ProfileBtnMenuComponent implements OnInit {
   constructor(
     public auth: AuthService,
     private router: Router,
+    private breakpoints: BreakpointsService,
     private dialog: MatDialog,
+    private bottomSheet: MatBottomSheet,
   ) {}
 
   ngOnInit() {}
 
   openEditDialog() {
-    this.dialog.open(ProfileBtnMenuDialogEditComponent);
+    this.breakpoints.mobile$.pipe(take(1)).subscribe((mobile) => {
+      if (mobile) this.bottomSheet.open(ProfileBtnMenuDialogEditComponent);
+      else this.dialog.open(ProfileBtnMenuDialogEditComponent);
+    });
   }
 
   logout() {
