@@ -1,0 +1,10 @@
+fragment ClassroomBasic on Classroom {
+  id
+  name
+  description
+  creator {
+    id
+    username
+    nickname
+  }
+}

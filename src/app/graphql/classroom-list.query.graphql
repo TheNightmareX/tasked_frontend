@@ -1,13 +1,7 @@
 query ClassroomList($limit: Int, $offset: Int) {
   classrooms(limit: $limit, offset: $offset) {
     results {
-      id
-      name
-      creator {
-        id
-        username
-        nickname
-      }
+      ...ClassroomBasic
     }
   }
 }

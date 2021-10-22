@@ -571,6 +571,19 @@ export type ClassroomAssignmentListQuery = {
   };
 };
 
+export type ClassroomBasicFragment = {
+  __typename?: 'Classroom';
+  id: string;
+  name: string;
+  description?: string | null | undefined;
+  creator: {
+    __typename?: 'User';
+    id: string;
+    username: string;
+    nickname?: string | null | undefined;
+  };
+};
+
 export type ClassroomDetailQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -582,6 +595,12 @@ export type ClassroomDetailQuery = {
     id: string;
     name: string;
     description?: string | null | undefined;
+    creator: {
+      __typename?: 'User';
+      id: string;
+      username: string;
+      nickname?: string | null | undefined;
+    };
   };
 };
 
@@ -598,6 +617,7 @@ export type ClassroomListQuery = {
       __typename?: 'Classroom';
       id: string;
       name: string;
+      description?: string | null | undefined;
       creator: {
         __typename?: 'User';
         id: string;
@@ -697,6 +717,18 @@ export type UserFragment = {
   updatedAt: any;
 };
 
+export const ClassroomBasicFragmentDoc = gql`
+  fragment ClassroomBasic on Classroom {
+    id
+    name
+    description
+    creator {
+      id
+      username
+      nickname
+    }
+  }
+`;
 export const UserFragmentDoc = gql`
   fragment User on User {
     id
@@ -808,11 +840,10 @@ export class ClassroomAssignmentListGQL extends Apollo.Query<
 export const ClassroomDetailDocument = gql`
   query ClassroomDetail($id: ID!) {
     classroom(id: $id) {
-      id
-      name
-      description
+      ...ClassroomBasic
     }
   }
+  ${ClassroomBasicFragmentDoc}
 `;
 
 @Injectable({
@@ -832,16 +863,11 @@ export const ClassroomListDocument = gql`
   query ClassroomList($limit: Int, $offset: Int) {
     classrooms(limit: $limit, offset: $offset) {
       results {
-        id
-        name
-        creator {
-          id
-          username
-          nickname
-        }
+        ...ClassroomBasic
       }
     }
   }
+  ${ClassroomBasicFragmentDoc}
 `;
 
 @Injectable({
