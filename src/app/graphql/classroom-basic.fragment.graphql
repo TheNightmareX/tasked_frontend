@@ -7,4 +7,8 @@ fragment ClassroomBasic on Classroom {
     username
     nickname
   }
+  membership {
+    id
+    role
+  }
 }

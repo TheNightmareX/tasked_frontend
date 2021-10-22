@@ -582,6 +582,7 @@ export type ClassroomBasicFragment = {
     username: string;
     nickname?: string | null | undefined;
   };
+  membership: { __typename?: 'Membership'; id: string; role: Role };
 };
 
 export type ClassroomDetailQueryVariables = Exact<{
@@ -601,6 +602,7 @@ export type ClassroomDetailQuery = {
       username: string;
       nickname?: string | null | undefined;
     };
+    membership: { __typename?: 'Membership'; id: string; role: Role };
   };
 };
 
@@ -624,6 +626,7 @@ export type ClassroomListQuery = {
         username: string;
         nickname?: string | null | undefined;
       };
+      membership: { __typename?: 'Membership'; id: string; role: Role };
     }>;
   };
 };
@@ -726,6 +729,10 @@ export const ClassroomBasicFragmentDoc = gql`
       id
       username
       nickname
+    }
+    membership {
+      id
+      role
     }
   }
 `;
