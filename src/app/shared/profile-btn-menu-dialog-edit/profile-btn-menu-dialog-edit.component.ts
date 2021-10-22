@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { NotifierService } from 'angular-notifier';
 import dayjs, { Dayjs } from 'dayjs';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
@@ -10,6 +12,7 @@ import {
   UserUpdateGQL,
   UserUpdateInput,
 } from 'src/app/graphql';
+import { NotificationType } from 'src/app/notification-type.enum';
 import { FormProfileData } from '../form-profile/form-profile-data.interface';
 
 @Component({
@@ -30,8 +33,10 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
 
   constructor(
     public auth: AuthService,
+    private notifier: NotifierService,
     private formDataService: FormDataService,
     private userUpdateGql: UserUpdateGQL,
+    private dialogRef: MatDialogRef<ProfileBtnMenuDialogEditComponent>,
   ) {}
 
   ngOnInit() {
@@ -52,10 +57,10 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
     this.auth.user$.pipe(take(1)).subscribe((user) => {
       const id = user!.id + '';
       const data = this.cleanData(user!);
-      this.userUpdateGql
-        .mutate({ id, data })
-        .pipe(map(({ data }) => data!.updateUser))
-        .subscribe();
+      this.userUpdateGql.mutate({ id, data }).subscribe(() => {
+        this.notifier.notify(NotificationType.Success, 'Profile updated');
+        this.dialogRef.close();
+      });
     });
   }
 
