@@ -14,14 +14,17 @@
   <div mat-dialog-actions fxLayout="row-reverse">
     <button
       mat-button
-      *ngIf="canUpdate"
+      *ngIf="canUpdate$ | async"
       class="uppercase"
       color="accent"
       [disabled]="!form.valid"
       type="submit"
-    ></button>
-    <button mat-button *ngIf="!canUpdate" disabled>
-      Unable to update until {{ qualifiedDate.toDate() | date: 'short' }}
+    >
+      Submit
+    </button>
+    <button mat-button *ngIf="!(canUpdate$ | async)" disabled>
+      Unable to update until
+      {{ (qualifiedDate$ | async)?.toDate() | date: 'short' }}
     </button>
   </div>
 </form>

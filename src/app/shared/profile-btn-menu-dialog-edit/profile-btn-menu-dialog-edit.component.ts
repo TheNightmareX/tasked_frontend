@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
+import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FormDataService } from 'src/app/core/form-data.service';
@@ -24,15 +25,8 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
     gender: Gender.Unknown,
   };
 
-  userSnapshot!: UserFragment;
-
-  get qualifiedDate() {
-    return dayjs(this.userSnapshot.updatedAt).add(3, 'day');
-  }
-
-  get canUpdate() {
-    return dayjs().isAfter(this.qualifiedDate);
-  }
+  qualifiedDate$?: Observable<Dayjs>;
+  canUpdate$?: Observable<boolean>;
 
   constructor(
     public auth: AuthService,
@@ -42,20 +36,27 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
 
   ngOnInit() {
     this.auth.user$.pipe(take(1)).subscribe((user) => {
-      this.userSnapshot = user!;
-      this.data.username = this.userSnapshot.username;
-      this.data.nickname = this.userSnapshot.nickname ?? '';
-      this.data.gender = this.userSnapshot.gender;
+      this.data.username = user!.username;
+      this.data.nickname = user!.nickname ?? '';
+      this.data.gender = user!.gender;
     });
+    this.qualifiedDate$ = this.auth.user$.pipe(
+      map((user) => dayjs(user!.updatedAt).add(3, 'day')),
+    );
+    this.canUpdate$ = this.qualifiedDate$.pipe(
+      map((date) => dayjs().isAfter(date)),
+    );
   }
 
   submit() {
-    const id = this.userSnapshot.id + '';
-    const data = this.cleanData(this.userSnapshot);
-    this.userUpdateGql
-      .mutate({ id, data })
-      .pipe(map(({ data }) => data!.updateUser))
-      .subscribe();
+    this.auth.user$.pipe(take(1)).subscribe((user) => {
+      const id = user!.id + '';
+      const data = this.cleanData(user!);
+      this.userUpdateGql
+        .mutate({ id, data })
+        .pipe(map(({ data }) => data!.updateUser))
+        .subscribe();
+    });
   }
 
   private cleanData(user: UserFragment) {
