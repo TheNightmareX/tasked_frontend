@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Data } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { timer } from 'rxjs';
 import { concatMap } from 'rxjs/operators';
 import {
   AssignmentUpdateGQL,
-  AssignmentUpdateInput,
   ClassroomAssignmentListQuery,
 } from 'src/app/graphql';
 import { NotificationType } from 'src/app/notification-type.enum';
@@ -12,16 +12,12 @@ import { NotificationType } from 'src/app/notification-type.enum';
 type Assignment =
   ClassroomAssignmentListQuery['classroom']['assignments']['results'][number];
 
-type Data = {
-  [Key in keyof AssignmentUpdateInput]: NonNullable<AssignmentUpdateInput[Key]>;
-};
-
 @Component({
-  selector: 'app-classroom-detail-assignments-item',
-  templateUrl: './classroom-detail-assignments-item.component.html',
-  styleUrls: ['./classroom-detail-assignments-item.component.css'],
+  selector: 'app-classroom-detail-tab-assignments-list-item',
+  templateUrl: './classroom-detail-tab-assignments-list-item.component.html',
+  styleUrls: ['./classroom-detail-tab-assignments-list-item.component.css'],
 })
-export class ClassroomDetailAssignmentsItemComponent implements OnInit {
+export class ClassroomDetailTabAssignmentsListItemComponent implements OnInit {
   @Input()
   assignment!: Assignment;
 

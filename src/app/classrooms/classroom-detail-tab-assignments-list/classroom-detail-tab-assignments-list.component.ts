@@ -3,9 +3,9 @@ import { QueryRef } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
-  ClassroomAssignmentListGQL,
   ClassroomAssignmentListQuery,
   ClassroomAssignmentListQueryVariables,
+  ClassroomAssignmentListGQL,
 } from 'src/app/graphql';
 import { ClassroomsStateService } from '../classrooms-state.service';
 
@@ -13,11 +13,11 @@ type Assignment =
   ClassroomAssignmentListQuery['classroom']['assignments']['results'][number];
 
 @Component({
-  selector: 'app-classroom-detail-assignments',
-  templateUrl: './classroom-detail-assignments.component.html',
-  styleUrls: ['./classroom-detail-assignments.component.css'],
+  selector: 'app-classroom-detail-tab-assignments-list',
+  templateUrl: './classroom-detail-tab-assignments-list.component.html',
+  styleUrls: ['./classroom-detail-tab-assignments-list.component.css'],
 })
-export class ClassroomDetailAssignmentsComponent implements OnInit {
+export class ClassroomDetailTabAssignmentsListComponent implements OnInit {
   assignmentsPending$!: Observable<Assignment[]>;
   assignmentsCompleted$!: Observable<Assignment[]>;
 

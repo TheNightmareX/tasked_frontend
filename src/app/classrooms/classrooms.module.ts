@@ -5,8 +5,9 @@ import { ClassroomDetailComponent } from './classroom-detail/classroom-detail.co
 import { ClassroomListComponent } from './classroom-list/classroom-list.component';
 import { ClassroomsRoutingModule } from './classrooms-routing.module';
 import { ClassroomsComponent } from './classrooms.component';
-import { ClassroomDetailAssignmentsComponent } from './classroom-detail-assignments/classroom-detail-assignments.component';
-import { ClassroomDetailAssignmentsItemComponent } from './classroom-detail-assignments-item/classroom-detail-assignments-item.component';
+import { ClassroomDetailTabAssignmentsComponent } from './classroom-detail-tab-assignments/classroom-detail-tab-assignments.component';
+import { ClassroomDetailTabAssignmentsListComponent } from './classroom-detail-tab-assignments-list/classroom-detail-tab-assignments-list.component';
+import { ClassroomDetailTabAssignmentsListItemComponent } from './classroom-detail-tab-assignments-list-item/classroom-detail-tab-assignments-list-item.component';
 
 @NgModule({
   declarations: [
@@ -14,8 +15,9 @@ import { ClassroomDetailAssignmentsItemComponent } from './classroom-detail-assi
     ClassroomListComponent,
     ClassroomDetailComponent,
     ClassroomDetailMembershipListComponent,
-    ClassroomDetailAssignmentsComponent,
-    ClassroomDetailAssignmentsItemComponent,
+    ClassroomDetailTabAssignmentsComponent,
+    ClassroomDetailTabAssignmentsListComponent,
+    ClassroomDetailTabAssignmentsListItemComponent,
   ],
   imports: [SharedModule, ClassroomsRoutingModule],
 })
