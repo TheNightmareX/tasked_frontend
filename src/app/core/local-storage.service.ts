@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
 import { fromEvent } from 'rxjs';
-import { CoreModule } from './core.module';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocalStorageService {
-  private readonly windowUnloadEvent$ = fromEvent(
-    window,
-    'unload' as keyof WindowEventMap,
-  );
+  private windowUnload$ = fromEvent(window, 'unload' as keyof WindowEventMap);
 
   constructor() {}
 
@@ -20,22 +16,11 @@ export class LocalStorageService {
    * @param validate - will be called to validate the parsed value from the local storage
    * @param get - will be called to get the value for saving on window unload
    */
-  load<T extends Record<string, unknown>>(
-    key: string,
-    alternative: T,
-    validate: (value: unknown) => value is T,
-  ): T;
   load<T>(
     key: string,
     alternative: T,
     validate: (value: unknown) => value is T,
-    getValue: () => T,
-  ): T;
-  load<T>(
-    key: string,
-    alternative: T,
-    validate: (value: unknown) => value is T,
-    getValue?: () => T,
+    valueToSave?: () => T,
   ) {
     let value = alternative;
 
@@ -45,9 +30,10 @@ export class LocalStorageService {
       if (dirtyValue !== undefined && validate(dirtyValue)) value = dirtyValue;
     }
 
-    this.windowUnloadEvent$.subscribe(() =>
-      localStorage.setItem(key, JSON.stringify(getValue ? getValue() : value)),
-    );
+    if (valueToSave)
+      this.windowUnload$.subscribe(() =>
+        localStorage.setItem(key, JSON.stringify(valueToSave())),
+      );
 
     return value;
   }
