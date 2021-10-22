@@ -97,6 +97,7 @@ export type Classroom = {
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   joinApplications: PaginatedJoinApplications;
+  membership: Membership;
   memberships: PaginatedMemberships;
   name: Scalars['String'];
   updatedAt: Scalars['DateTime'];
