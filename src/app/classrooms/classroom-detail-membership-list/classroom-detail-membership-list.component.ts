@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { concatMap, map } from 'rxjs/operators';
+import { AuthService } from 'src/app/auth/auth.service';
 import {
   ClassroomMembershipListGQL,
   ClassroomMembershipListQuery,
@@ -21,6 +22,7 @@ export class ClassroomDetailMembershipListComponent implements OnInit {
 
   constructor(
     private state: ClassroomsStateService,
+    private auth: AuthService,
     private classroomMembershipListGql: ClassroomMembershipListGQL,
   ) {}
 
@@ -31,9 +33,17 @@ export class ClassroomDetailMembershipListComponent implements OnInit {
       })
       .valueChanges.pipe(
         map((result) => [...result.data.classroom.memberships.results]),
-        map((memberships) =>
-          memberships.sort((a, b) =>
-            a.role == b.role ? 0 : a.role == Role.Teacher ? -1 : 1,
+        concatMap((memberships) =>
+          this.auth.user$.pipe(
+            map((user) =>
+              memberships
+                .sort((a, b) =>
+                  a.owner.id == user!.id ? -1 : b.owner.id == user!.id ? 1 : 0,
+                )
+                .sort((a, b) =>
+                  a.role == b.role ? 0 : a.role == Role.Teacher ? -1 : 1,
+                ),
+            ),
           ),
         ),
       );
