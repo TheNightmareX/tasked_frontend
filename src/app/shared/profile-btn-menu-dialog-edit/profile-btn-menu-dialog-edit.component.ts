@@ -66,10 +66,21 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
     this.auth.user$.pipe(take(1)).subscribe((user) => {
       const id = user!.id + '';
       const data = this.cleanData(user!);
-      this.userUpdateGql.mutate({ id, data }).subscribe(() => {
-        this.notifier.notify(NotificationType.Success, 'Profile updated');
-        this.dialogRef?.close();
-      });
+      this.userUpdateGql.mutate({ id, data }).subscribe(
+        () => {
+          this.notifier.notify(
+            NotificationType.Success,
+            'Profile updated successfully',
+          );
+          this.dialogRef?.close();
+        },
+        () => {
+          this.notifier.notify(
+            NotificationType.Error,
+            'Failed to update the profile',
+          );
+        },
+      );
     });
   }
 
