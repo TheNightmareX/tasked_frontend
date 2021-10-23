@@ -9,7 +9,6 @@ import {
   ClassroomMembershipListQuery,
   MembershipDeleteGQL,
   MembershipUpdateGQL,
-  MembershipUpdateInput,
   Role,
 } from 'src/app/graphql';
 import { NotificationType } from 'src/app/notification-type.enum';
@@ -18,11 +17,14 @@ type Membership =
   ClassroomMembershipListQuery['classroom']['memberships']['results'][number];
 
 @Component({
-  selector: 'app-classroom-detail-membership-list-item-menu',
-  templateUrl: './classroom-detail-membership-list-item-menu.component.html',
-  styleUrls: ['./classroom-detail-membership-list-item-menu.component.css'],
+  selector: 'app-classroom-detail-sidebar-membership-list-item-menu',
+  templateUrl:
+    './classroom-detail-sidebar-membership-list-item-menu.component.html',
+  styleUrls: [
+    './classroom-detail-sidebar-membership-list-item-menu.component.css',
+  ],
 })
-export class ClassroomDetailMembershipListItemMenuComponent
+export class ClassroomDetailSidebarMembershipListItemMenuComponent
   implements OnInit, OnDestroy
 {
   @Input()

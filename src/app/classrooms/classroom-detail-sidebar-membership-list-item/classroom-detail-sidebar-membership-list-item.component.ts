@@ -14,11 +14,11 @@ type Membership =
   ClassroomMembershipListQuery['classroom']['memberships']['results'][number];
 
 @Component({
-  selector: 'app-classroom-detail-membership-list-item',
-  templateUrl: './classroom-detail-membership-list-item.component.html',
-  styleUrls: ['./classroom-detail-membership-list-item.component.css'],
+  selector: 'app-classroom-detail-sidebar-membership-list-item',
+  templateUrl: './classroom-detail-sidebar-membership-list-item.component.html',
+  styleUrls: ['./classroom-detail-sidebar-membership-list-item.component.css'],
 })
-export class ClassroomDetailMembershipListItemComponent
+export class ClassroomDetailSidebarMembershipListItemComponent
   implements OnInit, OnDestroy
 {
   @Input()

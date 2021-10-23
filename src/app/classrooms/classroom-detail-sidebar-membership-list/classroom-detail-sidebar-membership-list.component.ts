@@ -14,11 +14,11 @@ type Membership =
   ClassroomMembershipListQuery['classroom']['memberships']['results'][number];
 
 @Component({
-  selector: 'app-classroom-detail-membership-list',
-  templateUrl: './classroom-detail-membership-list.component.html',
-  styleUrls: ['./classroom-detail-membership-list.component.css'],
+  selector: 'app-classroom-detail-sidebar-membership-list',
+  templateUrl: './classroom-detail-sidebar-membership-list.component.html',
+  styleUrls: ['./classroom-detail-sidebar-membership-list.component.css'],
 })
-export class ClassroomDetailMembershipListComponent implements OnInit {
+export class ClassroomDetailSidebarMembershipListComponent implements OnInit {
   memberships$!: Observable<Membership[]>;
 
   constructor(
