@@ -13,8 +13,5 @@ export class ClassroomsComponent implements OnInit {
   ngOnInit() {
     if (this.state.activeId)
       this.router.navigate(['/classrooms', this.state.activeId]);
-    else {
-      // TODO: do something
-    }
   }
 }
