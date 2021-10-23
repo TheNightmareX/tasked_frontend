@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ClassroomDetailGQL, Role } from 'src/app/graphql';
-import { ClassroomsStateService } from '../classrooms-state.service';
 
 @Component({
   selector: 'app-classroom-detail-tab-assignments',
@@ -13,15 +13,17 @@ export class ClassroomDetailTabAssignmentsComponent implements OnInit {
   isTeacher$!: Observable<boolean>;
 
   constructor(
-    private state: ClassroomsStateService,
+    private route: ActivatedRoute,
     private classroomGql: ClassroomDetailGQL,
   ) {}
 
   ngOnInit() {
-    this.isTeacher$ = this.classroomGql
-      .watch({ id: this.state.activeId! })
-      .valueChanges.pipe(
-        map(({ data }) => data.classroom.membership.role == Role.Teacher),
-      );
+    this.route.paramMap.subscribe((params) => {
+      this.isTeacher$ = this.classroomGql
+        .watch({ id: params.get('id')! })
+        .valueChanges.pipe(
+          map(({ data }) => data.classroom.membership.role == Role.Teacher),
+        );
+    });
   }
 }

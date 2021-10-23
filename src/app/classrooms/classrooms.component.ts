@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ClassroomsStateService } from './classrooms-state.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LocalStorageService } from '../core/local-storage.service';
 
 @Component({
   selector: 'app-classrooms',
@@ -8,10 +8,9 @@ import { ClassroomsStateService } from './classrooms-state.service';
   styleUrls: ['./classrooms.component.css'],
 })
 export class ClassroomsComponent implements OnInit {
-  constructor(private router: Router, private state: ClassroomsStateService) {}
+  constructor(private router: Router, private storage: LocalStorageService) {}
 
   ngOnInit() {
-    if (this.state.activeId)
-      this.router.navigate(['/classrooms', this.state.activeId]);
+    // TODO: re-implement the navigation
   }
 }

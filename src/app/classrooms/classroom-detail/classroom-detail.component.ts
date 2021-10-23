@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { QueryRef } from 'apollo-angular';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
-import { ClassroomsStateService } from 'src/app/classrooms/classrooms-state.service';
+import { map } from 'rxjs/operators';
 import { BreakpointsService } from 'src/app/core/breakpoints.service';
 import {
   ClassroomDetailGQL,
@@ -29,24 +28,17 @@ export class ClassroomDetailComponent implements OnInit {
   constructor(
     public breakpoints: BreakpointsService,
     private route: ActivatedRoute,
-    private state: ClassroomsStateService,
     private classroomDetailGql: ClassroomDetailGQL,
   ) {}
 
   ngOnInit() {
-    this.route.paramMap
-      .pipe(
-        map((params) => params.get('id')),
-        filter((value): value is string => !!value),
-      )
-      .subscribe((classroomId) => {
-        this.state.activeId = classroomId;
-        this.classroomQuery = this.classroomDetailGql.watch({
-          id: this.state.activeId,
-        });
-        this.classroom$ = this.classroomQuery.valueChanges.pipe(
-          map(({ data }) => data.classroom),
-        );
+    this.route.paramMap.subscribe((params) => {
+      this.classroomQuery = this.classroomDetailGql.watch({
+        id: params.get('id')!,
       });
+      this.classroom$ = this.classroomQuery.valueChanges.pipe(
+        map(({ data }) => data.classroom),
+      );
+    });
   }
 }
