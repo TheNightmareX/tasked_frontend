@@ -9,6 +9,7 @@ import {
   ClassroomDetailQuery,
   ClassroomDetailQueryVariables,
 } from 'src/app/graphql';
+import { ClassroomsLocalStorageService } from '../classrooms-local-storage.service';
 
 type Classroom = ClassroomDetailQuery['classroom'];
 
@@ -28,14 +29,15 @@ export class ClassroomDetailComponent implements OnInit {
   constructor(
     public breakpoints: BreakpointsService,
     private route: ActivatedRoute,
+    private local: ClassroomsLocalStorageService,
     private classroomDetailGql: ClassroomDetailGQL,
   ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
-      this.classroomQuery = this.classroomDetailGql.watch({
-        id: params.get('id')!,
-      });
+      const id = params.get('id')!;
+      this.local.lastActiveId = id;
+      this.classroomQuery = this.classroomDetailGql.watch({ id });
       this.classroom$ = this.classroomQuery.valueChanges.pipe(
         map(({ data }) => data.classroom),
       );

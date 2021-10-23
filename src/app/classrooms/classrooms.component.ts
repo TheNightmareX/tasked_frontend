@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { LocalStorageService } from '../core/local-storage.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ClassroomsLocalStorageService } from './classrooms-local-storage.service';
 
 @Component({
   selector: 'app-classrooms',
@@ -8,9 +8,13 @@ import { LocalStorageService } from '../core/local-storage.service';
   styleUrls: ['./classrooms.component.css'],
 })
 export class ClassroomsComponent implements OnInit {
-  constructor(private router: Router, private storage: LocalStorageService) {}
+  constructor(
+    private router: Router,
+    private storage: ClassroomsLocalStorageService,
+  ) {}
 
   ngOnInit() {
-    // TODO: re-implement the navigation
+    if (this.storage.lastActiveId)
+      this.router.navigate(['/classrooms', this.storage.lastActiveId]);
   }
 }
