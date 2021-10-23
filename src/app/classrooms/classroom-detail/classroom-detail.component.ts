@@ -34,11 +34,6 @@ export class ClassroomDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.classroomQuery = this.classroomDetailGql.watch();
-    this.classroom$ = this.classroomQuery.valueChanges.pipe(
-      map(({ data }) => data.classroom),
-    );
-
     this.route.paramMap
       .pipe(
         map((params) => params.get('id')),
@@ -46,7 +41,12 @@ export class ClassroomDetailComponent implements OnInit {
       )
       .subscribe((classroomId) => {
         this.state.activeId = classroomId;
-        this.classroomQuery.refetch({ id: classroomId });
+        this.classroomQuery = this.classroomDetailGql.watch({
+          id: this.state.activeId,
+        });
+        this.classroom$ = this.classroomQuery.valueChanges.pipe(
+          map(({ data }) => data.classroom),
+        );
       });
   }
 }
