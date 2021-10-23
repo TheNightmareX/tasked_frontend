@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
-import { fromEvent } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocalStorageService {
-  private windowUnload$ = fromEvent(window, 'unload' as keyof WindowEventMap);
+  private valueToSaveMap = new Map<string, () => unknown>();
 
-  constructor() {}
+  constructor() {
+    window.addEventListener('unload', () => {
+      this.valueToSaveMap.forEach((valueToSave, key) => {
+        this.save(key, valueToSave());
+      });
+    });
+  }
 
   /**
    * Load a value from the local storage and save it on window unload.
@@ -30,14 +35,21 @@ export class LocalStorageService {
       if (dirtyValue !== undefined && validate(dirtyValue)) value = dirtyValue;
     }
 
-    if (valueToSave)
-      this.windowUnload$.subscribe(() => this.save(key, valueToSave()));
+    if (valueToSave) this.persist(key, valueToSave);
 
     return value;
   }
 
-  save<T>(key: string, value: T) {
+  save(key: string, value: unknown) {
     localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  persist(key: string, valueToSave: () => unknown) {
+    this.valueToSaveMap.set(key, valueToSave);
+  }
+
+  depersist(key: string) {
+    this.valueToSaveMap.delete(key);
   }
 
   private parse<T>(value: string) {
