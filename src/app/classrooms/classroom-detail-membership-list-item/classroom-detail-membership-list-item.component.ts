@@ -1,8 +1,7 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatListItem } from '@angular/material/list';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
   ClassroomDetailGQL,
@@ -19,14 +18,18 @@ type Membership =
   templateUrl: './classroom-detail-membership-list-item.component.html',
   styleUrls: ['./classroom-detail-membership-list-item.component.css'],
 })
-export class ClassroomDetailMembershipListItemComponent implements OnInit {
+export class ClassroomDetailMembershipListItemComponent
+  implements OnInit, OnDestroy
+{
   @Input()
   membership!: Membership;
 
   name!: string;
   icon!: string;
-  color$!: Observable<string | null>;
-  class!: string[];
+  iconColor!: string | null;
+  titleClassList!: string[];
+
+  private sub?: Subscription;
 
   @ViewChild(MatMenuTrigger)
   private menuTrigger!: MatMenuTrigger;
@@ -38,31 +41,33 @@ export class ClassroomDetailMembershipListItemComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
-      const classroom$ = this.classroomGql
+      this.classroomGql
         .watch({ id: params.get('id')! })
-        .valueChanges.pipe(map(({ data }) => data.classroom));
+        .valueChanges.pipe(map(({ data }) => data.classroom))
+        .subscribe((classroom) => {
+          this.name =
+            this.membership.displayName ??
+            this.membership.owner.nickname ??
+            this.membership.owner.username;
 
-      this.name =
-        this.membership.displayName ??
-        this.membership.owner.nickname ??
-        this.membership.owner.username;
+          this.icon =
+            this.membership.role == Role.Student ? 'person' : 'manage_accounts';
 
-      this.icon =
-        this.membership.role == Role.Student ? 'person' : 'manage_accounts';
+          this.iconColor =
+            this.membership.owner.id == classroom.creator?.id ? 'accent' : null;
 
-      this.color$ = classroom$.pipe(
-        map((classroom) =>
-          this.membership.owner.id == classroom.creator?.id ? 'accent' : null,
-        ),
-      );
-
-      this.class =
-        this.membership.owner.gender == Gender.Male
-          ? ['text--blue']
-          : this.membership.owner.gender == Gender.Female
-          ? ['text--pink']
-          : [];
+          this.titleClassList =
+            this.membership.owner.gender == Gender.Male
+              ? ['text--blue']
+              : this.membership.owner.gender == Gender.Female
+              ? ['text--pink']
+              : [];
+        });
     });
+  }
+
+  ngOnDestroy() {
+    this.sub?.unsubscribe();
   }
 
   /**

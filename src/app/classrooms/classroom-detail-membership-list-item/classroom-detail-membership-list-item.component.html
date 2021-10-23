@@ -3,10 +3,10 @@
   (click)="openMenu($event, item._getHostElement(), helper)"
   #item
 >
-  <mat-icon matListIcon [color]="color$ | async">
+  <mat-icon matListIcon [color]="iconColor">
     {{ icon }}
   </mat-icon>
-  <span matLine [class]="class">
+  <span matLine [class]="titleClassList">
     {{ name }}
   </span>
   <span matLine>
