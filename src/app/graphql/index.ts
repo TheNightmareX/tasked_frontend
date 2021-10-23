@@ -684,6 +684,20 @@ export type MeQuery = {
   };
 };
 
+export type MembershipFragment = {
+  __typename?: 'Membership';
+  id: string;
+  displayName?: string | null | undefined;
+  role: Role;
+  owner: {
+    __typename?: 'User';
+    id: string;
+    username: string;
+    nickname?: string | null | undefined;
+    gender: Gender;
+  };
+};
+
 export type UserCreateMutationVariables = Exact<{
   data: UserCreateInput;
 }>;
@@ -743,6 +757,19 @@ export const ClassroomBasicFragmentDoc = gql`
       id
       role
     }
+  }
+`;
+export const MembershipFragmentDoc = gql`
+  fragment Membership on Membership {
+    id
+    owner {
+      id
+      username
+      nickname
+      gender
+    }
+    displayName
+    role
   }
 `;
 export const UserFragmentDoc = gql`
@@ -927,19 +954,12 @@ export const ClassroomMembershipListDocument = gql`
       memberships {
         total
         results {
-          id
-          owner {
-            id
-            username
-            nickname
-            gender
-          }
-          displayName
-          role
+          ...Membership
         }
       }
     }
   }
+  ${MembershipFragmentDoc}
 `;
 
 @Injectable({

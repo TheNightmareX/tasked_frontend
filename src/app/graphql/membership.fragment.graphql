@@ -1,0 +1,11 @@
+fragment Membership on Membership {
+  id
+  owner {
+    id
+    username
+    nickname
+    gender
+  }
+  displayName
+  role
+}

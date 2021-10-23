@@ -4,15 +4,7 @@ query ClassroomMembershipList($id: ID!) {
     memberships {
       total
       results {
-        id
-        owner {
-          id
-          username
-          nickname
-          gender
-        }
-        displayName
-        role
+        ...Membership
       }
     }
   }
