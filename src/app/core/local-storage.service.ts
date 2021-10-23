@@ -31,11 +31,13 @@ export class LocalStorageService {
     }
 
     if (valueToSave)
-      this.windowUnload$.subscribe(() =>
-        localStorage.setItem(key, JSON.stringify(valueToSave())),
-      );
+      this.windowUnload$.subscribe(() => this.save(key, valueToSave()));
 
     return value;
+  }
+
+  save<T>(key: string, value: T) {
+    localStorage.setItem(key, JSON.stringify(value));
   }
 
   private parse<T>(value: string) {
