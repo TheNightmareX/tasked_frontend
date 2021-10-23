@@ -4,21 +4,16 @@
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  max-width: 400px;
   height: 100%;
-  margin: 0 auto;
-  padding: 30px 0;
 }
 
 .container > .title {
   display: flex;
   flex-direction: column;
-  height: 168px;
   justify-content: center;
   align-items: center;
+  height: 88px;
+  padding-top: 32px;
 }
 .container > .title > span {
   opacity: 60%;
@@ -26,7 +21,19 @@
 .container > .title > h1 {
   opacity: 80%;
 }
-.container > .actions {
+
+.container > form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 56px 0;
+}
+.container > form > mat-form-field {
+  margin-bottom: 12px;
+}
+.container > form .actions {
   margin-top: 42px;
   display: flex;
   flex-direction: column;
