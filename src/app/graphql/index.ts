@@ -96,6 +96,7 @@ export type Classroom = {
   deletedAt?: Maybe<Scalars['DateTime']>;
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
+  isOpen: Scalars['Boolean'];
   joinApplications: PaginatedJoinApplications;
   membership: Membership;
   memberships: PaginatedMemberships;
