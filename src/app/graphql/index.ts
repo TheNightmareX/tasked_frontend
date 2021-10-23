@@ -654,6 +654,7 @@ export type ClassroomMembershipListQuery = {
       total: number;
       results: Array<{
         __typename?: 'Membership';
+        id: string;
         displayName?: string | null | undefined;
         role: Role;
         owner: {
@@ -926,6 +927,7 @@ export const ClassroomMembershipListDocument = gql`
       memberships {
         total
         results {
+          id
           owner {
             id
             username
