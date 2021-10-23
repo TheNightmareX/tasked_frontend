@@ -10,6 +10,7 @@ import { ClassroomDetailTabAssignmentsListComponent } from './classroom-detail-t
 import { ClassroomDetailTabAssignmentsListItemComponent } from './classroom-detail-tab-assignments-list-item/classroom-detail-tab-assignments-list-item.component';
 import { ClassroomDetailMembershipListItemComponent } from './classroom-detail-membership-list-item/classroom-detail-membership-list-item.component';
 import { ClassroomCreationComponent } from './classroom-creation/classroom-creation.component';
+import { ClassroomDetailMembershipListItemMenuComponent } from './classroom-detail-membership-list-item-menu/classroom-detail-membership-list-item-menu.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ClassroomCreationComponent } from './classroom-creation/classroom-creat
     ClassroomDetailTabAssignmentsListItemComponent,
     ClassroomDetailMembershipListItemComponent,
     ClassroomCreationComponent,
+    ClassroomDetailMembershipListItemMenuComponent,
   ],
   imports: [SharedModule, ClassroomsRoutingModule],
 })

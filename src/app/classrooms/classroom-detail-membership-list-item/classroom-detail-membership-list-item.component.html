@@ -1,11 +1,20 @@
-<button mat-list-item>
-  <mat-icon [color]="color$ | async" matListIcon>
+<button
+  mat-list-item
+  (click)="openMenu($event, item._getHostElement(), helper)"
+  #item
+>
+  <mat-icon matListIcon [color]="color$ | async">
     {{ icon }}
   </mat-icon>
-  <span [class]="class" matLine>
+  <span matLine [class]="class">
     {{ name }}
   </span>
   <span matLine>
     {{ membership.role }}
   </span>
+  <div class="menu-helper" [matMenuTriggerFor]="menu" #helper></div>
 </button>
+
+<mat-menu xPosition="before" #menu>
+  <app-classroom-detail-membership-list-item-menu></app-classroom-detail-membership-list-item-menu>
+</mat-menu>
