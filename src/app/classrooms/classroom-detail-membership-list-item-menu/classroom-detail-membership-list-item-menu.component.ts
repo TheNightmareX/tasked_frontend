@@ -1,13 +1,18 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { combineLatest, Subscription } from 'rxjs';
+import { NotifierService } from 'angular-notifier';
+import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import {
   ClassroomDetailGQL,
   ClassroomMembershipListQuery,
+  MembershipDeleteGQL,
+  MembershipUpdateGQL,
+  MembershipUpdateInput,
   Role,
 } from 'src/app/graphql';
+import { NotificationType } from 'src/app/notification-type.enum';
 
 type Membership =
   ClassroomMembershipListQuery['classroom']['memberships']['results'][number];
@@ -34,7 +39,10 @@ export class ClassroomDetailMembershipListItemMenuComponent
   constructor(
     private route: ActivatedRoute,
     private auth: AuthService,
+    private notifier: NotifierService,
     private classroomGql: ClassroomDetailGQL,
+    private updateGql: MembershipUpdateGQL,
+    private deleteGql: MembershipDeleteGQL,
   ) {}
 
   ngOnInit() {
@@ -71,9 +79,61 @@ export class ClassroomDetailMembershipListItemMenuComponent
     this.sub?.unsubscribe();
   }
 
-  promote() {}
+  promote() {
+    this.mutate(
+      (membership) =>
+        this.updateGql.mutate({
+          id: membership.id,
+          data: { role: Role.Teacher },
+        }),
+      'Member promoted successfully',
+      'Failed to promote the member',
+    );
+  }
 
-  demote() {}
+  demote() {
+    this.mutate(
+      (membership) =>
+        this.updateGql.mutate({
+          id: membership.id,
+          data: { role: Role.Student },
+        }),
+      'Member demoted successfully',
+      'Failed to demote the member',
+    );
+  }
 
-  remove() {}
+  remove() {
+    this.mutate(
+      (membership) =>
+        this.deleteGql.mutate(
+          { id: membership.id },
+          {
+            update: (cache) => cache.evict({ id: cache.identify(membership) }),
+          },
+        ),
+      'Member removed successfully',
+      'Failed to remove the member',
+    );
+  }
+
+  private mutate(
+    mutation: (membership: Membership) => Observable<unknown>,
+    messageSuccess: string,
+    messageFail: string,
+  ) {
+    if (this.loading) return;
+    if (this.membership)
+      mutation(this.membership).subscribe(
+        () => {
+          this.notifier.notify(NotificationType.Success, messageSuccess);
+        },
+        () => {
+          this.notifier.notify(NotificationType.Error, messageFail);
+        },
+        () => {
+          this.loading = false;
+        },
+      );
+  }
 }

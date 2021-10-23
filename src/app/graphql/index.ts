@@ -176,6 +176,11 @@ export type Membership = {
   updatedAt: Scalars['DateTime'];
 };
 
+export type MembershipUpdateInput = {
+  displayName?: Maybe<Scalars['String']>;
+  role?: Maybe<Role>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   acceptJoinApplication: AcceptJoinApplicationResult;
@@ -196,6 +201,7 @@ export type Mutation = {
   updateAssignment: Assignment;
   updateClassroom: Classroom;
   updateJoinApplication: JoinApplication;
+  updateMembership: Membership;
   updateTask: Task;
   updateUser: User;
 };
@@ -274,6 +280,11 @@ export type MutationUpdateClassroomArgs = {
 
 export type MutationUpdateJoinApplicationArgs = {
   data: JoinApplicationUpdateInput;
+  id: Scalars['ID'];
+};
+
+export type MutationUpdateMembershipArgs = {
+  data: MembershipUpdateInput;
   id: Scalars['ID'];
 };
 
@@ -684,6 +695,37 @@ export type MeQuery = {
   };
 };
 
+export type MembershipDeleteMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type MembershipDeleteMutation = {
+  __typename?: 'Mutation';
+  deleteMembership: { __typename?: 'Membership'; id: string };
+};
+
+export type MembershipUpdateMutationVariables = Exact<{
+  id: Scalars['ID'];
+  data: MembershipUpdateInput;
+}>;
+
+export type MembershipUpdateMutation = {
+  __typename?: 'Mutation';
+  updateMembership: {
+    __typename?: 'Membership';
+    id: string;
+    displayName?: string | null | undefined;
+    role: Role;
+    owner: {
+      __typename?: 'User';
+      id: string;
+      username: string;
+      nickname?: string | null | undefined;
+      gender: Gender;
+    };
+  };
+};
+
 export type MembershipFragment = {
   __typename?: 'Membership';
   id: string;
@@ -989,6 +1031,49 @@ export const MeDocument = gql`
 })
 export class MeGQL extends Apollo.Query<MeQuery, MeQueryVariables> {
   document = MeDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const MembershipDeleteDocument = gql`
+  mutation MembershipDelete($id: ID!) {
+    deleteMembership(id: $id) {
+      id
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class MembershipDeleteGQL extends Apollo.Mutation<
+  MembershipDeleteMutation,
+  MembershipDeleteMutationVariables
+> {
+  document = MembershipDeleteDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const MembershipUpdateDocument = gql`
+  mutation MembershipUpdate($id: ID!, $data: MembershipUpdateInput!) {
+    updateMembership(id: $id, data: $data) {
+      ...Membership
+    }
+  }
+  ${MembershipFragmentDoc}
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class MembershipUpdateGQL extends Apollo.Mutation<
+  MembershipUpdateMutation,
+  MembershipUpdateMutationVariables
+> {
+  document = MembershipUpdateDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
