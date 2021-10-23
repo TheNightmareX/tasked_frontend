@@ -24,8 +24,8 @@ export class ProfileBtnMenuComponent implements OnInit {
   ngOnInit() {}
 
   openEditDialog() {
-    this.breakpoints.mobile$.pipe(take(1)).subscribe((mobile) => {
-      if (mobile) this.bottomSheet.open(ProfileBtnMenuDialogEditComponent);
+    this.breakpoints.phone$.pipe(take(1)).subscribe((isPhone) => {
+      if (isPhone) this.bottomSheet.open(ProfileBtnMenuDialogEditComponent);
       else this.dialog.open(ProfileBtnMenuDialogEditComponent);
     });
   }
