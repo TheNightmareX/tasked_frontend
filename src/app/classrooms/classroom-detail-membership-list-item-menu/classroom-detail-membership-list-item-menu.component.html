@@ -1,0 +1,12 @@
+<button mat-menu-item [disabled]="!canPromote" (click)="promote()">
+  <mat-icon>arrow_upward</mat-icon>
+  <span>Promote</span>
+</button>
+<button mat-menu-item [disabled]="!canDemote" (click)="demote()">
+  <mat-icon>arrow_downward</mat-icon>
+  <span>Demote</span>
+</button>
+<button mat-menu-item [disabled]="!canRemove" (click)="remove()">
+  <mat-icon>clear</mat-icon>
+  <span>Remove</span>
+</button>
