@@ -585,6 +585,15 @@ export type ClassroomBasicFragment = {
   membership: { __typename?: 'Membership'; id: string; role: Role };
 };
 
+export type ClassroomCreateMutationVariables = Exact<{
+  data: ClassroomCreateInput;
+}>;
+
+export type ClassroomCreateMutation = {
+  __typename?: 'Mutation';
+  createClassroom: { __typename?: 'Classroom'; id: string };
+};
+
 export type ClassroomDetailQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -838,6 +847,27 @@ export class ClassroomAssignmentListGQL extends Apollo.Query<
   ClassroomAssignmentListQueryVariables
 > {
   document = ClassroomAssignmentListDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const ClassroomCreateDocument = gql`
+  mutation ClassroomCreate($data: ClassroomCreateInput!) {
+    createClassroom(data: $data) {
+      id
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ClassroomCreateGQL extends Apollo.Mutation<
+  ClassroomCreateMutation,
+  ClassroomCreateMutationVariables
+> {
+  document = ClassroomCreateDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

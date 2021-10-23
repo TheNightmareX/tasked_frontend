@@ -1,0 +1,5 @@
+mutation ClassroomCreate($data: ClassroomCreateInput!) {
+  createClassroom(data: $data) {
+    id
+  }
+}
