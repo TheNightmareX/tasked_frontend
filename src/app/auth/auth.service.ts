@@ -50,6 +50,6 @@ export class AuthService {
 
   logout() {
     this.token = undefined;
-    this.apollo.client.resetStore();
+    this.apollo.client.clearStore();
   }
 }
