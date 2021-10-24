@@ -20,9 +20,7 @@ export class AuthFormSignupComponent implements OnInit {
     passwordConfirm: '',
     gender: Gender.Unknown,
   };
-
   loading = false;
-
   submit$ = new Subject<Event>();
 
   constructor(

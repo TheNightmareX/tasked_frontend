@@ -12,8 +12,8 @@ import {
   NG_VALUE_ACCESSOR,
   Validator,
 } from '@angular/forms';
-import { of } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { MatInput } from '@angular/material/input';
+import { map } from 'rxjs/operators';
 import { Gender } from 'src/app/graphql';
 import { FormProfileData } from './form-profile-data.interface';
 
@@ -56,6 +56,9 @@ export class FormProfileComponent
   @ViewChild(NgForm)
   private form!: NgForm;
 
+  @ViewChild(MatInput)
+  private firstInput!: MatInput;
+
   private onChange = (v: unknown) => {};
   private onTouched = () => {};
 
@@ -67,7 +70,11 @@ export class FormProfileComponent
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    setTimeout(() => {
+      this.firstInput.focus();
+    });
+  }
 
   ngAfterViewInit() {
     this.form

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatInput } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { forkJoin, of, Subject, timer } from 'rxjs';
@@ -16,6 +17,9 @@ export class AuthFormLoginComponent implements OnInit {
   loading = false;
   submit$ = new Subject<Event>();
 
+  @ViewChild(MatInput)
+  private firstInput?: MatInput;
+
   constructor(
     private router: Router,
     private auth: AuthService,
@@ -24,6 +28,9 @@ export class AuthFormLoginComponent implements OnInit {
 
   ngOnInit() {
     this.submit$.pipe(throttleTime(1000)).subscribe(() => this.submit());
+    setTimeout(() => {
+      this.firstInput?.focus();
+    });
   }
 
   private submit() {
