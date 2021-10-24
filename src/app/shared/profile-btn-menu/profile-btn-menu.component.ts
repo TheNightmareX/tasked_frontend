@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/auth/auth.service';
-import { ProfileBtnMenuDialogEditComponent } from '../profile-btn-menu-dialog-edit/profile-btn-menu-dialog-edit.component';
-import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { BreakpointsService } from 'src/app/core/breakpoints.service';
 import { take } from 'rxjs/operators';
+import { AuthService } from 'src/app/auth/auth.service';
+import { BreakpointsService } from 'src/app/core/breakpoints.service';
+import { ProfileBtnMenuDialogEditComponent } from '../profile-btn-menu-dialog-edit/profile-btn-menu-dialog-edit.component';
 
 @Component({
   selector: 'app-profile-btn-menu',
@@ -31,7 +31,6 @@ export class ProfileBtnMenuComponent implements OnInit {
   }
 
   logout() {
-    this.auth.logout();
     this.router.navigate(['/auth']);
   }
 }
