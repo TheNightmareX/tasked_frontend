@@ -1,6 +1,6 @@
 import { Gender } from 'src/app/graphql';
 
-export interface FormProfileData {
+export interface ProfileFormData {
   username: string;
   nickname?: string;
   password: string;

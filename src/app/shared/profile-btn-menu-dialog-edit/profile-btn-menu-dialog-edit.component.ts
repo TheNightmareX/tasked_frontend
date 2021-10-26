@@ -14,7 +14,7 @@ import {
   UserUpdateInput,
 } from 'src/app/graphql';
 import { NotificationType } from 'src/app/notification-type.enum';
-import { FormProfileData } from '../form-profile/form-profile-data.interface';
+import { ProfileFormData } from '../profile-form/profile-form-data.interface';
 
 @Component({
   selector: 'app-profile-btn-menu-dialog-edit',
@@ -25,7 +25,7 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
   @HostBinding('class.dialog')
   hostClassDialog?: boolean;
 
-  data: FormProfileData = {
+  data: ProfileFormData = {
     username: '',
     password: '',
     passwordConfirm: '',

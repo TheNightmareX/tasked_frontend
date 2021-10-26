@@ -15,29 +15,29 @@ import {
 import { MatInput } from '@angular/material/input';
 import { map } from 'rxjs/operators';
 import { Gender } from 'src/app/graphql';
-import { FormProfileData } from './form-profile-data.interface';
+import { ProfileFormData } from '../profile-form/profile-form-data.interface';
 
 @Component({
-  selector: 'app-form-profile',
-  templateUrl: './form-profile.component.html',
-  styleUrls: ['./form-profile.component.css'],
+  selector: 'app-profile-form',
+  templateUrl: './profile-form.component.html',
+  styleUrls: ['./profile-form.component.css'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: FormProfileComponent,
+      useExisting: ProfileFormComponent,
       multi: true,
     },
     {
       provide: NG_VALIDATORS,
-      useExisting: FormProfileComponent,
+      useExisting: ProfileFormComponent,
       multi: true,
     },
   ],
 })
-export class FormProfileComponent
+export class ProfileFormComponent
   implements OnInit, AfterViewInit, ControlValueAccessor, Validator
 {
-  data: FormProfileData = {
+  data: ProfileFormData = {
     username: '',
     password: '',
     passwordConfirm: '',
@@ -94,7 +94,7 @@ export class FormProfileComponent
     return this.valid ? null : { profile: 'error' };
   }
 
-  writeValue(data: FormProfileComponent) {
+  writeValue(data: ProfileFormData) {
     Object.assign(this.data, data);
   }
 

@@ -21,12 +21,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { EqualDirective } from './equal.directive';
-import { FormProfileComponent } from './form-profile/form-profile.component';
 import { LayoutComponent } from './layout/layout.component';
 import { LoadingDirective } from './loading.directive';
 import { ProfileBtnMenuDialogEditComponent } from './profile-btn-menu-dialog-edit/profile-btn-menu-dialog-edit.component';
 import { ProfileBtnMenuComponent } from './profile-btn-menu/profile-btn-menu.component';
 import { ProfileBtnComponent } from './profile-btn/profile-btn.component';
+import { ProfileFormComponent } from './profile-form/profile-form.component';
 
 const modules = [
   CommonModule,
@@ -55,10 +55,10 @@ const modules = [
 ];
 const components = [
   LayoutComponent,
-  FormProfileComponent,
   ProfileBtnComponent,
   ProfileBtnMenuComponent,
   ProfileBtnMenuDialogEditComponent,
+  ProfileFormComponent,
 ];
 const directives = [EqualDirective, LoadingDirective];
 
