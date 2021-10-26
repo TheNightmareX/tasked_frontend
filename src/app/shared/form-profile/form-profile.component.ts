@@ -51,13 +51,13 @@ export class FormProfileComponent
   ];
 
   @Input()
-  update: boolean = false;
+  update = false;
 
   @ViewChild(NgForm)
-  private form!: NgForm;
+  private form?: NgForm;
 
   @ViewChild(MatInput)
-  private firstInput!: MatInput;
+  private firstInput?: MatInput;
 
   private onChange = (v: unknown) => {};
   private onTouched = () => {};
@@ -72,13 +72,13 @@ export class FormProfileComponent
 
   ngOnInit() {
     setTimeout(() => {
-      this.firstInput.focus();
+      this.firstInput?.focus();
     });
   }
 
   ngAfterViewInit() {
     this.form
-      .statusChanges!.pipe(map(() => !!this.form.valid))
+      ?.statusChanges!.pipe(map(() => !!this.form?.valid))
       .subscribe((valid) => (this.valid = valid));
   }
 

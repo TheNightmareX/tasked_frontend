@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ClassroomDetailGQL, ClassroomDetailQuery } from 'src/app/graphql';
 
@@ -12,7 +12,7 @@ type Classroom = ClassroomDetailQuery['classroom'];
   styleUrls: ['./classroom-detail-sidebar.component.css'],
 })
 export class ClassroomDetailSidebarComponent implements OnInit {
-  classroom$: Observable<Classroom> = of();
+  classroom$!: Observable<Classroom>;
 
   constructor(
     private route: ActivatedRoute,

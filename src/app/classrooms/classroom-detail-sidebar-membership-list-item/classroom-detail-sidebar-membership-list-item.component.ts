@@ -1,7 +1,6 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
   ClassroomDetailGQL,
@@ -19,20 +18,18 @@ type Membership =
   styleUrls: ['./classroom-detail-sidebar-membership-list-item.component.css'],
 })
 export class ClassroomDetailSidebarMembershipListItemComponent
-  implements OnInit, OnDestroy
+  implements OnInit
 {
   @Input()
-  membership!: Membership;
+  membership?: Membership;
 
-  name!: string;
-  icon!: string;
-  iconColor!: string | null;
-  titleClassList!: string[];
-
-  private sub?: Subscription;
+  name?: string;
+  icon?: string;
+  iconColor?: string | null;
+  titleClassList?: string[];
 
   @ViewChild(MatMenuTrigger)
-  private menuTrigger!: MatMenuTrigger;
+  private menuTrigger?: MatMenuTrigger;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,6 +42,8 @@ export class ClassroomDetailSidebarMembershipListItemComponent
         .watch({ id: params.get('id')! })
         .valueChanges.pipe(map(({ data }) => data.classroom))
         .subscribe((classroom) => {
+          if (!this.membership) return;
+
           this.name =
             this.membership.displayName ??
             this.membership.owner.nickname ??
@@ -66,10 +65,6 @@ export class ClassroomDetailSidebarMembershipListItemComponent
     });
   }
 
-  ngOnDestroy() {
-    this.sub?.unsubscribe();
-  }
-
   /**
    * Open a menu exactly on where the user clicks.
    *
@@ -86,6 +81,6 @@ export class ClassroomDetailSidebarMembershipListItemComponent
     const top = clientY - itemY;
     helper.style.left = `${left}px`;
     helper.style.top = `${top}px`;
-    this.menuTrigger.openMenu();
+    this.menuTrigger?.openMenu();
   }
 }

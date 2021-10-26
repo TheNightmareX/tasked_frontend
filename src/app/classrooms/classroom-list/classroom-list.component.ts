@@ -1,13 +1,8 @@
 import { Component, OnInit, TrackByFunction } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { QueryRef } from 'apollo-angular';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {
-  ClassroomListGQL,
-  ClassroomListQuery,
-  ClassroomListQueryVariables,
-} from 'src/app/graphql';
+import { ClassroomListGQL, ClassroomListQuery } from 'src/app/graphql';
 
 type Classroom = ClassroomListQuery['classrooms']['results'][number];
 
@@ -19,11 +14,6 @@ type Classroom = ClassroomListQuery['classrooms']['results'][number];
 export class ClassroomListComponent implements OnInit {
   classrooms$!: Observable<Classroom[]>;
 
-  private classroomsQuery!: QueryRef<
-    ClassroomListQuery,
-    ClassroomListQueryVariables
-  >;
-
   constructor(
     private router: Router,
     private classroomListGql: ClassroomListGQL,
@@ -32,10 +22,9 @@ export class ClassroomListComponent implements OnInit {
   trackByClassroom: TrackByFunction<Classroom> = (_, { id }) => id;
 
   ngOnInit() {
-    this.classroomsQuery = this.classroomListGql.watch();
-    this.classrooms$ = this.classroomsQuery.valueChanges.pipe(
-      map(({ data }) => data.classrooms.results),
-    );
+    this.classrooms$ = this.classroomListGql
+      .watch()
+      .valueChanges.pipe(map(({ data }) => data.classrooms.results));
   }
 
   deactivateIfActivated(classroom: Classroom) {

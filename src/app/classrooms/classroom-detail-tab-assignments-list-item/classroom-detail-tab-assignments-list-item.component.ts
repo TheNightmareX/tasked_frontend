@@ -19,13 +19,13 @@ type Assignment =
 })
 export class ClassroomDetailTabAssignmentsListItemComponent implements OnInit {
   @Input()
-  assignment!: Assignment;
+  assignment?: Assignment;
 
-  completionIcon!: string;
-  completionTooltip!: string;
+  completionIcon = '';
+  completionTooltip = '';
 
-  importanceIcon!: string;
-  importanceTooltip!: string;
+  importanceIcon = '';
+  importanceTooltip = '';
 
   private loading = false;
 
@@ -35,6 +35,8 @@ export class ClassroomDetailTabAssignmentsListItemComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (!this.assignment) return;
+
     this.completionIcon = this.assignment.isCompleted
       ? 'radio_button_checked'
       : 'radio_button_unchecked';
@@ -48,14 +50,17 @@ export class ClassroomDetailTabAssignmentsListItemComponent implements OnInit {
   }
 
   switchCompletion() {
+    if (!this.assignment) return;
     this.update({ isCompleted: !this.assignment.isCompleted });
   }
 
   switchImportance() {
+    if (!this.assignment) return;
     this.update({ isImportant: !this.assignment.isImportant });
   }
 
   private update(data: Data) {
+    if (!this.assignment) return;
     if (this.loading) return;
 
     const { id, isImportant, isPublic, isCompleted } = this.assignment;

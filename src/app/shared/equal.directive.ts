@@ -8,7 +8,8 @@ import { AbstractControl, NG_VALIDATORS, Validator } from '@angular/forms';
   ],
 })
 export class EqualDirective implements Validator {
-  @Input() appEqual = '';
+  @Input()
+  appEqual = '';
 
   constructor() {}
 

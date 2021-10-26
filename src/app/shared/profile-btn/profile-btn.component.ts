@@ -8,5 +8,5 @@ import { Component, OnInit } from '@angular/core';
 export class ProfileBtnComponent implements OnInit {
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit() {}
 }

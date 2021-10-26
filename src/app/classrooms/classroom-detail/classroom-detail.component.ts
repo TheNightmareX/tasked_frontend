@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { QueryRef } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BreakpointsService } from 'src/app/core/breakpoints.service';
-import {
-  ClassroomDetailGQL,
-  ClassroomDetailQuery,
-  ClassroomDetailQueryVariables,
-} from 'src/app/graphql';
+import { ClassroomDetailGQL, ClassroomDetailQuery } from 'src/app/graphql';
 import { ClassroomsLocalStorageService } from '../classrooms-local-storage.service';
 
 type Classroom = ClassroomDetailQuery['classroom'];
@@ -21,11 +16,6 @@ type Classroom = ClassroomDetailQuery['classroom'];
 export class ClassroomDetailComponent implements OnInit {
   classroom$!: Observable<Classroom>;
 
-  private classroomQuery!: QueryRef<
-    ClassroomDetailQuery,
-    ClassroomDetailQueryVariables
-  >;
-
   constructor(
     public breakpoints: BreakpointsService,
     private route: ActivatedRoute,
@@ -37,10 +27,9 @@ export class ClassroomDetailComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id')!;
       this.local.lastActiveId = id;
-      this.classroomQuery = this.classroomDetailGql.watch({ id });
-      this.classroom$ = this.classroomQuery.valueChanges.pipe(
-        map(({ data }) => data.classroom),
-      );
+      this.classroom$ = this.classroomDetailGql
+        .watch({ id })
+        .valueChanges.pipe(map(({ data }) => data.classroom));
     });
   }
 }

@@ -34,7 +34,7 @@ export class ClassroomDetailSidebarMembershipListItemMenuComponent
   canDemote?: boolean;
   canRemove?: boolean;
 
-  loading: boolean = false;
+  loading = false;
 
   private sub?: Subscription;
 

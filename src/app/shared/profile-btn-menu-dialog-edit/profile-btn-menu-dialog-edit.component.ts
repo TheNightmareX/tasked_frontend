@@ -32,8 +32,8 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
     gender: Gender.Unknown,
   };
 
-  qualifiedDate$?: Observable<Dayjs>;
-  canUpdate$?: Observable<boolean>;
+  qualifiedDate$!: Observable<Dayjs>;
+  canUpdate$!: Observable<boolean>;
 
   constructor(
     public auth: AuthService,
