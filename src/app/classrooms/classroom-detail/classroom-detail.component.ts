@@ -20,8 +20,7 @@ type Classroom = ClassroomDetailQuery['classroom'];
 export class ClassroomDetailComponent implements OnInit {
   classroom$!: Observable<Classroom>;
 
-  links: Link[] = [['Assignments', ['assignments']]];
-  linkActive?: Link;
+  links: TabLink[] = [['Assignments', ['assignments']]];
 
   constructor(
     public breakpoints: BreakpointsService,
@@ -35,7 +34,6 @@ export class ClassroomDetailComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id')!;
 
-      this.linkActive = undefined;
       this.local.lastActiveId = id;
       this.classroom$ = this.classroomDetailGql
         .watch({ id })
@@ -49,10 +47,19 @@ export class ClassroomDetailComponent implements OnInit {
     });
   }
 
-  navigate(link: Link) {
+  navigate(link: TabLink) {
     this.router.navigate(link[1], { relativeTo: this.route });
-    this.linkActive = link;
+  }
+
+  isLinkActive(link: TabLink) {
+    const url = this.router.createUrlTree(link[1], { relativeTo: this.route });
+    return this.router.isActive(url, {
+      paths: 'exact',
+      fragment: 'ignored',
+      matrixParams: 'ignored',
+      queryParams: 'ignored',
+    });
   }
 }
 
-type Link = [title: string, commands: string[]];
+type TabLink = [title: string, commands: string[]];
