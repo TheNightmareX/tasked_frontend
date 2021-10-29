@@ -1,5 +1,5 @@
 import { Component, OnInit, TrackByFunction } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ClassroomListGQL, ClassroomListQuery } from 'src/app/graphql';
@@ -16,6 +16,7 @@ export class ClassroomListComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private classroomListGql: ClassroomListGQL,
   ) {}
 
@@ -28,18 +29,12 @@ export class ClassroomListComponent implements OnInit {
   }
 
   deactivateIfActivated(classroom: Classroom) {
-    if (this.isRouteActive(this.getRouterCommands(classroom.id)))
-      this.router.navigate(this.getRouterCommands());
+    if (this.isClassroomActivated(classroom.id))
+      this.router.navigate(['../'], { relativeTo: this.route });
   }
 
-  getRouterCommands(id?: string) {
-    const commands = ['/classrooms'];
-    if (id) commands.push(id);
-    return commands;
-  }
-
-  private isRouteActive(commands: unknown[]) {
-    const tree = this.router.createUrlTree(commands);
+  private isClassroomActivated(id: string) {
+    const tree = this.router.createUrlTree([id], { relativeTo: this.route });
     const isActive = this.router.isActive(tree, {
       paths: 'exact',
       fragment: 'ignored',
