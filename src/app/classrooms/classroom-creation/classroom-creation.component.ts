@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { forkJoin, of, timer } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -21,6 +21,7 @@ export class ClassroomCreationComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private notifier: NotifierService,
     private createGql: ClassroomCreateGQL,
     private listGql: ClassroomListGQL,
@@ -45,10 +46,9 @@ export class ClassroomCreationComponent implements OnInit {
             'Classroom created successfully',
           );
           this.listGql.fetch({}, { fetchPolicy: 'network-only' }).subscribe();
-          this.router.navigate([
-            '/classrooms',
-            result.data!.createClassroom.id,
-          ]);
+          this.router.navigate(['../', result.data!.createClassroom.id], {
+            relativeTo: this.route,
+          });
         } else {
           this.notifier.notify(
             NotificationType.Error,
