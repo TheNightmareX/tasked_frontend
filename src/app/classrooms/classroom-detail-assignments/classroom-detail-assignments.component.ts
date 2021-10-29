@@ -11,11 +11,11 @@ type Assignment =
   ClassroomAssignmentListQuery['classroom']['assignments']['results'][number];
 
 @Component({
-  selector: 'app-classroom-detail-tab-assignments-list',
-  templateUrl: './classroom-detail-tab-assignments-list.component.html',
-  styleUrls: ['./classroom-detail-tab-assignments-list.component.css'],
+  selector: 'app-classroom-detail-assignments',
+  templateUrl: './classroom-detail-assignments.component.html',
+  styleUrls: ['./classroom-detail-assignments.component.css'],
 })
-export class ClassroomDetailTabAssignmentsListComponent implements OnInit {
+export class ClassroomDetailAssignmentsComponent implements OnInit {
   assignmentsPending$!: Observable<Assignment[]>;
   assignmentsCompleted$!: Observable<Assignment[]>;
 

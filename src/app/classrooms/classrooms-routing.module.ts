@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth.guard';
 import { ClassroomCreationComponent } from './classroom-creation/classroom-creation.component';
-import { ClassroomDetailTabAssignmentsComponent } from './classroom-detail-tab-assignments/classroom-detail-tab-assignments.component';
+import { ClassroomDetailAssignmentsComponent } from './classroom-detail-assignments/classroom-detail-assignments.component';
 import { ClassroomDetailComponent } from './classroom-detail/classroom-detail.component';
 import { ClassroomsComponent } from './classrooms.component';
 
@@ -25,7 +25,7 @@ const routes: Routes = [
         children: [
           {
             path: 'assignments',
-            component: ClassroomDetailTabAssignmentsComponent,
+            component: ClassroomDetailAssignmentsComponent,
           },
         ],
       },

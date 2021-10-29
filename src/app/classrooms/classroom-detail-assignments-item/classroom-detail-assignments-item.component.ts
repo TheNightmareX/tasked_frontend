@@ -13,11 +13,11 @@ type Assignment =
   ClassroomAssignmentListQuery['classroom']['assignments']['results'][number];
 
 @Component({
-  selector: 'app-classroom-detail-tab-assignments-list-item',
-  templateUrl: './classroom-detail-tab-assignments-list-item.component.html',
-  styleUrls: ['./classroom-detail-tab-assignments-list-item.component.css'],
+  selector: 'app-classroom-detail-assignments-item',
+  templateUrl: './classroom-detail-assignments-item.component.html',
+  styleUrls: ['./classroom-detail-assignments-item.component.css'],
 })
-export class ClassroomDetailTabAssignmentsListItemComponent implements OnInit {
+export class ClassroomDetailAssignmentsItemComponent implements OnInit {
   @Input()
   assignment?: Assignment;
 
