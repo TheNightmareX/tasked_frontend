@@ -10,10 +10,14 @@ mat-drawer-container {
 mat-drawer-container > mat-drawer {
   background-color: transparent;
 }
-mat-drawer-container > mat-drawer-content > main {
-  height: 100%;
+mat-drawer-container > mat-drawer-content {
+  display: flex;
+  flex-direction: column;
   padding: 20px 50px;
 }
-mat-drawer-container > mat-drawer-content > main.phone {
+mat-drawer-container > mat-drawer-content.phone {
   padding: 20px 15px;
+}
+mat-drawer-container > mat-drawer-content > main {
+  flex-grow: 1;
 }

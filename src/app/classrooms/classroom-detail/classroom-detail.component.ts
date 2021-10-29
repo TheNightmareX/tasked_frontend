@@ -16,6 +16,9 @@ type Classroom = ClassroomDetailQuery['classroom'];
 export class ClassroomDetailComponent implements OnInit {
   classroom$!: Observable<Classroom>;
 
+  links: Link[] = [['Assignments', ['assignments']]];
+  linksActive?: Link;
+
   constructor(
     public breakpoints: BreakpointsService,
     private route: ActivatedRoute,
@@ -33,3 +36,5 @@ export class ClassroomDetailComponent implements OnInit {
     });
   }
 }
+
+type Link = [title: string, commands: string[]];

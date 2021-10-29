@@ -20,13 +20,20 @@
     <app-classroom-detail-sidebar></app-classroom-detail-sidebar>
   </mat-drawer>
 
-  <mat-drawer-content>
-    <main [class.phone]="breakpoints.phone$ | async" fxLayout="row">
-      <mat-tab-group fxFlex="100%">
-        <mat-tab label="Assignments">
-          <app-classroom-detail-tab-assignments></app-classroom-detail-tab-assignments>
-        </mat-tab>
-      </mat-tab-group>
+  <mat-drawer-content [class.phone]="breakpoints.phone$ | async">
+    <nav mat-tab-nav-bar>
+      <a
+        matTabLink
+        *ngFor="let item of links"
+        [routerLink]="item[1]"
+        [active]="linksActive == item"
+        (click)="linksActive = item"
+      >
+        {{ item[0] }}
+      </a>
+    </nav>
+    <main>
+      <router-outlet></router-outlet>
     </main>
   </mat-drawer-content>
 </mat-drawer-container>

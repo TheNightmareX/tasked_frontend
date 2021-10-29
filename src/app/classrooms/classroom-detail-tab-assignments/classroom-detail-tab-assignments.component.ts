@@ -18,7 +18,7 @@ export class ClassroomDetailTabAssignmentsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params) => {
+    this.route.parent!.paramMap.subscribe((params) => {
       this.isTeacher$ = this.classroomGql
         .watch({ id: params.get('id')! })
         .valueChanges.pipe(
