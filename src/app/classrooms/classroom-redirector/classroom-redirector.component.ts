@@ -29,7 +29,13 @@ export class ClassroomRedirectorComponent implements OnInit {
           const existsClassroom = classrooms.some(
             (item) => item.id == this.storage.lastActiveId,
           );
-          if (!existsClassroom) this.storage.lastActiveId = undefined;
+          if (!existsClassroom) {
+            this.storage.lastActiveId = undefined;
+            this.notifier.notify(
+              NotificationType.Warning,
+              'Failed to navigate to the last accessed classroom',
+            );
+          }
         }
         this.redirect();
       });
@@ -43,7 +49,7 @@ export class ClassroomRedirectorComponent implements OnInit {
     if (id)
       this.notifier.notify(
         NotificationType.Info,
-        'Last accessed classroom found',
+        'Navigated to the last accessed classroom',
       );
   }
 }
