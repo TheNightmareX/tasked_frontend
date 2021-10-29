@@ -37,6 +37,7 @@ export class ClassroomDetailComponent implements OnInit, OnDestroy {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id')!;
 
+      this.linkActive = undefined;
       this.local.lastActiveId = id;
       this.classroom$ = this.classroomDetailGql
         .watch({ id })
