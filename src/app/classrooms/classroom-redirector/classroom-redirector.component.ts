@@ -21,18 +21,18 @@ export class ClassroomRedirectorComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.storage.lastActiveId)
-      this.listGql
-        .fetch()
-        .pipe(map((result) => result.data.classrooms.results))
-        .subscribe((classrooms) => {
+    this.listGql
+      .fetch()
+      .pipe(map((result) => result.data.classrooms.results))
+      .subscribe((classrooms) => {
+        if (this.storage.lastActiveId) {
           const existsClassroom = classrooms.some(
             (item) => item.id == this.storage.lastActiveId,
           );
           if (!existsClassroom) this.storage.lastActiveId = undefined;
-        });
-
-    this.redirect();
+        }
+        this.redirect();
+      });
   }
 
   private redirect() {
