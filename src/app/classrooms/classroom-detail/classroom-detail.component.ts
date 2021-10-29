@@ -41,23 +41,9 @@ export class ClassroomDetailComponent implements OnInit {
 
       this.classroom$.pipe(take(1)).subscribe((classroom) => {
         if (classroom.membership.role == Role.Student)
-          this.navigate(this.links[0]);
+          this.router.navigate(this.links[0][1], { relativeTo: this.route });
         // TODO: navigate to a assignments management page when the role is teacher
       });
-    });
-  }
-
-  navigate(link: TabLink) {
-    this.router.navigate(link[1], { relativeTo: this.route });
-  }
-
-  isLinkActive(link: TabLink) {
-    const url = this.router.createUrlTree(link[1], { relativeTo: this.route });
-    return this.router.isActive(url, {
-      paths: 'exact',
-      fragment: 'ignored',
-      matrixParams: 'ignored',
-      queryParams: 'ignored',
     });
   }
 }

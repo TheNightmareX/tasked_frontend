@@ -26,8 +26,9 @@
         matTabLink
         *ngFor="let link of links"
         [routerLink]="link[1]"
-        [active]="isLinkActive(link)"
-        (click)="navigate(link)"
+        routerLinkActive
+        #router="routerLinkActive"
+        [active]="router.isActive"
       >
         {{ link[0] }}
       </a>
