@@ -30,13 +30,13 @@ export class ClassroomListComponent implements OnInit {
 
   deactivateIfActivated(classroom: Classroom) {
     if (this.isClassroomActivated(classroom.id))
-      this.router.navigate(['../'], { relativeTo: this.route });
+      this.router.navigate(['.'], { relativeTo: this.route });
   }
 
   private isClassroomActivated(id: string) {
     const tree = this.router.createUrlTree([id], { relativeTo: this.route });
     const isActive = this.router.isActive(tree, {
-      paths: 'exact',
+      paths: 'subset',
       fragment: 'ignored',
       matrixParams: 'ignored',
       queryParams: 'ignored',
