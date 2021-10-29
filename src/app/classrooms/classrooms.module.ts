@@ -11,6 +11,7 @@ import { ClassroomDetailComponent } from './classroom-detail/classroom-detail.co
 import { ClassroomListComponent } from './classroom-list/classroom-list.component';
 import { ClassroomsRoutingModule } from './classrooms-routing.module';
 import { ClassroomsComponent } from './classrooms.component';
+import { ClassroomRedirectorComponent } from './classroom-redirector/classroom-redirector.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ClassroomsComponent } from './classrooms.component';
     ClassroomDetailSidebarMembershipListComponent,
     ClassroomDetailSidebarMembershipListItemComponent,
     ClassroomDetailSidebarMembershipListItemMenuComponent,
+    ClassroomRedirectorComponent,
   ],
   imports: [SharedModule, ClassroomsRoutingModule],
 })
