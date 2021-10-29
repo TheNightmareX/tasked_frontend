@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
 import { map } from 'rxjs/operators';
 import { ClassroomListGQL } from 'src/app/graphql';
+import { NotificationType } from 'src/app/notification-type.enum';
 import { ClassroomsLocalStorageService } from '../classrooms-local-storage.service';
 
 @Component({
@@ -14,6 +16,7 @@ export class ClassroomRedirectorComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private storage: ClassroomsLocalStorageService,
+    private notifier: NotifierService,
     private listGql: ClassroomListGQL,
   ) {}
 
@@ -37,5 +40,10 @@ export class ClassroomRedirectorComponent implements OnInit {
     this.router.navigate(['../', ...(id ? [id] : [])], {
       relativeTo: this.route,
     });
+    if (id)
+      this.notifier.notify(
+        NotificationType.Info,
+        'Last accessed classroom found',
+      );
   }
 }
