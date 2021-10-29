@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 import { BreakpointsService } from 'src/app/core/breakpoints.service';
 import {
   ClassroomDetailGQL,
@@ -17,13 +17,11 @@ type Classroom = ClassroomDetailQuery['classroom'];
   templateUrl: './classroom-detail.component.html',
   styleUrls: ['./classroom-detail.component.css'],
 })
-export class ClassroomDetailComponent implements OnInit, OnDestroy {
+export class ClassroomDetailComponent implements OnInit {
   classroom$!: Observable<Classroom>;
 
   links: Link[] = [['Assignments', ['assignments']]];
   linkActive?: Link;
-
-  private sub!: Subscription;
 
   constructor(
     public breakpoints: BreakpointsService,
@@ -43,16 +41,12 @@ export class ClassroomDetailComponent implements OnInit, OnDestroy {
         .watch({ id })
         .valueChanges.pipe(map(({ data }) => data.classroom));
 
-      this.sub = this.classroom$.subscribe((classroom) => {
+      this.classroom$.pipe(take(1)).subscribe((classroom) => {
         if (classroom.membership.role == Role.Student)
           this.navigate(this.links[0]);
         // TODO: navigate to a assignments management page when the role is teacher
       });
     });
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe();
   }
 
   navigate(link: Link) {
