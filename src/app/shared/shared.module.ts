@@ -27,6 +27,7 @@ import { ProfileBtnMenuDialogEditComponent } from './profile-btn-menu-dialog-edi
 import { ProfileBtnMenuComponent } from './profile-btn-menu/profile-btn-menu.component';
 import { ProfileBtnComponent } from './profile-btn/profile-btn.component';
 import { ProfileFormComponent } from './profile-form/profile-form.component';
+import { StopRipplePropagationDirective } from './stop-ripple-propagation.directive';
 
 const modules = [
   CommonModule,
@@ -60,7 +61,11 @@ const components = [
   ProfileBtnMenuDialogEditComponent,
   ProfileFormComponent,
 ];
-const directives = [EqualDirective, LoadingDirective];
+const directives = [
+  EqualDirective,
+  LoadingDirective,
+  StopRipplePropagationDirective,
+];
 
 @NgModule({
   declarations: [components, directives],

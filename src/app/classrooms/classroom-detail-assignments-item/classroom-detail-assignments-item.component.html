@@ -1,11 +1,10 @@
-<mat-list-item class="hoverable" matRipple [matRippleTrigger]="trigger">
-  <div class="ripple-trigger" #trigger></div>
-
+<button mat-list-item class="hoverable">
   <div class="actions">
     <button
       mat-icon-button
       [matTooltip]="completionTooltip"
       (click)="switchCompletion()"
+      appStopRipplePropagation
     >
       <mat-icon>{{ completionIcon }}</mat-icon>
     </button>
@@ -43,8 +42,9 @@
       mat-icon-button
       [matTooltip]="importanceTooltip"
       (click)="switchImportance()"
+      appStopRipplePropagation
     >
       <mat-icon>{{ importanceIcon }}</mat-icon>
     </button>
   </div>
-</mat-list-item>
+</button>
