@@ -1,10 +1,3 @@
-<!-- get the popup content when the component is created in other components -->
 <ng-template>
   <ng-content></ng-content>
 </ng-template>
-
-<!-- display the popup content when the component is created by Angular Material as a popup -->
-<ng-template
-  [ngIf]="contentTemplateWhenAsPopup"
-  [ngTemplateOutlet]="contentTemplateWhenAsPopup!"
-></ng-template>
