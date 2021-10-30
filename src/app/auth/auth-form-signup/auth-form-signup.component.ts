@@ -6,7 +6,7 @@ import { catchError, concatMap, map, throttleTime } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Gender, UserCreateGQL, UserCreateInput } from 'src/app/graphql';
 import { NotificationType } from 'src/app/notification-type.enum';
-import { ProfileFormData } from '../../shared/profile-form/profile-form-data.interface';
+import { ProfileFormData } from 'src/app/profile/profile-form/profile-form-data.interface';
 
 @Component({
   selector: 'app-auth-form-signup',

@@ -15,7 +15,7 @@ import {
 import { MatInput } from '@angular/material/input';
 import { map } from 'rxjs/operators';
 import { Gender } from 'src/app/graphql';
-import { ProfileFormData } from '../profile-form/profile-form-data.interface';
+import { ProfileFormData } from './profile-form-data.interface';
 
 @Component({
   selector: 'app-profile-form',

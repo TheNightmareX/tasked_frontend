@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ProfileModule } from '../profile/profile.module';
 import { SharedModule } from '../shared/shared.module';
 import { ClassroomCreationComponent } from './classroom-creation/classroom-creation.component';
 import { ClassroomDetailAssignmentsItemComponent } from './classroom-detail-assignments-item/classroom-detail-assignments-item.component';
@@ -31,6 +32,6 @@ import { ClassroomsComponent } from './classrooms.component';
     ClassroomDetailSettingsComponent,
     ClassroomDetailSettingsItemComponent,
   ],
-  imports: [SharedModule, ClassroomsRoutingModule],
+  imports: [SharedModule, ClassroomsRoutingModule, ProfileModule],
 })
 export class ClassroomsModule {}

@@ -1,5 +1,6 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { ProfileModule } from '../profile/profile.module';
 import { SharedModule } from '../shared/shared.module';
 import { AuthFormLayoutComponent } from './auth-form-layout/auth-form-layout.component';
 import { AuthFormLoginComponent } from './auth-form-login/auth-form-login.component';
@@ -17,7 +18,7 @@ import { AuthInterceptor } from './auth.interceptor';
     AuthFormSignupComponent,
     AuthSidenavComponent,
   ],
-  imports: [SharedModule, AuthRoutingModule],
+  imports: [SharedModule, AuthRoutingModule, ProfileModule],
   exports: [],
   providers: [
     {
