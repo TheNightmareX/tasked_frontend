@@ -23,6 +23,7 @@ import { RouterModule } from '@angular/router';
 import { EqualDirective } from './equal.directive';
 import { LayoutComponent } from './layout/layout.component';
 import { LoadingDirective } from './loading.directive';
+import { PopupComponent } from './popup/popup.component';
 import { ProfileBtnMenuDialogEditComponent } from './profile-btn-menu-dialog-edit/profile-btn-menu-dialog-edit.component';
 import { ProfileBtnMenuComponent } from './profile-btn-menu/profile-btn-menu.component';
 import { ProfileBtnComponent } from './profile-btn/profile-btn.component';
@@ -60,6 +61,7 @@ const components = [
   ProfileBtnMenuComponent,
   ProfileBtnMenuDialogEditComponent,
   ProfileFormComponent,
+  PopupComponent,
 ];
 const directives = [
   EqualDirective,

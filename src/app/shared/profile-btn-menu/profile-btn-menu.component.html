@@ -3,7 +3,7 @@
   <span>{{ (auth.user$ | async)?.username }}</span>
 </div>
 <mat-divider></mat-divider>
-<button mat-menu-item (click)="openEditDialog()">
+<button mat-menu-item (click)="popup.open()">
   <mat-icon>edit</mat-icon>
   <span>Profile</span>
 </button>
@@ -11,3 +11,7 @@
   <mat-icon>logout</mat-icon>
   <span>Logout</span>
 </button>
+
+<app-popup #popup>
+  <app-profile-btn-menu-dialog-edit></app-profile-btn-menu-dialog-edit>
+</app-popup>
