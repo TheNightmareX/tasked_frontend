@@ -135,6 +135,7 @@ export type ClassroomCreateInput = {
 
 export type ClassroomUpdateInput = {
   description?: Maybe<Scalars['String']>;
+  isOpen?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
 };
 
