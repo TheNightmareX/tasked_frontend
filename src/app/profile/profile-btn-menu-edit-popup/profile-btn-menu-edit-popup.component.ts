@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  HostBinding,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import dayjs, { Dayjs } from 'dayjs';
 import { Observable } from 'rxjs';
@@ -27,9 +21,6 @@ import { ProfileFormData } from '../profile-form/profile-form-data.interface';
   styleUrls: ['./profile-btn-menu-edit-popup.component.css'],
 })
 export class ProfileBtnMenuEditPopupComponent implements OnInit {
-  @HostBinding('class.dialog')
-  hostClassDialog?: boolean;
-
   @Output()
   update = new EventEmitter();
 
@@ -52,9 +43,6 @@ export class ProfileBtnMenuEditPopupComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.breakpoints.phone$.pipe(take(1)).subscribe((isPhone) => {
-      this.hostClassDialog = !isPhone;
-    });
     this.auth.user$.pipe(take(1)).subscribe((user) => {
       this.data.username = user!.username;
       this.data.nickname = user!.nickname ?? '';
