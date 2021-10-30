@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+
+mat-card {
+  padding: 0;
+  margin: 0 16px;
+}
+mat-card > mat-action-list {
+  padding: 0;
+}

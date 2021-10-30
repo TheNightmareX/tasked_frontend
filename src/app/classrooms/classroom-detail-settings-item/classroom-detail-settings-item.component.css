@@ -1,0 +1,22 @@
+:host {
+  /* there is a padding of 16px in list items */
+  --list-item-margin: 16px;
+}
+
+button[mat-list-item] .icon {
+  margin-right: var(--list-item-margin);
+}
+button[mat-list-item] .name {
+  margin-right: 10%;
+}
+button[mat-list-item] .value {
+  flex-grow: 1;
+  opacity: 80%;
+  overflow: hidden;
+  text-align: right;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+button[mat-list-item] .action {
+  margin-left: var(--list-item-margin);
+}

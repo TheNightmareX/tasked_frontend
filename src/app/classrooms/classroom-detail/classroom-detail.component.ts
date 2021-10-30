@@ -20,7 +20,10 @@ type Classroom = ClassroomDetailQuery['classroom'];
 export class ClassroomDetailComponent implements OnInit {
   classroom$!: Observable<Classroom>;
 
-  links: TabLink[] = [['Assignments', ['assignments']]];
+  links: TabLink[] = [
+    ['Assignments', ['assignments']],
+    ['Settings', ['settings']],
+  ];
 
   constructor(
     public breakpoints: BreakpointsService,
