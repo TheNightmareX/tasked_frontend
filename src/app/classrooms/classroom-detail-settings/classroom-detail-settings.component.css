@@ -1,11 +1,19 @@
-:host {
-  display: block;
+.container {
+  margin: 0 auto;
+  padding: 0 18px;
 }
-
-mat-card {
-  padding: 0;
-  margin: 0 16px;
+.container:not(.mobile) {
+  width: 72%;
 }
-mat-card > mat-action-list {
-  padding: 0;
+.container > section {
+  margin-top: 28px;
+}
+.container > section > h2 {
+  font-weight: 300;
+}
+.container > section > mat-card {
+  margin: 12px;
+}
+.container > section:last-child {
+  margin-top: 68px;
 }
