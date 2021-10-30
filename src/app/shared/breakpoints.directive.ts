@@ -15,21 +15,20 @@ export class BreakpointsDirective implements OnInit, OnDestroy {
 
   private subscription!: Subscription;
 
-  constructor(private breakpoints: BreakpointsService) {}
-
-  ngOnInit() {
-    // Avoid unexpectedly changing the input value of components before the
-    // change detection is completed, which will cause an error in dev mode.
-    setTimeout(() => {
-      this.subscription = combineLatest([
-        this.breakpoints.mobile$,
-        this.breakpoints.phone$,
-      ]).subscribe(([isMobile, isPhone]) => {
-        this.phone = isPhone;
-        this.mobile = isMobile;
-      });
+  constructor(private breakpoints: BreakpointsService) {
+    // The properties must be assigned before initializing the input value of
+    // components (of course also before `ngInit`) because there may be some
+    // components' input requiring them.
+    this.subscription = combineLatest([
+      this.breakpoints.mobile$,
+      this.breakpoints.phone$,
+    ]).subscribe(([isMobile, isPhone]) => {
+      this.phone = isPhone;
+      this.mobile = isMobile;
     });
   }
+
+  ngOnInit() {}
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
