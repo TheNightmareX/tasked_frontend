@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ContentChild, OnInit, TemplateRef } from '@angular/core';
 import {
   MatBottomSheet,
   MatBottomSheetRef,
@@ -17,7 +17,7 @@ import { BreakpointsService } from 'src/app/core/breakpoints.service';
   styleUrls: ['./popup.component.css'],
 })
 export class PopupComponent implements OnInit {
-  @ViewChild(TemplateRef)
+  @ContentChild(TemplateRef)
   private contentTemplate!: TemplateRef<never>;
 
   private sheetRef?: MatBottomSheetRef<PopupComponent>;
