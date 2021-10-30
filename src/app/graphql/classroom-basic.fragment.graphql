@@ -2,6 +2,7 @@ fragment ClassroomBasic on Classroom {
   id
   name
   description
+  isOpen
   creator {
     id
     username

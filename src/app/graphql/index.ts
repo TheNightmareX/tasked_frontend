@@ -387,6 +387,7 @@ export type QueryClassroomArgs = {
 };
 
 export type QueryClassroomsArgs = {
+  isOpen?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -485,6 +486,7 @@ export type UserAssignmentsArgs = {
 };
 
 export type UserClassroomsArgs = {
+  isOpen?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -588,6 +590,7 @@ export type ClassroomBasicFragment = {
   id: string;
   name: string;
   description?: string | null | undefined;
+  isOpen: boolean;
   creator: {
     __typename?: 'User';
     id: string;
@@ -617,6 +620,7 @@ export type ClassroomDetailQuery = {
     id: string;
     name: string;
     description?: string | null | undefined;
+    isOpen: boolean;
     creator: {
       __typename?: 'User';
       id: string;
@@ -641,6 +645,7 @@ export type ClassroomListQuery = {
       id: string;
       name: string;
       description?: string | null | undefined;
+      isOpen: boolean;
       creator: {
         __typename?: 'User';
         id: string;
@@ -791,6 +796,7 @@ export const ClassroomBasicFragmentDoc = gql`
     id
     name
     description
+    isOpen
     creator {
       id
       username
