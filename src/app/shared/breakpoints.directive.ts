@@ -8,10 +8,10 @@ import { BreakpointsService } from '../core/breakpoints.service';
 })
 export class BreakpointsDirective implements OnInit, OnDestroy {
   @HostBinding('class.phone')
-  phone = false;
+  phone?: boolean;
 
   @HostBinding('class.mobile')
-  mobile = false;
+  mobile?: boolean;
 
   private subscription!: Subscription;
 
@@ -22,8 +22,11 @@ export class BreakpointsDirective implements OnInit, OnDestroy {
       this.breakpoints.mobile$,
       this.breakpoints.phone$,
     ]).subscribe(([isMobile, isPhone]) => {
-      this.phone = isPhone;
-      this.mobile = isMobile;
+      // activate the change detection on purpose
+      setTimeout(() => {
+        this.phone = isPhone;
+        this.mobile = isMobile;
+      });
     });
   }
 
