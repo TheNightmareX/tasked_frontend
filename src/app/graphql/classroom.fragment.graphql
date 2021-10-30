@@ -1,4 +1,4 @@
-fragment ClassroomBasic on Classroom {
+fragment Classroom on Classroom {
   id
   name
   description

@@ -1,5 +1,5 @@
 query ClassroomDetail($id: ID!) {
   classroom(id: $id) {
-    ...ClassroomBasic
+    ...Classroom
   }
 }

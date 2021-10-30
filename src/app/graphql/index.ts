@@ -585,21 +585,6 @@ export type ClassroomAssignmentListQuery = {
   };
 };
 
-export type ClassroomBasicFragment = {
-  __typename?: 'Classroom';
-  id: string;
-  name: string;
-  description?: string | null | undefined;
-  isOpen: boolean;
-  creator: {
-    __typename?: 'User';
-    id: string;
-    username: string;
-    nickname?: string | null | undefined;
-  };
-  membership: { __typename?: 'Membership'; id: string; role: Role };
-};
-
 export type ClassroomCreateMutationVariables = Exact<{
   data: ClassroomCreateInput;
 }>;
@@ -684,6 +669,21 @@ export type ClassroomMembershipListQuery = {
       }>;
     };
   };
+};
+
+export type ClassroomFragment = {
+  __typename?: 'Classroom';
+  id: string;
+  name: string;
+  description?: string | null | undefined;
+  isOpen: boolean;
+  creator: {
+    __typename?: 'User';
+    id: string;
+    username: string;
+    nickname?: string | null | undefined;
+  };
+  membership: { __typename?: 'Membership'; id: string; role: Role };
 };
 
 export type MeQueryVariables = Exact<{ [key: string]: never }>;
@@ -791,8 +791,8 @@ export type UserFragment = {
   updatedAt: any;
 };
 
-export const ClassroomBasicFragmentDoc = gql`
-  fragment ClassroomBasic on Classroom {
+export const ClassroomFragmentDoc = gql`
+  fragment Classroom on Classroom {
     id
     name
     description
@@ -953,10 +953,10 @@ export class ClassroomCreateGQL extends Apollo.Mutation<
 export const ClassroomDetailDocument = gql`
   query ClassroomDetail($id: ID!) {
     classroom(id: $id) {
-      ...ClassroomBasic
+      ...Classroom
     }
   }
-  ${ClassroomBasicFragmentDoc}
+  ${ClassroomFragmentDoc}
 `;
 
 @Injectable({
@@ -976,11 +976,11 @@ export const ClassroomListDocument = gql`
   query ClassroomList($limit: Int, $offset: Int) {
     classrooms(limit: $limit, offset: $offset) {
       results {
-        ...ClassroomBasic
+        ...Classroom
       }
     }
   }
-  ${ClassroomBasicFragmentDoc}
+  ${ClassroomFragmentDoc}
 `;
 
 @Injectable({
