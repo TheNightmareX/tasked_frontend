@@ -18,12 +18,13 @@ export class BreakpointsDirective implements OnInit, OnDestroy {
   constructor(private breakpoints: BreakpointsService) {}
 
   ngOnInit() {
-    this.subscription = combineLatest([
-      this.breakpoints.mobile$,
-      this.breakpoints.phone$,
-    ]).subscribe(([isMobile, isPhone]) => {
-      // activate the change detection on purpose
-      setTimeout(() => {
+    // Avoid unexpectedly changing the input value of components before the
+    // change detection is completed, which will cause an error in dev mode.
+    setTimeout(() => {
+      this.subscription = combineLatest([
+        this.breakpoints.mobile$,
+        this.breakpoints.phone$,
+      ]).subscribe(([isMobile, isPhone]) => {
         this.phone = isPhone;
         this.mobile = isMobile;
       });
