@@ -3,7 +3,7 @@
   <span>{{ (auth.user$ | async)?.username }}</span>
 </div>
 <mat-divider></mat-divider>
-<button mat-menu-item (click)="popup.open()">
+<button mat-menu-item (click)="editPopup.open()">
   <mat-icon>edit</mat-icon>
   <span>Profile</span>
 </button>
@@ -12,10 +12,11 @@
   <span>Logout</span>
 </button>
 
-<app-popup #popup>
+<app-popup #editPopup>
   <ng-template>
-    <app-profile-btn-menu-dialog-edit
-      (submit)="popup.close()"
-    ></app-profile-btn-menu-dialog-edit>
+    <app-profile-btn-menu-edit-popup
+      appBreakpoints
+      (update)="editPopup.close()"
+    ></app-profile-btn-menu-edit-popup>
   </ng-template>
 </app-popup>

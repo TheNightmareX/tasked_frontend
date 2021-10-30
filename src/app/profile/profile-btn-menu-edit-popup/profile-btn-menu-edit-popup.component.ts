@@ -22,16 +22,16 @@ import { NotificationType } from 'src/app/notification-type.enum';
 import { ProfileFormData } from '../profile-form/profile-form-data.interface';
 
 @Component({
-  selector: 'app-profile-btn-menu-dialog-edit',
-  templateUrl: './profile-btn-menu-dialog-edit.component.html',
-  styleUrls: ['./profile-btn-menu-dialog-edit.component.css'],
+  selector: 'app-profile-btn-menu-edit-popup',
+  templateUrl: './profile-btn-menu-edit-popup.component.html',
+  styleUrls: ['./profile-btn-menu-edit-popup.component.css'],
 })
-export class ProfileBtnMenuDialogEditComponent implements OnInit {
+export class ProfileBtnMenuEditPopupComponent implements OnInit {
   @HostBinding('class.dialog')
   hostClassDialog?: boolean;
 
   @Output()
-  submit = new EventEmitter();
+  update = new EventEmitter();
 
   data: ProfileFormData = {
     username: '',
@@ -68,7 +68,7 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
     );
   }
 
-  update() {
+  submit() {
     this.auth.user$.pipe(take(1)).subscribe((user) => {
       const id = user!.id + '';
       const data = this.cleanData(user!);
@@ -78,7 +78,7 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
             NotificationType.Success,
             'Profile updated successfully',
           );
-          this.submit.emit();
+          this.update.emit();
         },
         () => {
           this.notifier.notify(
