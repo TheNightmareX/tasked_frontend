@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { BreakpointsService } from 'src/app/core/breakpoints.service';
 import {
   ClassroomDetailGQL,
   ClassroomDetailQuery,
@@ -26,7 +25,6 @@ export class ClassroomDetailComponent implements OnInit {
   ];
 
   constructor(
-    public breakpoints: BreakpointsService,
     private router: Router,
     private route: ActivatedRoute,
     private local: ClassroomsLocalStorageService,

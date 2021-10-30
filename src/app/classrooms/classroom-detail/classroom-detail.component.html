@@ -12,15 +12,17 @@
 
 <mat-drawer-container>
   <mat-drawer
-    [opened]="!(breakpoints.phone$ | async)"
     mode="side"
     position="end"
+    appBreakpoints
+    #breakpoints="breakpoints"
+    [opened]="!breakpoints.phone"
     #drawer
   >
     <app-classroom-detail-sidebar></app-classroom-detail-sidebar>
   </mat-drawer>
 
-  <mat-drawer-content [class.phone]="breakpoints.phone$ | async">
+  <mat-drawer-content appBreakpoints>
     <nav mat-tab-nav-bar>
       <a
         matTabLink
