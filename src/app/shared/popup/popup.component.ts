@@ -10,6 +10,9 @@ import { BreakpointsService } from 'src/app/core/breakpoints.service';
 /**
  * A wrapper of {@link MatDialog} and {@link MatBottomSheet}, which opens its
  * content as a dialog in desktop devices but a bottom sheet in mobile devices.
+ *
+ * **NOTE**: Providers like {@link MatDialogRef} and {@link MatBottomSheetRef}
+ * are not available.
  */
 @Component({
   selector: 'app-popup',

@@ -1,5 +1,10 @@
-import { Component, HostBinding, OnInit, Optional } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import dayjs, { Dayjs } from 'dayjs';
 import { Observable } from 'rxjs';
@@ -25,6 +30,9 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
   @HostBinding('class.dialog')
   hostClassDialog?: boolean;
 
+  @Output()
+  submit = new EventEmitter();
+
   data: ProfileFormData = {
     username: '',
     password: '',
@@ -41,8 +49,6 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
     private notifier: NotifierService,
     private formDataService: FormDataService,
     private userUpdateGql: UserUpdateGQL,
-    @Optional()
-    private dialogRef?: MatDialogRef<ProfileBtnMenuDialogEditComponent>,
   ) {}
 
   ngOnInit() {
@@ -62,7 +68,7 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
     );
   }
 
-  submit() {
+  update() {
     this.auth.user$.pipe(take(1)).subscribe((user) => {
       const id = user!.id + '';
       const data = this.cleanData(user!);
@@ -72,7 +78,7 @@ export class ProfileBtnMenuDialogEditComponent implements OnInit {
             NotificationType.Success,
             'Profile updated successfully',
           );
-          this.dialogRef?.close();
+          this.submit.emit();
         },
         () => {
           this.notifier.notify(

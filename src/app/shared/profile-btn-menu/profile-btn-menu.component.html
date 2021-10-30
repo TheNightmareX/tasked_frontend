@@ -14,6 +14,8 @@
 
 <app-popup #popup>
   <ng-template>
-    <app-profile-btn-menu-dialog-edit></app-profile-btn-menu-dialog-edit>
+    <app-profile-btn-menu-dialog-edit
+      (submit)="popup.close()"
+    ></app-profile-btn-menu-dialog-edit>
   </ng-template>
 </app-popup>
