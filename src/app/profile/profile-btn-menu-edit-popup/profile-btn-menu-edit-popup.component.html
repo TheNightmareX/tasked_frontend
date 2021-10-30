@@ -1,7 +1,7 @@
 <form fxLayout="column" (ngSubmit)="submit()" #form="ngForm">
-  <h1 mat-dialog-title>Profile</h1>
+  <h1 matDialogTitle>Profile</h1>
 
-  <div mat-dialog-content>
+  <div matDialogContent>
     <app-profile-form
       name="profile"
       [(ngModel)]="data"
@@ -11,7 +11,7 @@
 
   <div fxFlex></div>
 
-  <div mat-dialog-actions fxLayout="row-reverse">
+  <div matDialogActions fxLayout="row-reverse">
     <button
       mat-button
       *ngIf="canUpdate$ | async"
