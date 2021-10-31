@@ -15,7 +15,7 @@ export class ClassroomsLocalStorageService {
         typeof v == 'object' &&
         !!v &&
         Object.entries(v).every(
-          (userId, classroomId) =>
+          ([userId, classroomId]) =>
             typeof userId == 'string' && typeof classroomId == 'string',
         ),
       () => this.lastActivatedClassroomMap,
