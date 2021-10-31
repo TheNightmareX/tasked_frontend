@@ -672,6 +672,29 @@ export type ClassroomMembershipListQuery = {
   };
 };
 
+export type ClassroomUpdateMutationVariables = Exact<{
+  id: Scalars['ID'];
+  data: ClassroomUpdateInput;
+}>;
+
+export type ClassroomUpdateMutation = {
+  __typename?: 'Mutation';
+  updateClassroom: {
+    __typename?: 'Classroom';
+    id: string;
+    name: string;
+    description?: string | null | undefined;
+    isOpen: boolean;
+    creator: {
+      __typename?: 'User';
+      id: string;
+      username: string;
+      nickname?: string | null | undefined;
+    };
+    membership: { __typename?: 'Membership'; id: string; role: Role };
+  };
+};
+
 export type ClassroomFragment = {
   __typename?: 'Classroom';
   id: string;
@@ -1020,6 +1043,28 @@ export class ClassroomMembershipListGQL extends Apollo.Query<
   ClassroomMembershipListQueryVariables
 > {
   document = ClassroomMembershipListDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const ClassroomUpdateDocument = gql`
+  mutation ClassroomUpdate($id: ID!, $data: ClassroomUpdateInput!) {
+    updateClassroom(id: $id, data: $data) {
+      ...Classroom
+    }
+  }
+  ${ClassroomFragmentDoc}
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ClassroomUpdateGQL extends Apollo.Mutation<
+  ClassroomUpdateMutation,
+  ClassroomUpdateMutationVariables
+> {
+  document = ClassroomUpdateDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
