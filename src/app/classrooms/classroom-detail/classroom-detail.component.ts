@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
+import { AuthService } from 'src/app/auth/auth.service';
 import {
   ClassroomDetailGQL,
   ClassroomDetailQuery,
@@ -28,6 +29,7 @@ export class ClassroomDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private local: ClassroomsLocalStorageService,
+    private auth: AuthService,
     private classroomDetailGql: ClassroomDetailGQL,
   ) {}
 
@@ -35,7 +37,10 @@ export class ClassroomDetailComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id')!;
 
-      this.local.lastActiveId = id;
+      this.auth.user$.pipe(take(1)).subscribe((user) => {
+        this.local.lastActivatedClassroomMap[user!.id] = id;
+      });
+
       this.classroom$ = this.classroomDetailGql
         .watch({ id })
         .valueChanges.pipe(map(({ data }) => data.classroom));
