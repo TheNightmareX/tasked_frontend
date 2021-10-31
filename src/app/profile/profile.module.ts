@@ -7,12 +7,17 @@ import { ProfileBtnMenuEditPopupComponent } from './profile-btn-menu-edit-popup/
 
 @NgModule({
   declarations: [
-    ProfileBtnMenuComponent,
     ProfileBtnComponent,
-    ProfileFormComponent,
+    ProfileBtnMenuComponent,
     ProfileBtnMenuEditPopupComponent,
+    ProfileFormComponent,
   ],
   imports: [SharedModule],
-  exports: [ProfileBtnComponent],
+  exports: [
+    ProfileBtnComponent,
+    ProfileBtnMenuComponent,
+    ProfileBtnMenuEditPopupComponent,
+    ProfileFormComponent,
+  ],
 })
 export class ProfileModule {}
