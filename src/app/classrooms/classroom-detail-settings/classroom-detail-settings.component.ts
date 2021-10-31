@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { combineLatest, forkJoin, Observable, of, Subject, timer } from 'rxjs';
 import { catchError, debounceTime, map, take } from 'rxjs/operators';
+import { AuthService } from 'src/app/auth/auth.service';
 import { FormDataService } from 'src/app/core/form-data.service';
 import {
   ClassroomDetailGQL,
@@ -28,12 +29,14 @@ export class ClassroomDetailSettingsComponent implements OnInit {
 
   change$ = new Subject();
   classroom$!: Observable<Classroom>;
+  isCreator!: Observable<boolean>;
   modified$!: Observable<boolean>;
 
   loading = false;
 
   constructor(
     private route: ActivatedRoute,
+    private auth: AuthService,
     private formData: FormDataService,
     private notifier: NotifierService,
     private queryGql: ClassroomDetailGQL,
@@ -45,12 +48,16 @@ export class ClassroomDetailSettingsComponent implements OnInit {
       this.classroom$ = this.queryGql
         .watch({ id: params.get('id')! })
         .valueChanges.pipe(map((result) => result.data.classroom));
-    });
 
-    this.modified$ = combineLatest([this.classroom$, this.change$]).pipe(
-      debounceTime(100),
-      map(([classroom]) => this.formData.isModified(this.data, classroom)),
-    );
+      this.isCreator = combineLatest([this.classroom$, this.auth.user$]).pipe(
+        map(([classroom, user]) => classroom.creator.id == user!.id),
+      );
+
+      this.modified$ = combineLatest([this.classroom$, this.change$]).pipe(
+        debounceTime(100),
+        map(([classroom]) => this.formData.isModified(this.data, classroom)),
+      );
+    });
 
     this.reset();
   }

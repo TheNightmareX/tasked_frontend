@@ -11,6 +11,7 @@
         <mat-label>Name</mat-label>
         <input
           matInput
+          [disabled]="!(isCreator | async)"
           maxlength="15"
           [(ngModel)]="data.name"
           (ngModelChange)="change$.next()"
@@ -23,6 +24,7 @@
         <textarea
           matInput
           rows="3"
+          [disabled]="!(isCreator | async)"
           maxlength="100"
           [(ngModel)]="data.description"
           (ngModelChange)="change$.next()"
@@ -37,6 +39,7 @@
     <mat-card>
       <div fxLayout fxLayoutGap="5px">
         <mat-slide-toggle
+          [disabled]="!(isCreator | async)"
           [(ngModel)]="data.isOpen"
           (ngModelChange)="change$.next()"
         >
