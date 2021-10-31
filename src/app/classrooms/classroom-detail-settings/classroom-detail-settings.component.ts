@@ -1,16 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
-import {
-  combineLatest,
-  forkJoin,
-  Observable,
-  of,
-  Subject,
-  Subscription,
-  timer,
-} from 'rxjs';
-import { catchError, map, take, tap, throttleTime } from 'rxjs/operators';
+import { combineLatest, forkJoin, Observable, of, Subject, timer } from 'rxjs';
+import { catchError, debounceTime, map, take } from 'rxjs/operators';
 import { FormDataService } from 'src/app/core/form-data.service';
 import {
   ClassroomDetailGQL,
@@ -56,7 +48,7 @@ export class ClassroomDetailSettingsComponent implements OnInit {
     });
 
     this.modified$ = combineLatest([this.classroom$, this.change$]).pipe(
-      throttleTime(200),
+      debounceTime(100),
       map(([classroom]) => this.formData.isModified(this.data, classroom)),
     );
 
