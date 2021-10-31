@@ -1,19 +1,13 @@
 .container {
   margin: 0 auto;
-  padding: 0 18px;
+  padding: 28px 0;
 }
 .container:not(.mobile) {
   width: 72%;
-}
-.container > section {
-  margin-top: 28px;
 }
 .container > section > h2 {
   font-weight: 300;
 }
 .container > section > mat-card {
   margin: 12px;
-}
-.container > section:last-child {
-  margin-top: 68px;
 }
