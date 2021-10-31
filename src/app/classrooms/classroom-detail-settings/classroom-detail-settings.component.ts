@@ -70,6 +70,7 @@ export class ClassroomDetailSettingsComponent implements OnInit {
         'isOpen',
       ]);
       this.data = currentValues;
+      this.change$.next();
     });
   }
 
