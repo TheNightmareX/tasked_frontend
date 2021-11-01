@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MediaObserver } from '@angular/flex-layout';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
@@ -18,6 +19,8 @@ type Classroom = ClassroomDetailQuery['classroom'];
   styleUrls: ['./classroom-detail.component.css'],
 })
 export class ClassroomDetailComponent implements OnInit {
+  sidebarOpen$!: Observable<boolean>;
+
   classroom$!: Observable<Classroom>;
 
   links: TabLink[] = [
@@ -28,12 +31,20 @@ export class ClassroomDetailComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private media: MediaObserver,
     private local: ClassroomsLocalStorageService,
     private auth: AuthService,
     private classroomDetailGql: ClassroomDetailGQL,
   ) {}
 
   ngOnInit() {
+    this.sidebarOpen$ = this.media
+      .asObservable()
+      .pipe(
+        map((items) =>
+          items.some((item) => item.mqAlias == 'gt-sm' && item.matches),
+        ),
+      );
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id')!;
 

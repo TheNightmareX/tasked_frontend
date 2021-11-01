@@ -14,9 +14,7 @@
   <mat-drawer
     mode="side"
     position="end"
-    appBreakpoints
-    #breakpoints="breakpoints"
-    [opened]="!breakpoints.phone"
+    [opened]="sidebarOpen$ | async"
     #drawer
   >
     <app-classroom-detail-sidebar></app-classroom-detail-sidebar>

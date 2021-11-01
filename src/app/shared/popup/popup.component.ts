@@ -1,11 +1,10 @@
 import { Component, ContentChild, OnInit, TemplateRef } from '@angular/core';
+import { MediaObserver } from '@angular/flex-layout';
 import {
   MatBottomSheet,
   MatBottomSheetRef,
 } from '@angular/material/bottom-sheet';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { take } from 'rxjs/operators';
-import { BreakpointsService } from 'src/app/core/breakpoints.service';
 
 /**
  * A wrapper of {@link MatDialog} and {@link MatBottomSheet}, which opens its
@@ -27,7 +26,7 @@ export class PopupComponent implements OnInit {
   private dialogRef?: MatDialogRef<PopupComponent>;
 
   constructor(
-    private breakpoints: BreakpointsService,
+    private media: MediaObserver,
     private dialog: MatDialog,
     private sheet: MatBottomSheet,
   ) {}
@@ -35,10 +34,9 @@ export class PopupComponent implements OnInit {
   ngOnInit() {}
 
   open() {
-    this.breakpoints.phone$.pipe(take(1)).subscribe((isPhone) => {
-      if (isPhone) this.sheetRef = this.sheet.open(this.contentTemplate);
-      else this.dialogRef = this.dialog.open(this.contentTemplate);
-    });
+    const isPhone = this.media.isActive('lt-md');
+    if (isPhone) this.sheetRef = this.sheet.open(this.contentTemplate);
+    else this.dialogRef = this.dialog.open(this.contentTemplate);
   }
 
   close() {

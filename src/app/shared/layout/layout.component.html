@@ -11,10 +11,8 @@
 <mat-sidenav-container style="flex-grow: 1">
   <mat-sidenav
     class="mat-elevation-z3"
-    appBreakpoints
-    #breakpoints="breakpoints"
-    [opened]="!breakpoints.mobile"
-    [mode]="breakpoints.mobile ? 'over' : 'side'"
+    [opened]="!(isMobile$ | async)"
+    [mode]="(isMobile$ | async) ? 'over' : 'side'"
     #sidenav
   >
     <ng-content select="sidenav"></ng-content>

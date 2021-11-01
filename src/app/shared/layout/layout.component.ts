@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MediaObserver } from '@angular/flex-layout';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
@@ -7,7 +10,17 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./layout.component.css'],
 })
 export class LayoutComponent implements OnInit {
-  constructor(public auth: AuthService) {}
+  isMobile$!: Observable<boolean>;
 
-  ngOnInit() {}
+  constructor(public auth: AuthService, private media: MediaObserver) {}
+
+  ngOnInit() {
+    this.isMobile$ = this.media
+      .asObservable()
+      .pipe(
+        map((items) =>
+          items.some((item) => item.mqAlias == 'lt-lg' && item.matches),
+        ),
+      );
+  }
 }

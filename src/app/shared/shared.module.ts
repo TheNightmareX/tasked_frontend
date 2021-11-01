@@ -21,7 +21,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
-import { BreakpointsDirective } from './breakpoints.directive';
 import { EqualDirective } from './equal.directive';
 import { LayoutComponent } from './layout/layout.component';
 import { LoadingDirective } from './loading.directive';
@@ -59,7 +58,6 @@ const directives = [
   EqualDirective,
   LoadingDirective,
   StopRipplePropagationDirective,
-  BreakpointsDirective,
 ];
 
 @NgModule({
