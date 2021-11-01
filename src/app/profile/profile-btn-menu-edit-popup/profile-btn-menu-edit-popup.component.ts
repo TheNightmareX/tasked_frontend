@@ -4,7 +4,6 @@ import dayjs, { Dayjs } from 'dayjs';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
-import { BreakpointsService } from 'src/app/core/breakpoints.service';
 import { FormDataService } from 'src/app/core/form-data.service';
 import {
   Gender,
@@ -36,7 +35,6 @@ export class ProfileBtnMenuEditPopupComponent implements OnInit {
 
   constructor(
     public auth: AuthService,
-    public breakpoints: BreakpointsService,
     private notifier: NotifierService,
     private formDataService: FormDataService,
     private userUpdateGql: UserUpdateGQL,

@@ -15,7 +15,7 @@
 <app-popup #editPopup>
   <ng-template>
     <app-profile-btn-menu-edit-popup
-      appBreakpoints
+      ngClass.gt-sm="dialog"
       (update)="editPopup.close()"
     ></app-profile-btn-menu-edit-popup>
   </ng-template>

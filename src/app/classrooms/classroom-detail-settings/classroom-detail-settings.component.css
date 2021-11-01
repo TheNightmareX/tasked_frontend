@@ -2,9 +2,6 @@
   margin: 0 auto;
   padding: 28px 0;
 }
-.container:not(.mobile) {
-  width: 72%;
-}
 .container > section > h2 {
   font-weight: 300;
 }
