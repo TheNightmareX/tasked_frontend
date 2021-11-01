@@ -15,27 +15,20 @@ export class LocalStorageService {
   }
 
   /**
-   * Load a value from the local storage and save it on window unload.
-   * @param key - local storage key
-   * @param alternative - default value to be used when the value cannot be loaded
-   * @param validate - will be called to validate the parsed value from the local storage
-   * @param get - will be called to get the value for saving on window unload
+   * Load a value from the local storage.
+   * @param options
+   * @returns
    */
-  load<T>(
-    key: string,
-    alternative: T,
-    validate: (value: unknown) => value is T,
-    valueToSave?: () => T,
-  ) {
-    let value = alternative;
+  load<T>({ key, validator, valueOnError, valueOnSave }: LoadOptions<T>) {
+    let value = valueOnError;
 
     const rawValue = localStorage.getItem(key);
     if (rawValue != null) {
       const dirtyValue = this.parse(rawValue);
-      if (dirtyValue !== undefined && validate(dirtyValue)) value = dirtyValue;
+      if (dirtyValue !== undefined && validator(dirtyValue)) value = dirtyValue;
     }
 
-    if (valueToSave) this.persist(key, valueToSave);
+    if (valueOnSave) this.persist(key, valueOnSave);
 
     return value;
   }
@@ -59,4 +52,23 @@ export class LocalStorageService {
       return;
     }
   }
+}
+
+interface LoadOptions<T> {
+  /**
+   * The key of the value stored in the local storage.
+   */
+  key: string;
+  /**
+   * The validator to validate whether the parsed value is expected.
+   */
+  validator: (dirtyValue: unknown) => dirtyValue is T;
+  /**
+   * The alternative to use when the validation fails.
+   */
+  valueOnError: T;
+  /**
+   * The value to save on window unload. Won't save if not provided.
+   */
+  valueOnSave?: () => T;
 }

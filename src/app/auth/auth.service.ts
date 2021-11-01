@@ -22,12 +22,13 @@ export class AuthService {
     private meGql: MeGQL,
     private apollo: Apollo,
   ) {
-    this.token = this.storage.load(
-      'token',
-      undefined,
-      (v): v is this['token'] => v == undefined || typeof v == 'string',
-      () => this.token,
-    );
+    this.token = this.storage.load({
+      key: 'token',
+      validator: (v): v is this['token'] =>
+        v == undefined || typeof v == 'string',
+      valueOnError: undefined,
+      valueOnSave: () => this.token,
+    });
     this.userQuery = this.meGql.watch();
     this.user$ = this.userQuery.valueChanges.pipe(
       map(({ data }) => data.me),

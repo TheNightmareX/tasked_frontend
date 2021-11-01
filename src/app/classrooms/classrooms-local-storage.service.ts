@@ -8,17 +8,17 @@ export class ClassroomsLocalStorageService {
   lastActivatedClassroomMap: Record<string, string>;
 
   constructor(private storage: LocalStorageService) {
-    this.lastActivatedClassroomMap = this.storage.load(
-      'lastActivatedClassroomMap',
-      {},
-      (v): v is this['lastActivatedClassroomMap'] =>
+    this.lastActivatedClassroomMap = this.storage.load({
+      key: 'lastActivatedClassroomMap',
+      validator: (v): v is this['lastActivatedClassroomMap'] =>
         typeof v == 'object' &&
         !!v &&
         Object.entries(v).every(
           ([userId, classroomId]) =>
             typeof userId == 'string' && typeof classroomId == 'string',
         ),
-      () => this.lastActivatedClassroomMap,
-    );
+      valueOnError: {},
+      valueOnSave: () => this.lastActivatedClassroomMap,
+    });
   }
 }
