@@ -2,9 +2,9 @@
   margin: 0 auto;
   padding: 28px 0;
 }
+.container.desktop {
+  width: 72%;
+}
 .container > section > h2 {
   font-weight: 300;
-}
-.container > section > mat-card {
-  margin: 12px;
 }

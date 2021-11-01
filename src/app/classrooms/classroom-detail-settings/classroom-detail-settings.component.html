@@ -1,84 +1,81 @@
-<div fxLayout fxLayoutAlign="center center">
-  <div
-    class="container mat-typography"
-    fxFlex="100%"
-    fxFlex.gt-md="72%"
-    fxLayout="column"
-    fxLayoutGap="28px"
-  >
-    <section>
-      <h2>Basic</h2>
-      <mat-card fxLayout="row wrap">
-        <mat-form-field color="accent">
-          <mat-label>Name</mat-label>
-          <input
-            matInput
-            [disabled]="!(isCreator | async)"
-            maxlength="15"
-            [(ngModel)]="data.name"
-            (ngModelChange)="change$.next()"
-          />
-          <mat-hint align="end">{{ data.name?.length }} / 15</mat-hint>
-        </mat-form-field>
+<div
+  class="container mat-typography"
+  ngClass.gt-sm="desktop"
+  fxLayout="column"
+  fxLayoutGap="28px"
+>
+  <section>
+    <h2 fxLayout fxLayoutAlign.xs="center">Basic</h2>
+    <mat-card fxLayout="row wrap">
+      <mat-form-field color="accent">
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          [disabled]="!(isCreator | async)"
+          maxlength="15"
+          [(ngModel)]="data.name"
+          (ngModelChange)="change$.next()"
+        />
+        <mat-hint align="end">{{ data.name?.length }} / 15</mat-hint>
+      </mat-form-field>
 
-        <mat-form-field fxFlex="100%" color="accent">
-          <mat-label>Description</mat-label>
-          <textarea
-            matInput
-            rows="3"
-            [disabled]="!(isCreator | async)"
-            maxlength="100"
-            [(ngModel)]="data.description"
-            (ngModelChange)="change$.next()"
-          ></textarea>
-          <mat-hint align="end">{{ data.description?.length }} / 100</mat-hint>
-        </mat-form-field>
-      </mat-card>
-    </section>
+      <mat-form-field fxFlex="100%" color="accent">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          rows="3"
+          [disabled]="!(isCreator | async)"
+          maxlength="100"
+          [(ngModel)]="data.description"
+          (ngModelChange)="change$.next()"
+        ></textarea>
+        <mat-hint align="end">{{ data.description?.length }} / 100</mat-hint>
+      </mat-form-field>
+    </mat-card>
+  </section>
 
-    <section>
-      <h2>Access</h2>
-      <mat-card>
-        <div fxLayout fxLayoutGap="5px">
-          <mat-slide-toggle
-            [disabled]="!(isCreator | async)"
-            [(ngModel)]="data.isOpen"
-            (ngModelChange)="change$.next()"
-          >
-            <span>Open to public</span>
-          </mat-slide-toggle>
-          <mat-icon
-            class="helper"
-            matTooltip="If turned off, others will be unable to join this classroom"
-          >
-            help_outline
-          </mat-icon>
-        </div>
-      </mat-card>
-    </section>
-
-    <section fxFlexOffset="56px" fxLayout="row-reverse">
-      <div fxLayout fxLayoutGap="8px">
-        <button
-          mat-raised-button
-          fxFlex
-          class="uppercase"
-          [disabled]="!(modified$ | async) || loading"
-          (click)="reset()"
+  <section>
+    <h2 fxLayout fxLayoutAlign.xs="center">Access</h2>
+    <mat-card>
+      <div fxLayout fxLayoutGap="5px">
+        <mat-slide-toggle
+          [disabled]="!(isCreator | async)"
+          [(ngModel)]="data.isOpen"
+          (ngModelChange)="change$.next()"
         >
-          <span>Reset</span>
-        </button>
-        <button
-          mat-raised-button
-          fxFlex
-          class="uppercase"
-          color="primary"
-          [disabled]="!(modified$ | async) || loading"
-          (click)="save()"
+          <span>Open to public</span>
+        </mat-slide-toggle>
+        <mat-icon
+          class="helper"
+          matTooltip="If turned off, others will be unable to join this classroom"
         >
-          <span *appLoading="loading; diameter: 25">Save</span>
-        </button>
+          help_outline
+        </mat-icon>
       </div>
-    </section>
-  </div>
+    </mat-card>
+  </section>
+
+  <section fxFlexOffset="56px" fxLayout="row-reverse">
+    <div fxLayout fxLayoutGap="8px">
+      <button
+        mat-raised-button
+        fxFlex
+        class="uppercase"
+        [disabled]="!(modified$ | async) || loading"
+        (click)="reset()"
+      >
+        <span>Reset</span>
+      </button>
+      <button
+        mat-raised-button
+        fxFlex
+        class="uppercase"
+        color="primary"
+        [disabled]="!(modified$ | async) || loading"
+        (click)="save()"
+      >
+        <span *appLoading="loading; diameter: 25">Save</span>
+      </button>
+    </div>
+  </section>
 </div>
