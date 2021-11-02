@@ -14,6 +14,7 @@ import { ClassroomListComponent } from './classroom-list/classroom-list.componen
 import { ClassroomRedirectorComponent } from './classroom-redirector/classroom-redirector.component';
 import { ClassroomsRoutingModule } from './classrooms-routing.module';
 import { ClassroomsComponent } from './classrooms.component';
+import { ClassroomDetailSettingsSectionComponent } from './classroom-detail-settings-section/classroom-detail-settings-section.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ClassroomsComponent } from './classrooms.component';
     ClassroomDetailSidebarMembershipListItemMenuComponent,
     ClassroomRedirectorComponent,
     ClassroomDetailSettingsComponent,
+    ClassroomDetailSettingsSectionComponent,
   ],
   imports: [SharedModule, ClassroomsRoutingModule, ProfileModule],
 })

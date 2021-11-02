@@ -4,9 +4,9 @@
   fxLayout="column"
   fxLayoutGap="28px"
 >
-  <section>
-    <h2 fxLayout fxLayoutAlign.xs="center">Basic</h2>
-    <mat-card fxLayout="row wrap">
+  <app-classroom-detail-settings-section>
+    <ng-container ngProjectAs="title">Basic</ng-container>
+    <ng-container ngProjectAs="content">
       <mat-form-field color="accent">
         <mat-label>Name</mat-label>
         <input
@@ -31,12 +31,12 @@
         ></textarea>
         <mat-hint align="end">{{ data.description?.length }} / 100</mat-hint>
       </mat-form-field>
-    </mat-card>
-  </section>
+    </ng-container>
+  </app-classroom-detail-settings-section>
 
-  <section>
-    <h2 fxLayout fxLayoutAlign.xs="center">Access</h2>
-    <mat-card>
+  <app-classroom-detail-settings-section>
+    <ng-container ngProjectAs="title">Access</ng-container>
+    <ng-container ngProjectAs="content">
       <div fxLayout fxLayoutGap="5px">
         <mat-slide-toggle
           [disabled]="!(isCreator | async)"
@@ -52,8 +52,8 @@
           help_outline
         </mat-icon>
       </div>
-    </mat-card>
-  </section>
+    </ng-container>
+  </app-classroom-detail-settings-section>
 
   <section fxFlexOffset="56px" fxLayout="row-reverse">
     <div fxLayout fxLayoutGap="8px">
