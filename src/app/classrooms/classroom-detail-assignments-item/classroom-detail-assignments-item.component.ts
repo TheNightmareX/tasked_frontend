@@ -45,7 +45,7 @@ export class ClassroomDetailAssignmentsItemComponent implements OnInit {
       : 'Mark as completed';
     this.importanceIcon = this.assignment.isImportant ? 'star' : 'star_outline';
     this.importanceTooltip = this.assignment.isImportant
-      ? 'Remove important mark'
+      ? 'Remove importance mark'
       : 'Mark as important';
   }
 
