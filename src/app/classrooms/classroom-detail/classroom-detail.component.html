@@ -1,9 +1,9 @@
-<mat-toolbar>
-  <div fxFlex></div>
+<mat-toolbar fxLayout fxLayoutAlign="space-between center">
+  <div></div>
   <div>
     <span>{{ (classroom$ | async)?.name }}</span>
   </div>
-  <div fxFlex fxLayout="row-reverse">
+  <div>
     <button mat-icon-button (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
