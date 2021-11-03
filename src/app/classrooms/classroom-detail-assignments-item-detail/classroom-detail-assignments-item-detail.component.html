@@ -13,29 +13,12 @@
   </p>
 
   <mat-list dense>
-    <mat-list-item>
-      <mat-icon matListIcon>person</mat-icon>
+    <mat-list-item *ngFor="let info of infoItems">
+      <mat-icon matListIcon>{{ info.icon }}</mat-icon>
       <div matLine class="info-value">
-        {{
-          assignment?.task?.creator?.nickname ??
-            assignment?.task?.creator?.username
-        }}
+        {{ info.value }}
       </div>
-      <div matLine class="info-name">Creator</div>
-    </mat-list-item>
-    <mat-list-item>
-      <mat-icon matListIcon>calendar_today</mat-icon>
-      <div matLine class="info-value">
-        {{ assignment?.createdAt | date: 'medium' }}
-      </div>
-      <div matLine class="info-name">Creation Time</div>
-    </mat-list-item>
-    <mat-list-item>
-      <mat-icon matListIcon>visibility</mat-icon>
-      <div matLine class="info-value">
-        {{ assignment?.isPublic ? 'Public' : 'Private' }}
-      </div>
-      <div matLine class="info-name">Visibility</div>
+      <div matLine class="info-name">{{ info.name }}</div>
     </mat-list-item>
   </mat-list>
 </div>
