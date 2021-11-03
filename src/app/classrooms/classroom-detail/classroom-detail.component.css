@@ -19,7 +19,7 @@ mat-drawer-container > mat-drawer-content {
   flex-direction: column;
   padding: 20px 50px;
 }
-mat-drawer-container > mat-drawer-content.phone {
+mat-drawer-container > mat-drawer-content.mobile {
   padding: 20px 15px;
 }
 mat-drawer-container > mat-drawer-content > main {
