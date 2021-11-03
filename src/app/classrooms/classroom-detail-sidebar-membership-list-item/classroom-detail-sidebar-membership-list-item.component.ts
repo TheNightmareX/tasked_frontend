@@ -45,9 +45,7 @@ export class ClassroomDetailSidebarMembershipListItemComponent
           if (!this.membership) return;
 
           this.name =
-            this.membership.displayName ??
-            this.membership.owner.nickname ??
-            this.membership.owner.username;
+            this.membership.owner.nickname ?? this.membership.owner.username;
 
           this.icon =
             this.membership.role == Role.Student ? 'person' : 'manage_accounts';
