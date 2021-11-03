@@ -29,6 +29,11 @@ const routes: Routes = [
         component: ClassroomDetailComponent,
         children: [
           {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'assignments',
+          },
+          {
             path: 'assignments',
             component: ClassroomDetailAssignmentsComponent,
           },
