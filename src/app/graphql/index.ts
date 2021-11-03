@@ -123,7 +123,6 @@ export type JoinApplication = {
   id: Scalars['ID'];
   message?: Maybe<Scalars['String']>;
   owner: User;
-  role: Role;
   status: ApplicationStatus;
   updatedAt: Scalars['DateTime'];
 };
@@ -131,11 +130,6 @@ export type JoinApplication = {
 export type JoinApplicationCreateInput = {
   classroom: Scalars['ID'];
   message?: Maybe<Scalars['String']>;
-  role: Role;
-};
-
-export type JoinApplicationUpdateInput = {
-  role?: Maybe<Role>;
 };
 
 export type Membership = {
@@ -168,7 +162,6 @@ export type Mutation = {
   rejectJoinApplication: JoinApplication;
   updateAssignment: Assignment;
   updateClassroom: Classroom;
-  updateJoinApplication: JoinApplication;
   updateMembership: Membership;
   updateTask: Task;
   updateUser: User;
@@ -230,11 +223,6 @@ export type MutationUpdateAssignmentArgs = {
 
 export type MutationUpdateClassroomArgs = {
   data: ClassroomUpdateInput;
-  id: Scalars['ID'];
-};
-
-export type MutationUpdateJoinApplicationArgs = {
-  data: JoinApplicationUpdateInput;
   id: Scalars['ID'];
 };
 
