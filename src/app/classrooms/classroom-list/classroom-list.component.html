@@ -7,8 +7,8 @@
     (click)="deactivateIfActivated(classroom)"
   >
     <span matLine>{{ classroom.name }}</span>
-    <span matLine>{{
-      classroom.creator.nickname ?? classroom.creator.username
-    }}</span>
+    <span matLine>
+      <app-username [user]="classroom.creator"></app-username>
+    </span>
   </a>
 </mat-nav-list>

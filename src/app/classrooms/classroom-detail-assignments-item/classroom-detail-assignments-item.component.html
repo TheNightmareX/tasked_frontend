@@ -23,12 +23,7 @@
       </span>
       <span matTooltip="Creator">
         <mat-icon inline>person</mat-icon>
-        <span>
-          {{
-            assignment?.task?.creator?.nickname ??
-              assignment?.task?.creator?.username
-          }}
-        </span>
+        <app-username [user]="assignment?.task?.creator"></app-username>
       </span>
       <span matTooltip="Visibility" *ngIf="assignment?.isPublic">
         <mat-icon inline>visibility</mat-icon>

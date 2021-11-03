@@ -26,6 +26,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { LoadingDirective } from './loading.directive';
 import { PopupComponent } from './popup/popup.component';
 import { StopRipplePropagationDirective } from './stop-ripple-propagation.directive';
+import { UsernameComponent } from './username/username.component';
 
 const modules = [
   CommonModule,
@@ -53,7 +54,7 @@ const modules = [
     MatSlideToggleModule,
   ],
 ];
-const components = [LayoutComponent, PopupComponent];
+const components = [LayoutComponent, PopupComponent, UsernameComponent];
 const directives = [
   EqualDirective,
   LoadingDirective,

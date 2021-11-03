@@ -20,6 +20,7 @@ export class ClassroomDetailAssignmentsItemDetailComponent implements OnInit {
   constructor(private datePipe: DatePipe) {}
 
   ngOnInit() {
+    // TODO: use <app-username>
     this.infoItems = [
       {
         name: 'Creator',

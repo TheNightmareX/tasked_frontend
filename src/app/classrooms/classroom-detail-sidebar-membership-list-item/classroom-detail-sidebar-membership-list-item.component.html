@@ -6,8 +6,8 @@
   <mat-icon matListIcon [color]="iconColor">
     {{ icon }}
   </mat-icon>
-  <span matLine [class]="titleClassList">
-    {{ name }}
+  <span matLine>
+    <app-username [user]="membership?.owner" [color]="true"></app-username>
   </span>
   <span matLine>
     {{ membership?.role }}

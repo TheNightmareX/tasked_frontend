@@ -23,10 +23,8 @@ export class ClassroomDetailSidebarMembershipListItemComponent
   @Input()
   membership?: Membership;
 
-  name?: string;
   icon?: string;
   iconColor?: string | null;
-  titleClassList?: string[];
 
   @ViewChild(MatMenuTrigger)
   private menuTrigger?: MatMenuTrigger;
@@ -44,21 +42,11 @@ export class ClassroomDetailSidebarMembershipListItemComponent
         .subscribe((classroom) => {
           if (!this.membership) return;
 
-          this.name =
-            this.membership.owner.nickname ?? this.membership.owner.username;
-
           this.icon =
             this.membership.role == Role.Student ? 'person' : 'manage_accounts';
 
           this.iconColor =
             this.membership.owner.id == classroom.creator?.id ? 'accent' : null;
-
-          this.titleClassList =
-            this.membership.owner.gender == Gender.Male
-              ? ['text--blue']
-              : this.membership.owner.gender == Gender.Female
-              ? ['text--pink']
-              : [];
         });
     });
   }
