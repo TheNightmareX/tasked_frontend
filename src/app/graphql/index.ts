@@ -654,7 +654,6 @@ export type MeQuery = {
     username: string;
     nickname?: string | null | undefined;
     gender: Gender;
-    createdAt: any;
     updatedAt: any;
   };
 };
@@ -714,7 +713,6 @@ export type UserCreateMutation = {
     username: string;
     nickname?: string | null | undefined;
     gender: Gender;
-    createdAt: any;
     updatedAt: any;
   };
 };
@@ -732,7 +730,6 @@ export type UserUpdateMutation = {
     username: string;
     nickname?: string | null | undefined;
     gender: Gender;
-    createdAt: any;
     updatedAt: any;
   };
 };
@@ -743,7 +740,6 @@ export type UserFragment = {
   username: string;
   nickname?: string | null | undefined;
   gender: Gender;
-  createdAt: any;
   updatedAt: any;
 };
 
@@ -782,7 +778,6 @@ export const UserFragmentDoc = gql`
     username
     nickname
     gender
-    createdAt
     updatedAt
   }
 `;

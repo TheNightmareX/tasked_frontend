@@ -3,6 +3,5 @@ fragment User on User {
   username
   nickname
   gender
-  createdAt
   updatedAt
 }
