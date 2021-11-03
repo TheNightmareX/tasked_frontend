@@ -1,5 +1,5 @@
-<button mat-list-item class="hoverable">
-  <div class="actions">
+<button mat-list-item class="hoverable" (click)="popup.open()">
+  <div class="actions" (click)="$event.stopPropagation()">
     <button
       mat-icon-button
       [matTooltip]="completionTooltip"
@@ -37,7 +37,7 @@
     </div>
   </div>
 
-  <div class="actions">
+  <div class="actions" (click)="$event.stopPropagation()">
     <button
       mat-icon-button
       [matTooltip]="importanceTooltip"
@@ -48,3 +48,11 @@
     </button>
   </div>
 </button>
+
+<app-popup #popup>
+  <ng-template>
+    <app-classroom-detail-assignments-item-detail
+      [assignment]="assignment"
+    ></app-classroom-detail-assignments-item-detail>
+  </ng-template>
+</app-popup>

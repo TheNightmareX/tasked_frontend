@@ -1,0 +1,41 @@
+<div
+  class="container mat-typography"
+  ngClass.lt-md="mobile"
+  fxLayout="column"
+  fxLayoutAlign="start"
+>
+  <h2 fxLayout fxLayoutAlign="center center">
+    {{ assignment?.task?.title }}
+  </h2>
+
+  <p *ngIf="assignment?.task?.description">
+    {{ assignment?.task?.description }}
+  </p>
+
+  <mat-list dense>
+    <mat-list-item>
+      <mat-icon matListIcon>person</mat-icon>
+      <div matLine class="info-value">
+        {{
+          assignment?.task?.creator?.nickname ??
+            assignment?.task?.creator?.username
+        }}
+      </div>
+      <div matLine class="info-name">Creator</div>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon matListIcon>calendar_today</mat-icon>
+      <div matLine class="info-value">
+        {{ assignment?.createdAt | date: 'medium' }}
+      </div>
+      <div matLine class="info-name">Creation Time</div>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon matListIcon>visibility</mat-icon>
+      <div matLine class="info-value">
+        {{ assignment?.isPublic ? 'Public' : 'Private' }}
+      </div>
+      <div matLine class="info-name">Visibility</div>
+    </mat-list-item>
+  </mat-list>
+</div>
