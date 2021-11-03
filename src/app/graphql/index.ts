@@ -171,7 +171,6 @@ export type Membership = {
   __typename?: 'Membership';
   classroom: Classroom;
   createdAt: Scalars['DateTime'];
-  displayName?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   owner: User;
   role: Role;
@@ -179,7 +178,6 @@ export type Membership = {
 };
 
 export type MembershipUpdateInput = {
-  displayName?: Maybe<Scalars['String']>;
   role?: Maybe<Role>;
 };
 
@@ -658,7 +656,6 @@ export type ClassroomMembershipListQuery = {
       results: Array<{
         __typename?: 'Membership';
         id: string;
-        displayName?: string | null | undefined;
         role: Role;
         owner: {
           __typename?: 'User';
@@ -744,7 +741,6 @@ export type MembershipUpdateMutation = {
   updateMembership: {
     __typename?: 'Membership';
     id: string;
-    displayName?: string | null | undefined;
     role: Role;
     owner: {
       __typename?: 'User';
@@ -759,7 +755,6 @@ export type MembershipUpdateMutation = {
 export type MembershipFragment = {
   __typename?: 'Membership';
   id: string;
-  displayName?: string | null | undefined;
   role: Role;
   owner: {
     __typename?: 'User';
@@ -841,7 +836,6 @@ export const MembershipFragmentDoc = gql`
       nickname
       gender
     }
-    displayName
     role
   }
 `;

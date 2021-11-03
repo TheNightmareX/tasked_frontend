@@ -6,6 +6,5 @@ fragment Membership on Membership {
     nickname
     gender
   }
-  displayName
   role
 }
