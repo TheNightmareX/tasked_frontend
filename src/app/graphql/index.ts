@@ -26,28 +26,6 @@ export type AcceptJoinApplicationResult = {
   membership: Membership;
 };
 
-export type Affair = {
-  __typename?: 'Affair';
-  classroom: Classroom;
-  createdAt: Scalars['DateTime'];
-  date: Scalars['DateTime'];
-  duration: Scalars['Int'];
-  id: Scalars['ID'];
-  isActivated: Scalars['Boolean'];
-  remark: Scalars['String'];
-  title: Scalars['String'];
-  updatedAt: Scalars['DateTime'];
-};
-
-export type AffairCreateInput = {
-  classroom: Scalars['Int'];
-  date: Scalars['DateTime'];
-  duration: Scalars['Int'];
-  isActivated?: Maybe<Scalars['Boolean']>;
-  remark?: Maybe<Scalars['String']>;
-  title: Scalars['String'];
-};
-
 export enum ApplicationStatus {
   Accepted = 'Accepted',
   Pending = 'Pending',
@@ -89,7 +67,6 @@ export type AuthResult = {
 
 export type Classroom = {
   __typename?: 'Classroom';
-  affairs: PaginatedAffairs;
   assignments: PaginatedAssignments;
   createdAt: Scalars['DateTime'];
   creator: User;
@@ -102,12 +79,6 @@ export type Classroom = {
   memberships: PaginatedMemberships;
   name: Scalars['String'];
   updatedAt: Scalars['DateTime'];
-};
-
-export type ClassroomAffairsArgs = {
-  isActivated?: Maybe<Scalars['Boolean']>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
 };
 
 export type ClassroomAssignmentsArgs = {
@@ -185,19 +156,16 @@ export type Mutation = {
   __typename?: 'Mutation';
   acceptJoinApplication: AcceptJoinApplicationResult;
   auth: AuthResult;
-  createAffair: Affair;
   createAssignment: Assignment;
   createClassroom: Classroom;
   createJoinApplication: JoinApplication;
   createTask: Task;
   createUser: User;
-  deleteAffair: Affair;
   deleteAssignment: Assignment;
   deleteClassroom: Classroom;
   deleteMembership: Membership;
   deleteTask: Task;
   rejectJoinApplication: JoinApplication;
-  updateAffair: Affair;
   updateAssignment: Assignment;
   updateClassroom: Classroom;
   updateJoinApplication: JoinApplication;
@@ -213,10 +181,6 @@ export type MutationAcceptJoinApplicationArgs = {
 export type MutationAuthArgs = {
   password: Scalars['String'];
   username: Scalars['String'];
-};
-
-export type MutationCreateAffairArgs = {
-  data: AffairCreateInput;
 };
 
 export type MutationCreateAssignmentArgs = {
@@ -239,10 +203,6 @@ export type MutationCreateUserArgs = {
   data: UserCreateInput;
 };
 
-export type MutationDeleteAffairArgs = {
-  id: Scalars['ID'];
-};
-
 export type MutationDeleteAssignmentArgs = {
   id: Scalars['ID'];
 };
@@ -260,11 +220,6 @@ export type MutationDeleteTaskArgs = {
 };
 
 export type MutationRejectJoinApplicationArgs = {
-  id: Scalars['ID'];
-};
-
-export type MutationUpdateAffairArgs = {
-  data: AffairCreateInput;
   id: Scalars['ID'];
 };
 
@@ -296,12 +251,6 @@ export type MutationUpdateTaskArgs = {
 export type MutationUpdateUserArgs = {
   data: UserUpdateInput;
   id: Scalars['ID'];
-};
-
-export type PaginatedAffairs = {
-  __typename?: 'PaginatedAffairs';
-  results: Array<Affair>;
-  total: Scalars['Int'];
 };
 
 export type PaginatedAssignments = {
@@ -342,8 +291,6 @@ export type PaginatedUsers = {
 
 export type Query = {
   __typename?: 'Query';
-  affair: Affair;
-  affairs: PaginatedAffairs;
   assignment: Assignment;
   assignments: PaginatedAssignments;
   classroom: Classroom;
@@ -357,16 +304,6 @@ export type Query = {
   tasks: PaginatedTasks;
   user: User;
   users: PaginatedUsers;
-};
-
-export type QueryAffairArgs = {
-  id: Scalars['ID'];
-};
-
-export type QueryAffairsArgs = {
-  isActivated?: Maybe<Scalars['Boolean']>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
 };
 
 export type QueryAssignmentArgs = {
