@@ -15,13 +15,13 @@
       {{ assignment?.task?.title }}
     </div>
     <div matLine class="info">
-      <span matTooltip="creation time">
+      <span matTooltip="Creation Time">
         <mat-icon inline>calendar_today</mat-icon>
         <span>
           {{ assignment?.createdAt | date: 'short' }}
         </span>
       </span>
-      <span matTooltip="creator">
+      <span matTooltip="Creator">
         <mat-icon inline>person</mat-icon>
         <span>
           {{
@@ -30,7 +30,7 @@
           }}
         </span>
       </span>
-      <span matTooltip="visibility" *ngIf="assignment?.isPublic">
+      <span matTooltip="Visibility" *ngIf="assignment?.isPublic">
         <mat-icon inline>visibility</mat-icon>
         Public
       </span>
