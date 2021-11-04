@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotifierModule } from 'angular-notifier';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ApplicationsModule } from './applications/applications.module';
 import { AuthModule } from './auth/auth.module';
 import { ClassroomsModule } from './classrooms/classrooms.module';
 import { CoreModule } from './core/core.module';
@@ -28,6 +29,7 @@ registerLocaleData(en);
 
     AuthModule,
     ClassroomsModule,
+    ApplicationsModule,
     AppRoutingModule,
   ],
   bootstrap: [AppComponent],
