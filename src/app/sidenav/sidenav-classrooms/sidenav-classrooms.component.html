@@ -5,8 +5,5 @@
   routerLinkActive="router-link-active"
   (click)="deactivateIfActivated(classroom)"
 >
-  <span matLine>{{ classroom.name }}</span>
-  <span matLine>
-    <app-username [user]="classroom.creator"></app-username>
-  </span>
+  <div matLine>{{ classroom.name }}</div>
 </a>
