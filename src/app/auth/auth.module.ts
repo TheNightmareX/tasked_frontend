@@ -1,4 +1,3 @@
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ProfileModule } from '../profile/profile.module';
 import { SharedModule } from '../shared/shared.module';
@@ -8,7 +7,6 @@ import { AuthFormSignupComponent } from './auth-form-signup/auth-form-signup.com
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthSidenavComponent } from './auth-sidenav/auth-sidenav.component';
 import { AuthComponent } from './auth.component';
-import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -20,12 +18,6 @@ import { AuthInterceptor } from './auth.interceptor';
   ],
   imports: [SharedModule, AuthRoutingModule, ProfileModule],
   exports: [],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true,
-    },
-  ],
+  providers: [],
 })
 export class AuthModule {}

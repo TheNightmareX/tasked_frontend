@@ -1,8 +1,9 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { InMemoryCache } from '@apollo/client/core';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpBatchLink } from 'apollo-angular/http';
+import { AuthInterceptor } from '../auth/auth.interceptor';
 
 @NgModule({
   imports: [HttpClientModule],
@@ -14,6 +15,11 @@ import { HttpBatchLink } from 'apollo-angular/http';
         cache: new InMemoryCache(),
       }),
       deps: [HttpBatchLink],
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
     },
   ],
 })
