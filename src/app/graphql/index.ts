@@ -90,6 +90,7 @@ export type ClassroomAssignmentsArgs = {
 };
 
 export type ClassroomJoinApplicationsArgs = {
+  isPending?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -321,6 +322,7 @@ export type QueryJoinApplicationArgs = {
 };
 
 export type QueryJoinApplicationsArgs = {
+  isPending?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -416,6 +418,7 @@ export type UserClassroomsArgs = {
 };
 
 export type UserJoinApplicationsArgs = {
+  isPending?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
