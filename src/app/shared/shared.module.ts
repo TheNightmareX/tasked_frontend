@@ -22,7 +22,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { EqualDirective } from './equal.directive';
-import { LayoutComponent } from './layout/layout.component';
 import { LoadingDirective } from './loading.directive';
 import { PopupComponent } from './popup/popup.component';
 import { StopRipplePropagationDirective } from './stop-ripple-propagation.directive';
@@ -54,7 +53,7 @@ const modules = [
     MatSlideToggleModule,
   ],
 ];
-const components = [LayoutComponent, PopupComponent, UsernameComponent];
+const components = [PopupComponent, UsernameComponent];
 const directives = [
   EqualDirective,
   LoadingDirective,

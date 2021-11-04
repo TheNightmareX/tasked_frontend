@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ProfileModule } from '../profile/profile.module';
 import { SharedModule } from '../shared/shared.module';
-import { SidenavModule } from '../sidenav/sidenav.module';
 import { ClassroomCreationComponent } from './classroom-creation/classroom-creation.component';
 import { ClassroomDetailAssignmentsItemDetailComponent } from './classroom-detail-assignments-item-detail/classroom-detail-assignments-item-detail.component';
 import { ClassroomDetailAssignmentsItemComponent } from './classroom-detail-assignments-item/classroom-detail-assignments-item.component';
@@ -33,11 +31,6 @@ import { ClassroomsComponent } from './classrooms.component';
     ClassroomDetailSettingsSectionComponent,
     ClassroomDetailAssignmentsItemDetailComponent,
   ],
-  imports: [
-    SharedModule,
-    ClassroomsRoutingModule,
-    ProfileModule,
-    SidenavModule,
-  ],
+  imports: [SharedModule, ClassroomsRoutingModule],
 })
 export class ClassroomsModule {}

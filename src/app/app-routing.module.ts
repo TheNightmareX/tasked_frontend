@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { LayoutAuthComponent } from './layouts/layout-auth/layout-auth.component';
+import { LayoutMainComponent } from './layouts/layout-main/layout-main.component';
 
 const routes: Routes = [
   {
@@ -8,20 +10,35 @@ const routes: Routes = [
     redirectTo: '/classrooms/last',
   },
   {
-    path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+    path: '',
+    component: LayoutAuthComponent,
+    children: [
+      {
+        path: 'auth',
+        loadChildren: () =>
+          import('./auth/auth.module').then((m) => m.AuthModule),
+      },
+    ],
   },
   {
-    path: 'classrooms',
-    loadChildren: () =>
-      import('./classrooms/classrooms.module').then((m) => m.ClassroomsModule),
-  },
-  {
-    path: 'applications',
-    loadChildren: () =>
-      import('./applications/applications.module').then(
-        (m) => m.ApplicationsModule,
-      ),
+    path: '',
+    component: LayoutMainComponent,
+    children: [
+      {
+        path: 'classrooms',
+        loadChildren: () =>
+          import('./classrooms/classrooms.module').then(
+            (m) => m.ClassroomsModule,
+          ),
+      },
+      {
+        path: 'applications',
+        loadChildren: () =>
+          import('./applications/applications.module').then(
+            (m) => m.ApplicationsModule,
+          ),
+      },
+    ],
   },
   {
     path: '**',

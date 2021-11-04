@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { GraphqlModule } from './graphql/graphql.module';
+import { LayoutsModule } from './layouts/layouts.module';
 import { SharedModule } from './shared/shared.module';
 
 registerLocaleData(en);
@@ -23,6 +24,7 @@ registerLocaleData(en);
     GraphqlModule,
     CoreModule,
     SharedModule,
+    LayoutsModule,
 
     AppRoutingModule,
   ],

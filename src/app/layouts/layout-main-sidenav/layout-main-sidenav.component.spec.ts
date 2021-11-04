@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SidenavClassroomsComponent } from './sidenav-classrooms.component';
+import { LayoutMainSidenavComponent } from './layout-main-sidenav.component';
 
-describe('SidenavClassroomsComponent', () => {
-  let component: SidenavClassroomsComponent;
-  let fixture: ComponentFixture<SidenavClassroomsComponent>;
+describe('LayoutMainSidenavComponent', () => {
+  let component: LayoutMainSidenavComponent;
+  let fixture: ComponentFixture<LayoutMainSidenavComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SidenavClassroomsComponent],
+      declarations: [LayoutMainSidenavComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SidenavClassroomsComponent);
+    fixture = TestBed.createComponent(LayoutMainSidenavComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
