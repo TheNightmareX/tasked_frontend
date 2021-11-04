@@ -18,14 +18,11 @@ registerLocaleData(en);
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-
     NotifierModule,
-
     GraphqlModule,
     CoreModule,
     SharedModule,
     LayoutsModule,
-
     AppRoutingModule,
   ],
   bootstrap: [AppComponent],
