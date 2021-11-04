@@ -15,7 +15,7 @@ mat-sidenav {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  width: 286px;
+  width: 256px;
 }
 mat-sidenav.desktop {
   background-color: transparent;

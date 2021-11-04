@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { ProfileModule } from '../profile/profile.module';
 import { SharedModule } from '../shared/shared.module';
+import { SidenavModule } from '../sidenav/sidenav.module';
 import { ClassroomCreationComponent } from './classroom-creation/classroom-creation.component';
+import { ClassroomDetailAssignmentsItemDetailComponent } from './classroom-detail-assignments-item-detail/classroom-detail-assignments-item-detail.component';
 import { ClassroomDetailAssignmentsItemComponent } from './classroom-detail-assignments-item/classroom-detail-assignments-item.component';
 import { ClassroomDetailAssignmentsComponent } from './classroom-detail-assignments/classroom-detail-assignments.component';
 import { ClassroomDetailSettingsSectionComponent } from './classroom-detail-settings-section/classroom-detail-settings-section.component';
@@ -11,16 +13,13 @@ import { ClassroomDetailSidebarMembershipListItemComponent } from './classroom-d
 import { ClassroomDetailSidebarMembershipListComponent } from './classroom-detail-sidebar-membership-list/classroom-detail-sidebar-membership-list.component';
 import { ClassroomDetailSidebarComponent } from './classroom-detail-sidebar/classroom-detail-sidebar.component';
 import { ClassroomDetailComponent } from './classroom-detail/classroom-detail.component';
-import { ClassroomListComponent } from './classroom-list/classroom-list.component';
 import { ClassroomRedirectorComponent } from './classroom-redirector/classroom-redirector.component';
 import { ClassroomsRoutingModule } from './classrooms-routing.module';
 import { ClassroomsComponent } from './classrooms.component';
-import { ClassroomDetailAssignmentsItemDetailComponent } from './classroom-detail-assignments-item-detail/classroom-detail-assignments-item-detail.component';
 
 @NgModule({
   declarations: [
     ClassroomsComponent,
-    ClassroomListComponent,
     ClassroomDetailComponent,
     ClassroomDetailAssignmentsComponent,
     ClassroomDetailAssignmentsItemComponent,
@@ -34,6 +33,11 @@ import { ClassroomDetailAssignmentsItemDetailComponent } from './classroom-detai
     ClassroomDetailSettingsSectionComponent,
     ClassroomDetailAssignmentsItemDetailComponent,
   ],
-  imports: [SharedModule, ClassroomsRoutingModule, ProfileModule],
+  imports: [
+    SharedModule,
+    ClassroomsRoutingModule,
+    ProfileModule,
+    SidenavModule,
+  ],
 })
 export class ClassroomsModule {}

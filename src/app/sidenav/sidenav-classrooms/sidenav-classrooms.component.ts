@@ -7,16 +7,15 @@ import { ClassroomListGQL, ClassroomListQuery } from 'src/app/graphql';
 type Classroom = ClassroomListQuery['classrooms']['results'][number];
 
 @Component({
-  selector: 'app-classroom-list',
-  templateUrl: './classroom-list.component.html',
-  styleUrls: ['./classroom-list.component.css'],
+  selector: 'app-sidenav-classrooms',
+  templateUrl: './sidenav-classrooms.component.html',
+  styleUrls: ['./sidenav-classrooms.component.css'],
 })
-export class ClassroomListComponent implements OnInit {
+export class SidenavClassroomsComponent implements OnInit {
   classrooms$!: Observable<Classroom[]>;
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private classroomListGql: ClassroomListGQL,
   ) {}
 
@@ -30,11 +29,11 @@ export class ClassroomListComponent implements OnInit {
 
   deactivateIfActivated(classroom: Classroom) {
     if (this.isClassroomActivated(classroom.id))
-      this.router.navigate(['.'], { relativeTo: this.route });
+      this.router.navigate(['/classrooms']);
   }
 
   private isClassroomActivated(id: string) {
-    const tree = this.router.createUrlTree([id], { relativeTo: this.route });
+    const tree = this.router.createUrlTree(['/classrooms', id]);
     const isActive = this.router.isActive(tree, {
       paths: 'subset',
       fragment: 'ignored',
