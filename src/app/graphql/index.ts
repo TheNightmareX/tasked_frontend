@@ -549,6 +549,7 @@ export type ClassroomListQuery = {
   __typename?: 'Query';
   classrooms: {
     __typename?: 'PaginatedClassrooms';
+    total: number;
     results: Array<{
       __typename?: 'Classroom';
       id: string;
@@ -913,6 +914,7 @@ export class ClassroomDetailGQL extends Apollo.Query<
 export const ClassroomListDocument = gql`
   query ClassroomList($limit: Int, $offset: Int) {
     classrooms(limit: $limit, offset: $offset) {
+      total
       results {
         ...Classroom
       }
