@@ -6,9 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotifierModule } from 'angular-notifier';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ApplicationsModule } from './applications/applications.module';
-import { AuthModule } from './auth/auth.module';
-import { ClassroomsModule } from './classrooms/classrooms.module';
 import { CoreModule } from './core/core.module';
 import { GraphqlModule } from './graphql/graphql.module';
 import { SharedModule } from './shared/shared.module';
@@ -27,9 +24,6 @@ registerLocaleData(en);
     CoreModule,
     SharedModule,
 
-    AuthModule,
-    ClassroomsModule,
-    ApplicationsModule,
     AppRoutingModule,
   ],
   bootstrap: [AppComponent],

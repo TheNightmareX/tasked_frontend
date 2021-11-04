@@ -10,7 +10,7 @@ import { ClassroomsComponent } from './classrooms.component';
 
 const routes: Routes = [
   {
-    path: 'classrooms',
+    path: '',
     component: ClassroomsComponent,
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
