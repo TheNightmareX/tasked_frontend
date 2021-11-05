@@ -1,4 +1,5 @@
 <mat-list>
+  <mat-divider></mat-divider>
   <ng-container *ngFor="let group of applicationGroups$ | async">
     <h2 matSubheader>{{ group[0] }}</h2>
     <app-application-list-item
@@ -6,5 +7,6 @@
       [application]="item"
       [actions]="(auth.user$ | async)?.id != item.owner.id"
     ></app-application-list-item>
+    <mat-divider></mat-divider>
   </ng-container>
 </mat-list>
