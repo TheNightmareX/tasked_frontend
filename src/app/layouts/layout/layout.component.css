@@ -17,6 +17,3 @@ mat-sidenav {
   align-items: stretch;
   width: 256px;
 }
-mat-sidenav.desktop {
-  background-color: transparent;
-}

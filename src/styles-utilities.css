@@ -26,3 +26,7 @@
 .opacity--3 {
   opacity: 40%;
 }
+
+.bgc--none {
+  background-color: transparent;
+}

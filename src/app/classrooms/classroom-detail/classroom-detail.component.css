@@ -7,9 +7,6 @@
 mat-drawer-container {
   flex-grow: 1;
 }
-mat-drawer-container > mat-drawer {
-  background-color: transparent;
-}
 mat-drawer-container > mat-drawer-content {
   display: flex;
   flex-direction: column;
