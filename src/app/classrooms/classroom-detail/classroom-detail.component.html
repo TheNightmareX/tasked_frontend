@@ -2,7 +2,7 @@
   <div></div>
   <div class="title">
     <span class="name">{{ (classroom$ | async)?.name }}</span>
-    <span class="id">#{{ (classroom$ | async)?.id }}</span>
+    <span class="id opacity--3">#{{ (classroom$ | async)?.id }}</span>
   </div>
   <div>
     <button mat-icon-button (click)="drawer.toggle()">

@@ -4,10 +4,6 @@
   height: 100%;
 }
 
-mat-toolbar > .title > .id {
-  opacity: 50%;
-}
-
 mat-drawer-container {
   flex-grow: 1;
 }

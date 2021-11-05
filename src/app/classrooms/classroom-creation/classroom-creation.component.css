@@ -15,12 +15,6 @@
   height: 88px;
   padding-top: 32px;
 }
-.container > .title > span {
-  opacity: 60%;
-}
-.container > .title > h1 {
-  opacity: 80%;
-}
 
 .container > form {
   display: flex;
