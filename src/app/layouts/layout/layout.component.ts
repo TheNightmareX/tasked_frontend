@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
+import { MatDrawerMode } from '@angular/material/sidenav';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -10,17 +11,21 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./layout.component.css'],
 })
 export class LayoutComponent implements OnInit {
-  isMobile$!: Observable<boolean>;
+  sidenavOpened$!: Observable<boolean>;
+  sidenavMode$!: Observable<MatDrawerMode>;
 
   constructor(public auth: AuthService, private media: MediaObserver) {}
 
   ngOnInit() {
-    this.isMobile$ = this.media
+    this.sidenavOpened$ = this.media
       .asObservable()
       .pipe(
         map((items) =>
-          items.some((item) => item.mqAlias == 'lt-lg' && item.matches),
+          items.some((item) => item.mqAlias == 'gt-md' && item.matches),
         ),
       );
+    this.sidenavMode$ = this.sidenavOpened$.pipe(
+      map((value) => (value ? 'side' : 'over')),
+    );
   }
 }

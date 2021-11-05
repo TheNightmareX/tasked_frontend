@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
+import { MatDrawerMode } from '@angular/material/sidenav';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
@@ -15,7 +16,8 @@ type Classroom = ClassroomDetailQuery['classroom'];
   styleUrls: ['./classroom-detail.component.css'],
 })
 export class ClassroomDetailComponent implements OnInit {
-  sidebarOpen$!: Observable<boolean>;
+  sidebarOpened$!: Observable<boolean>;
+  sidebarMode$!: Observable<MatDrawerMode>;
 
   classroom$!: Observable<Classroom>;
 
@@ -33,13 +35,17 @@ export class ClassroomDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.sidebarOpen$ = this.media
+    this.sidebarOpened$ = this.media
       .asObservable()
       .pipe(
         map((items) =>
           items.some((item) => item.mqAlias == 'gt-sm' && item.matches),
         ),
       );
+    this.sidebarMode$ = this.sidebarOpened$.pipe(
+      map((value) => (value ? 'side' : 'over')),
+    );
+
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id')!;
 

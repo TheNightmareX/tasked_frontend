@@ -13,10 +13,10 @@
 
 <mat-drawer-container>
   <mat-drawer
-    mode="side"
     position="end"
-    [opened]="sidebarOpen$ | async"
-    class="bgc--none"
+    [opened]="sidebarOpened$ | async"
+    [mode]="(sidebarMode$ | async)!"
+    [class.bgc--none]="sidebarOpened$ | async"
     #drawer
   >
     <app-classroom-detail-sidebar></app-classroom-detail-sidebar>
