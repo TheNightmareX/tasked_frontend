@@ -658,20 +658,7 @@ export type JoinApplicationAcceptMutation = {
         gender: Gender;
         updatedAt: any;
       };
-      classroom: {
-        __typename?: 'Classroom';
-        id: string;
-        name: string;
-        description?: string | null | undefined;
-        isOpen: boolean;
-        creator: {
-          __typename?: 'User';
-          id: string;
-          username: string;
-          nickname?: string | null | undefined;
-        };
-        membership: { __typename?: 'Membership'; id: string; role: Role };
-      };
+      classroom: { __typename?: 'Classroom'; id: string; name: string };
     };
   };
 };
@@ -699,20 +686,7 @@ export type JoinApplicationListQuery = {
         gender: Gender;
         updatedAt: any;
       };
-      classroom: {
-        __typename?: 'Classroom';
-        id: string;
-        name: string;
-        description?: string | null | undefined;
-        isOpen: boolean;
-        creator: {
-          __typename?: 'User';
-          id: string;
-          username: string;
-          nickname?: string | null | undefined;
-        };
-        membership: { __typename?: 'Membership'; id: string; role: Role };
-      };
+      classroom: { __typename?: 'Classroom'; id: string; name: string };
     }>;
   };
 };
@@ -737,20 +711,7 @@ export type JoinApplicationRejectMutation = {
       gender: Gender;
       updatedAt: any;
     };
-    classroom: {
-      __typename?: 'Classroom';
-      id: string;
-      name: string;
-      description?: string | null | undefined;
-      isOpen: boolean;
-      creator: {
-        __typename?: 'User';
-        id: string;
-        username: string;
-        nickname?: string | null | undefined;
-      };
-      membership: { __typename?: 'Membership'; id: string; role: Role };
-    };
+    classroom: { __typename?: 'Classroom'; id: string; name: string };
   };
 };
 
@@ -768,20 +729,7 @@ export type JoinApplicationFragment = {
     gender: Gender;
     updatedAt: any;
   };
-  classroom: {
-    __typename?: 'Classroom';
-    id: string;
-    name: string;
-    description?: string | null | undefined;
-    isOpen: boolean;
-    creator: {
-      __typename?: 'User';
-      id: string;
-      username: string;
-      nickname?: string | null | undefined;
-    };
-    membership: { __typename?: 'Membership'; id: string; role: Role };
-  };
+  classroom: { __typename?: 'Classroom'; id: string; name: string };
 };
 
 export type MeQueryVariables = Exact<{ [key: string]: never }>;
@@ -883,15 +831,6 @@ export type UserFragment = {
   updatedAt: any;
 };
 
-export const UserFragmentDoc = gql`
-  fragment User on User {
-    id
-    username
-    nickname
-    gender
-    updatedAt
-  }
-`;
 export const ClassroomFragmentDoc = gql`
   fragment Classroom on Classroom {
     id
@@ -909,6 +848,15 @@ export const ClassroomFragmentDoc = gql`
     }
   }
 `;
+export const UserFragmentDoc = gql`
+  fragment User on User {
+    id
+    username
+    nickname
+    gender
+    updatedAt
+  }
+`;
 export const JoinApplicationFragmentDoc = gql`
   fragment JoinApplication on JoinApplication {
     id
@@ -916,14 +864,14 @@ export const JoinApplicationFragmentDoc = gql`
       ...User
     }
     classroom {
-      ...Classroom
+      id
+      name
     }
     message
     status
     createdAt
   }
   ${UserFragmentDoc}
-  ${ClassroomFragmentDoc}
 `;
 export const MembershipFragmentDoc = gql`
   fragment Membership on Membership {

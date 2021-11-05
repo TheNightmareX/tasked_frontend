@@ -4,7 +4,8 @@ fragment JoinApplication on JoinApplication {
     ...User
   }
   classroom {
-    ...Classroom
+    id
+    name
   }
   message
   status
