@@ -1,0 +1,5 @@
+mutation JoinApplicationCreate($data: JoinApplicationCreateInput!) {
+  createJoinApplication(data: $data) {
+    ...JoinApplication
+  }
+}

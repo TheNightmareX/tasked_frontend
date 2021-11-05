@@ -663,6 +663,43 @@ export type JoinApplicationAcceptMutation = {
   };
 };
 
+export type JoinApplicationCreateMutationVariables = Exact<{
+  data: JoinApplicationCreateInput;
+}>;
+
+export type JoinApplicationCreateMutation = {
+  __typename?: 'Mutation';
+  createJoinApplication: {
+    __typename?: 'JoinApplication';
+    id: string;
+    message?: string | null | undefined;
+    status: ApplicationStatus;
+    createdAt: any;
+    owner: {
+      __typename?: 'User';
+      id: string;
+      username: string;
+      nickname?: string | null | undefined;
+      gender: Gender;
+      updatedAt: any;
+    };
+    classroom: {
+      __typename?: 'Classroom';
+      id: string;
+      name: string;
+      description?: string | null | undefined;
+      isOpen: boolean;
+      creator: {
+        __typename?: 'User';
+        id: string;
+        username: string;
+        nickname?: string | null | undefined;
+      };
+      membership: { __typename?: 'Membership'; id: string; role: Role };
+    };
+  };
+};
+
 export type JoinApplicationListQueryVariables = Exact<{
   isPending?: Maybe<Scalars['Boolean']>;
 }>;
@@ -1120,6 +1157,28 @@ export class JoinApplicationAcceptGQL extends Apollo.Mutation<
   JoinApplicationAcceptMutationVariables
 > {
   document = JoinApplicationAcceptDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const JoinApplicationCreateDocument = gql`
+  mutation JoinApplicationCreate($data: JoinApplicationCreateInput!) {
+    createJoinApplication(data: $data) {
+      ...JoinApplication
+    }
+  }
+  ${JoinApplicationFragmentDoc}
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class JoinApplicationCreateGQL extends Apollo.Mutation<
+  JoinApplicationCreateMutation,
+  JoinApplicationCreateMutationVariables
+> {
+  document = JoinApplicationCreateDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
