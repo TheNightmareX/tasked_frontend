@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { combineLatest } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ClassroomListGQL } from 'src/app/graphql';
 import { NotificationType } from 'src/app/notification-type.enum';
@@ -28,7 +28,7 @@ export class ClassroomRedirectorComponent {
       this.listGql
         .fetch()
         .pipe(map((result) => result.data.classrooms.results)),
-      this.auth.user$.pipe(take(1)),
+      this.auth.user$.pipe(first()),
     ]).subscribe(([classrooms, user]) => {
       const map = this.storage.lastActivatedClassroomMap;
       if (user!.id in map) {

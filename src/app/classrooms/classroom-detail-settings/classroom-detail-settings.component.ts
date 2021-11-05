@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { combineLatest, forkJoin, Observable, of, Subject, timer } from 'rxjs';
-import { catchError, debounceTime, map, take } from 'rxjs/operators';
+import { catchError, debounceTime, first, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FormDataService } from 'src/app/core/form-data.service';
 import {
@@ -63,7 +63,7 @@ export class ClassroomDetailSettingsComponent implements OnInit {
   }
 
   reset() {
-    this.classroom$.pipe(take(1)).subscribe((classroom) => {
+    this.classroom$.pipe(first()).subscribe((classroom) => {
       const currentValues = this.formData.pick(classroom, [
         'name',
         'description',
@@ -75,7 +75,7 @@ export class ClassroomDetailSettingsComponent implements OnInit {
   }
 
   save() {
-    this.classroom$.pipe(take(1)).subscribe((classroom) => {
+    this.classroom$.pipe(first()).subscribe((classroom) => {
       const data = this.formData.filterUnchanged({ ...this.data }, classroom);
       this.loading = true;
       forkJoin([

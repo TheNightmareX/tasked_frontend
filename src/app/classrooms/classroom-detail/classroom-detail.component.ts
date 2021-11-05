@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ClassroomDetailGQL, ClassroomDetailQuery } from 'src/app/graphql';
 import { ClassroomsLocalStorageService } from '../classrooms-local-storage.service';
@@ -43,7 +43,7 @@ export class ClassroomDetailComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id')!;
 
-      this.auth.user$.pipe(take(1)).subscribe((user) => {
+      this.auth.user$.pipe(first()).subscribe((user) => {
         this.local.lastActivatedClassroomMap[user!.id] = id;
       });
 

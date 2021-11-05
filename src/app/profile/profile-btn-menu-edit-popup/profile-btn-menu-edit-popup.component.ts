@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import dayjs, { Dayjs } from 'dayjs';
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FormDataService } from 'src/app/core/form-data.service';
 import {
@@ -41,7 +41,7 @@ export class ProfileBtnMenuEditPopupComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.auth.user$.pipe(take(1)).subscribe((user) => {
+    this.auth.user$.pipe(first()).subscribe((user) => {
       this.data.username = user!.username;
       this.data.nickname = user!.nickname ?? '';
       this.data.gender = user!.gender;
@@ -55,7 +55,7 @@ export class ProfileBtnMenuEditPopupComponent implements OnInit {
   }
 
   submit() {
-    this.auth.user$.pipe(take(1)).subscribe((user) => {
+    this.auth.user$.pipe(first()).subscribe((user) => {
       const id = user!.id + '';
       const data = this.cleanData(user!);
       this.userUpdateGql.mutate({ id, data }).subscribe(
