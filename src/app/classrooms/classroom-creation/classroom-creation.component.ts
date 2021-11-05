@@ -46,9 +46,12 @@ export class ClassroomCreationComponent implements OnInit {
             'Classroom created successfully',
           );
           this.listGql.watch().refetch();
-          this.router.navigate(['../', result.data!.createClassroom.id], {
-            relativeTo: this.route,
-          });
+          this.router.navigate(
+            ['/classrooms', result.data!.createClassroom.id],
+            {
+              relativeTo: this.route,
+            },
+          );
         } else {
           this.notifier.notify(
             NotificationType.Error,
