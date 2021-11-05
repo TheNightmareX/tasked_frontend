@@ -1,0 +1,12 @@
+fragment JoinApplication on JoinApplication {
+  id
+  owner {
+    ...User
+  }
+  classroom {
+    ...Classroom
+  }
+  message
+  status
+  createdAt
+}

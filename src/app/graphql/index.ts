@@ -636,6 +636,154 @@ export type ClassroomFragment = {
   membership: { __typename?: 'Membership'; id: string; role: Role };
 };
 
+export type JoinApplicationAcceptMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type JoinApplicationAcceptMutation = {
+  __typename?: 'Mutation';
+  acceptJoinApplication: {
+    __typename?: 'AcceptJoinApplicationResult';
+    application: {
+      __typename?: 'JoinApplication';
+      id: string;
+      message?: string | null | undefined;
+      status: ApplicationStatus;
+      createdAt: any;
+      owner: {
+        __typename?: 'User';
+        id: string;
+        username: string;
+        nickname?: string | null | undefined;
+        gender: Gender;
+        updatedAt: any;
+      };
+      classroom: {
+        __typename?: 'Classroom';
+        id: string;
+        name: string;
+        description?: string | null | undefined;
+        isOpen: boolean;
+        creator: {
+          __typename?: 'User';
+          id: string;
+          username: string;
+          nickname?: string | null | undefined;
+        };
+        membership: { __typename?: 'Membership'; id: string; role: Role };
+      };
+    };
+  };
+};
+
+export type JoinApplicationListQueryVariables = Exact<{
+  isPending?: Maybe<Scalars['Boolean']>;
+}>;
+
+export type JoinApplicationListQuery = {
+  __typename?: 'Query';
+  joinApplications: {
+    __typename?: 'PaginatedJoinApplications';
+    total: number;
+    results: Array<{
+      __typename?: 'JoinApplication';
+      id: string;
+      message?: string | null | undefined;
+      status: ApplicationStatus;
+      createdAt: any;
+      owner: {
+        __typename?: 'User';
+        id: string;
+        username: string;
+        nickname?: string | null | undefined;
+        gender: Gender;
+        updatedAt: any;
+      };
+      classroom: {
+        __typename?: 'Classroom';
+        id: string;
+        name: string;
+        description?: string | null | undefined;
+        isOpen: boolean;
+        creator: {
+          __typename?: 'User';
+          id: string;
+          username: string;
+          nickname?: string | null | undefined;
+        };
+        membership: { __typename?: 'Membership'; id: string; role: Role };
+      };
+    }>;
+  };
+};
+
+export type JoinApplicationRejectMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type JoinApplicationRejectMutation = {
+  __typename?: 'Mutation';
+  rejectJoinApplication: {
+    __typename?: 'JoinApplication';
+    id: string;
+    message?: string | null | undefined;
+    status: ApplicationStatus;
+    createdAt: any;
+    owner: {
+      __typename?: 'User';
+      id: string;
+      username: string;
+      nickname?: string | null | undefined;
+      gender: Gender;
+      updatedAt: any;
+    };
+    classroom: {
+      __typename?: 'Classroom';
+      id: string;
+      name: string;
+      description?: string | null | undefined;
+      isOpen: boolean;
+      creator: {
+        __typename?: 'User';
+        id: string;
+        username: string;
+        nickname?: string | null | undefined;
+      };
+      membership: { __typename?: 'Membership'; id: string; role: Role };
+    };
+  };
+};
+
+export type JoinApplicationFragment = {
+  __typename?: 'JoinApplication';
+  id: string;
+  message?: string | null | undefined;
+  status: ApplicationStatus;
+  createdAt: any;
+  owner: {
+    __typename?: 'User';
+    id: string;
+    username: string;
+    nickname?: string | null | undefined;
+    gender: Gender;
+    updatedAt: any;
+  };
+  classroom: {
+    __typename?: 'Classroom';
+    id: string;
+    name: string;
+    description?: string | null | undefined;
+    isOpen: boolean;
+    creator: {
+      __typename?: 'User';
+      id: string;
+      username: string;
+      nickname?: string | null | undefined;
+    };
+    membership: { __typename?: 'Membership'; id: string; role: Role };
+  };
+};
+
 export type MeQueryVariables = Exact<{ [key: string]: never }>;
 
 export type MeQuery = {
@@ -735,6 +883,15 @@ export type UserFragment = {
   updatedAt: any;
 };
 
+export const UserFragmentDoc = gql`
+  fragment User on User {
+    id
+    username
+    nickname
+    gender
+    updatedAt
+  }
+`;
 export const ClassroomFragmentDoc = gql`
   fragment Classroom on Classroom {
     id
@@ -752,6 +909,22 @@ export const ClassroomFragmentDoc = gql`
     }
   }
 `;
+export const JoinApplicationFragmentDoc = gql`
+  fragment JoinApplication on JoinApplication {
+    id
+    owner {
+      ...User
+    }
+    classroom {
+      ...Classroom
+    }
+    message
+    status
+    createdAt
+  }
+  ${UserFragmentDoc}
+  ${ClassroomFragmentDoc}
+`;
 export const MembershipFragmentDoc = gql`
   fragment Membership on Membership {
     id
@@ -762,15 +935,6 @@ export const MembershipFragmentDoc = gql`
       gender
     }
     role
-  }
-`;
-export const UserFragmentDoc = gql`
-  fragment User on User {
-    id
-    username
-    nickname
-    gender
-    updatedAt
   }
 `;
 export const AssignmentUpdateDocument = gql`
@@ -984,6 +1148,77 @@ export class ClassroomUpdateGQL extends Apollo.Mutation<
   ClassroomUpdateMutationVariables
 > {
   document = ClassroomUpdateDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const JoinApplicationAcceptDocument = gql`
+  mutation JoinApplicationAccept($id: ID!) {
+    acceptJoinApplication(id: $id) {
+      application {
+        ...JoinApplication
+      }
+    }
+  }
+  ${JoinApplicationFragmentDoc}
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class JoinApplicationAcceptGQL extends Apollo.Mutation<
+  JoinApplicationAcceptMutation,
+  JoinApplicationAcceptMutationVariables
+> {
+  document = JoinApplicationAcceptDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const JoinApplicationListDocument = gql`
+  query JoinApplicationList($isPending: Boolean) {
+    joinApplications(isPending: $isPending) {
+      total
+      results {
+        ...JoinApplication
+      }
+    }
+  }
+  ${JoinApplicationFragmentDoc}
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class JoinApplicationListGQL extends Apollo.Query<
+  JoinApplicationListQuery,
+  JoinApplicationListQueryVariables
+> {
+  document = JoinApplicationListDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const JoinApplicationRejectDocument = gql`
+  mutation JoinApplicationReject($id: ID!) {
+    rejectJoinApplication(id: $id) {
+      ...JoinApplication
+    }
+  }
+  ${JoinApplicationFragmentDoc}
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class JoinApplicationRejectGQL extends Apollo.Mutation<
+  JoinApplicationRejectMutation,
+  JoinApplicationRejectMutationVariables
+> {
+  document = JoinApplicationRejectDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

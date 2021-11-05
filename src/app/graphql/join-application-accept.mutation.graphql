@@ -1,0 +1,7 @@
+mutation JoinApplicationAccept($id: ID!) {
+  acceptJoinApplication(id: $id) {
+    application {
+      ...JoinApplication
+    }
+  }
+}

@@ -1,0 +1,41 @@
+<mat-list-item>
+  <div matLine fxLayout fxLayoutAlign="start center">
+    <app-username [user]="application?.owner" [color]="true"></app-username>
+    <mat-icon inline class="opacity--3">arrow_right</mat-icon>
+    <span>{{ application?.classroom?.name }}</span>
+  </div>
+  <div matLine>
+    {{ application?.message || '...' }}
+  </div>
+  <div matLine class="opacity--2">
+    {{
+      (isOwn$ | async)
+        ? (application?.createdAt | date: 'medium')
+        : (application?.createdAt | date: 'mediumTime')
+    }}
+  </div>
+
+  <ng-container *ngIf="!(isOwn$ | async)">
+    <ng-container
+      *ngIf="
+        application?.status == ApplicationStatus.Pending;
+        then thenBlock;
+        else elseBlock
+      "
+    >
+    </ng-container>
+
+    <ng-template #thenBlock>
+      <button mat-icon-button (click)="accept()">
+        <mat-icon>check</mat-icon>
+      </button>
+      <button mat-icon-button (click)="reject()">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </ng-template>
+
+    <ng-template #elseBlock>
+      <div class="opacity--2 mat-body">{{ application?.status }}</div>
+    </ng-template>
+  </ng-container>
+</mat-list-item>

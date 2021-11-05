@@ -1,0 +1,8 @@
+query JoinApplicationList($isPending: Boolean) {
+  joinApplications(isPending: $isPending) {
+    total
+    results {
+      ...JoinApplication
+    }
+  }
+}
