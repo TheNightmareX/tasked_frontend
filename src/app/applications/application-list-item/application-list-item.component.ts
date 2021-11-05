@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
-import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { finalize, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import {
   ApplicationStatus,
@@ -74,14 +74,20 @@ export class ApplicationListItemComponent implements OnInit {
   ) {
     if (!this.application) return;
     if (this.loading) return;
-    mutation.pipe(catchError(() => of(null))).subscribe((result) => {
-      if (result) {
-        this.notifier.notify(NotificationType.Success, messageOnSuccess);
-        onSucceed?.();
-      } else {
-        this.notifier.notify(NotificationType.Error, messageOnFailure);
-      }
-      this.loading = false;
-    });
+    mutation
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+        }),
+      )
+      .subscribe(
+        () => {
+          this.notifier.notify(NotificationType.Success, messageOnSuccess);
+          onSucceed?.();
+        },
+        () => {
+          this.notifier.notify(NotificationType.Error, messageOnFailure);
+        },
+      );
   }
 }
