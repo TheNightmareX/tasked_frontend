@@ -20,6 +20,12 @@ export type Scalars = {
   DateTime: any;
 };
 
+export type AcceptJoinApplicationResult = {
+  __typename?: 'AcceptJoinApplicationResult';
+  application: JoinApplication;
+  membership: Membership;
+};
+
 export enum ApplicationStatus {
   Accepted = 'Accepted',
   Pending = 'Pending',
@@ -127,10 +133,6 @@ export type JoinApplicationCreateInput = {
   message?: Maybe<Scalars['String']>;
 };
 
-export type JoinApplicationUpdateInput = {
-  status?: Maybe<ApplicationStatus>;
-};
-
 export type Membership = {
   __typename?: 'Membership';
   classroom: Classroom;
@@ -147,6 +149,7 @@ export type MembershipUpdateInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  acceptJoinApplication: AcceptJoinApplicationResult;
   auth: AuthResult;
   createAssignment: Assignment;
   createClassroom: Classroom;
@@ -157,12 +160,16 @@ export type Mutation = {
   deleteClassroom: Classroom;
   deleteMembership: Membership;
   deleteTask: Task;
+  rejectJoinApplication: JoinApplication;
   updateAssignment: Assignment;
   updateClassroom: Classroom;
-  updateJoinApplication: JoinApplication;
   updateMembership: Membership;
   updateTask: Task;
   updateUser: User;
+};
+
+export type MutationAcceptJoinApplicationArgs = {
+  id: Scalars['ID'];
 };
 
 export type MutationAuthArgs = {
@@ -206,6 +213,10 @@ export type MutationDeleteTaskArgs = {
   id: Scalars['ID'];
 };
 
+export type MutationRejectJoinApplicationArgs = {
+  id: Scalars['ID'];
+};
+
 export type MutationUpdateAssignmentArgs = {
   data: AssignmentUpdateInput;
   id: Scalars['ID'];
@@ -213,11 +224,6 @@ export type MutationUpdateAssignmentArgs = {
 
 export type MutationUpdateClassroomArgs = {
   data: ClassroomUpdateInput;
-  id: Scalars['ID'];
-};
-
-export type MutationUpdateJoinApplicationArgs = {
-  data: JoinApplicationUpdateInput;
   id: Scalars['ID'];
 };
 
