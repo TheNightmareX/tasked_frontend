@@ -15,17 +15,26 @@
     }}
   </div>
 
-  <ng-container *ngIf="!(isOwn$ | async)">
+  <ng-container>
     <ng-container
-      *ngIf="
-        application?.status == ApplicationStatus.Pending;
-        then thenBlock;
-        else elseBlock
-      "
-    >
-    </ng-container>
+      *ngIf="isOwn$ | async; then isOwnBlock; else notOwnBlock"
+    ></ng-container>
 
-    <ng-template #thenBlock>
+    <ng-template #isOwnBlock>
+      <ng-container *ngTemplateOutlet="status"></ng-container>
+    </ng-template>
+
+    <ng-template #notOwnBlock>
+      <ng-container
+        *ngIf="
+          application?.status == ApplicationStatus.Pending;
+          then actions;
+          else status
+        "
+      >
+      </ng-container>
+    </ng-template>
+    <ng-template #actions>
       <button mat-icon-button (click)="accept()">
         <mat-icon>check</mat-icon>
       </button>
@@ -34,7 +43,7 @@
       </button>
     </ng-template>
 
-    <ng-template #elseBlock>
+    <ng-template #status>
       <div class="opacity--2 mat-body">{{ application?.status }}</div>
     </ng-template>
   </ng-container>
