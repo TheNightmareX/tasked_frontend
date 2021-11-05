@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AuthService } from 'src/app/auth/auth.service';
 import {
   JoinApplicationListGQL,
   JoinApplicationListQuery,
@@ -20,6 +21,7 @@ export class ApplicationListComponent implements OnInit {
   applicationGroups$!: Observable<[string, Application[]][]>;
 
   constructor(
+    public auth: AuthService,
     private datePipe: DatePipe,
     private listGql: JoinApplicationListGQL,
   ) {}

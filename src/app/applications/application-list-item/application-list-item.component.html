@@ -8,39 +8,25 @@
     {{ application?.message || '...' }}
   </div>
   <div matLine class="opacity--2">
-    {{
-      (isOwn$ | async)
-        ? (application?.createdAt | date: 'medium')
-        : (application?.createdAt | date: 'mediumTime')
-    }}
+    {{ application?.createdAt | date: 'mediumTime' }}
   </div>
 
   <ng-container>
     <ng-container
-      *ngIf="isOwn$ | async; then isOwnBlock; else notOwnBlock"
+      *ngIf="actions; then statusWithActions; else status"
     ></ng-container>
 
-    <ng-template #isOwnBlock>
-      <ng-container *ngTemplateOutlet="status"></ng-container>
-    </ng-template>
-
-    <ng-template #notOwnBlock>
+    <ng-template #statusWithActions>
       <ng-container
-        *ngIf="
-          application?.status == ApplicationStatus.Pending;
-          then actions;
-          else status
-        "
+        *ngIf="application?.status == ApplicationStatus.Pending; else status"
       >
+        <button mat-icon-button (click)="accept()">
+          <mat-icon>check</mat-icon>
+        </button>
+        <button mat-icon-button (click)="reject()">
+          <mat-icon>clear</mat-icon>
+        </button>
       </ng-container>
-    </ng-template>
-    <ng-template #actions>
-      <button mat-icon-button (click)="accept()">
-        <mat-icon>check</mat-icon>
-      </button>
-      <button mat-icon-button (click)="reject()">
-        <mat-icon>clear</mat-icon>
-      </button>
     </ng-template>
 
     <ng-template #status>

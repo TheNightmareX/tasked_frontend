@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import { Observable } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
-import { AuthService } from 'src/app/auth/auth.service';
+import { finalize } from 'rxjs/operators';
 import {
   ApplicationStatus,
   ClassroomMembershipListGQL,
@@ -24,24 +23,21 @@ export class ApplicationListItemComponent implements OnInit {
   @Input()
   application?: Application;
 
+  @Input()
+  actions = false;
+
   loading = false;
-  isOwn$!: Observable<boolean>;
 
   ApplicationStatus = ApplicationStatus;
 
   constructor(
-    private auth: AuthService,
     private notifier: NotifierService,
     private acceptGql: JoinApplicationAcceptGQL,
     private rejectGql: JoinApplicationRejectGQL,
     private classroomMembershipListGql: ClassroomMembershipListGQL,
   ) {}
 
-  ngOnInit() {
-    this.isOwn$ = this.auth.user$.pipe(
-      map((user) => this.application?.owner.id == user!.id),
-    );
-  }
+  ngOnInit() {}
 
   accept() {
     this.mutate(
