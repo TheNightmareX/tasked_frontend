@@ -45,7 +45,7 @@ export class ClassroomCreationComponent implements OnInit {
             NotificationType.Success,
             'Classroom created successfully',
           );
-          this.listGql.fetch({}, { fetchPolicy: 'network-only' }).subscribe();
+          this.listGql.watch().refetch();
           this.router.navigate(['../', result.data!.createClassroom.id], {
             relativeTo: this.route,
           });
