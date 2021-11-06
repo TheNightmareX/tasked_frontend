@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Data } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { timer } from 'rxjs';
-import { concatMap } from 'rxjs/operators';
+import { concatMap, finalize } from 'rxjs/operators';
 import {
   AssignmentUpdateGQL,
   ClassroomAssignmentListQuery,
@@ -89,11 +89,11 @@ export class ClassroomDetailAssignmentsItemComponent implements OnInit {
             },
           ),
         ),
+        finalize(() => {
+          this.loading = false;
+        }),
       )
       .subscribe({
-        complete: () => {
-          this.loading = false;
-        },
         error: () => {
           this.notifier.notify(
             NotificationType.Error,
