@@ -4,6 +4,7 @@ import { NotifierService } from 'angular-notifier';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { concatMap, finalize, first, map } from 'rxjs/operators';
+import { leastTime } from 'src/app/common/least-time.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import {
   ClassroomDeleteGQL,
@@ -77,6 +78,7 @@ export class ClassroomDetailSettingsActionsComponent implements OnInit {
           ),
         ),
         first(),
+        leastTime(1000),
         finalize(() => {
           this.loading = false;
         }),

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { leastTime } from 'src/app/common/least-time.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import { ApolloHelperService } from 'src/app/core/apollo-helper.service';
 import {
@@ -94,6 +95,7 @@ export class ApplicationListItemComponent implements OnInit {
     if (this.loading) return;
     mutation
       .pipe(
+        leastTime(1000),
         finalize(() => {
           this.loading = false;
         }),
