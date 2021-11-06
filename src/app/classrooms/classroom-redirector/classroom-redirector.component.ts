@@ -41,10 +41,6 @@ export class ClassroomRedirectorComponent {
           this.redirect(map[user!.id]);
         } else {
           delete map[user!.id];
-          this.notifier.notify(
-            NotificationType.Warning,
-            'Failed to navigate to the last accessed classroom',
-          );
           this.redirect();
         }
       } else {
