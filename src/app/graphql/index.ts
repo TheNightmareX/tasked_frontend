@@ -75,7 +75,7 @@ export type Classroom = {
   id: Scalars['ID'];
   isOpen: Scalars['Boolean'];
   joinApplications: PaginatedJoinApplications;
-  membership: Membership;
+  membership?: Maybe<Membership>;
   memberships: PaginatedMemberships;
   name: Scalars['String'];
   updatedAt: Scalars['DateTime'];
@@ -312,6 +312,7 @@ export type QueryClassroomArgs = {
 };
 
 export type QueryClassroomsArgs = {
+  isJoined?: Maybe<Scalars['Boolean']>;
   isOpen?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -412,6 +413,7 @@ export type UserAssignmentsArgs = {
 };
 
 export type UserClassroomsArgs = {
+  isJoined?: Maybe<Scalars['Boolean']>;
   isOpen?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -530,7 +532,10 @@ export type ClassroomCreateMutation = {
       username: string;
       nickname?: string | null | undefined;
     };
-    membership: { __typename?: 'Membership'; id: string; role: Role };
+    membership?:
+      | { __typename?: 'Membership'; id: string; role: Role }
+      | null
+      | undefined;
   };
 };
 
@@ -552,7 +557,10 @@ export type ClassroomDetailQuery = {
       username: string;
       nickname?: string | null | undefined;
     };
-    membership: { __typename?: 'Membership'; id: string; role: Role };
+    membership?:
+      | { __typename?: 'Membership'; id: string; role: Role }
+      | null
+      | undefined;
   };
 };
 
@@ -578,7 +586,10 @@ export type ClassroomListQuery = {
         username: string;
         nickname?: string | null | undefined;
       };
-      membership: { __typename?: 'Membership'; id: string; role: Role };
+      membership?:
+        | { __typename?: 'Membership'; id: string; role: Role }
+        | null
+        | undefined;
     }>;
   };
 };
@@ -630,7 +641,10 @@ export type ClassroomUpdateMutation = {
       username: string;
       nickname?: string | null | undefined;
     };
-    membership: { __typename?: 'Membership'; id: string; role: Role };
+    membership?:
+      | { __typename?: 'Membership'; id: string; role: Role }
+      | null
+      | undefined;
   };
 };
 
@@ -646,7 +660,10 @@ export type ClassroomFragment = {
     username: string;
     nickname?: string | null | undefined;
   };
-  membership: { __typename?: 'Membership'; id: string; role: Role };
+  membership?:
+    | { __typename?: 'Membership'; id: string; role: Role }
+    | null
+    | undefined;
 };
 
 export type JoinApplicationAcceptMutationVariables = Exact<{
@@ -1078,7 +1095,7 @@ export class ClassroomDetailGQL extends Apollo.Query<
 }
 export const ClassroomListDocument = gql`
   query ClassroomList($limit: Int, $offset: Int) {
-    classrooms(limit: $limit, offset: $offset) {
+    classrooms(limit: $limit, offset: $offset, isJoined: true) {
       total
       results {
         ...Classroom

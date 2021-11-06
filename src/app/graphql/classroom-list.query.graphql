@@ -1,5 +1,5 @@
 query ClassroomList($limit: Int, $offset: Int) {
-  classrooms(limit: $limit, offset: $offset) {
+  classrooms(limit: $limit, offset: $offset, isJoined: true) {
     total
     results {
       ...Classroom

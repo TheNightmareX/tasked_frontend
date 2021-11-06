@@ -62,7 +62,7 @@ export class ClassroomDetailSidebarMembershipListItemMenuComponent
             this.canDemote = this.membership?.role == Role.Teacher && !isSelf;
             this.canRemove = !isSelf;
           } else {
-            if (classroom.membership.role == Role.Student) {
+            if (classroom.membership!.role == Role.Student) {
               this.canPromote = false;
               this.canDemote = false;
               this.canRemove = false;
