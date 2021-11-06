@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import { Observable } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { ApolloHelperService } from 'src/app/core/apollo-helper.service';
 import {
   ApplicationStatus,
   ClassroomMembershipListGQL,
   ClassroomMembershipListQuery,
+  ClassroomMembershipListQueryVariables,
   JoinApplicationAcceptGQL,
   JoinApplicationListQuery,
   JoinApplicationRejectGQL,
@@ -48,8 +49,12 @@ export class ApplicationListItemComponent implements OnInit {
         { id: this.application!.id },
         {
           update: (_, result) => {
-            this.apolloHelper.updateQueryCache<ClassroomMembershipListQuery>({
+            this.apolloHelper.updateQueryCache<
+              ClassroomMembershipListQuery,
+              ClassroomMembershipListQueryVariables
+            >({
               query: this.classroomMembershipListGql.document,
+              variables: { id: this.application!.classroom.id },
               data: (prev) => ({
                 ...prev,
                 classroom: {
