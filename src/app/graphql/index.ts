@@ -673,6 +673,18 @@ export type JoinApplicationAcceptMutation = {
       };
       classroom: { __typename?: 'Classroom'; id: string; name: string };
     };
+    membership: {
+      __typename?: 'Membership';
+      id: string;
+      role: Role;
+      owner: {
+        __typename?: 'User';
+        id: string;
+        username: string;
+        nickname?: string | null | undefined;
+        gender: Gender;
+      };
+    };
   };
 };
 
@@ -1145,9 +1157,13 @@ export const JoinApplicationAcceptDocument = gql`
       application {
         ...JoinApplication
       }
+      membership {
+        ...Membership
+      }
     }
   }
   ${JoinApplicationFragmentDoc}
+  ${MembershipFragmentDoc}
 `;
 
 @Injectable({

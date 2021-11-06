@@ -5,6 +5,7 @@ import { finalize } from 'rxjs/operators';
 import {
   ApplicationStatus,
   ClassroomMembershipListGQL,
+  ClassroomMembershipListQuery,
   JoinApplicationAcceptGQL,
   JoinApplicationListQuery,
   JoinApplicationRejectGQL,
@@ -41,16 +42,35 @@ export class ApplicationListItemComponent implements OnInit {
 
   accept() {
     this.mutate(
-      this.acceptGql.mutate({ id: this.application!.id }),
+      this.acceptGql.mutate(
+        { id: this.application!.id },
+        {
+          update: (cache, result) => {
+            const prev = cache.readQuery<ClassroomMembershipListQuery>({
+              query: this.classroomMembershipListGql.document,
+            });
+            if (prev)
+              cache.writeQuery<ClassroomMembershipListQuery>({
+                query: this.classroomMembershipListGql.document,
+                data: {
+                  ...prev,
+                  classroom: {
+                    ...prev.classroom,
+                    memberships: {
+                      ...prev.classroom.memberships,
+                      results: [
+                        ...prev.classroom.memberships.results,
+                        result.data!.acceptJoinApplication.membership,
+                      ],
+                    },
+                  },
+                },
+              });
+          },
+        },
+      ),
       'Application accepted',
       'Failed to accept the application',
-      () => {
-        this.classroomMembershipListGql
-          .watch({
-            id: this.application!.classroom.id,
-          })
-          .refetch();
-      },
     );
   }
 

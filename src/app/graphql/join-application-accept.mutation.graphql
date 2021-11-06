@@ -3,5 +3,8 @@ mutation JoinApplicationAccept($id: ID!) {
     application {
       ...JoinApplication
     }
+    membership {
+      ...Membership
+    }
   }
 }
