@@ -44,20 +44,21 @@ export class ClassroomCreationComponent implements OnInit {
             update: (cache, result) => {
               const prev = cache.readQuery<ClassroomListQuery>({
                 query: this.listGql.document,
-              })!;
-              cache.writeQuery<ClassroomListQuery>({
-                query: this.listGql.document,
-                data: {
-                  ...prev,
-                  classrooms: {
-                    ...prev.classrooms,
-                    results: [
-                      ...prev.classrooms.results,
-                      result.data!.createClassroom,
-                    ],
-                  },
-                },
               });
+              if (prev)
+                cache.writeQuery<ClassroomListQuery>({
+                  query: this.listGql.document,
+                  data: {
+                    ...prev,
+                    classrooms: {
+                      ...prev.classrooms,
+                      results: [
+                        ...prev.classrooms.results,
+                        result.data!.createClassroom,
+                      ],
+                    },
+                  },
+                });
             },
           },
         )

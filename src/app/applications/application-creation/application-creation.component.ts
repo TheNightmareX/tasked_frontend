@@ -41,20 +41,21 @@ export class ApplicationCreationComponent implements OnInit {
           update: (cache, result) => {
             const prev = cache.readQuery<JoinApplicationListQuery>({
               query: this.listGql.document,
-            })!;
-            cache.writeQuery<JoinApplicationListQuery>({
-              query: this.listGql.document,
-              data: {
-                ...prev,
-                joinApplications: {
-                  ...prev.joinApplications,
-                  results: [
-                    result.data!.createJoinApplication,
-                    ...prev.joinApplications.results,
-                  ],
-                },
-              },
             });
+            if (prev)
+              cache.writeQuery<JoinApplicationListQuery>({
+                query: this.listGql.document,
+                data: {
+                  ...prev,
+                  joinApplications: {
+                    ...prev.joinApplications,
+                    results: [
+                      result.data!.createJoinApplication,
+                      ...prev.joinApplications.results,
+                    ],
+                  },
+                },
+              });
           },
         },
       )
