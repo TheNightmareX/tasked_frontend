@@ -3,6 +3,7 @@
     <app-username [user]="application?.owner" [color]="true"></app-username>
     <mat-icon inline class="opacity--3">arrow_right</mat-icon>
     <span>{{ application?.classroom?.name }}</span>
+    <span class="opacity--3">#{{ application?.classroom?.id }}</span>
   </div>
   <div matLine [class.opacity--2]="!application?.message">
     {{ application?.message || '...' }}
