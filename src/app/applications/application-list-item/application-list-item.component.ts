@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, tap } from 'rxjs/operators';
+import { ApolloHelperService } from 'src/app/core/apollo-helper.service';
 import {
   ApplicationStatus,
   ClassroomMembershipListGQL,
@@ -36,6 +37,7 @@ export class ApplicationListItemComponent implements OnInit {
     private acceptGql: JoinApplicationAcceptGQL,
     private rejectGql: JoinApplicationRejectGQL,
     private classroomMembershipListGql: ClassroomMembershipListGQL,
+    private apolloHelper: ApolloHelperService,
   ) {}
 
   ngOnInit() {}
@@ -45,27 +47,23 @@ export class ApplicationListItemComponent implements OnInit {
       this.acceptGql.mutate(
         { id: this.application!.id },
         {
-          update: (cache, result) => {
-            const prev = cache.readQuery<ClassroomMembershipListQuery>({
+          update: (_, result) => {
+            this.apolloHelper.updateQueryCache<ClassroomMembershipListQuery>({
               query: this.classroomMembershipListGql.document,
-            });
-            if (prev)
-              cache.writeQuery<ClassroomMembershipListQuery>({
-                query: this.classroomMembershipListGql.document,
-                data: {
-                  ...prev,
-                  classroom: {
-                    ...prev.classroom,
-                    memberships: {
-                      ...prev.classroom.memberships,
-                      results: [
-                        ...prev.classroom.memberships.results,
-                        result.data!.acceptJoinApplication.membership,
-                      ],
-                    },
+              data: (prev) => ({
+                ...prev,
+                classroom: {
+                  ...prev.classroom,
+                  memberships: {
+                    ...prev.classroom.memberships,
+                    results: [
+                      ...prev.classroom.memberships.results,
+                      result.data!.acceptJoinApplication.membership,
+                    ],
                   },
                 },
-              });
+              }),
+            });
           },
         },
       ),
@@ -86,7 +84,6 @@ export class ApplicationListItemComponent implements OnInit {
     mutation: Observable<T>,
     messageOnSuccess: string,
     messageOnFailure: string,
-    onSucceed?: () => void,
   ) {
     if (!this.application) return;
     if (this.loading) return;
@@ -99,7 +96,6 @@ export class ApplicationListItemComponent implements OnInit {
       .subscribe(
         () => {
           this.notifier.notify(NotificationType.Success, messageOnSuccess);
-          onSucceed?.();
         },
         () => {
           this.notifier.notify(NotificationType.Error, messageOnFailure);

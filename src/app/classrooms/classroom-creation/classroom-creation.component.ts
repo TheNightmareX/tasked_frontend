@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { forkJoin, of, timer } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { ApolloHelperService } from 'src/app/core/apollo-helper.service';
 import {
   ClassroomCreateGQL,
   ClassroomListGQL,
@@ -29,6 +30,7 @@ export class ClassroomCreationComponent implements OnInit {
     private notifier: NotifierService,
     private createGql: ClassroomCreateGQL,
     private listGql: ClassroomListGQL,
+    private apolloHelper: ApolloHelperService,
   ) {}
 
   ngOnInit() {}
@@ -41,24 +43,20 @@ export class ClassroomCreationComponent implements OnInit {
         .mutate(
           { data: this.data },
           {
-            update: (cache, result) => {
-              const prev = cache.readQuery<ClassroomListQuery>({
+            update: (_, result) => {
+              this.apolloHelper.updateQueryCache<ClassroomListQuery>({
                 query: this.listGql.document,
-              });
-              if (prev)
-                cache.writeQuery<ClassroomListQuery>({
-                  query: this.listGql.document,
-                  data: {
-                    ...prev,
-                    classrooms: {
-                      ...prev.classrooms,
-                      results: [
-                        ...prev.classrooms.results,
-                        result.data!.createClassroom,
-                      ],
-                    },
+                data: (prev) => ({
+                  ...prev,
+                  classrooms: {
+                    ...prev.classrooms,
+                    results: [
+                      ...prev.classrooms.results,
+                      result.data!.createClassroom,
+                    ],
                   },
-                });
+                }),
+              });
             },
           },
         )

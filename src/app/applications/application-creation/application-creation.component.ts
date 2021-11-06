@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import { finalize } from 'rxjs/operators';
+import { ApolloHelperService } from 'src/app/core/apollo-helper.service';
 import {
   JoinApplicationCreateGQL,
   JoinApplicationListGQL,
@@ -25,6 +26,7 @@ export class ApplicationCreationComponent implements OnInit {
     private notifier: NotifierService,
     private createGql: JoinApplicationCreateGQL,
     private listGql: JoinApplicationListGQL,
+    private apolloHelper: ApolloHelperService,
   ) {}
 
   ngOnInit() {}
@@ -38,24 +40,20 @@ export class ApplicationCreationComponent implements OnInit {
       .mutate(
         { data },
         {
-          update: (cache, result) => {
-            const prev = cache.readQuery<JoinApplicationListQuery>({
+          update: (_, result) => {
+            this.apolloHelper.updateQueryCache<JoinApplicationListQuery>({
               query: this.listGql.document,
-            });
-            if (prev)
-              cache.writeQuery<JoinApplicationListQuery>({
-                query: this.listGql.document,
-                data: {
-                  ...prev,
-                  joinApplications: {
-                    ...prev.joinApplications,
-                    results: [
-                      result.data!.createJoinApplication,
-                      ...prev.joinApplications.results,
-                    ],
-                  },
+              data: (prev) => ({
+                ...prev,
+                joinApplications: {
+                  ...prev.joinApplications,
+                  results: [
+                    result.data!.createJoinApplication,
+                    ...prev.joinApplications.results,
+                  ],
                 },
-              });
+              }),
+            });
           },
         },
       )
