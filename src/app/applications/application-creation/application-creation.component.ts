@@ -9,6 +9,7 @@ import {
   JoinApplicationListGQL,
   JoinApplicationListQuery,
 } from 'src/app/graphql';
+import { PopupComponent } from 'src/app/shared/popup/popup.component';
 
 @Component({
   selector: 'app-application-creation',
@@ -28,6 +29,7 @@ export class ApplicationCreationComponent implements OnInit {
     private createGql: JoinApplicationCreateGQL,
     private listGql: JoinApplicationListGQL,
     private apolloHelper: ApolloHelperService,
+    private popup: PopupComponent,
   ) {}
 
   ngOnInit() {}
@@ -62,6 +64,7 @@ export class ApplicationCreationComponent implements OnInit {
         leastTime(1000),
         finalize(() => {
           this.loading = false;
+          this.popup.close();
         }),
       )
       .subscribe(

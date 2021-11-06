@@ -1,50 +1,40 @@
-<form
-  fxLayout="row wrap"
-  fxLayoutAlign="space-between center"
-  fxLayoutGap="16px"
-  #form="ngForm"
->
-  <mat-form-field color="accent" fxFlex="30%" fxFlex.lt-sm="100%">
-    <mat-label>Classroom ID</mat-label>
-    <input
-      matInput
-      name="classroom"
-      type="number"
-      required
-      [(ngModel)]="data.classroom"
-    />
-  </mat-form-field>
-  <mat-form-field color="accent" fxFlex fxFlex.lt-sm="100%">
-    <mat-label>Message</mat-label>
-    <input
-      matInput
-      name="message"
-      type="text"
-      maxlength="20"
-      [(ngModel)]="data.message"
-    />
-  </mat-form-field>
+<div class="container">
+  <div matDialogTitle>New Application</div>
 
-  <button
-    mat-icon-button
-    type="submit"
-    fxShow
-    fxHide.lt-sm
-    [disabled]="!form.valid || loading"
-    (click)="send()"
-  >
-    <mat-icon>send</mat-icon>
-  </button>
-  <button
-    mat-raised-button
-    type="submit"
-    class="uppercase"
-    fxFlex
-    fxHide
-    fxShow.lt-sm
-    [disabled]="!form.valid || loading"
-    (click)="send()"
-  >
-    Send
-  </button>
-</form>
+  <form matDialogContent #form="ngForm" fxLayout="column">
+    <mat-form-field color="accent">
+      <mat-label>Classroom ID</mat-label>
+      <input
+        matInput
+        name="classroom"
+        type="number"
+        required
+        [(ngModel)]="data.classroom"
+      />
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+      <mat-label>Message</mat-label>
+      <input
+        matInput
+        name="message"
+        type="text"
+        maxlength="20"
+        [(ngModel)]="data.message"
+      />
+    </mat-form-field>
+  </form>
+
+  <div matDialogActions fxLayout>
+    <div fxFlex></div>
+    <button
+      mat-button
+      type="submit"
+      class="uppercase"
+      [disabled]="!form.valid || loading"
+      (click)="send()"
+    >
+      Send
+    </button>
+  </div>
+</div>

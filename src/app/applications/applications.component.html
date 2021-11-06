@@ -1,4 +1,13 @@
 <div class="container">
-  <app-application-creation></app-application-creation>
   <app-application-list></app-application-list>
 </div>
+
+<button mat-fab class="fab" (click)="popup.open()">
+  <mat-icon>add</mat-icon>
+</button>
+
+<app-popup #popup>
+  <ng-template>
+    <app-application-creation></app-application-creation>
+  </ng-template>
+</app-popup>
