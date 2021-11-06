@@ -1,5 +1,8 @@
-:host {
+.container {
   display: block;
-  width: 368px;
   margin: 0 auto;
+  max-width: 368px;
+}
+.container.dialog {
+  width: 100vw;
 }
