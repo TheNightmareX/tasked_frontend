@@ -4,6 +4,7 @@ import { NotifierService } from 'angular-notifier';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
+import { NotificationType } from 'src/app/common/notification-type.enum';
 import {
   ClassroomDetailGQL,
   ClassroomMembershipListQuery,
@@ -11,7 +12,6 @@ import {
   MembershipUpdateGQL,
   Role,
 } from 'src/app/graphql';
-import { NotificationType } from 'src/app/notification-type.enum';
 
 type Membership =
   ClassroomMembershipListQuery['classroom']['memberships']['results'][number];

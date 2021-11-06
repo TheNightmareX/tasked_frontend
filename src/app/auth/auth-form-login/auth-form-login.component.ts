@@ -5,7 +5,7 @@ import { NotifierService } from 'angular-notifier';
 import { forkJoin, of, Subject, timer } from 'rxjs';
 import { catchError, map, throttleTime } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
-import { NotificationType } from 'src/app/notification-type.enum';
+import { NotificationType } from 'src/app/common/notification-type.enum';
 
 @Component({
   selector: 'app-auth-form-login',

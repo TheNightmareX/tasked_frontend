@@ -4,6 +4,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
+import { NotificationType } from 'src/app/common/notification-type.enum';
 import { FormDataService } from 'src/app/core/form-data.service';
 import {
   Gender,
@@ -11,7 +12,6 @@ import {
   UserUpdateGQL,
   UserUpdateInput,
 } from 'src/app/graphql';
-import { NotificationType } from 'src/app/notification-type.enum';
 import { ProfileFormData } from '../profile-form/profile-form-data.interface';
 
 @Component({

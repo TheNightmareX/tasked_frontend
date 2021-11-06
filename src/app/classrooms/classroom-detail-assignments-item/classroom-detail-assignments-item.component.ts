@@ -3,11 +3,11 @@ import { Data } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { timer } from 'rxjs';
 import { concatMap, finalize } from 'rxjs/operators';
+import { NotificationType } from 'src/app/common/notification-type.enum';
 import {
   AssignmentUpdateGQL,
   ClassroomAssignmentListQuery,
 } from 'src/app/graphql';
-import { NotificationType } from 'src/app/notification-type.enum';
 
 type Assignment =
   ClassroomAssignmentListQuery['classroom']['assignments']['results'][number];

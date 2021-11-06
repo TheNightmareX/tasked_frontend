@@ -3,13 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { forkJoin, of, timer } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { NotificationType } from 'src/app/common/notification-type.enum';
 import { ApolloHelperService } from 'src/app/core/apollo-helper.service';
 import {
   ClassroomCreateGQL,
   ClassroomListGQL,
   ClassroomListQuery,
 } from 'src/app/graphql';
-import { NotificationType } from 'src/app/notification-type.enum';
 
 @Component({
   selector: 'app-classroom-creation',

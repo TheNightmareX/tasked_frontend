@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { NotificationType } from 'src/app/common/notification-type.enum';
 import { ApolloHelperService } from 'src/app/core/apollo-helper.service';
 import {
   ApplicationStatus,
@@ -12,7 +13,6 @@ import {
   JoinApplicationListQuery,
   JoinApplicationRejectGQL,
 } from 'src/app/graphql';
-import { NotificationType } from 'src/app/notification-type.enum';
 
 type Application =
   JoinApplicationListQuery['joinApplications']['results'][number];

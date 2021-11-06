@@ -4,8 +4,8 @@ import { NotifierService } from 'angular-notifier';
 import { combineLatest } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
+import { NotificationType } from 'src/app/common/notification-type.enum';
 import { ClassroomListGQL } from 'src/app/graphql';
-import { NotificationType } from 'src/app/notification-type.enum';
 import { ClassroomsLocalStorageService } from '../classrooms-local-storage.service';
 
 @Component({

@@ -4,13 +4,13 @@ import { NotifierService } from 'angular-notifier';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { concatMap, finalize, first, map } from 'rxjs/operators';
+import { NotificationType } from 'src/app/common/notification-type.enum';
 import {
   ClassroomDeleteGQL,
   ClassroomDetailGQL,
   ClassroomDetailQuery,
   MembershipDeleteGQL,
 } from 'src/app/graphql';
-import { NotificationType } from 'src/app/notification-type.enum';
 
 type Classroom = ClassroomDetailQuery['classroom'];
 

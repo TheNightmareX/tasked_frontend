@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import { finalize } from 'rxjs/operators';
+import { NotificationType } from 'src/app/common/notification-type.enum';
 import { ApolloHelperService } from 'src/app/core/apollo-helper.service';
 import {
   JoinApplicationCreateGQL,
   JoinApplicationListGQL,
   JoinApplicationListQuery,
 } from 'src/app/graphql';
-import { NotificationType } from 'src/app/notification-type.enum';
 
 @Component({
   selector: 'app-application-creation',

@@ -4,6 +4,7 @@ import { NotifierService } from 'angular-notifier';
 import { combineLatest, forkJoin, Observable, of, Subject, timer } from 'rxjs';
 import { catchError, debounceTime, first, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
+import { NotificationType } from 'src/app/common/notification-type.enum';
 import { FormDataService } from 'src/app/core/form-data.service';
 import {
   ClassroomDetailGQL,
@@ -11,7 +12,6 @@ import {
   ClassroomUpdateGQL,
   ClassroomUpdateInput,
 } from 'src/app/graphql';
-import { NotificationType } from 'src/app/notification-type.enum';
 
 type Classroom = ClassroomDetailQuery['classroom'];
 
