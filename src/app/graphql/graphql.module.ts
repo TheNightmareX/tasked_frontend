@@ -1,6 +1,10 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { InMemoryCache } from '@apollo/client/core';
+import {
+  ApolloClientOptions,
+  InMemoryCache,
+  NormalizedCacheObject,
+} from '@apollo/client/core';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpBatchLink } from 'apollo-angular/http';
 import { AuthInterceptor } from '../auth/auth.interceptor';
@@ -10,9 +14,23 @@ import { AuthInterceptor } from '../auth/auth.interceptor';
   providers: [
     {
       provide: APOLLO_OPTIONS,
-      useFactory: (link: HttpBatchLink) => ({
-        link: link.create({ uri: '/graphql/' }),
-        cache: new InMemoryCache(),
+      useFactory: (
+        httpBatchLinkFactory: HttpBatchLink,
+      ): ApolloClientOptions<NormalizedCacheObject> => ({
+        link: httpBatchLinkFactory.create({ uri: '/graphql/' }),
+        cache: new InMemoryCache({
+          typePolicies: {
+            Query: {
+              fields: {
+                classroom: {
+                  // use the existing cache if possible
+                  read: (_, { args, toReference }) =>
+                    toReference({ __typename: 'Classroom', id: args!.id }),
+                },
+              },
+            },
+          },
+        }),
       }),
       deps: [HttpBatchLink],
     },
