@@ -29,7 +29,7 @@ export class ClassroomDetailSettingsComponent implements OnInit {
 
   change$ = new Subject();
   classroom$!: Observable<Classroom>;
-  isCreator!: Observable<boolean>;
+  isCreator$!: Observable<boolean>;
   modified$!: Observable<boolean>;
 
   loading = false;
@@ -49,7 +49,7 @@ export class ClassroomDetailSettingsComponent implements OnInit {
         .watch({ id: params.get('id')! })
         .valueChanges.pipe(map((result) => result.data.classroom));
 
-      this.isCreator = combineLatest([this.classroom$, this.auth.user$]).pipe(
+      this.isCreator$ = combineLatest([this.classroom$, this.auth.user$]).pipe(
         map(([classroom, user]) => classroom.creator.id == user!.id),
       );
 

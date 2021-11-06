@@ -11,7 +11,7 @@
         <mat-label>Name</mat-label>
         <input
           matInput
-          [disabled]="!(isCreator | async)"
+          [disabled]="!(isCreator$ | async)"
           maxlength="15"
           [(ngModel)]="data.name"
           (ngModelChange)="change$.next()"
@@ -24,7 +24,7 @@
         <textarea
           matInput
           rows="3"
-          [disabled]="!(isCreator | async)"
+          [disabled]="!(isCreator$ | async)"
           maxlength="100"
           [(ngModel)]="data.description"
           (ngModelChange)="change$.next()"
@@ -39,7 +39,7 @@
     <ng-container ngProjectAs="content">
       <div fxLayout fxLayoutGap="5px">
         <mat-slide-toggle
-          [disabled]="!(isCreator | async)"
+          [disabled]="!(isCreator$ | async)"
           [(ngModel)]="data.isOpen"
           (ngModelChange)="change$.next()"
         >
@@ -77,5 +77,13 @@
         <span *appLoading="loading; diameter: 25">Save</span>
       </button>
     </div>
+  </section>
+
+  <mat-divider></mat-divider>
+
+  <section>
+    <app-classroom-detail-settings-actions
+      [admin]="!!(isCreator$ | async)"
+    ></app-classroom-detail-settings-actions>
   </section>
 </div>

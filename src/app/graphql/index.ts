@@ -539,6 +539,15 @@ export type ClassroomCreateMutation = {
   };
 };
 
+export type ClassroomDeleteMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type ClassroomDeleteMutation = {
+  __typename?: 'Mutation';
+  deleteClassroom: { __typename?: 'Classroom'; id: string };
+};
+
 export type ClassroomDetailQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -1066,6 +1075,27 @@ export class ClassroomCreateGQL extends Apollo.Mutation<
   ClassroomCreateMutationVariables
 > {
   document = ClassroomCreateDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const ClassroomDeleteDocument = gql`
+  mutation ClassroomDelete($id: ID!) {
+    deleteClassroom(id: $id) {
+      id
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ClassroomDeleteGQL extends Apollo.Mutation<
+  ClassroomDeleteMutation,
+  ClassroomDeleteMutationVariables
+> {
+  document = ClassroomDeleteDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
