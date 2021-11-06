@@ -3,7 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { forkJoin, of, timer } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { ClassroomCreateGQL, ClassroomListGQL } from 'src/app/graphql';
+import {
+  ClassroomCreateGQL,
+  ClassroomListGQL,
+  ClassroomListQuery,
+} from 'src/app/graphql';
 import { NotificationType } from 'src/app/notification-type.enum';
 
 @Component({
@@ -34,7 +38,29 @@ export class ClassroomCreationComponent implements OnInit {
     forkJoin([
       timer(1000),
       this.createGql
-        .mutate({ data: this.data })
+        .mutate(
+          { data: this.data },
+          {
+            update: (cache, result) => {
+              const prev = cache.readQuery<ClassroomListQuery>({
+                query: this.listGql.document,
+              })!;
+              cache.writeQuery<ClassroomListQuery>({
+                query: this.listGql.document,
+                data: {
+                  ...prev,
+                  classrooms: {
+                    ...prev.classrooms,
+                    results: [
+                      ...prev.classrooms.results,
+                      result.data!.createClassroom,
+                    ],
+                  },
+                },
+              });
+            },
+          },
+        )
         .pipe(catchError(() => of(null))),
     ])
       .pipe(map((results) => results[1]))
@@ -45,7 +71,6 @@ export class ClassroomCreationComponent implements OnInit {
             NotificationType.Success,
             'Classroom created successfully',
           );
-          this.listGql.watch().refetch();
           this.router.navigate(
             ['/classrooms', result.data!.createClassroom.id],
             {

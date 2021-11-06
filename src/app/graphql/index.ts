@@ -518,7 +518,20 @@ export type ClassroomCreateMutationVariables = Exact<{
 
 export type ClassroomCreateMutation = {
   __typename?: 'Mutation';
-  createClassroom: { __typename?: 'Classroom'; id: string };
+  createClassroom: {
+    __typename?: 'Classroom';
+    id: string;
+    name: string;
+    description?: string | null | undefined;
+    isOpen: boolean;
+    creator: {
+      __typename?: 'User';
+      id: string;
+      username: string;
+      nickname?: string | null | undefined;
+    };
+    membership: { __typename?: 'Membership'; id: string; role: Role };
+  };
 };
 
 export type ClassroomDetailQueryVariables = Exact<{
@@ -683,20 +696,7 @@ export type JoinApplicationCreateMutation = {
       gender: Gender;
       updatedAt: any;
     };
-    classroom: {
-      __typename?: 'Classroom';
-      id: string;
-      name: string;
-      description?: string | null | undefined;
-      isOpen: boolean;
-      creator: {
-        __typename?: 'User';
-        id: string;
-        username: string;
-        nickname?: string | null | undefined;
-      };
-      membership: { __typename?: 'Membership'; id: string; role: Role };
-    };
+    classroom: { __typename?: 'Classroom'; id: string; name: string };
   };
 };
 
@@ -1023,9 +1023,10 @@ export class ClassroomAssignmentListGQL extends Apollo.Query<
 export const ClassroomCreateDocument = gql`
   mutation ClassroomCreate($data: ClassroomCreateInput!) {
     createClassroom(data: $data) {
-      id
+      ...Classroom
     }
   }
+  ${ClassroomFragmentDoc}
 `;
 
 @Injectable({

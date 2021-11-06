@@ -4,6 +4,7 @@ import { finalize } from 'rxjs/operators';
 import {
   JoinApplicationCreateGQL,
   JoinApplicationListGQL,
+  JoinApplicationListQuery,
 } from 'src/app/graphql';
 import { NotificationType } from 'src/app/notification-type.enum';
 
@@ -34,7 +35,29 @@ export class ApplicationCreationComponent implements OnInit {
     this.loading = true;
     const data = { ...this.data, classroom: this.data.classroom + '' };
     this.createGql
-      .mutate({ data })
+      .mutate(
+        { data },
+        {
+          update: (cache, result) => {
+            const prev = cache.readQuery<JoinApplicationListQuery>({
+              query: this.listGql.document,
+            })!;
+            cache.writeQuery<JoinApplicationListQuery>({
+              query: this.listGql.document,
+              data: {
+                ...prev,
+                joinApplications: {
+                  ...prev.joinApplications,
+                  results: [
+                    result.data!.createJoinApplication,
+                    ...prev.joinApplications.results,
+                  ],
+                },
+              },
+            });
+          },
+        },
+      )
       .pipe(
         finalize(() => {
           this.loading = false;
@@ -46,7 +69,6 @@ export class ApplicationCreationComponent implements OnInit {
             NotificationType.Success,
             `Application sent to classroom #${data.classroom}`,
           );
-          this.listGql.watch().refetch();
         },
         () => {
           this.notifier.notify(
