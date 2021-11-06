@@ -36,7 +36,7 @@ export class ClassroomDetailSidebarMembershipListItemMenuComponent
 
   loading = false;
 
-  private sub?: Subscription;
+  private subscription?: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -49,36 +49,37 @@ export class ClassroomDetailSidebarMembershipListItemMenuComponent
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
-      if (this.membership) {
-        this.sub = combineLatest([
-          this.classroomGql
-            .watch({ id: params.get('id')! })
-            .valueChanges.pipe(map((result) => result.data.classroom)),
-          this.auth.user$,
-        ]).subscribe(([classroom, user]) => {
-          const isSelf = this.membership?.owner.id == user?.id;
-          if (classroom.creator.id == user?.id) {
-            this.canPromote = this.membership?.role == Role.Student;
-            this.canDemote = this.membership?.role == Role.Teacher && !isSelf;
-            this.canRemove = !isSelf;
+      if (!this.membership) return;
+
+      this.subscription?.unsubscribe();
+      this.subscription = combineLatest([
+        this.classroomGql
+          .watch({ id: params.get('id')! })
+          .valueChanges.pipe(map((result) => result.data.classroom)),
+        this.auth.user$,
+      ]).subscribe(([classroom, user]) => {
+        const isSelf = this.membership?.owner.id == user?.id;
+        if (classroom.creator.id == user?.id) {
+          this.canPromote = this.membership?.role == Role.Student;
+          this.canDemote = this.membership?.role == Role.Teacher && !isSelf;
+          this.canRemove = !isSelf;
+        } else {
+          if (classroom.membership!.role == Role.Student) {
+            this.canPromote = false;
+            this.canDemote = false;
+            this.canRemove = false;
           } else {
-            if (classroom.membership!.role == Role.Student) {
-              this.canPromote = false;
-              this.canDemote = false;
-              this.canRemove = false;
-            } else {
-              this.canPromote = this.membership?.role == Role.Student;
-              this.canDemote = false;
-              this.canRemove = this.membership?.role == Role.Student && !isSelf;
-            }
+            this.canPromote = this.membership?.role == Role.Student;
+            this.canDemote = false;
+            this.canRemove = this.membership?.role == Role.Student && !isSelf;
           }
-        });
-      }
+        }
+      });
     });
   }
 
   ngOnDestroy() {
-    this.sub?.unsubscribe();
+    this.subscription?.unsubscribe();
   }
 
   promote() {

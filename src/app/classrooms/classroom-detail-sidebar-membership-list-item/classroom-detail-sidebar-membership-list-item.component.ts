@@ -1,6 +1,7 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
   ClassroomDetailGQL,
@@ -18,7 +19,7 @@ type Membership =
   styleUrls: ['./classroom-detail-sidebar-membership-list-item.component.css'],
 })
 export class ClassroomDetailSidebarMembershipListItemComponent
-  implements OnInit
+  implements OnInit, OnDestroy
 {
   @Input()
   membership?: Membership;
@@ -29,6 +30,8 @@ export class ClassroomDetailSidebarMembershipListItemComponent
   @ViewChild(MatMenuTrigger)
   private menuTrigger?: MatMenuTrigger;
 
+  private subscription?: Subscription;
+
   constructor(
     private route: ActivatedRoute,
     private classroomGql: ClassroomDetailGQL,
@@ -36,7 +39,8 @@ export class ClassroomDetailSidebarMembershipListItemComponent
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
-      this.classroomGql
+      this.subscription?.unsubscribe();
+      this.subscription = this.classroomGql
         .watch({ id: params.get('id')! })
         .valueChanges.pipe(map(({ data }) => data.classroom))
         .subscribe((classroom) => {
@@ -49,6 +53,10 @@ export class ClassroomDetailSidebarMembershipListItemComponent
             this.membership.owner.id == classroom.creator?.id ? 'accent' : null;
         });
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription?.unsubscribe();
   }
 
   /**
