@@ -11,7 +11,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
  * content as a dialog in desktop devices but a bottom sheet in mobile devices.
  *
  * **NOTE**: Providers like {@link MatDialogRef} and {@link MatBottomSheetRef}
- * are not available.
+ * are not available, inject {@link PopupComponent} instead.
  */
 @Component({
   selector: 'app-popup',

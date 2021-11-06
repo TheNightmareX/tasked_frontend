@@ -12,6 +12,7 @@ import {
   UserUpdateGQL,
   UserUpdateInput,
 } from 'src/app/graphql';
+import { PopupComponent } from 'src/app/shared/popup/popup.component';
 import { ProfileFormData } from '../profile-form/profile-form-data.interface';
 
 @Component({
@@ -20,9 +21,6 @@ import { ProfileFormData } from '../profile-form/profile-form-data.interface';
   styleUrls: ['./profile-btn-menu-edit-popup.component.css'],
 })
 export class ProfileBtnMenuEditPopupComponent implements OnInit {
-  @Output()
-  update = new EventEmitter();
-
   data: ProfileFormData = {
     username: '',
     password: '',
@@ -38,6 +36,7 @@ export class ProfileBtnMenuEditPopupComponent implements OnInit {
     private notifier: NotifierService,
     private formDataService: FormDataService,
     private userUpdateGql: UserUpdateGQL,
+    private popup: PopupComponent,
   ) {}
 
   ngOnInit() {
@@ -64,7 +63,7 @@ export class ProfileBtnMenuEditPopupComponent implements OnInit {
             NotificationType.Success,
             'Profile updated successfully',
           );
-          this.update.emit();
+          this.popup.close();
         },
         () => {
           this.notifier.notify(
