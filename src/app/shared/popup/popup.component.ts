@@ -33,10 +33,18 @@ export class PopupComponent implements OnInit {
 
   ngOnInit() {}
 
-  open() {
-    const isPhone = this.media.isActive('lt-md');
-    if (isPhone) this.sheetRef = this.sheet.open(this.contentTemplate);
-    else this.dialogRef = this.dialog.open(this.contentTemplate);
+  open(breakpoint = 'lt-md') {
+    const isPhone = this.media.isActive(breakpoint);
+    if (isPhone) this.openSheet();
+    else this.openDialog();
+  }
+
+  openDialog() {
+    this.dialogRef = this.dialog.open(this.contentTemplate);
+  }
+
+  openSheet() {
+    this.sheetRef = this.sheet.open(this.contentTemplate);
   }
 
   close() {
