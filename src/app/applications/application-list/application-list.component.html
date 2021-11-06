@@ -1,12 +1,26 @@
 <mat-list>
   <mat-divider></mat-divider>
-  <ng-container *ngFor="let group of applicationGroups$ | async">
-    <h2 matSubheader>{{ group[0] }}</h2>
-    <app-application-list-item
-      *ngFor="let item of group[1]"
-      [application]="item"
-      [actions]="(auth.user$ | async)?.id != item.owner.id"
-    ></app-application-list-item>
-    <mat-divider></mat-divider>
-  </ng-container>
+
+  <ng-template>
+    <ng-container *ngFor="let group of applicationGroups$ | async">
+      <h2 matSubheader>{{ group[0] }}</h2>
+      <app-application-list-item
+        *ngFor="let item of group[1]"
+        [application]="item"
+        [actions]="(auth.user$ | async)?.id != item.owner.id"
+      ></app-application-list-item>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </ng-template>
+
+  <div
+    fxHide.lt-sm
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    class="no-items"
+  >
+    <h2 fxFlexOffset="-20%" class="no-items opacity--2 mat-title">
+      Nothing received yet...
+    </h2>
+  </div>
 </mat-list>
