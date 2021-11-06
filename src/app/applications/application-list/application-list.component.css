@@ -1,13 +1,3 @@
 :host > mat-list {
   padding: 28px 0;
 }
-:host > mat-list > .no-items {
-  height: 400px;
-}
-:host > mat-list > .no-items:not(:nth-child(2)) {
-  display: none;
-}
-:host > mat-list > .no-items > h2 {
-  text-align: center;
-  font-weight: 300;
-}
