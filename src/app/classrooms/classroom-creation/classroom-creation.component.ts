@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
-import { forkJoin, of, timer } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
+import { leastTime } from 'src/app/common/least-time.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import { ApolloHelperService } from 'src/app/core/apollo-helper.service';
 import {
@@ -37,35 +37,35 @@ export class ClassroomCreationComponent implements OnInit {
 
   submit() {
     this.loading = true;
-    forkJoin([
-      timer(1000),
-      this.createGql
-        .mutate(
-          { data: this.data },
-          {
-            update: (_, result) => {
-              this.apolloHelper.updateQueryCache<ClassroomListQuery>({
-                query: this.listGql.document,
-                data: (prev) => ({
-                  ...prev,
-                  classrooms: {
-                    ...prev.classrooms,
-                    results: [
-                      ...prev.classrooms.results,
-                      result.data!.createClassroom,
-                    ],
-                  },
-                }),
-              });
-            },
+    this.createGql
+      .mutate(
+        { data: this.data },
+        {
+          update: (_, result) => {
+            this.apolloHelper.updateQueryCache<ClassroomListQuery>({
+              query: this.listGql.document,
+              data: (prev) => ({
+                ...prev,
+                classrooms: {
+                  ...prev.classrooms,
+                  results: [
+                    ...prev.classrooms.results,
+                    result.data!.createClassroom,
+                  ],
+                },
+              }),
+            });
           },
-        )
-        .pipe(catchError(() => of(null))),
-    ])
-      .pipe(map((results) => results[1]))
-      .subscribe((result) => {
-        this.loading = false;
-        if (result) {
+        },
+      )
+      .pipe(
+        leastTime(1000),
+        finalize(() => {
+          this.loading = false;
+        }),
+      )
+      .subscribe(
+        (result) => {
           this.notifier.notify(
             NotificationType.Success,
             'Classroom created successfully',
@@ -76,12 +76,13 @@ export class ClassroomCreationComponent implements OnInit {
               relativeTo: this.route,
             },
           );
-        } else {
+        },
+        () => {
           this.notifier.notify(
             NotificationType.Error,
             'Failed to create the classroom',
           );
-        }
-      });
+        },
+      );
   }
 }

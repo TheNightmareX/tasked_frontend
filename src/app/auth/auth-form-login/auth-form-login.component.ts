@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatInput } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
-import { forkJoin, of, Subject, timer } from 'rxjs';
-import { catchError, map, throttleTime } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { finalize, throttleTime } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
+import { leastTime } from 'src/app/common/least-time.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 
 @Component({
@@ -36,19 +37,24 @@ export class AuthFormLoginComponent implements OnInit {
   private submit() {
     const { username, password } = this.data;
     this.loading = true;
-    forkJoin([
-      this.auth.login(username, password).pipe(catchError(() => of(null))),
-      timer(1000),
-    ])
-      .pipe(map(([data]) => data))
-      .subscribe((data) => {
-        if (data) this.router.navigate(['/']);
-        else
+    this.auth
+      .login(username, password)
+      .pipe(
+        leastTime(1000),
+        finalize(() => {
+          this.loading = false;
+        }),
+      )
+      .subscribe(
+        () => {
+          this.router.navigate(['/']);
+        },
+        () => {
           this.notifier.notify(
             NotificationType.Error,
             'Invalid username or password',
           );
-        this.loading = false;
-      });
+        },
+      );
   }
 }

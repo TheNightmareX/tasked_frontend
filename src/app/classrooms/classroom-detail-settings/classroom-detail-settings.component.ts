@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
-import { combineLatest, forkJoin, Observable, of, Subject, timer } from 'rxjs';
-import { catchError, debounceTime, first, map } from 'rxjs/operators';
+import { combineLatest, Observable, Subject } from 'rxjs';
+import { debounceTime, finalize, first, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
+import { leastTime } from 'src/app/common/least-time.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import { FormDataService } from 'src/app/core/form-data.service';
 import {
@@ -78,24 +79,28 @@ export class ClassroomDetailSettingsComponent implements OnInit {
     this.classroom$.pipe(first()).subscribe((classroom) => {
       const data = this.formData.filterUnchanged({ ...this.data }, classroom);
       this.loading = true;
-      forkJoin([
-        this.updateGql
-          .mutate({ id: classroom.id, data })
-          .pipe(catchError(() => of(null))),
-        timer(1000),
-      ]).subscribe(([result]) => {
-        if (result)
-          this.notifier.notify(
-            NotificationType.Success,
-            'Changes have been saved successfully',
-          );
-        else
-          this.notifier.notify(
-            NotificationType.Error,
-            'Failed to save the changes',
-          );
-        this.loading = false;
-      });
+      this.updateGql
+        .mutate({ id: classroom.id, data })
+        .pipe(
+          leastTime(1000),
+          finalize(() => {
+            this.loading = false;
+          }),
+        )
+        .subscribe(
+          () => {
+            this.notifier.notify(
+              NotificationType.Success,
+              'Changes have been saved successfully',
+            );
+          },
+          () => {
+            this.notifier.notify(
+              NotificationType.Error,
+              'Failed to save the changes',
+            );
+          },
+        );
     });
   }
 }

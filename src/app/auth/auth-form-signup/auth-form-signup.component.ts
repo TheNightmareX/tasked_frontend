@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
-import { forkJoin, of, Subject, timer } from 'rxjs';
-import { catchError, concatMap, map, throttleTime } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { concatMap, finalize, throttleTime } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
+import { leastTime } from 'src/app/common/least-time.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import { Gender, UserCreateGQL, UserCreateInput } from 'src/app/graphql';
 import { ProfileFormData } from 'src/app/profile/profile-form/profile-form-data.interface';
@@ -38,22 +39,25 @@ export class AuthFormSignupComponent implements OnInit {
     this.loading = true;
     const { username, password, nickname, gender } = this.data;
     const data: UserCreateInput = { username, password, nickname, gender };
-    forkJoin([
-      this.userCreateGql.mutate({ data }).pipe(
+    this.userCreateGql
+      .mutate({ data })
+      .pipe(
         concatMap(() => this.auth.login(username, password)),
-        catchError(() => of(null)),
-      ),
-      timer(1000),
-    ])
-      .pipe(map((values) => values[0]))
-      .subscribe((result) => {
-        if (result) this.router.navigate(['/']);
-        else
+        leastTime(1000),
+        finalize(() => {
+          this.loading = false;
+        }),
+      )
+      .subscribe(
+        () => {
+          this.router.navigate(['/']);
+        },
+        () => {
           this.notifier.notify(
             NotificationType.Error,
             `Username "${username}" is already taken`,
           );
-        this.loading = false;
-      });
+        },
+      );
   }
 }
