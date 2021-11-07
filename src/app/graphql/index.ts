@@ -864,6 +864,29 @@ export type MembershipFragment = {
   };
 };
 
+export type TaskCreateMutationVariables = Exact<{
+  data: TaskCreateInput;
+}>;
+
+export type TaskCreateMutation = {
+  __typename?: 'Mutation';
+  createTask: {
+    __typename?: 'Task';
+    id: string;
+    title: string;
+    description?: string | null | undefined;
+    createdAt: any;
+  };
+};
+
+export type TaskFragment = {
+  __typename?: 'Task';
+  id: string;
+  title: string;
+  description?: string | null | undefined;
+  createdAt: any;
+};
+
 export type UserCreateMutationVariables = Exact<{
   data: UserCreateInput;
 }>;
@@ -958,6 +981,14 @@ export const MembershipFragmentDoc = gql`
       gender
     }
     role
+  }
+`;
+export const TaskFragmentDoc = gql`
+  fragment Task on Task {
+    id
+    title
+    description
+    createdAt
   }
 `;
 export const AssignmentUpdateDocument = gql`
@@ -1352,6 +1383,28 @@ export class MembershipUpdateGQL extends Apollo.Mutation<
   MembershipUpdateMutationVariables
 > {
   document = MembershipUpdateDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const TaskCreateDocument = gql`
+  mutation TaskCreate($data: TaskCreateInput!) {
+    createTask(data: $data) {
+      ...Task
+    }
+  }
+  ${TaskFragmentDoc}
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class TaskCreateGQL extends Apollo.Mutation<
+  TaskCreateMutation,
+  TaskCreateMutationVariables
+> {
+  document = TaskCreateDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

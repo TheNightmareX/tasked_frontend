@@ -38,6 +38,11 @@ const routes: Routes = [
             (m) => m.ApplicationsModule,
           ),
       },
+      {
+        path: 'tasks',
+        loadChildren: () =>
+          import('./tasks/tasks.module').then((m) => m.TasksModule),
+      },
     ],
   },
   {

@@ -1,0 +1,9 @@
+<button mat-fab class="fab" (click)="popup.open()">
+  <mat-icon>add</mat-icon>
+</button>
+
+<app-popup #popup>
+  <ng-template>
+    <app-task-creation></app-task-creation>
+  </ng-template>
+</app-popup>
