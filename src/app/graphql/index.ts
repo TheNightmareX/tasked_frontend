@@ -342,6 +342,7 @@ export type QueryTaskArgs = {
 };
 
 export type QueryTasksArgs = {
+  isOwn?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -367,6 +368,7 @@ export type Task = {
   creator: User;
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
+  isActive: Scalars['Boolean'];
   title: Scalars['String'];
   updatedAt: Scalars['DateTime'];
 };
@@ -386,6 +388,7 @@ export type TaskCreateInput = {
 
 export type TaskUpdateInput = {
   description?: Maybe<Scalars['String']>;
+  isActive?: Maybe<Scalars['Boolean']>;
   title?: Maybe<Scalars['String']>;
 };
 
@@ -431,6 +434,7 @@ export type UserMembershipsArgs = {
 };
 
 export type UserTasksArgs = {
+  isOwn?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
