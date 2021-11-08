@@ -1,7 +1,3 @@
-:host > mat-list {
-  padding: 28px 0;
-}
-
 mat-divider:only-child {
   display: none;
 }
