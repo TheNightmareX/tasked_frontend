@@ -17,8 +17,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: ClassroomCreationComponent,
+        redirectTo: 'creation',
         pathMatch: 'full',
+      },
+      {
+        path: 'creation',
+        component: ClassroomCreationComponent,
       },
       {
         path: 'last',
