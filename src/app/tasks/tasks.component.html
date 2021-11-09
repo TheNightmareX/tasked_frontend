@@ -1,6 +1,15 @@
-<button mat-fab class="fab" (click)="popup.open()">
-  <mat-icon>add</mat-icon>
-</button>
+<div class="container" fxLayout="column">
+  <div class="header" fxLayout fxLayoutAlign="space-between center">
+    <h2 class="mat-title">6/48 Items</h2>
+    <button mat-flat-button class="uppercase" (click)="popup.open()">
+      New
+    </button>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="content"></div>
+</div>
 
 <app-popup #popup>
   <ng-template>
