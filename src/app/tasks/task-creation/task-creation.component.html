@@ -1,7 +1,7 @@
 <div class="container" fxLayout="column" fxLayoutGap="16px">
   <div matDialogTitle>New Task</div>
 
-  <form matDialogContent fxLayout="column" #form>
+  <form matDialogContent fxLayout="column" #form="ngForm">
     <mat-form-field color="accent">
       <mat-label>Title</mat-label>
       <input
