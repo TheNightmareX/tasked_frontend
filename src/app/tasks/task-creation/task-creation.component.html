@@ -1,4 +1,4 @@
-<div class="container" fxLayout="column" fxLayoutGap="16px">
+<div class="container" fxLayout="column" fxLayoutGap="32px">
   <div matDialogTitle>New Task</div>
 
   <form matDialogContent fxLayout="column" #form="ngForm">
@@ -31,9 +31,9 @@
     <div fxFlex></div>
     <button
       mat-button
+      type="submit"
       class="uppercase"
       [disabled]="!form.valid || loading"
-      (click)="create()"
     >
       create
     </button>
