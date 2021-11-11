@@ -17,11 +17,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'creation',
+        redirectTo: 'create',
         pathMatch: 'full',
       },
       {
-        path: 'creation',
+        path: 'create',
         component: ClassroomCreationComponent,
       },
       {
