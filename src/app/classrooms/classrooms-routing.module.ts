@@ -4,6 +4,7 @@ import { AuthGuard } from '../auth/auth.guard';
 import { ClassroomCreationComponent } from './classroom-creation/classroom-creation.component';
 import { ClassroomDetailAssignmentsComponent } from './classroom-detail-assignments/classroom-detail-assignments.component';
 import { ClassroomDetailSettingsComponent } from './classroom-detail-settings/classroom-detail-settings.component';
+import { ClassroomDetailTabRedirectorComponent } from './classroom-detail-tab-redirector/classroom-detail-tab-redirector.component';
 import { ClassroomDetailComponent } from './classroom-detail/classroom-detail.component';
 import { ClassroomRedirectorComponent } from './classroom-redirector/classroom-redirector.component';
 import { ClassroomsComponent } from './classrooms.component';
@@ -34,8 +35,8 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            pathMatch: 'full',
-            redirectTo: 'assignments',
+            component: ClassroomDetailTabRedirectorComponent,
+            pathMatch: 'exact',
           },
           {
             path: 'assignments',

@@ -15,6 +15,7 @@ import { ClassroomRedirectorComponent } from './classroom-redirector/classroom-r
 import { ClassroomsRoutingModule } from './classrooms-routing.module';
 import { ClassroomsComponent } from './classrooms.component';
 import { ClassroomDetailSettingsActionsComponent } from './classroom-detail-settings-actions/classroom-detail-settings-actions.component';
+import { ClassroomDetailTabRedirectorComponent } from './classroom-detail-tab-redirector/classroom-detail-tab-redirector.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ClassroomDetailSettingsActionsComponent } from './classroom-detail-sett
     ClassroomDetailSettingsSectionComponent,
     ClassroomDetailAssignmentsItemDetailComponent,
     ClassroomDetailSettingsActionsComponent,
+    ClassroomDetailTabRedirectorComponent,
   ],
   imports: [SharedModule, ClassroomsRoutingModule],
 })
