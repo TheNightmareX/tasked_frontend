@@ -363,7 +363,7 @@ export enum Role {
 
 export type Task = {
   __typename?: 'Task';
-  assignments: Assignment;
+  assignments: PaginatedAssignments;
   createdAt: Scalars['DateTime'];
   creator: User;
   description?: Maybe<Scalars['String']>;
