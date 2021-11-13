@@ -37,28 +37,21 @@ import { ProfileFormData } from './profile-form-data.interface';
 export class ProfileFormComponent
   implements OnInit, AfterViewInit, ControlValueAccessor, Validator
 {
+  @Input() update = false;
   data: ProfileFormData = {
     username: '',
     password: '',
     passwordConfirm: '',
     gender: Gender.Unknown,
   };
-
   genderSelections = [
     { text: 'Male', value: Gender.Male },
     { text: 'Female', value: Gender.Female },
     { text: 'Alien', value: Gender.Unknown },
   ];
 
-  @Input()
-  update = false;
-
-  @ViewChild(NgForm)
-  private form?: NgForm;
-
-  @ViewChild(MatInput)
-  private firstInput?: MatInput;
-
+  @ViewChild(NgForm) private form?: NgForm;
+  @ViewChild(MatInput) private firstInput?: MatInput;
   private onChange = (v: unknown) => {};
   private onTouched = () => {};
 

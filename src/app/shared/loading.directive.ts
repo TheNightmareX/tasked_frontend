@@ -11,14 +11,7 @@ import { MatSpinner } from '@angular/material/progress-spinner';
   selector: '[appLoading]',
 })
 export class LoadingDirective {
-  @Input()
-  appLoadingDiameter?: number;
-
-  constructor(
-    private templateRef: TemplateRef<any>,
-    private viewContainerRef: ViewContainerRef,
-    private componentFactoryResolver: ComponentFactoryResolver,
-  ) {}
+  @Input() appLoadingDiameter?: number;
 
   @Input()
   set appLoading(loading: boolean) {
@@ -26,6 +19,12 @@ export class LoadingDirective {
     if (!loading) this.createContent();
     else this.createSpinner();
   }
+
+  constructor(
+    private templateRef: TemplateRef<any>,
+    private viewContainerRef: ViewContainerRef,
+    private componentFactoryResolver: ComponentFactoryResolver,
+  ) {}
 
   private createContent() {
     return this.viewContainerRef.createEmbeddedView(this.templateRef);

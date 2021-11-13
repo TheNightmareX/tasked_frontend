@@ -18,8 +18,7 @@ type Assignment =
   styleUrls: ['./classroom-detail-assignments-item.component.css'],
 })
 export class ClassroomDetailAssignmentsItemComponent implements OnInit {
-  @Input()
-  assignment?: Assignment;
+  @Input() assignment?: Assignment;
 
   completionIcon = '';
   completionTooltip = '';

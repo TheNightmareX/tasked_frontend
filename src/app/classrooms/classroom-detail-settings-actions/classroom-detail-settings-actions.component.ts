@@ -21,9 +21,7 @@ type Classroom = ClassroomDetailQuery['classroom'];
   styleUrls: ['./classroom-detail-settings-actions.component.css'],
 })
 export class ClassroomDetailSettingsActionsComponent implements OnInit {
-  @Input()
-  admin = false;
-
+  @Input() admin = false;
   loading = false;
 
   private classroom$!: Observable<Classroom>;

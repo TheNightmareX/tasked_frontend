@@ -12,8 +12,7 @@ type Assignment =
   viewProviders: [DatePipe],
 })
 export class ClassroomDetailAssignmentsItemDetailComponent implements OnInit {
-  @Input()
-  assignment?: Assignment;
+  @Input() assignment?: Assignment;
 
   infoItems: Info[] = [];
 

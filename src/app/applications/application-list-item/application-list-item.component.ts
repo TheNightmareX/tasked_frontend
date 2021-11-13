@@ -24,14 +24,9 @@ type Application =
   styleUrls: ['./application-list-item.component.css'],
 })
 export class ApplicationListItemComponent implements OnInit {
-  @Input()
-  application?: Application;
-
-  @Input()
-  actions = false;
-
+  @Input() application?: Application;
+  @Input() actions = false;
   loading = false;
-
   ApplicationStatus = ApplicationStatus;
 
   constructor(

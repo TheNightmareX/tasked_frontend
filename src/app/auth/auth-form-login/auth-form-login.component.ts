@@ -18,8 +18,7 @@ export class AuthFormLoginComponent implements OnInit {
   loading = false;
   submit$ = new Subject<Event>();
 
-  @ViewChild(MatInput)
-  private firstInput?: MatInput;
+  @ViewChild(MatInput) private firstInput?: MatInput;
 
   constructor(
     private router: Router,

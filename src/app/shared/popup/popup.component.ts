@@ -19,9 +19,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./popup.component.css'],
 })
 export class PopupComponent implements OnInit {
-  @ContentChild(TemplateRef)
-  private contentTemplate!: TemplateRef<never>;
-
+  @ContentChild(TemplateRef) private contentTemplate!: TemplateRef<never>;
   private sheetRef?: MatBottomSheetRef<PopupComponent>;
   private dialogRef?: MatDialogRef<PopupComponent>;
 

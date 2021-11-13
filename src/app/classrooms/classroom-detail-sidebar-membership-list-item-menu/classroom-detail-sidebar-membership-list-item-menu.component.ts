@@ -27,14 +27,11 @@ type Membership =
 export class ClassroomDetailSidebarMembershipListItemMenuComponent
   implements OnInit, OnDestroy
 {
-  @Input()
-  membership?: Membership;
-
+  @Input() membership?: Membership;
+  loading = false;
   canPromote?: boolean;
   canDemote?: boolean;
   canRemove?: boolean;
-
-  loading = false;
 
   private subscription?: Subscription;
 

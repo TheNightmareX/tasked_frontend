@@ -16,14 +16,9 @@ type User = Pick<UserFragment, 'username' | 'nickname'> &
   styleUrls: ['./username.component.css'],
 })
 export class UsernameComponent implements OnInit, OnChanges {
-  @Input()
-  user?: User;
-
-  @Input()
-  color = false;
-
-  @HostBinding('class')
-  classList: string[] = [];
+  @Input() user?: User;
+  @Input() color = false;
+  @HostBinding('class') classList: string[] = [];
 
   constructor() {}
 
