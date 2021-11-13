@@ -1,5 +1,5 @@
 <div class="container" fxLayout="column">
-  <mat-accordion multi fxFlex>
+  <mat-accordion fxFlex>
     <app-classroom-detail-tasks-item
       *ngFor="let task of tasks$ | async; trackBy: identifyTask"
       [task]="task"
