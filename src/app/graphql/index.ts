@@ -34,7 +34,6 @@ export enum ApplicationStatus {
 
 export type Assignment = {
   __typename?: 'Assignment';
-  classroom: Classroom;
   createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
   isCompleted: Scalars['Boolean'];
@@ -46,7 +45,6 @@ export type Assignment = {
 };
 
 export type AssignmentCreateInput = {
-  classroom: Scalars['ID'];
   isImportant?: Maybe<Scalars['Boolean']>;
   isPublic?: Maybe<Scalars['Boolean']>;
   recipient: Scalars['ID'];
@@ -78,6 +76,7 @@ export type Classroom = {
   membership?: Maybe<Membership>;
   memberships: PaginatedMemberships;
   name: Scalars['String'];
+  tasks: PaginatedTasks;
   updatedAt: Scalars['DateTime'];
 };
 
@@ -364,6 +363,7 @@ export enum Role {
 export type Task = {
   __typename?: 'Task';
   assignments: PaginatedAssignments;
+  classroom: Classroom;
   createdAt: Scalars['DateTime'];
   creator: User;
   description?: Maybe<Scalars['String']>;
@@ -382,11 +382,13 @@ export type TaskAssignmentsArgs = {
 };
 
 export type TaskCreateInput = {
+  classroom: Scalars['ID'];
   description?: Maybe<Scalars['String']>;
   title: Scalars['String'];
 };
 
 export type TaskUpdateInput = {
+  classroom?: Maybe<Scalars['ID']>;
   description?: Maybe<Scalars['String']>;
   isActive?: Maybe<Scalars['Boolean']>;
   title?: Maybe<Scalars['String']>;
