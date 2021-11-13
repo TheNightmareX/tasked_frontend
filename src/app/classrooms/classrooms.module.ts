@@ -16,24 +16,26 @@ import { ClassroomsRoutingModule } from './classrooms-routing.module';
 import { ClassroomsComponent } from './classrooms.component';
 import { ClassroomDetailSettingsActionsComponent } from './classroom-detail-settings-actions/classroom-detail-settings-actions.component';
 import { ClassroomDetailTabRedirectorComponent } from './classroom-detail-tab-redirector/classroom-detail-tab-redirector.component';
+import { ClassroomDetailTasksComponent } from './classroom-detail-tasks/classroom-detail-tasks.component';
 
 @NgModule({
   declarations: [
     ClassroomsComponent,
     ClassroomDetailComponent,
+    ClassroomCreationComponent,
     ClassroomDetailAssignmentsComponent,
     ClassroomDetailAssignmentsItemComponent,
-    ClassroomCreationComponent,
+    ClassroomDetailAssignmentsItemDetailComponent,
+    ClassroomDetailTasksComponent,
+    ClassroomDetailSettingsComponent,
+    ClassroomDetailSettingsSectionComponent,
+    ClassroomDetailSettingsActionsComponent,
+    ClassroomDetailTabRedirectorComponent,
     ClassroomDetailSidebarComponent,
     ClassroomDetailSidebarMembershipListComponent,
     ClassroomDetailSidebarMembershipListItemComponent,
     ClassroomDetailSidebarMembershipListItemMenuComponent,
     ClassroomRedirectorComponent,
-    ClassroomDetailSettingsComponent,
-    ClassroomDetailSettingsSectionComponent,
-    ClassroomDetailAssignmentsItemDetailComponent,
-    ClassroomDetailSettingsActionsComponent,
-    ClassroomDetailTabRedirectorComponent,
   ],
   imports: [SharedModule, ClassroomsRoutingModule],
 })
