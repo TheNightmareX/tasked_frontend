@@ -17,6 +17,7 @@ import { ClassroomsComponent } from './classrooms.component';
 import { ClassroomDetailSettingsActionsComponent } from './classroom-detail-settings-actions/classroom-detail-settings-actions.component';
 import { ClassroomDetailTabRedirectorComponent } from './classroom-detail-tab-redirector/classroom-detail-tab-redirector.component';
 import { ClassroomDetailTasksComponent } from './classroom-detail-tasks/classroom-detail-tasks.component';
+import { ClassroomDetailTasksItemComponent } from './classroom-detail-tasks-item/classroom-detail-tasks-item.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ClassroomDetailTasksComponent } from './classroom-detail-tasks/classroo
     ClassroomDetailAssignmentsItemComponent,
     ClassroomDetailAssignmentsItemDetailComponent,
     ClassroomDetailTasksComponent,
+    ClassroomDetailTasksItemComponent,
     ClassroomDetailSettingsComponent,
     ClassroomDetailSettingsSectionComponent,
     ClassroomDetailSettingsActionsComponent,

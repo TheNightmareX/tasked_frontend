@@ -643,6 +643,30 @@ export type ClassroomMembershipListQuery = {
   };
 };
 
+export type ClassroomTaskListQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type ClassroomTaskListQuery = {
+  __typename?: 'Query';
+  classroom: {
+    __typename?: 'Classroom';
+    id: string;
+    tasks: {
+      __typename?: 'PaginatedTasks';
+      total: number;
+      results: Array<{
+        __typename?: 'Task';
+        id: string;
+        title: string;
+        description?: string | null | undefined;
+        createdAt: any;
+        assignments: { __typename?: 'PaginatedAssignments'; total: number };
+      }>;
+    };
+  };
+};
+
 export type ClassroomUpdateMutationVariables = Exact<{
   id: Scalars['ID'];
   data: ClassroomUpdateInput;
@@ -888,6 +912,24 @@ export type TaskCreateMutation = {
     title: string;
     description?: string | null | undefined;
     createdAt: any;
+    assignments: { __typename?: 'PaginatedAssignments'; total: number };
+  };
+};
+
+export type TaskUpdateMutationVariables = Exact<{
+  id: Scalars['ID'];
+  data: TaskUpdateInput;
+}>;
+
+export type TaskUpdateMutation = {
+  __typename?: 'Mutation';
+  updateTask: {
+    __typename?: 'Task';
+    id: string;
+    title: string;
+    description?: string | null | undefined;
+    createdAt: any;
+    assignments: { __typename?: 'PaginatedAssignments'; total: number };
   };
 };
 
@@ -897,6 +939,7 @@ export type TaskFragment = {
   title: string;
   description?: string | null | undefined;
   createdAt: any;
+  assignments: { __typename?: 'PaginatedAssignments'; total: number };
 };
 
 export type UserCreateMutationVariables = Exact<{
@@ -1000,6 +1043,9 @@ export const TaskFragmentDoc = gql`
     id
     title
     description
+    assignments {
+      total
+    }
     createdAt
   }
 `;
@@ -1219,6 +1265,34 @@ export class ClassroomMembershipListGQL extends Apollo.Query<
     super(apollo);
   }
 }
+export const ClassroomTaskListDocument = gql`
+  query ClassroomTaskList($id: ID!) {
+    classroom(id: $id) {
+      id
+      tasks {
+        total
+        results {
+          ...Task
+        }
+      }
+    }
+  }
+  ${TaskFragmentDoc}
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ClassroomTaskListGQL extends Apollo.Query<
+  ClassroomTaskListQuery,
+  ClassroomTaskListQueryVariables
+> {
+  document = ClassroomTaskListDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const ClassroomUpdateDocument = gql`
   mutation ClassroomUpdate($id: ID!, $data: ClassroomUpdateInput!) {
     updateClassroom(id: $id, data: $data) {
@@ -1417,6 +1491,28 @@ export class TaskCreateGQL extends Apollo.Mutation<
   TaskCreateMutationVariables
 > {
   document = TaskCreateDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const TaskUpdateDocument = gql`
+  mutation TaskUpdate($id: ID!, $data: TaskUpdateInput!) {
+    updateTask(id: $id, data: $data) {
+      ...Task
+    }
+  }
+  ${TaskFragmentDoc}
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class TaskUpdateGQL extends Apollo.Mutation<
+  TaskUpdateMutation,
+  TaskUpdateMutationVariables
+> {
+  document = TaskUpdateDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

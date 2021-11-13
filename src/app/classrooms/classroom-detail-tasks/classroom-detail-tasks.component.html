@@ -1,0 +1,8 @@
+<div class="container">
+  <mat-accordion multi>
+    <app-classroom-detail-tasks-item
+      *ngFor="let task of tasks$ | async; trackBy: identifyTask"
+      [task]="task"
+    ></app-classroom-detail-tasks-item>
+  </mat-accordion>
+</div>

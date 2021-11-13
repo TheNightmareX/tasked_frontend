@@ -1,0 +1,11 @@
+query ClassroomTaskList($id: ID!) {
+  classroom(id: $id) {
+    id
+    tasks {
+      total
+      results {
+        ...Task
+      }
+    }
+  }
+}
