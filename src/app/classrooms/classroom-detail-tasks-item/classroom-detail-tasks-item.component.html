@@ -35,7 +35,7 @@
     <mat-list>
       <mat-list-item>
         <mat-icon matListIcon>task_alt</mat-icon>
-        <div matLine>Assigned</div>
+        <div matLine>Assignments</div>
         <div matLine>{{ task?.assignments?.total }}</div>
       </mat-list-item>
       <mat-list-item>
@@ -50,9 +50,9 @@
         mat-button
         class="uppercase"
         [disabled]="!valid || loading"
-        (click)="save()"
+        (click)="update()"
       >
-        <span *appLoading="loading; diameter: 25">Save</span>
+        <span *appLoading="loading; diameter: 25">Update</span>
       </button>
     </mat-action-row>
   </ng-template>

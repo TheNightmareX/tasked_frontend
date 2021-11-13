@@ -56,7 +56,7 @@ export class ClassroomDetailTasksItemComponent implements OnInit {
       this.data = this.formData.pick(this.task, ['title', 'description']);
   }
 
-  save() {
+  update() {
     if (!this.task) return;
     if (this.loading) return;
 
