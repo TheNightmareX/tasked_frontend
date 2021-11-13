@@ -45,20 +45,20 @@ export class ClassroomDetailSettingsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.parent!.paramMap.subscribe((params) => {
-      this.classroom$ = this.queryGql
-        .watch({ id: params.get('id')! })
-        .valueChanges.pipe(map((result) => result.data.classroom));
+    const id = this.route.parent!.snapshot.paramMap.get('id')!;
 
-      this.isCreator$ = combineLatest([this.classroom$, this.auth.user$]).pipe(
-        map(([classroom, user]) => classroom.creator.id == user!.id),
-      );
+    this.classroom$ = this.queryGql
+      .watch({ id })
+      .valueChanges.pipe(map((result) => result.data.classroom));
 
-      this.modified$ = combineLatest([this.classroom$, this.change$]).pipe(
-        debounceTime(100),
-        map(([classroom]) => this.formData.isModified(this.data, classroom)),
-      );
-    });
+    this.isCreator$ = combineLatest([this.classroom$, this.auth.user$]).pipe(
+      map(([classroom, user]) => classroom.creator.id == user!.id),
+    );
+
+    this.modified$ = combineLatest([this.classroom$, this.change$]).pipe(
+      debounceTime(100),
+      map(([classroom]) => this.formData.isModified(this.data, classroom)),
+    );
 
     this.reset();
   }

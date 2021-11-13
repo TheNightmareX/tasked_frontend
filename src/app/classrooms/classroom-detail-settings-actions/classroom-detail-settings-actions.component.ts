@@ -39,11 +39,10 @@ export class ClassroomDetailSettingsActionsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.parent!.paramMap.subscribe((params) => {
-      this.classroom$ = this.classroomGql
-        .watch({ id: params.get('id')! })
-        .valueChanges.pipe(map((result) => result.data.classroom));
-    });
+    const id = this.route.parent!.snapshot.paramMap.get('id')!;
+    this.classroom$ = this.classroomGql
+      .watch({ id })
+      .valueChanges.pipe(map((result) => result.data.classroom));
   }
 
   exit() {

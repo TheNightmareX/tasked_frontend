@@ -29,37 +29,36 @@ export class ClassroomDetailSidebarMembershipListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params) => {
-      const id = params.get('id')!;
-      this.memberships$ = combineLatest([
-        this.listGql
-          .watch({ id })
-          .valueChanges.pipe(
-            map((result) => [...result.data.classroom.memberships.results]),
-          ),
-        this.classroomGql
-          .watch({ id })
-          .valueChanges.pipe(map((result) => result.data.classroom)),
-        this.auth.user$,
-      ]).pipe(
-        map(([memberships, classroom, user]) =>
-          memberships
-            .sort((a, b) =>
-              a.owner.id == user!.id ? -1 : b.owner.id == user!.id ? 1 : 0,
-            )
-            .sort((a, b) =>
-              a.owner.id == classroom.creator.id
-                ? -1
-                : b.owner.id == classroom.creator.id
-                ? 1
-                : a.role == b.role
-                ? 0
-                : a.role == Role.Teacher
-                ? -1
-                : 1,
-            ),
+    const id = this.route.snapshot.paramMap.get('id')!;
+
+    this.memberships$ = combineLatest([
+      this.listGql
+        .watch({ id })
+        .valueChanges.pipe(
+          map((result) => [...result.data.classroom.memberships.results]),
         ),
-      );
-    });
+      this.classroomGql
+        .watch({ id })
+        .valueChanges.pipe(map((result) => result.data.classroom)),
+      this.auth.user$,
+    ]).pipe(
+      map(([memberships, classroom, user]) =>
+        memberships
+          .sort((a, b) =>
+            a.owner.id == user!.id ? -1 : b.owner.id == user!.id ? 1 : 0,
+          )
+          .sort((a, b) =>
+            a.owner.id == classroom.creator.id
+              ? -1
+              : b.owner.id == classroom.creator.id
+              ? 1
+              : a.role == b.role
+              ? 0
+              : a.role == Role.Teacher
+              ? -1
+              : 1,
+          ),
+      ),
+    );
   }
 }

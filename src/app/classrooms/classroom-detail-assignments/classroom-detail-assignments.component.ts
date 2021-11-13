@@ -25,30 +25,29 @@ export class ClassroomDetailAssignmentsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.parent!.paramMap.subscribe((params) => {
-      const assignments$ = this.listGql
-        .watch({ id: params.get('id')!, isOwn: true })
-        .valueChanges.pipe(
-          map(({ data }) =>
-            [...data.classroom.assignments.results]
-              .sort((a, b) =>
-                a.isPublic == b.isPublic ? 0 : a.isPublic ? -1 : 1,
-              )
-              .sort((a, b) =>
-                a.isImportant == b.isImportant ? 0 : a.isImportant ? -1 : 1,
-              ),
-          ),
-        );
-      this.assignmentsPending$ = assignments$.pipe(
-        map((assignments) =>
-          assignments.filter((assignment) => !assignment.isCompleted),
+    const id = this.route.parent!.snapshot.paramMap.get('id')!;
+    const assignments$ = this.listGql
+      .watch({ id, isOwn: true })
+      .valueChanges.pipe(
+        map(({ data }) =>
+          [...data.classroom.assignments.results]
+            .sort((a, b) =>
+              a.isPublic == b.isPublic ? 0 : a.isPublic ? -1 : 1,
+            )
+            .sort((a, b) =>
+              a.isImportant == b.isImportant ? 0 : a.isImportant ? -1 : 1,
+            ),
         ),
       );
-      this.assignmentsCompleted$ = assignments$.pipe(
-        map((assignments) =>
-          assignments.filter((assignment) => assignment.isCompleted),
-        ),
-      );
-    });
+    this.assignmentsPending$ = assignments$.pipe(
+      map((assignments) =>
+        assignments.filter((assignment) => !assignment.isCompleted),
+      ),
+    );
+    this.assignmentsCompleted$ = assignments$.pipe(
+      map((assignments) =>
+        assignments.filter((assignment) => assignment.isCompleted),
+      ),
+    );
   }
 }

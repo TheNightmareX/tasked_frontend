@@ -20,10 +20,9 @@ export class ClassroomDetailSidebarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params) => {
-      this.classroom$ = this.classroomGql
-        .watch({ id: params.get('id')! })
-        .valueChanges.pipe(map((result) => result.data.classroom));
-    });
+    const id = this.route.snapshot.paramMap.get('id')!;
+    this.classroom$ = this.classroomGql
+      .watch({ id })
+      .valueChanges.pipe(map((result) => result.data.classroom));
   }
 }
