@@ -99,6 +99,12 @@ export type ClassroomMembershipsArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
+export type ClassroomTasksArgs = {
+  isOwn?: Maybe<Scalars['Boolean']>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
 export type ClassroomCreateInput = {
   description?: Maybe<Scalars['String']>;
   name: Scalars['String'];
