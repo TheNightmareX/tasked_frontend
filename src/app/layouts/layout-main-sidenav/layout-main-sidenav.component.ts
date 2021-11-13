@@ -13,11 +13,6 @@ export class LayoutMainSidenavComponent implements OnInit {
   ngOnInit() {
     this.items = [
       {
-        title: 'Tasks',
-        route: '/tasks',
-        icon: 'task',
-      },
-      {
         title: 'Applications',
         route: '/applications',
         icon: 'person_add_alt_1',
