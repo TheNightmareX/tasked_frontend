@@ -50,6 +50,7 @@ export class ApplicationCreationComponent implements OnInit {
                 ...prev,
                 joinApplications: {
                   ...prev.joinApplications,
+                  total: prev.joinApplications.total + 1,
                   results: [
                     result.data!.createJoinApplication,
                     ...prev.joinApplications.results,

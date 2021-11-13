@@ -51,6 +51,7 @@ export class ClassroomDetailTasksCreationBarComponent implements OnInit {
                   ...prev.classroom,
                   tasks: {
                     ...prev.classroom.tasks,
+                    total: prev.classroom.tasks.total + 1,
                     results: [
                       result.data!.createTask,
                       ...prev.classroom.tasks.results,

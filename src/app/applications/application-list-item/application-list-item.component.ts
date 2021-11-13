@@ -57,6 +57,7 @@ export class ApplicationListItemComponent implements OnInit {
                   ...prev.classroom,
                   memberships: {
                     ...prev.classroom.memberships,
+                    total: prev.classroom.memberships.total + 1,
                     results: [
                       ...prev.classroom.memberships.results,
                       result.data!.acceptJoinApplication.membership,

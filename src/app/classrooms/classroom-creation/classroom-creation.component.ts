@@ -48,6 +48,7 @@ export class ClassroomCreationComponent implements OnInit {
                 ...prev,
                 classrooms: {
                   ...prev.classrooms,
+                  total: prev.classrooms.total + 1,
                   results: [
                     ...prev.classrooms.results,
                     result.data!.createClassroom,
