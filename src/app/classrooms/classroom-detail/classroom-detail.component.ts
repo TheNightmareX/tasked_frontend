@@ -3,9 +3,14 @@ import { MediaObserver } from '@angular/flex-layout';
 import { MatDrawerMode } from '@angular/material/sidenav';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { first, map } from 'rxjs/operators';
+import { first, map, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
-import { ClassroomDetailGQL, ClassroomDetailQuery } from 'src/app/graphql';
+import {
+  ClassroomDetailGQL,
+  ClassroomDetailQuery,
+  ClassroomMembershipListDocument,
+  Role,
+} from 'src/app/graphql';
 import { ClassroomsLocalStorageService } from '../classrooms-local-storage.service';
 
 type Classroom = ClassroomDetailQuery['classroom'];
@@ -21,10 +26,7 @@ export class ClassroomDetailComponent implements OnInit {
 
   classroom$!: Observable<Classroom>;
 
-  links: TabLink[] = [
-    ['Assignments', ['assignments']],
-    ['Settings', ['settings']],
-  ];
+  links: TabLink[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -53,9 +55,17 @@ export class ClassroomDetailComponent implements OnInit {
         this.local.lastActivatedClassroomMap[user!.id] = id;
       });
 
-      this.classroom$ = this.classroomDetailGql
-        .watch({ id })
-        .valueChanges.pipe(map(({ data }) => data.classroom));
+      this.classroom$ = this.classroomDetailGql.watch({ id }).valueChanges.pipe(
+        map(({ data }) => data.classroom),
+        tap((classroom) => {
+          this.links = [
+            classroom.membership!.role == Role.Student
+              ? ['Assignments', ['assignments']]
+              : ['Tasks', ['tasks']],
+            ['Settings', ['settings']],
+          ];
+        }),
+      );
     });
   }
 }
