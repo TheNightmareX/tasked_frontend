@@ -1,0 +1,20 @@
+<div fxLayout fxLayoutAlign="start center" fxLayoutGap="8px">
+  <mat-form-field fxFlex appearance="standard" color="accent">
+    <mat-label>New Task</mat-label>
+    <input
+      matInput
+      maxlength="15"
+      type="text"
+      [(ngModel)]="data"
+      #model="ngModel"
+    />
+    <mat-hint align="end">{{ data.length }} / 15</mat-hint>
+  </mat-form-field>
+  <button
+    mat-icon-button
+    [disabled]="!model.valid || !data || loading"
+    (click)="create()"
+  >
+    <mat-icon>send</mat-icon>
+  </button>
+</div>

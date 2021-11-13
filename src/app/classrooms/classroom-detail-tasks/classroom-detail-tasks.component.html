@@ -1,8 +1,10 @@
-<div class="container">
-  <mat-accordion multi>
+<div class="container" fxLayout="column">
+  <mat-accordion multi fxFlex>
     <app-classroom-detail-tasks-item
       *ngFor="let task of tasks$ | async; trackBy: identifyTask"
       [task]="task"
     ></app-classroom-detail-tasks-item>
   </mat-accordion>
+  <mat-divider></mat-divider>
+  <app-classroom-detail-tasks-creation-bar></app-classroom-detail-tasks-creation-bar>
 </div>
