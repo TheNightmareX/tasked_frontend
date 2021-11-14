@@ -112,23 +112,33 @@ export class ClassroomDetailTasksItemAssignPopupComponent
           leastTime(1000),
           finalize(() => {
             this.loading = false;
+            // Close the popup whether succeed or not because I'm lazy to
+            // restore the selections if it fails. :]
+            this.popup.close();
           }),
         )
-        .subscribe((results) => {
-          const { creation, deletion } = results.reduce(
-            (counter, operation) => {
-              if (operation == 'creation') counter.creation++;
-              else counter.deletion++;
-              return counter;
-            },
-            { creation: 0, deletion: 0 },
-          );
-          this.notifier.notify(
-            NotificationType.Success,
-            `Assignments updated: assigned ${creation}, revoked ${deletion}`,
-          );
-          this.popup.close();
-        });
+        .subscribe(
+          (results) => {
+            const { creation, deletion } = results.reduce(
+              (counter, operation) => {
+                if (operation == 'creation') counter.creation++;
+                else counter.deletion++;
+                return counter;
+              },
+              { creation: 0, deletion: 0 },
+            );
+            this.notifier.notify(
+              NotificationType.Success,
+              `Assignments updated: assigned ${creation}, revoked ${deletion}`,
+            );
+          },
+          () => {
+            this.notifier.notify(
+              NotificationType.Error,
+              'Failed to update the assignments',
+            );
+          },
+        );
   }
 
   identifyItem(index: number, item: Item) {
