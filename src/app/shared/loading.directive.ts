@@ -5,6 +5,7 @@ import {
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
 import { MatSpinner } from '@angular/material/progress-spinner';
 
 @Directive({
@@ -12,6 +13,7 @@ import { MatSpinner } from '@angular/material/progress-spinner';
 })
 export class LoadingDirective {
   @Input() appLoadingDiameter?: number;
+  @Input() appLoadingColor: ThemePalette = 'primary';
 
   @Input()
   set appLoading(loading: boolean) {
@@ -35,14 +37,13 @@ export class LoadingDirective {
       this.componentFactoryResolver.resolveComponentFactory(MatSpinner);
 
     const spinner = this.viewContainerRef.createComponent(factory);
+    const $spinner: HTMLElement = spinner.instance._elementRef.nativeElement;
 
     if (this.appLoadingDiameter)
       spinner.instance.diameter = this.appLoadingDiameter;
+    if (this.appLoadingColor) spinner.instance.color = this.appLoadingColor;
 
-    (spinner.instance._elementRef.nativeElement as HTMLElement).setAttribute(
-      'style',
-      'display: inline-block',
-    );
+    $spinner.setAttribute('style', 'display: inline-block');
 
     return spinner;
   }
