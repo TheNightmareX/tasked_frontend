@@ -125,8 +125,9 @@ export class ClassroomDetailTasksItemAssignPopupComponent
           );
           this.notifier.notify(
             NotificationType.Success,
-            `Assignments updated: assigned ${creation} revoked ${deletion}`,
+            `Assignments updated: assigned ${creation}, revoked ${deletion}`,
           );
+          this.popup.close();
         });
   }
 
