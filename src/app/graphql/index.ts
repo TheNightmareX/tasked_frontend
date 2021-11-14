@@ -460,6 +460,28 @@ export type UserUpdateInput = {
   password?: Maybe<Scalars['String']>;
 };
 
+export type AssignmentCreateMutationVariables = Exact<{
+  data: AssignmentCreateInput;
+}>;
+
+export type AssignmentCreateMutation = {
+  __typename?: 'Mutation';
+  createAssignment: {
+    __typename?: 'Assignment';
+    id: string;
+    recipient: { __typename?: 'User'; id: string };
+  };
+};
+
+export type AssignmentDeleteMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type AssignmentDeleteMutation = {
+  __typename?: 'Mutation';
+  deleteAssignment: { __typename?: 'Assignment'; id: string };
+};
+
 export type AssignmentUpdateMutationVariables = Exact<{
   id: Scalars['ID'];
   data: AssignmentUpdateInput;
@@ -900,6 +922,33 @@ export type MembershipFragment = {
   };
 };
 
+export type TaskAssignmentListAssignmentFragment = {
+  __typename?: 'Assignment';
+  id: string;
+  recipient: { __typename?: 'User'; id: string };
+};
+
+export type TaskAssignmentListQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type TaskAssignmentListQuery = {
+  __typename?: 'Query';
+  task: {
+    __typename?: 'Task';
+    id: string;
+    assignments: {
+      __typename?: 'PaginatedAssignments';
+      total: number;
+      results: Array<{
+        __typename?: 'Assignment';
+        id: string;
+        recipient: { __typename?: 'User'; id: string };
+      }>;
+    };
+  };
+};
+
 export type TaskCreateMutationVariables = Exact<{
   data: TaskCreateInput;
 }>;
@@ -1038,6 +1087,14 @@ export const MembershipFragmentDoc = gql`
     role
   }
 `;
+export const TaskAssignmentListAssignmentFragmentDoc = gql`
+  fragment TaskAssignmentListAssignment on Assignment {
+    id
+    recipient {
+      id
+    }
+  }
+`;
 export const TaskFragmentDoc = gql`
   fragment Task on Task {
     id
@@ -1049,6 +1106,49 @@ export const TaskFragmentDoc = gql`
     createdAt
   }
 `;
+export const AssignmentCreateDocument = gql`
+  mutation AssignmentCreate($data: AssignmentCreateInput!) {
+    createAssignment(data: $data) {
+      ...TaskAssignmentListAssignment
+    }
+  }
+  ${TaskAssignmentListAssignmentFragmentDoc}
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AssignmentCreateGQL extends Apollo.Mutation<
+  AssignmentCreateMutation,
+  AssignmentCreateMutationVariables
+> {
+  document = AssignmentCreateDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const AssignmentDeleteDocument = gql`
+  mutation AssignmentDelete($id: ID!) {
+    deleteAssignment(id: $id) {
+      id
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AssignmentDeleteGQL extends Apollo.Mutation<
+  AssignmentDeleteMutation,
+  AssignmentDeleteMutationVariables
+> {
+  document = AssignmentDeleteDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const AssignmentUpdateDocument = gql`
   mutation AssignmentUpdate($id: ID!, $data: AssignmentUpdateInput!) {
     updateAssignment(id: $id, data: $data) {
@@ -1469,6 +1569,34 @@ export class MembershipUpdateGQL extends Apollo.Mutation<
   MembershipUpdateMutationVariables
 > {
   document = MembershipUpdateDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const TaskAssignmentListDocument = gql`
+  query TaskAssignmentList($id: ID!) {
+    task(id: $id) {
+      id
+      assignments {
+        total
+        results {
+          ...TaskAssignmentListAssignment
+        }
+      }
+    }
+  }
+  ${TaskAssignmentListAssignmentFragmentDoc}
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class TaskAssignmentListGQL extends Apollo.Query<
+  TaskAssignmentListQuery,
+  TaskAssignmentListQueryVariables
+> {
+  document = TaskAssignmentListDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

@@ -1,0 +1,6 @@
+fragment TaskAssignmentListAssignment on Assignment {
+  id
+  recipient {
+    id
+  }
+}

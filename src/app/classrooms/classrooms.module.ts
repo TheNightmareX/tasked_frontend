@@ -13,6 +13,7 @@ import { ClassroomDetailSidebarMembershipListComponent } from './classroom-detai
 import { ClassroomDetailSidebarComponent } from './classroom-detail-sidebar/classroom-detail-sidebar.component';
 import { ClassroomDetailTabRedirectorComponent } from './classroom-detail-tab-redirector/classroom-detail-tab-redirector.component';
 import { ClassroomDetailTasksCreationBarComponent } from './classroom-detail-tasks-creation-bar/classroom-detail-tasks-creation-bar.component';
+import { ClassroomDetailTasksItemAssignPopupComponent } from './classroom-detail-tasks-item-assign-popup/classroom-detail-tasks-item-assign-popup.component';
 import { ClassroomDetailTasksItemComponent } from './classroom-detail-tasks-item/classroom-detail-tasks-item.component';
 import { ClassroomDetailTasksComponent } from './classroom-detail-tasks/classroom-detail-tasks.component';
 import { ClassroomDetailComponent } from './classroom-detail/classroom-detail.component';
@@ -30,6 +31,7 @@ import { ClassroomsComponent } from './classrooms.component';
     ClassroomDetailAssignmentsItemDetailComponent,
     ClassroomDetailTasksComponent,
     ClassroomDetailTasksItemComponent,
+    ClassroomDetailTasksItemAssignPopupComponent,
     ClassroomDetailTasksCreationBarComponent,
     ClassroomDetailSettingsComponent,
     ClassroomDetailSettingsSectionComponent,
