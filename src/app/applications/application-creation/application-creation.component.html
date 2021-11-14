@@ -1,7 +1,7 @@
-<div class="container">
+<form class="container" #form="ngForm" (ngSubmit)="send()">
   <div matDialogTitle>New Application</div>
 
-  <form matDialogContent fxLayout="column" #form="ngForm" (ngSubmit)="send()">
+  <div matDialogContent fxLayout="column">
     <mat-form-field color="accent">
       <mat-label>Classroom ID</mat-label>
       <input
@@ -23,7 +23,7 @@
         [(ngModel)]="data.message"
       />
     </mat-form-field>
-  </form>
+  </div>
 
   <div matDialogActions fxLayout>
     <div fxFlex></div>
@@ -36,4 +36,4 @@
       Send
     </button>
   </div>
-</div>
+</form>
