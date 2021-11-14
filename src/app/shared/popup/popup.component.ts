@@ -1,4 +1,10 @@
-import { Component, ContentChild, OnInit, TemplateRef } from '@angular/core';
+import {
+  Component,
+  ContentChild,
+  Input,
+  OnInit,
+  TemplateRef,
+} from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 import {
   MatBottomSheet,
@@ -19,6 +25,8 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./popup.component.css'],
 })
 export class PopupComponent implements OnInit {
+  @Input() closable = true;
+
   @ContentChild(TemplateRef) private contentTemplate!: TemplateRef<never>;
   private sheetRef?: MatBottomSheetRef<PopupComponent>;
   private dialogRef?: MatDialogRef<PopupComponent>;
@@ -38,11 +46,15 @@ export class PopupComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialogRef = this.dialog.open(this.contentTemplate);
+    this.dialogRef = this.dialog.open(this.contentTemplate, {
+      disableClose: !this.closable,
+    });
   }
 
   openSheet() {
-    this.sheetRef = this.sheet.open(this.contentTemplate);
+    this.sheetRef = this.sheet.open(this.contentTemplate, {
+      disableClose: !this.closable,
+    });
   }
 
   close() {
