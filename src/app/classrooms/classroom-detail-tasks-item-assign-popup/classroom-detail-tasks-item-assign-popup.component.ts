@@ -9,6 +9,8 @@ import { ApolloHelperService } from 'src/app/core/apollo-helper.service';
 import {
   AssignmentCreateGQL,
   AssignmentDeleteGQL,
+  ClassroomAssignmentListQuery,
+  ClassroomAssignmentListQueryVariables,
   ClassroomMembershipListGQL,
   ClassroomMembershipListQuery,
   ClassroomTaskListQuery,
@@ -31,6 +33,7 @@ export class ClassroomDetailTasksItemAssignPopupComponent
   items: Item[] = [];
   loading = false;
 
+  private taskId!: string;
   private subscription?: Subscription;
 
   constructor(
@@ -45,11 +48,11 @@ export class ClassroomDetailTasksItemAssignPopupComponent
   ) {}
 
   ngOnInit() {
-    const id = this.route.parent!.snapshot.paramMap.get('id')!;
+    this.taskId = this.route.parent!.snapshot.paramMap.get('id')!;
     if (this.task)
       this.subscription = combineLatest([
         this.membershipListGqL
-          .watch({ id })
+          .watch({ id: this.taskId })
           .valueChanges.pipe(
             map((result) =>
               result.data.classroom.memberships.results.filter(
@@ -184,6 +187,23 @@ export class ClassroomDetailTasksItemAssignPopupComponent
       {
         update: (cache, result) => {
           cache.evict({ id: cache.identify(result.data!.deleteAssignment) });
+          this.apolloHelper.updateQueryCache<
+            TaskAssignmentListQuery,
+            TaskAssignmentListQueryVariables
+          >({
+            query: this.assignmentListGql.document,
+            data: (prev) => ({
+              ...prev,
+              task: {
+                ...prev.task,
+                assignments: {
+                  ...prev.task.assignments,
+                  total: prev.task.assignments.total - 1,
+                },
+              },
+            }),
+            variables: { id: this.taskId },
+          });
         },
       },
     );

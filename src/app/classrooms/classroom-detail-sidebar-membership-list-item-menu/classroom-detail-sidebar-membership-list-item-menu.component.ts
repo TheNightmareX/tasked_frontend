@@ -5,9 +5,12 @@ import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { NotificationType } from 'src/app/common/notification-type.enum';
+import { ApolloHelperService } from 'src/app/core/apollo-helper.service';
 import {
   ClassroomDetailGQL,
+  ClassroomMembershipListGQL,
   ClassroomMembershipListQuery,
+  ClassroomMembershipListQueryVariables,
   MembershipDeleteGQL,
   MembershipUpdateGQL,
   Role,
@@ -33,6 +36,7 @@ export class ClassroomDetailSidebarMembershipListItemMenuComponent
   canDemote?: boolean;
   canRemove?: boolean;
 
+  private classroomId!: string;
   private subscription?: Subscription;
 
   constructor(
@@ -40,18 +44,22 @@ export class ClassroomDetailSidebarMembershipListItemMenuComponent
     private auth: AuthService,
     private notifier: NotifierService,
     private classroomGql: ClassroomDetailGQL,
+    private listGql: ClassroomMembershipListGQL,
     private updateGql: MembershipUpdateGQL,
     private deleteGql: MembershipDeleteGQL,
+    private apolloHelper: ApolloHelperService,
   ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
       if (!this.membership) return;
 
+      this.classroomId = params.get('id')!;
+
       this.subscription?.unsubscribe();
       this.subscription = combineLatest([
         this.classroomGql
-          .watch({ id: params.get('id')! })
+          .watch({ id: this.classroomId })
           .valueChanges.pipe(map((result) => result.data.classroom)),
         this.auth.user$,
       ]).subscribe(([classroom, user]) => {
@@ -109,7 +117,26 @@ export class ClassroomDetailSidebarMembershipListItemMenuComponent
         this.deleteGql.mutate(
           { id: membership.id },
           {
-            update: (cache) => cache.evict({ id: cache.identify(membership) }),
+            update: (cache) => {
+              cache.evict({ id: cache.identify(membership) });
+              this.apolloHelper.updateQueryCache<
+                ClassroomMembershipListQuery,
+                ClassroomMembershipListQueryVariables
+              >({
+                query: this.listGql.document,
+                data: (prev) => ({
+                  ...prev,
+                  classroom: {
+                    ...prev.classroom,
+                    memberships: {
+                      ...prev.classroom.memberships,
+                      total: prev.classroom.memberships.total - 1,
+                    },
+                  },
+                }),
+                variables: { id: this.classroomId },
+              });
+            },
           },
         ),
       'Member removed successfully',
