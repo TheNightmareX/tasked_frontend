@@ -1,8 +1,14 @@
-<div fxLayout fxLayoutAlign="start center" fxLayoutGap="8px">
+<form
+  fxLayout
+  fxLayoutAlign="start center"
+  fxLayoutGap="8px"
+  (ngSubmit)="create()"
+>
   <mat-form-field fxFlex appearance="standard" color="accent">
     <mat-label>New Task</mat-label>
     <input
       matInput
+      name="data"
       maxlength="15"
       type="text"
       [(ngModel)]="data"
@@ -12,9 +18,9 @@
   </mat-form-field>
   <button
     mat-icon-button
+    type="submit"
     [disabled]="!model.valid || !data || loading"
-    (click)="create()"
   >
     <mat-icon>send</mat-icon>
   </button>
-</div>
+</form>
