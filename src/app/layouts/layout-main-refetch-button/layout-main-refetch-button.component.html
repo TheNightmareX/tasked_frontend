@@ -1,0 +1,10 @@
+<button
+  mat-icon-button
+  matTooltip="Reload"
+  [disabled]="disabled"
+  (click)="refetch()"
+>
+  <mat-icon *appLoading="loading; diameter: 20; color: 'accent'">
+    refresh
+  </mat-icon>
+</button>

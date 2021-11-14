@@ -7,9 +7,10 @@ import { LayoutMainComponent } from './layout-main/layout-main.component';
 import { LayoutComponent } from './layout/layout.component';
 import { LayoutMainSidenavComponent } from './layout-main-sidenav/layout-main-sidenav.component';
 import { LayoutMainSidenavClassroomsComponent } from './layout-main-sidenav-classrooms/layout-main-sidenav-classrooms.component';
+import { LayoutMainRefetchButtonComponent } from './layout-main-refetch-button/layout-main-refetch-button.component';
 
 @NgModule({
-  declarations: [LayoutComponent, LayoutAuthComponent, LayoutMainComponent, LayoutMainSidenavComponent, LayoutMainSidenavClassroomsComponent],
+  declarations: [LayoutComponent, LayoutAuthComponent, LayoutMainComponent, LayoutMainSidenavComponent, LayoutMainSidenavClassroomsComponent, LayoutMainRefetchButtonComponent],
   imports: [SharedModule, RouterModule, ProfileModule],
 })
 export class LayoutsModule {}
