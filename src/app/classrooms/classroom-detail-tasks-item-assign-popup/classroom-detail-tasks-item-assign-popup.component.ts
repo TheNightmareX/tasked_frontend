@@ -54,11 +54,7 @@ export class ClassroomDetailTasksItemAssignPopupComponent
         this.membershipListGqL
           .watch({ id: this.taskId })
           .valueChanges.pipe(
-            map((result) =>
-              result.data.classroom.memberships.results.filter(
-                (item) => item.role == Role.Student,
-              ),
-            ),
+            map((result) => result.data.classroom.memberships.results),
           ),
         this.assignmentListGql
           .watch({ id: this.task.id })
@@ -68,12 +64,14 @@ export class ClassroomDetailTasksItemAssignPopupComponent
       ]).subscribe(([memberships, assignments]) => {
         const items: Record<string, Item> = {};
 
-        memberships.forEach((membership) => {
-          items[membership.owner.id] = {
-            user: membership.owner,
-            selected: false,
-          };
-        });
+        memberships
+          .filter((item) => item.role == Role.Student)
+          .forEach((membership) => {
+            items[membership.owner.id] = {
+              user: membership.owner,
+              selected: false,
+            };
+          });
 
         assignments.forEach((assignment) => {
           items[assignment.recipient.id].selected = true;
