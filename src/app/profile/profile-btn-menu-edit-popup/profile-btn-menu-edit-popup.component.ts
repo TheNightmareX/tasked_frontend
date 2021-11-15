@@ -46,7 +46,7 @@ export class ProfileBtnMenuEditPopupComponent implements OnInit {
       this.data.gender = user!.gender;
     });
     this.qualifiedDate$ = this.auth.user$.pipe(
-      map((user) => dayjs(user!.updatedAt).add(3, 'day')),
+      map((user) => dayjs(user!.updatedAt).add(5, 'minute')),
     );
     this.canUpdate$ = this.qualifiedDate$.pipe(
       map((date) => dayjs().isAfter(date)),
