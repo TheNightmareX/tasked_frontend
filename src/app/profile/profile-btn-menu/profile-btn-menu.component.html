@@ -1,6 +1,6 @@
 <div mat-menu-item>
   <mat-icon>person</mat-icon>
-  <span>{{ (auth.user$ | async)?.username }}</span>
+  <app-username [user]="(auth.user$ | async) ?? undefined"></app-username>
 </div>
 <mat-divider></mat-divider>
 <button mat-menu-item (click)="editPopup.open()">
