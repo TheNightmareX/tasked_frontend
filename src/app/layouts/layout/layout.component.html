@@ -1,24 +1,28 @@
-<mat-toolbar color="primary" class="mat-elevation-z4">
-  <button mat-icon-button (click)="sidenav.toggle()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span fxFlex="1%"></span>
-  <span class="logo" routerLink="/">Tasked</span>
-  <span fxFlex></span>
-  <ng-content select="header-actions"></ng-content>
-</mat-toolbar>
+<div class="container" fxLayout="column">
+  <mat-toolbar color="primary" class="mat-elevation-z4">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span fxFlex="1%"></span>
+    <span class="logo" routerLink="/">Tasked</span>
+    <span fxFlex></span>
+    <ng-content select="header-actions"></ng-content>
+  </mat-toolbar>
 
-<mat-sidenav-container style="flex-grow: 1">
-  <mat-sidenav
-    class="mat-elevation-z3"
-    [opened]="sidenavOpened$ | async"
-    [mode]="(sidenavMode$ | async)!"
-    [class.bgc--none]="sidenavOpened$ | async"
-    #sidenav
-  >
-    <ng-content select="sidenav"></ng-content>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <ng-content></ng-content>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  <mat-sidenav-container fxFlex>
+    <mat-sidenav
+      class="mat-elevation-z3"
+      fxLayout="column"
+      fxLayoutAlign="stretch"
+      [opened]="sidenavOpened$ | async"
+      [mode]="(sidenavMode$ | async)!"
+      [class.bgc--none]="sidenavOpened$ | async"
+      #sidenav
+    >
+      <ng-content select="sidenav"></ng-content>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <ng-content></ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

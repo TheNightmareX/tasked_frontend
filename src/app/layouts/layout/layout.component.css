@@ -1,6 +1,4 @@
-:host {
-  display: flex;
-  flex-direction: column;
+.container {
   height: 100%;
 }
 
@@ -11,9 +9,11 @@ mat-toolbar > .logo {
   cursor: pointer;
 }
 
+mat-sidenav-container {
+  /* prevent the content from pushing the toolbar */
+  height: 0;
+}
+
 mat-sidenav {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
   width: 256px;
 }
