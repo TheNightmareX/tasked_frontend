@@ -1,0 +1,3 @@
+mat-list-item:not(:hover) button {
+  display: none;
+}
