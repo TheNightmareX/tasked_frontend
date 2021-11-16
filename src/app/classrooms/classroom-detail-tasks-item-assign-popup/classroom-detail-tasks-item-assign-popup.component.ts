@@ -2,15 +2,13 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { combineLatest, forkJoin, Subscription } from 'rxjs';
-import { finalize, first, map } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 import { leastTime } from 'src/app/common/least-time.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import { ApolloHelperService } from 'src/app/core/apollo-helper.service';
 import {
   AssignmentCreateGQL,
   AssignmentDeleteGQL,
-  ClassroomAssignmentListQuery,
-  ClassroomAssignmentListQueryVariables,
   ClassroomMembershipListGQL,
   ClassroomMembershipListQuery,
   ClassroomTaskListQuery,
@@ -67,8 +65,8 @@ export class ClassroomDetailTasksItemAssignPopupComponent
         memberships
           .filter((item) => item.role == Role.Student)
           .forEach((membership) => {
-            items[membership.owner.id] = {
-              user: membership.owner,
+            items[membership.id] = {
+              membership,
               selected: false,
             };
           });
@@ -102,7 +100,7 @@ export class ClassroomDetailTasksItemAssignPopupComponent
             map(() => 'deletion' as const),
           );
         else
-          return this.createAssignment(item.user).pipe(
+          return this.createAssignment(item.membership).pipe(
             map(() => 'creation' as const),
           );
       });
@@ -143,10 +141,10 @@ export class ClassroomDetailTasksItemAssignPopupComponent
   }
 
   identifyItem(index: number, item: Item) {
-    return item.user.id;
+    return item.membership.id;
   }
 
-  private createAssignment(recipient: User) {
+  private createAssignment(recipient: Membership) {
     return this.assignmentCreateGql.mutate(
       {
         data: { task: this.task!.id, recipient: recipient.id },
@@ -210,14 +208,14 @@ export class ClassroomDetailTasksItemAssignPopupComponent
 
 type Task = ClassroomTaskListQuery['classroom']['tasks']['results'][number];
 
-type User =
-  ClassroomMembershipListQuery['classroom']['memberships']['results'][number]['owner'];
+type Membership =
+  ClassroomMembershipListQuery['classroom']['memberships']['results'][number];
 
 type Assignment =
   TaskAssignmentListQuery['task']['assignments']['results'][number];
 
 interface Item {
-  user: User;
+  membership: Membership;
   selected: boolean;
   assignment?: Assignment;
 }

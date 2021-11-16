@@ -39,7 +39,7 @@ export type Assignment = {
   isCompleted: Scalars['Boolean'];
   isImportant: Scalars['Boolean'];
   isPublic: Scalars['Boolean'];
-  recipient: User;
+  recipient: Membership;
   task: Task;
   updatedAt: Scalars['DateTime'];
 };
@@ -68,7 +68,6 @@ export type Classroom = {
   assignments: PaginatedAssignments;
   createdAt: Scalars['DateTime'];
   creator: User;
-  deletedAt?: Maybe<Scalars['DateTime']>;
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   isOpen: Scalars['Boolean'];
@@ -140,12 +139,21 @@ export type JoinApplicationCreateInput = {
 
 export type Membership = {
   __typename?: 'Membership';
+  assignments: PaginatedAssignments;
   classroom: Classroom;
   createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
   owner: User;
   role: Role;
   updatedAt: Scalars['DateTime'];
+};
+
+export type MembershipAssignmentsArgs = {
+  isCompleted?: Maybe<Scalars['Boolean']>;
+  isOwn?: Maybe<Scalars['Boolean']>;
+  isPublic?: Maybe<Scalars['Boolean']>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
 };
 
 export type MembershipUpdateInput = {
@@ -469,7 +477,7 @@ export type AssignmentCreateMutation = {
   createAssignment: {
     __typename?: 'Assignment';
     id: string;
-    recipient: { __typename?: 'User'; id: string };
+    recipient: { __typename?: 'Membership'; id: string };
   };
 };
 
@@ -530,7 +538,7 @@ export type ClassroomAssignmentListQuery = {
         isCompleted: boolean;
         isImportant: boolean;
         createdAt: any;
-        recipient: { __typename?: 'User'; id: string };
+        recipient: { __typename?: 'Membership'; id: string };
         task: {
           __typename?: 'Task';
           id: string;
@@ -925,7 +933,7 @@ export type MembershipFragment = {
 export type TaskAssignmentListAssignmentFragment = {
   __typename?: 'Assignment';
   id: string;
-  recipient: { __typename?: 'User'; id: string };
+  recipient: { __typename?: 'Membership'; id: string };
 };
 
 export type TaskAssignmentListQueryVariables = Exact<{
@@ -943,7 +951,7 @@ export type TaskAssignmentListQuery = {
       results: Array<{
         __typename?: 'Assignment';
         id: string;
-        recipient: { __typename?: 'User'; id: string };
+        recipient: { __typename?: 'Membership'; id: string };
       }>;
     };
   };

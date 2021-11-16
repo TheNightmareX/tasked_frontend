@@ -4,7 +4,7 @@
     [(selected)]="item.selected"
   >
     <div matLine>
-      <app-username [user]="item.user"></app-username>
+      <app-username [user]="item.membership.owner"></app-username>
     </div>
   </mat-list-option>
 </mat-selection-list>
