@@ -1,5 +1,5 @@
-query JoinApplicationList($isPending: Boolean) {
-  joinApplications(isPending: $isPending) {
+query JoinApplicationList($limit: Int, $offset: Int, $isPending: Boolean) {
+  joinApplications(limit: $limit, offset: $offset, isPending: $isPending) {
     total
     results {
       ...JoinApplication

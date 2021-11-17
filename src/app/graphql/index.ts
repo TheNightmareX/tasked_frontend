@@ -805,6 +805,8 @@ export type JoinApplicationCreateMutation = {
 };
 
 export type JoinApplicationListQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
   isPending?: Maybe<Scalars['Boolean']>;
 }>;
 
@@ -1474,8 +1476,8 @@ export class JoinApplicationCreateGQL extends Apollo.Mutation<
   }
 }
 export const JoinApplicationListDocument = gql`
-  query JoinApplicationList($isPending: Boolean) {
-    joinApplications(isPending: $isPending) {
+  query JoinApplicationList($limit: Int, $offset: Int, $isPending: Boolean) {
+    joinApplications(limit: $limit, offset: $offset, isPending: $isPending) {
       total
       results {
         ...JoinApplication

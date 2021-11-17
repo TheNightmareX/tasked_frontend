@@ -1,4 +1,8 @@
-:host > .container {
+.container {
+  height: 100%;
+  overflow: auto;
+}
+.container > .content {
   width: 90%;
   max-width: 528px;
   margin: 0 auto;

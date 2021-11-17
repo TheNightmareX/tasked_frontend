@@ -1,5 +1,6 @@
 <mat-list>
   <mat-divider></mat-divider>
+
   <ng-container *ngFor="let group of applicationGroups$ | async">
     <h2 matSubheader>{{ group[0] }}</h2>
     <app-application-list-item
@@ -9,4 +10,9 @@
     ></app-application-list-item>
     <mat-divider></mat-divider>
   </ng-container>
+
+  <div fxLayout="column" fxLayoutAlign="start center">
+    <app-fetch-more-trigger (trigger)="fetchMore()"></app-fetch-more-trigger>
+    <mat-spinner *ngIf="loading" fxFlexOffset="8px" diameter="40"></mat-spinner>
+  </div>
 </mat-list>
