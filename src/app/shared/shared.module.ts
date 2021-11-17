@@ -22,7 +22,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
+import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
 import { EqualDirective } from './equal.directive';
+import { FetchMoreTriggerComponent } from './fetch-more-trigger/fetch-more-trigger.component';
 import { LoadingDirective } from './loading.directive';
 import { PopupComponent } from './popup/popup.component';
 import { StopRipplePropagationDirective } from './stop-ripple-propagation.directive';
@@ -32,6 +34,7 @@ const modules = [
   CommonModule,
   FormsModule,
   FlexLayoutModule,
+  IntersectionObserverModule,
   [
     MatRippleModule,
     MatListModule,
@@ -55,7 +58,11 @@ const modules = [
     MatExpansionModule,
   ],
 ];
-const components = [PopupComponent, UsernameComponent];
+const components = [
+  PopupComponent,
+  UsernameComponent,
+  FetchMoreTriggerComponent,
+];
 const directives = [
   EqualDirective,
   LoadingDirective,
