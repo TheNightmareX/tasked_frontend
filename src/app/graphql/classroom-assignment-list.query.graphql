@@ -31,7 +31,6 @@ query ClassroomAssignmentList(
             nickname
           }
         }
-        isPublic
         isCompleted
         isImportant
         createdAt

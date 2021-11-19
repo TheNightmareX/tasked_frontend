@@ -38,7 +38,6 @@ export type Assignment = {
   id: Scalars['ID'];
   isCompleted: Scalars['Boolean'];
   isImportant: Scalars['Boolean'];
-  isPublic: Scalars['Boolean'];
   recipient: Membership;
   task: Task;
   updatedAt: Scalars['DateTime'];
@@ -502,7 +501,6 @@ export type AssignmentUpdateMutation = {
     id: string;
     isCompleted: boolean;
     isImportant: boolean;
-    isPublic: boolean;
   };
 };
 
@@ -536,7 +534,6 @@ export type ClassroomAssignmentListQuery = {
       results: Array<{
         __typename?: 'Assignment';
         id: string;
-        isPublic: boolean;
         isCompleted: boolean;
         isImportant: boolean;
         createdAt: any;
@@ -1167,7 +1164,6 @@ export const AssignmentUpdateDocument = gql`
       id
       isCompleted
       isImportant
-      isPublic
     }
   }
 `;
@@ -1240,7 +1236,6 @@ export const ClassroomAssignmentListDocument = gql`
               nickname
             }
           }
-          isPublic
           isCompleted
           isImportant
           createdAt
