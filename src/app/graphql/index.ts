@@ -45,7 +45,6 @@ export type Assignment = {
 
 export type AssignmentCreateInput = {
   isImportant?: Maybe<Scalars['Boolean']>;
-  isPublic?: Maybe<Scalars['Boolean']>;
   recipient: Scalars['ID'];
   task: Scalars['ID'];
 };
@@ -53,7 +52,6 @@ export type AssignmentCreateInput = {
 export type AssignmentUpdateInput = {
   isCompleted?: Maybe<Scalars['Boolean']>;
   isImportant?: Maybe<Scalars['Boolean']>;
-  isPublic?: Maybe<Scalars['Boolean']>;
 };
 
 export type AuthResult = {
@@ -81,7 +79,6 @@ export type Classroom = {
 export type ClassroomAssignmentsArgs = {
   isCompleted?: Maybe<Scalars['Boolean']>;
   isOwn?: Maybe<Scalars['Boolean']>;
-  isPublic?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -150,7 +147,6 @@ export type Membership = {
 export type MembershipAssignmentsArgs = {
   isCompleted?: Maybe<Scalars['Boolean']>;
   isOwn?: Maybe<Scalars['Boolean']>;
-  isPublic?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -314,7 +310,6 @@ export type QueryAssignmentArgs = {
 export type QueryAssignmentsArgs = {
   isCompleted?: Maybe<Scalars['Boolean']>;
   isOwn?: Maybe<Scalars['Boolean']>;
-  isPublic?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -389,7 +384,6 @@ export type Task = {
 export type TaskAssignmentsArgs = {
   isCompleted?: Maybe<Scalars['Boolean']>;
   isOwn?: Maybe<Scalars['Boolean']>;
-  isPublic?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -425,7 +419,6 @@ export type User = {
 export type UserAssignmentsArgs = {
   isCompleted?: Maybe<Scalars['Boolean']>;
   isOwn?: Maybe<Scalars['Boolean']>;
-  isPublic?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -519,7 +512,6 @@ export type ClassroomAssignmentListQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   isCompleted?: Maybe<Scalars['Boolean']>;
-  isPublic?: Maybe<Scalars['Boolean']>;
   isOwn?: Maybe<Scalars['Boolean']>;
 }>;
 
@@ -1208,7 +1200,6 @@ export const ClassroomAssignmentListDocument = gql`
     $limit: Int
     $offset: Int
     $isCompleted: Boolean
-    $isPublic: Boolean
     $isOwn: Boolean
   ) {
     classroom(id: $id) {
@@ -1217,7 +1208,6 @@ export const ClassroomAssignmentListDocument = gql`
         limit: $limit
         offset: $offset
         isCompleted: $isCompleted
-        isPublic: $isPublic
         isOwn: $isOwn
       ) {
         total
