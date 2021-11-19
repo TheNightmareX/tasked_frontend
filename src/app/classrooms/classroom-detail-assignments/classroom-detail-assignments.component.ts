@@ -37,7 +37,11 @@ export class ClassroomDetailAssignmentsComponent implements OnInit {
     const id = this.route.parent!.snapshot.paramMap.get('id')!;
     this.query = this.listGql.watch({ id, isOwn: true });
     const assignments$ = this.query.valueChanges.pipe(
-      map(({ data }) => this.sort([...data.classroom.assignments.results])),
+      map(({ data }) =>
+        [...data.classroom.assignments.results].sort((a, b) =>
+          a.isImportant == b.isImportant ? 0 : a.isImportant ? -1 : 1,
+        ),
+      ),
     );
     this.assignmentsPending$ = assignments$.pipe(
       map((items) => items.filter((item) => !item.isCompleted)),
@@ -73,13 +77,5 @@ export class ClassroomDetailAssignmentsComponent implements OnInit {
           },
         }));
       });
-  }
-
-  private sort(assignments: Assignment[]) {
-    return assignments
-      .sort((a, b) => (a.isPublic == b.isPublic ? 0 : a.isPublic ? -1 : 1))
-      .sort((a, b) =>
-        a.isImportant == b.isImportant ? 0 : a.isImportant ? -1 : 1,
-      );
   }
 }

@@ -62,7 +62,7 @@ export class ClassroomDetailAssignmentsItemComponent implements OnInit {
     if (!this.assignment) return;
     if (this.loading) return;
 
-    const { id, isImportant, isPublic, isCompleted } = this.assignment;
+    const { id, isImportant, isCompleted } = this.assignment;
 
     this.loading = true;
     timer(200)
@@ -81,7 +81,6 @@ export class ClassroomDetailAssignmentsItemComponent implements OnInit {
                   id,
                   isCompleted,
                   isImportant,
-                  isPublic,
                   ...data,
                 },
               },

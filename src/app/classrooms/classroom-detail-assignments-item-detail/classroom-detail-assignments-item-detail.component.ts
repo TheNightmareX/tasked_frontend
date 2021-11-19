@@ -36,15 +36,6 @@ export class ClassroomDetailAssignmentsItemDetailComponent implements OnInit {
           : '',
         icon: 'calendar_today',
       },
-      {
-        name: 'Visibility',
-        value: this.assignment
-          ? this.assignment.isPublic
-            ? 'Public'
-            : 'Private'
-          : '',
-        icon: 'visibility',
-      },
     ];
   }
 }
