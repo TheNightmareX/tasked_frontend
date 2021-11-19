@@ -1,12 +1,20 @@
 query ClassroomAssignmentList(
   $id: ID!
+  $limit: Int
+  $offset: Int
   $isCompleted: Boolean
   $isPublic: Boolean
   $isOwn: Boolean
 ) {
   classroom(id: $id) {
     id
-    assignments(isCompleted: $isCompleted, isPublic: $isPublic, isOwn: $isOwn) {
+    assignments(
+      limit: $limit
+      offset: $offset
+      isCompleted: $isCompleted
+      isPublic: $isPublic
+      isOwn: $isOwn
+    ) {
       total
       results {
         id

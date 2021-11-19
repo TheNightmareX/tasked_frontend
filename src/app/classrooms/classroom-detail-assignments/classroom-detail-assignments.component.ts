@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { QueryRef } from 'apollo-angular';
+import { from, Observable } from 'rxjs';
+import { finalize, map } from 'rxjs/operators';
 import {
   ClassroomAssignmentListGQL,
   ClassroomAssignmentListQuery,
+  ClassroomAssignmentListQueryVariables,
 } from 'src/app/graphql';
 
 type Assignment =
@@ -18,6 +20,13 @@ type Assignment =
 export class ClassroomDetailAssignmentsComponent implements OnInit {
   assignmentsPending$!: Observable<Assignment[]>;
   assignmentsCompleted$!: Observable<Assignment[]>;
+  loading = false;
+
+  private query!: QueryRef<
+    ClassroomAssignmentListQuery,
+    ClassroomAssignmentListQueryVariables
+  >;
+  private allLoaded = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,28 +35,51 @@ export class ClassroomDetailAssignmentsComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.parent!.snapshot.paramMap.get('id')!;
-    const assignments$ = this.listGql
-      .watch({ id, isOwn: true })
-      .valueChanges.pipe(
-        map(({ data }) =>
-          [...data.classroom.assignments.results]
-            .sort((a, b) =>
-              a.isPublic == b.isPublic ? 0 : a.isPublic ? -1 : 1,
-            )
-            .sort((a, b) =>
-              a.isImportant == b.isImportant ? 0 : a.isImportant ? -1 : 1,
-            ),
-        ),
-      );
+    this.query = this.listGql.watch({ id, isOwn: true });
+    const assignments$ = this.query.valueChanges.pipe(
+      map(({ data }) => this.sort([...data.classroom.assignments.results])),
+    );
     this.assignmentsPending$ = assignments$.pipe(
-      map((assignments) =>
-        assignments.filter((assignment) => !assignment.isCompleted),
-      ),
+      map((items) => items.filter((item) => !item.isCompleted)),
     );
     this.assignmentsCompleted$ = assignments$.pipe(
-      map((assignments) =>
-        assignments.filter((assignment) => assignment.isCompleted),
-      ),
+      map((items) => items.filter((item) => item.isCompleted)),
     );
+  }
+
+  fetchMore() {
+    if (this.allLoaded) return;
+    if (this.loading) return;
+
+    const data = this.query.getCurrentResult().data.classroom.assignments;
+
+    this.loading = true;
+    from(this.query.fetchMore({ variables: { offset: data.results.length } }))
+      .pipe(
+        map((result) => result.data.classroom.assignments),
+        finalize(() => (this.loading = false)),
+      )
+      .subscribe(({ results, total }) => {
+        this.allLoaded = results.length >= total;
+        this.query.updateQuery((prev) => ({
+          ...prev,
+          classroom: {
+            ...prev.classroom,
+            assignments: {
+              ...prev.classroom.assignments,
+              total,
+              results: [...prev.classroom.assignments.results, ...results],
+            },
+          },
+        }));
+      });
+  }
+
+  private sort(assignments: Assignment[]) {
+    return assignments
+      .sort((a, b) => (a.isPublic == b.isPublic ? 0 : a.isPublic ? -1 : 1))
+      .sort((a, b) =>
+        a.isImportant == b.isImportant ? 0 : a.isImportant ? -1 : 1,
+      );
   }
 }

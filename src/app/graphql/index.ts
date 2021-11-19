@@ -518,6 +518,8 @@ export type AuthMutation = {
 
 export type ClassroomAssignmentListQueryVariables = Exact<{
   id: Scalars['ID'];
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
   isCompleted?: Maybe<Scalars['Boolean']>;
   isPublic?: Maybe<Scalars['Boolean']>;
   isOwn?: Maybe<Scalars['Boolean']>;
@@ -1207,6 +1209,8 @@ export class AuthGQL extends Apollo.Mutation<
 export const ClassroomAssignmentListDocument = gql`
   query ClassroomAssignmentList(
     $id: ID!
+    $limit: Int
+    $offset: Int
     $isCompleted: Boolean
     $isPublic: Boolean
     $isOwn: Boolean
@@ -1214,6 +1218,8 @@ export const ClassroomAssignmentListDocument = gql`
     classroom(id: $id) {
       id
       assignments(
+        limit: $limit
+        offset: $offset
         isCompleted: $isCompleted
         isPublic: $isPublic
         isOwn: $isOwn

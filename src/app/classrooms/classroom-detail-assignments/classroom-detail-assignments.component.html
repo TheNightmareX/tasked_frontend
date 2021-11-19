@@ -14,4 +14,9 @@
     *ngFor="let assignment of assignmentsCompleted$ | async"
     [assignment]="assignment"
   ></app-classroom-detail-assignments-item>
+
+  <app-fetch-more-trigger
+    [loading]="loading"
+    (trigger)="fetchMore()"
+  ></app-fetch-more-trigger>
 </mat-action-list>
