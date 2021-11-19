@@ -16,6 +16,7 @@
   ></app-classroom-detail-assignments-item>
 
   <app-fetch-more-trigger
+    *ngIf="!allLoaded"
     [loading]="loading"
     (trigger)="fetchMore()"
   ></app-fetch-more-trigger>

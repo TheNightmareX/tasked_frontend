@@ -1,4 +1,4 @@
-<mat-list fxLayout="column">
+<mat-list>
   <mat-divider></mat-divider>
 
   <ng-container *ngFor="let group of applicationGroups$ | async">
@@ -11,7 +11,7 @@
     <mat-divider></mat-divider>
   </ng-container>
 
-  <div fxFlexOffset="8px" *ngIf="(applicationGroups$ | async)?.length">
+  <div *ngIf="(applicationGroups$ | async)?.length && !allLoaded">
     <app-fetch-more-trigger
       [loading]="loading"
       (trigger)="fetchMore()"

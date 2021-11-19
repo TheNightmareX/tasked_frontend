@@ -21,12 +21,12 @@ export class ClassroomDetailAssignmentsComponent implements OnInit {
   assignmentsPending$!: Observable<Assignment[]>;
   assignmentsCompleted$!: Observable<Assignment[]>;
   loading = false;
+  allLoaded = false;
 
   private query!: QueryRef<
     ClassroomAssignmentListQuery,
     ClassroomAssignmentListQueryVariables
   >;
-  private allLoaded = false;
 
   constructor(
     private route: ActivatedRoute,
