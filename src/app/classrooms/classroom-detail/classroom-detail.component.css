@@ -13,5 +13,6 @@ mat-drawer-container > mat-drawer-content.mobile {
   padding: 20px 15px;
 }
 mat-drawer-container > mat-drawer-content > main {
-  flex-grow: 1;
+  height: 0;
+  overflow: auto;
 }
