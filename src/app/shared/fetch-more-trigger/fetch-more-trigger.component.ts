@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-fetch-more-trigger',
@@ -7,6 +7,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class FetchMoreTriggerComponent implements OnInit {
   @Output() trigger = new EventEmitter();
+  @Input() loading = false;
 
   constructor() {}
 
