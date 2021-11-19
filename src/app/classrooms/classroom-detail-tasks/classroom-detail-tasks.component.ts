@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { ClassroomTaskListGQL, ClassroomTaskListQuery } from 'src/app/graphql';
+import { QueryRef } from 'apollo-angular';
+import { from, Observable } from 'rxjs';
+import { finalize, map, tap } from 'rxjs/operators';
+import {
+  ClassroomTaskListGQL,
+  ClassroomTaskListQuery,
+  ClassroomTaskListQueryVariables,
+} from 'src/app/graphql';
 
 type Task = ClassroomTaskListQuery['classroom']['tasks']['results'][number];
 
@@ -13,6 +18,13 @@ type Task = ClassroomTaskListQuery['classroom']['tasks']['results'][number];
 })
 export class ClassroomDetailTasksComponent implements OnInit {
   tasks$!: Observable<Task[]>;
+  loading = false;
+  allLoaded = false;
+
+  private query!: QueryRef<
+    ClassroomTaskListQuery,
+    ClassroomTaskListQueryVariables
+  >;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,12 +33,42 @@ export class ClassroomDetailTasksComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.parent!.snapshot.paramMap.get('id')!;
-    this.tasks$ = this.listGql
-      .watch({ id })
-      .valueChanges.pipe(map((result) => result.data.classroom.tasks.results));
+    this.query = this.listGql.watch({ id, limit: 20 });
+    this.tasks$ = this.query.valueChanges.pipe(
+      map((result) => result.data.classroom.tasks),
+      tap(({ results, total }) => (this.allLoaded = results.length >= total)),
+      map(({ results }) => results),
+    );
   }
 
   identifyTask(index: number, task: Task) {
     return task.id;
+  }
+
+  fetchMore() {
+    if (this.allLoaded || this.loading) return;
+
+    const current = this.query.getCurrentResult().data.classroom.tasks;
+    this.loading = true;
+    from(
+      this.query.fetchMore({ variables: { offset: current.results.length } }),
+    )
+      .pipe(
+        map((result) => result.data.classroom.tasks),
+        finalize(() => (this.loading = false)),
+      )
+      .subscribe(({ results, total }) => {
+        this.query.updateQuery((prev) => ({
+          ...prev,
+          classroom: {
+            ...prev.classroom,
+            tasks: {
+              ...prev.classroom.tasks,
+              total,
+              results: [...prev.classroom.tasks.results, ...results],
+            },
+          },
+        }));
+      });
   }
 }

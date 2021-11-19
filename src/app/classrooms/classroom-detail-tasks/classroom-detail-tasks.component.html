@@ -4,7 +4,13 @@
       *ngFor="let task of tasks$ | async; trackBy: identifyTask"
       [task]="task"
     ></app-classroom-detail-tasks-item>
+    <app-fetch-more-trigger
+      *ngIf="!allLoaded"
+      [loading]="loading"
+      (trigger)="fetchMore()"
+    ></app-fetch-more-trigger>
   </mat-accordion>
+
   <mat-divider></mat-divider>
   <app-classroom-detail-tasks-creation-bar></app-classroom-detail-tasks-creation-bar>
 </div>
