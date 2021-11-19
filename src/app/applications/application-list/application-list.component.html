@@ -11,7 +11,11 @@
     <mat-divider></mat-divider>
   </ng-container>
 
-  <div fxLayout="column" fxLayoutAlign="start center">
+  <div
+    *ngIf="(applicationGroups$ | async)?.length"
+    fxLayout="column"
+    fxLayoutAlign="start center"
+  >
     <app-fetch-more-trigger (trigger)="fetchMore()"></app-fetch-more-trigger>
     <mat-spinner *ngIf="loading" fxFlexOffset="8px" diameter="40"></mat-spinner>
   </div>
