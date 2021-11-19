@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { QueryRef } from 'apollo-angular';
 import { from, Observable } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { finalize, map, tap } from 'rxjs/operators';
 import {
   ClassroomAssignmentListGQL,
   ClassroomAssignmentListQuery,
@@ -35,10 +35,12 @@ export class ClassroomDetailAssignmentsComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.parent!.snapshot.paramMap.get('id')!;
-    this.query = this.listGql.watch({ id, isOwn: true });
+    this.query = this.listGql.watch({ id, limit: 20, isOwn: true });
     const assignments$ = this.query.valueChanges.pipe(
-      map(({ data }) =>
-        [...data.classroom.assignments.results].sort((a, b) =>
+      map((result) => result.data.classroom.assignments),
+      tap(({ results, total }) => (this.allLoaded = results.length >= total)),
+      map(({ results }) =>
+        [...results].sort((a, b) =>
           a.isImportant == b.isImportant ? 0 : a.isImportant ? -1 : 1,
         ),
       ),
@@ -64,7 +66,6 @@ export class ClassroomDetailAssignmentsComponent implements OnInit {
         finalize(() => (this.loading = false)),
       )
       .subscribe(({ results, total }) => {
-        this.allLoaded = results.length >= total;
         this.query.updateQuery((prev) => ({
           ...prev,
           classroom: {
