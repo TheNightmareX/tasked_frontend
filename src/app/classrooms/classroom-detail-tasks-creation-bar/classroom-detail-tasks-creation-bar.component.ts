@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { finalize } from 'rxjs/operators';
-import { leastTime } from 'src/app/common/least-time.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import { ApolloHelperService } from 'src/app/core/apollo-helper.service';
 import {
@@ -64,12 +63,7 @@ export class ClassroomDetailTasksCreationBarComponent implements OnInit {
           },
         },
       )
-      .pipe(
-        leastTime(1000),
-        finalize(() => {
-          this.loading = false;
-        }),
-      )
+      .pipe(finalize(() => (this.loading = false)))
       .subscribe(
         () => {
           this.notifier.notify(NotificationType.Success, 'Task created');

@@ -93,14 +93,9 @@ export class ClassroomDetailTasksItemComponent implements OnInit {
   ) {
     if (this.loading) return;
     this.loading = true;
-    mutation
-      .pipe(
-        leastTime(1000),
-        finalize(() => (this.loading = false)),
-      )
-      .subscribe(
-        () => this.notifier.notify(NotificationType.Success, messageOnSucceed),
-        () => this.notifier.notify(NotificationType.Error, messageOnFail),
-      );
+    mutation.pipe(finalize(() => (this.loading = false))).subscribe(
+      () => this.notifier.notify(NotificationType.Success, messageOnSucceed),
+      () => this.notifier.notify(NotificationType.Error, messageOnFail),
+    );
   }
 }
