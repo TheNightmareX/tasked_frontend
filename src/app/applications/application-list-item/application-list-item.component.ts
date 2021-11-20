@@ -40,9 +40,10 @@ export class ApplicationListItemComponent implements OnInit {
   ngOnInit() {}
 
   accept() {
+    if (!this.application) return;
     this.mutate(
       this.acceptGql.mutate(
-        { id: this.application!.id },
+        { id: this.application.id },
         {
           update: (_, result) => {
             this.apolloHelper.updateQueryCache<
@@ -75,8 +76,9 @@ export class ApplicationListItemComponent implements OnInit {
   }
 
   reject() {
+    if (!this.application) return;
     this.mutate(
-      this.rejectGql.mutate({ id: this.application!.id }),
+      this.rejectGql.mutate({ id: this.application.id }),
       'Application rejected',
       'Failed to reject the application',
     );
@@ -87,22 +89,10 @@ export class ApplicationListItemComponent implements OnInit {
     messageOnSuccess: string,
     messageOnFailure: string,
   ) {
-    if (!this.application) return;
     if (this.loading) return;
-    mutation
-      .pipe(
-        leastTime(1000),
-        finalize(() => {
-          this.loading = false;
-        }),
-      )
-      .subscribe(
-        () => {
-          this.notifier.notify(NotificationType.Success, messageOnSuccess);
-        },
-        () => {
-          this.notifier.notify(NotificationType.Error, messageOnFailure);
-        },
-      );
+    mutation.pipe(finalize(() => (this.loading = false))).subscribe(
+      () => this.notifier.notify(NotificationType.Success, messageOnSuccess),
+      () => this.notifier.notify(NotificationType.Error, messageOnFailure),
+    );
   }
 }
