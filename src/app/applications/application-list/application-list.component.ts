@@ -37,7 +37,7 @@ export class ApplicationListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.query = this.listGql.watch({ limit: 20 });
+    this.query = this.listGql.watch();
     this.applicationGroups$ = this.query.valueChanges.pipe(
       map((result) => result.data.joinApplications),
       tap((data) => (this.allLoaded = data.results.length >= data.total)),

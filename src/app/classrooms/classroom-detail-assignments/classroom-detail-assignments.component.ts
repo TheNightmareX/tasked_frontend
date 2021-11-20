@@ -35,7 +35,7 @@ export class ClassroomDetailAssignmentsComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.parent!.snapshot.paramMap.get('id')!;
-    this.query = this.listGql.watch({ id, limit: 20, isOwn: true });
+    this.query = this.listGql.watch({ id, isOwn: true });
     const assignments$ = this.query.valueChanges.pipe(
       map((result) => result.data.classroom.assignments),
       tap(({ results, total }) => (this.allLoaded = results.length >= total)),
