@@ -2,14 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { leastTime } from 'src/app/common/least-time.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
-import { ApolloHelperService } from 'src/app/core/apollo-helper.service';
 import {
   ApplicationStatus,
   ClassroomMembershipListGQL,
-  ClassroomMembershipListQuery,
-  ClassroomMembershipListQueryVariables,
   JoinApplicationAcceptGQL,
   JoinApplicationListQuery,
   JoinApplicationRejectGQL,
@@ -34,39 +30,37 @@ export class ApplicationListItemComponent implements OnInit {
     private acceptGql: JoinApplicationAcceptGQL,
     private rejectGql: JoinApplicationRejectGQL,
     private classroomMembershipListGql: ClassroomMembershipListGQL,
-    private apolloHelper: ApolloHelperService,
   ) {}
 
   ngOnInit() {}
 
   accept() {
     if (!this.application) return;
+    const application = this.application;
+
     this.mutate(
       this.acceptGql.mutate(
-        { id: this.application.id },
+        { id: application.id },
         {
           update: (_, result) => {
-            this.apolloHelper.updateQueryCache<
-              ClassroomMembershipListQuery,
-              ClassroomMembershipListQueryVariables
-            >({
-              query: this.classroomMembershipListGql.document,
-              variables: { id: this.application!.classroom.id },
-              data: (prev) => ({
-                ...prev,
-                classroom: {
-                  ...prev.classroom,
-                  memberships: {
-                    ...prev.classroom.memberships,
-                    total: prev.classroom.memberships.total + 1,
-                    results: [
-                      ...prev.classroom.memberships.results,
-                      result.data!.acceptJoinApplication.membership,
-                    ],
-                  },
-                },
-              }),
+            const query = this.classroomMembershipListGql.watch({
+              id: application.classroom.id,
             });
+            if (query.getCurrentResult().loading) return;
+            query.updateQuery((prev) => ({
+              ...prev,
+              classroom: {
+                ...prev.classroom,
+                memberships: {
+                  ...prev.classroom.memberships,
+                  total: prev.classroom.memberships.total + 1,
+                  results: [
+                    ...prev.classroom.memberships.results,
+                    result.data!.acceptJoinApplication.membership,
+                  ],
+                },
+              },
+            }));
           },
         },
       ),

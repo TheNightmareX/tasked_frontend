@@ -4,12 +4,7 @@ import { NotifierService } from 'angular-notifier';
 import { finalize } from 'rxjs/operators';
 import { leastTime } from 'src/app/common/least-time.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
-import { ApolloHelperService } from 'src/app/core/apollo-helper.service';
-import {
-  ClassroomCreateGQL,
-  ClassroomListGQL,
-  ClassroomListQuery,
-} from 'src/app/graphql';
+import { ClassroomCreateGQL, ClassroomListGQL } from 'src/app/graphql';
 
 @Component({
   selector: 'app-classroom-creation',
@@ -30,7 +25,6 @@ export class ClassroomCreationComponent implements OnInit {
     private notifier: NotifierService,
     private createGql: ClassroomCreateGQL,
     private listGql: ClassroomListGQL,
-    private apolloHelper: ApolloHelperService,
   ) {}
 
   ngOnInit() {}
@@ -42,20 +36,18 @@ export class ClassroomCreationComponent implements OnInit {
         { data: this.data },
         {
           update: (_, result) => {
-            this.apolloHelper.updateQueryCache<ClassroomListQuery>({
-              query: this.listGql.document,
-              data: (prev) => ({
-                ...prev,
-                classrooms: {
-                  ...prev.classrooms,
-                  total: prev.classrooms.total + 1,
-                  results: [
-                    ...prev.classrooms.results,
-                    result.data!.createClassroom,
-                  ],
-                },
-              }),
-            });
+            const query = this.listGql.watch();
+            query.updateQuery((prev) => ({
+              ...prev,
+              classrooms: {
+                ...prev.classrooms,
+                total: prev.classrooms.total + 1,
+                results: [
+                  ...prev.classrooms.results,
+                  result.data!.createClassroom,
+                ],
+              },
+            }));
           },
         },
       )

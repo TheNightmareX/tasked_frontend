@@ -3,11 +3,9 @@ import { NotifierService } from 'angular-notifier';
 import { finalize } from 'rxjs/operators';
 import { leastTime } from 'src/app/common/least-time.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
-import { ApolloHelperService } from 'src/app/core/apollo-helper.service';
 import {
   JoinApplicationCreateGQL,
   JoinApplicationListGQL,
-  JoinApplicationListQuery,
 } from 'src/app/graphql';
 import { PopupComponent } from 'src/app/shared/popup/popup.component';
 
@@ -28,7 +26,6 @@ export class ApplicationCreationComponent implements OnInit {
     private notifier: NotifierService,
     private createGql: JoinApplicationCreateGQL,
     private listGql: JoinApplicationListGQL,
-    private apolloHelper: ApolloHelperService,
     private popup: PopupComponent,
   ) {}
 
@@ -44,20 +41,18 @@ export class ApplicationCreationComponent implements OnInit {
         { data },
         {
           update: (_, result) => {
-            this.apolloHelper.updateQueryCache<JoinApplicationListQuery>({
-              query: this.listGql.document,
-              data: (prev) => ({
-                ...prev,
-                joinApplications: {
-                  ...prev.joinApplications,
-                  total: prev.joinApplications.total + 1,
-                  results: [
-                    result.data!.createJoinApplication,
-                    ...prev.joinApplications.results,
-                  ],
-                },
-              }),
-            });
+            const query = this.listGql.watch();
+            query.updateQuery((prev) => ({
+              ...prev,
+              joinApplications: {
+                ...prev.joinApplications,
+                total: prev.joinApplications.total + 1,
+                results: [
+                  result.data!.createJoinApplication,
+                  ...prev.joinApplications.results,
+                ],
+              },
+            }));
           },
         },
       )

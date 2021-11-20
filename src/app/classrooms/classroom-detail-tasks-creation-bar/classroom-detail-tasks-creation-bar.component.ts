@@ -3,13 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { finalize } from 'rxjs/operators';
 import { NotificationType } from 'src/app/common/notification-type.enum';
-import { ApolloHelperService } from 'src/app/core/apollo-helper.service';
-import {
-  ClassroomTaskListGQL,
-  ClassroomTaskListQuery,
-  ClassroomTaskListQueryVariables,
-  TaskCreateGQL,
-} from 'src/app/graphql';
+import { ClassroomTaskListGQL, TaskCreateGQL } from 'src/app/graphql';
 
 @Component({
   selector: 'app-classroom-detail-tasks-creation-bar',
@@ -23,9 +17,8 @@ export class ClassroomDetailTasksCreationBarComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private notifier: NotifierService,
+    private listGql: ClassroomTaskListGQL,
     private createGql: TaskCreateGQL,
-    private classroomTaskListGql: ClassroomTaskListGQL,
-    private apolloHelper: ApolloHelperService,
   ) {}
 
   ngOnInit() {}
@@ -39,27 +32,21 @@ export class ClassroomDetailTasksCreationBarComponent implements OnInit {
         { data: { classroom: classroomId, title: this.data } },
         {
           update: (_, result) => {
-            this.apolloHelper.updateQueryCache<
-              ClassroomTaskListQuery,
-              ClassroomTaskListQueryVariables
-            >({
-              query: this.classroomTaskListGql.document,
-              data: (prev) => ({
-                ...prev,
-                classroom: {
-                  ...prev.classroom,
-                  tasks: {
-                    ...prev.classroom.tasks,
-                    total: prev.classroom.tasks.total + 1,
-                    results: [
-                      result.data!.createTask,
-                      ...prev.classroom.tasks.results,
-                    ],
-                  },
+            const query = this.listGql.watch({ id: classroomId });
+            query.updateQuery((prev) => ({
+              ...prev,
+              classroom: {
+                ...prev.classroom,
+                tasks: {
+                  ...prev.classroom.tasks,
+                  total: prev.classroom.tasks.total + 1,
+                  results: [
+                    result.data!.createTask,
+                    ...prev.classroom.tasks.results,
+                  ],
                 },
-              }),
-              variables: { id: classroomId },
-            });
+              },
+            }));
           },
         },
       )

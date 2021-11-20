@@ -5,7 +5,6 @@ import { combineLatest, forkJoin, Subscription } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 import { leastTime } from 'src/app/common/least-time.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
-import { ApolloHelperService } from 'src/app/core/apollo-helper.service';
 import {
   AssignmentCreateGQL,
   AssignmentDeleteGQL,
@@ -15,7 +14,6 @@ import {
   Role,
   TaskAssignmentListGQL,
   TaskAssignmentListQuery,
-  TaskAssignmentListQueryVariables,
 } from 'src/app/graphql';
 import { PopupComponent } from 'src/app/shared/popup/popup.component';
 
@@ -42,7 +40,6 @@ export class ClassroomDetailTasksItemAssignPopupComponent
     private assignmentListGql: TaskAssignmentListGQL,
     private assignmentCreateGql: AssignmentCreateGQL,
     private assignmentDeleteGql: AssignmentDeleteGQL,
-    private apolloHelper: ApolloHelperService,
   ) {}
 
   ngOnInit() {
@@ -151,27 +148,21 @@ export class ClassroomDetailTasksItemAssignPopupComponent
       },
       {
         update: (_, result) => {
-          this.apolloHelper.updateQueryCache<
-            TaskAssignmentListQuery,
-            TaskAssignmentListQueryVariables
-          >({
-            query: this.assignmentListGql.document,
-            data: (prev) => ({
-              ...prev,
-              task: {
-                ...prev.task,
-                assignments: {
-                  ...prev.task.assignments,
-                  total: prev.task.assignments.total + 1,
-                  results: [
-                    result.data!.createAssignment,
-                    ...prev.task.assignments.results,
-                  ],
-                },
+          const query = this.assignmentListGql.watch({ id: this.task!.id });
+          query.updateQuery((prev) => ({
+            ...prev,
+            task: {
+              ...prev.task,
+              assignments: {
+                ...prev.task.assignments,
+                total: prev.task.assignments.total + 1,
+                results: [
+                  result.data!.createAssignment,
+                  ...prev.task.assignments.results,
+                ],
               },
-            }),
-            variables: { id: this.task!.id },
-          });
+            },
+          }));
         },
       },
     );
@@ -183,23 +174,17 @@ export class ClassroomDetailTasksItemAssignPopupComponent
       {
         update: (cache, result) => {
           cache.evict({ id: cache.identify(result.data!.deleteAssignment) });
-          this.apolloHelper.updateQueryCache<
-            TaskAssignmentListQuery,
-            TaskAssignmentListQueryVariables
-          >({
-            query: this.assignmentListGql.document,
-            data: (prev) => ({
-              ...prev,
-              task: {
-                ...prev.task,
-                assignments: {
-                  ...prev.task.assignments,
-                  total: prev.task.assignments.total - 1,
-                },
+          const query = this.assignmentListGql.watch({ id: this.task!.id });
+          query.updateQuery((prev) => ({
+            ...prev,
+            task: {
+              ...prev.task,
+              assignments: {
+                ...prev.task.assignments,
+                total: prev.task.assignments.total - 1,
               },
-            }),
-            variables: { id: this.taskId },
-          });
+            },
+          }));
         },
       },
     );

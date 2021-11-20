@@ -5,12 +5,10 @@ import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { NotificationType } from 'src/app/common/notification-type.enum';
-import { ApolloHelperService } from 'src/app/core/apollo-helper.service';
 import {
   ClassroomDetailGQL,
   ClassroomMembershipListGQL,
   ClassroomMembershipListQuery,
-  ClassroomMembershipListQueryVariables,
   MembershipDeleteGQL,
   MembershipUpdateGQL,
   Role,
@@ -47,7 +45,6 @@ export class ClassroomDetailSidebarMembershipListItemMenuComponent
     private listGql: ClassroomMembershipListGQL,
     private updateGql: MembershipUpdateGQL,
     private deleteGql: MembershipDeleteGQL,
-    private apolloHelper: ApolloHelperService,
   ) {}
 
   ngOnInit() {
@@ -119,23 +116,17 @@ export class ClassroomDetailSidebarMembershipListItemMenuComponent
           {
             update: (cache) => {
               cache.evict({ id: cache.identify(membership) });
-              this.apolloHelper.updateQueryCache<
-                ClassroomMembershipListQuery,
-                ClassroomMembershipListQueryVariables
-              >({
-                query: this.listGql.document,
-                data: (prev) => ({
-                  ...prev,
-                  classroom: {
-                    ...prev.classroom,
-                    memberships: {
-                      ...prev.classroom.memberships,
-                      total: prev.classroom.memberships.total - 1,
-                    },
+              const query = this.listGql.watch({ id: this.classroomId });
+              query.updateQuery((prev) => ({
+                ...prev,
+                classroom: {
+                  ...prev.classroom,
+                  memberships: {
+                    ...prev.classroom.memberships,
+                    total: prev.classroom.memberships.total - 1,
                   },
-                }),
-                variables: { id: this.classroomId },
-              });
+                },
+              }));
             },
           },
         ),
