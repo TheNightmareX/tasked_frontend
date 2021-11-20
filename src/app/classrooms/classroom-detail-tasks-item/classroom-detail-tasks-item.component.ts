@@ -1,11 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
+import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { leastTime } from 'src/app/common/least-time.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import { FormDataService } from 'src/app/core/form-data.service';
 import {
   ClassroomTaskListQuery,
+  TaskDeleteGQL,
   TaskUpdateGQL,
   TaskUpdateInput,
 } from 'src/app/graphql';
@@ -47,6 +49,7 @@ export class ClassroomDetailTasksItemComponent implements OnInit {
     private notifier: NotifierService,
     private formData: FormDataService,
     private updateGql: TaskUpdateGQL,
+    private deleteGql: TaskDeleteGQL,
   ) {}
 
   ngOnInit() {}
@@ -58,30 +61,46 @@ export class ClassroomDetailTasksItemComponent implements OnInit {
 
   update() {
     if (!this.task) return;
-    if (this.loading) return;
-
     const data = { ...this.data };
     this.formData.filterUnchanged(data, this.task);
+    this.mutate(
+      this.updateGql.mutate({ id: this.task.id, data }),
+      'Task updated',
+      'Failed to update the task',
+    );
+  }
 
+  delete() {
+    if (!this.task) return;
+    this.mutate(
+      this.deleteGql.mutate(
+        { id: this.task.id },
+        {
+          update: (cache, result) => {
+            cache.evict({ id: cache.identify(result.data!.deleteTask) });
+          },
+        },
+      ),
+      'Task deleted',
+      'Failed to delete the task',
+    );
+  }
+
+  private mutate(
+    mutation: Observable<unknown>,
+    messageOnSucceed: string,
+    messageOnFail: string,
+  ) {
+    if (this.loading) return;
     this.loading = true;
-    this.updateGql
-      .mutate({ id: this.task.id, data })
+    mutation
       .pipe(
         leastTime(1000),
-        finalize(() => {
-          this.loading = false;
-        }),
+        finalize(() => (this.loading = false)),
       )
       .subscribe(
-        () => {
-          this.notifier.notify(NotificationType.Success, 'Task updated');
-        },
-        () => {
-          this.notifier.notify(
-            NotificationType.Error,
-            'Failed to update the task',
-          );
-        },
+        () => this.notifier.notify(NotificationType.Success, messageOnSucceed),
+        () => this.notifier.notify(NotificationType.Error, messageOnFail),
       );
   }
 }

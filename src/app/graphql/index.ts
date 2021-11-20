@@ -968,6 +968,15 @@ export type TaskCreateMutation = {
   };
 };
 
+export type TaskDeleteMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type TaskDeleteMutation = {
+  __typename?: 'Mutation';
+  deleteTask: { __typename?: 'Task'; id: string };
+};
+
 export type TaskUpdateMutationVariables = Exact<{
   id: Scalars['ID'];
   data: TaskUpdateInput;
@@ -1622,6 +1631,27 @@ export class TaskCreateGQL extends Apollo.Mutation<
   TaskCreateMutationVariables
 > {
   document = TaskCreateDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const TaskDeleteDocument = gql`
+  mutation TaskDelete($id: ID!) {
+    deleteTask(id: $id) {
+      id
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class TaskDeleteGQL extends Apollo.Mutation<
+  TaskDeleteMutation,
+  TaskDeleteMutationVariables
+> {
+  document = TaskDeleteDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

@@ -45,17 +45,30 @@
       </mat-list-item>
     </mat-list>
 
-    <mat-action-row>
+    <mat-action-row fxLayout>
       <button mat-button class="uppercase" (click)="popup.openSheet()">
         Assign
       </button>
+
+      <mat-divider vertical style="margin-left: 8px"></mat-divider>
+
       <button
         mat-button
         class="uppercase"
         [disabled]="!valid || loading"
         (click)="update()"
       >
-        <span *appLoading="loading; diameter: 25">Update</span>
+        Update
+      </button>
+
+      <button
+        mat-button
+        class="uppercase"
+        [disabled]="loading"
+        color="warn"
+        (click)="delete()"
+      >
+        Delete
       </button>
     </mat-action-row>
   </ng-template>
