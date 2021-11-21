@@ -8,9 +8,8 @@ describe('ProfileBtnMenuEditPopupComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProfileBtnMenuEditPopupComponent ]
-    })
-    .compileComponents();
+      declarations: [ProfileBtnMenuEditPopupComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

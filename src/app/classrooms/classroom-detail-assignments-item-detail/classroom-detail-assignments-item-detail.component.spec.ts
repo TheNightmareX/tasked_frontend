@@ -8,13 +8,14 @@ describe('ClassroomDetailAssignmentsItemDetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ClassroomDetailAssignmentsItemDetailComponent ]
-    })
-    .compileComponents();
+      declarations: [ClassroomDetailAssignmentsItemDetailComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ClassroomDetailAssignmentsItemDetailComponent);
+    fixture = TestBed.createComponent(
+      ClassroomDetailAssignmentsItemDetailComponent,
+    );
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

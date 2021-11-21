@@ -10,7 +10,14 @@ import { LayoutMainSidenavClassroomsComponent } from './layout-main-sidenav-clas
 import { LayoutMainRefetchButtonComponent } from './layout-main-refetch-button/layout-main-refetch-button.component';
 
 @NgModule({
-  declarations: [LayoutComponent, LayoutAuthComponent, LayoutMainComponent, LayoutMainSidenavComponent, LayoutMainSidenavClassroomsComponent, LayoutMainRefetchButtonComponent],
+  declarations: [
+    LayoutComponent,
+    LayoutAuthComponent,
+    LayoutMainComponent,
+    LayoutMainSidenavComponent,
+    LayoutMainSidenavClassroomsComponent,
+    LayoutMainRefetchButtonComponent,
+  ],
   imports: [SharedModule, RouterModule, ProfileModule],
 })
 export class LayoutsModule {}
