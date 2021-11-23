@@ -1,6 +1,6 @@
 <ng-container ngForm>
   <mat-form-field color="accent" appearance="standard">
-    <mat-label>Username</mat-label>
+    <mat-label i18n>Username</mat-label>
     <input
       matInput
       name="username"
@@ -14,20 +14,21 @@
       #username="ngModel"
       [disabled]="update"
     />
-    <mat-hint *ngIf="update">Username cannot be updated</mat-hint>
-    <mat-error *ngIf="!username.valid">
+    <mat-hint *ngIf="update" i18n>Username cannot be updated</mat-hint>
+    <mat-error *ngIf="!username.valid" i18n>
       Must consist of alphanumeric, underscores or hyphens
     </mat-error>
     <mat-icon
       matSuffix
       matTooltip="Credentials for login which is immutable and unique"
+      i18n-matTooltip
     >
       help_outline
     </mat-icon>
   </mat-form-field>
 
   <mat-form-field color="accent" appearance="standard">
-    <mat-label>Nickname</mat-label>
+    <mat-label i18n>Nickname</mat-label>
     <input
       matInput
       name="nickname"
@@ -40,13 +41,14 @@
     <mat-icon
       matSuffix
       matTooltip="[Optional] Something that will be displayed to others instead of your username and can be updated whenever you like"
+      i18n-matTooltip
     >
       help_outline
     </mat-icon>
   </mat-form-field>
 
   <mat-form-field color="accent" appearance="standard">
-    <mat-label>Password</mat-label>
+    <mat-label i18n>Password</mat-label>
     <input
       matInput
       name="password"
@@ -60,13 +62,13 @@
       (ngModelChange)="propagate()"
       #password="ngModel"
     />
-    <mat-error *ngIf="!password.valid">
+    <mat-error *ngIf="!password.valid" i18n>
       Must consist of 6 - 20 characters
     </mat-error>
   </mat-form-field>
 
   <mat-form-field color="accent" appearance="standard">
-    <mat-label>Confirm Password</mat-label>
+    <mat-label i18n>Confirm Password</mat-label>
     <input
       matInput
       name="passwordConfirm"
@@ -79,13 +81,13 @@
       (ngModelChange)="propagate()"
       #passwordConfirm="ngModel"
     />
-    <mat-error *ngIf="!passwordConfirm.valid">
+    <mat-error *ngIf="!passwordConfirm.valid" i18n>
       Must match the previous password above
     </mat-error>
   </mat-form-field>
 
   <mat-form-field color="accent" appearance="standard">
-    <mat-label>Gender</mat-label>
+    <mat-label i18n>Gender</mat-label>
     <mat-select
       name="gender"
       [(ngModel)]="data.gender"

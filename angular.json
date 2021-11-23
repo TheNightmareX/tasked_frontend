@@ -16,6 +16,12 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "zh": "src/locales/messages.zh.json"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -64,6 +70,9 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "zh": {
+              "localize": ["zh"]
             }
           },
           "defaultConfiguration": "production"
@@ -77,6 +86,9 @@
             "development": {
               "browserTarget": "tasked:build:development",
               "proxyConfig": "proxy.conf.json"
+            },
+            "zh": {
+              "browserTarget": "tasked:build:zh"
             }
           },
           "defaultConfiguration": "development"

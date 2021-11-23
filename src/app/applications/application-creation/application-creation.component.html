@@ -1,9 +1,9 @@
 <form class="container" #form="ngForm" (ngSubmit)="send()">
-  <div matDialogTitle>New Application</div>
+  <div matDialogTitle i18n>New Application</div>
 
   <div matDialogContent fxLayout="column">
     <mat-form-field color="accent">
-      <mat-label>Classroom ID</mat-label>
+      <mat-label i18n>Classroom ID</mat-label>
       <input
         matInput
         name="classroom"
@@ -14,7 +14,7 @@
     </mat-form-field>
 
     <mat-form-field color="accent">
-      <mat-label>Message</mat-label>
+      <mat-label i18n>Message</mat-label>
       <input
         matInput
         name="message"
@@ -32,6 +32,7 @@
       type="submit"
       class="uppercase"
       [disabled]="!form.valid || loading"
+      i18n
     >
       Send
     </button>

@@ -10,7 +10,13 @@
 </mat-selection-list>
 
 <div fxLayout fxLayoutAlign="end">
-  <button mat-button class="uppercase" [disabled]="loading" (click)="update()">
+  <button
+    mat-button
+    class="uppercase"
+    [disabled]="loading"
+    (click)="update()"
+    i18n
+  >
     Confirm
   </button>
 </div>

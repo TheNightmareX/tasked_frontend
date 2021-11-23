@@ -19,10 +19,11 @@
       color="accent"
       [disabled]="!form.valid"
       type="submit"
+      i18n
     >
       Submit
     </button>
-    <button mat-button *ngIf="!(canUpdate$ | async)" disabled>
+    <button mat-button *ngIf="!(canUpdate$ | async)" disabled i18n>
       Unable to update until
       {{ (qualifiedDate$ | async)?.toDate() | date: 'short' }}
     </button>

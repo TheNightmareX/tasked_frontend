@@ -1,10 +1,10 @@
 <form (ngSubmit)="submit$.next()" #form="ngForm">
   <app-auth-form-layout>
-    <ng-container ngProjectAs="title">Login</ng-container>
+    <ng-container ngProjectAs="title" i18n>Login</ng-container>
 
     <ng-container ngProjectAs="content">
       <mat-form-field color="accent">
-        <mat-label>Username</mat-label>
+        <mat-label i18n>Username</mat-label>
         <input
           matInput
           name="username"
@@ -17,7 +17,7 @@
       </mat-form-field>
 
       <mat-form-field color="accent">
-        <mat-label>Password</mat-label>
+        <mat-label i18n>Password</mat-label>
         <input
           matInput
           name="password"
@@ -38,7 +38,7 @@
         color="primary"
         type="submit"
       >
-        <span *appLoading="loading; diameter: 30">Submit</span>
+        <span *appLoading="loading; diameter: 30" i18n>Submit</span>
       </button>
     </ng-container>
   </app-auth-form-layout>

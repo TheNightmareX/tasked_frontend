@@ -1,5 +1,5 @@
 <mat-list>
-  <h3 matSubheader>Description</h3>
+  <h3 matSubheader i18n>Description</h3>
   <section class="description mat-typography">
     <p [class]="{ 'opacity--2': !(classroom$ | async)?.description }">
       {{ (classroom$ | async)?.description || 'No description provided...' }}

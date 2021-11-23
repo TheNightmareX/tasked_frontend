@@ -6,16 +6,16 @@
   <ng-template #actionExit>
     <button mat-list-item [disabled]="loading" (click)="exit()">
       <mat-icon matListIcon>logout</mat-icon>
-      <div matLine>Exit this classroom</div>
-      <div matLine>Remove your membership</div>
+      <div matLine i18n>Exit this classroom</div>
+      <div matLine i18n>Remove your membership</div>
     </button>
   </ng-template>
 
   <ng-template #actionDisband>
     <button mat-list-item [disabled]="loading" (click)="disband()">
       <mat-icon matListIcon>delete</mat-icon>
-      <div matLine>Disband this classroom</div>
-      <div matLine>Remove the entire classroom</div>
+      <div matLine i18n>Disband this classroom</div>
+      <div matLine i18n>Remove the entire classroom</div>
     </button>
   </ng-template>
 </mat-action-list>

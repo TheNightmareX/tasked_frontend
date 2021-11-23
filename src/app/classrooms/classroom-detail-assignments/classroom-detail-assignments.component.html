@@ -1,12 +1,14 @@
 <mat-action-list>
-  <h3 matSubheader *ngIf="(assignmentsPending$ | async)?.length">Pending</h3>
+  <h3 matSubheader *ngIf="(assignmentsPending$ | async)?.length" i18n>
+    Pending
+  </h3>
 
   <app-classroom-detail-assignments-item
     *ngFor="let assignment of assignmentsPending$ | async"
     [assignment]="assignment"
   ></app-classroom-detail-assignments-item>
 
-  <h3 matSubheader *ngIf="(assignmentsCompleted$ | async)?.length">
+  <h3 matSubheader *ngIf="(assignmentsCompleted$ | async)?.length" i18n>
     Completed
   </h3>
 

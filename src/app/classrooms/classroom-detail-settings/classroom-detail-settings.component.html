@@ -5,10 +5,10 @@
   fxLayoutGap="28px"
 >
   <app-classroom-detail-settings-section>
-    <ng-container ngProjectAs="title">Basic</ng-container>
+    <ng-container ngProjectAs="title" i18n>Basic</ng-container>
     <ng-container ngProjectAs="content">
       <mat-form-field color="accent">
-        <mat-label>Name</mat-label>
+        <mat-label i18n>Name</mat-label>
         <input
           matInput
           [disabled]="!(isCreator$ | async)"
@@ -20,7 +20,7 @@
       </mat-form-field>
 
       <mat-form-field fxFlex="100%" color="accent">
-        <mat-label>Description</mat-label>
+        <mat-label i18n>Description</mat-label>
         <textarea
           matInput
           rows="3"
@@ -35,7 +35,7 @@
   </app-classroom-detail-settings-section>
 
   <app-classroom-detail-settings-section>
-    <ng-container ngProjectAs="title">Access</ng-container>
+    <ng-container ngProjectAs="title" i18n>Access</ng-container>
     <ng-container ngProjectAs="content">
       <div fxLayout fxLayoutGap="5px">
         <mat-slide-toggle
@@ -43,11 +43,12 @@
           [(ngModel)]="data.isOpen"
           (ngModelChange)="change$.next()"
         >
-          <span>Open to public</span>
+          <span i18n>Open to public</span>
         </mat-slide-toggle>
         <mat-icon
           class="helper"
           matTooltip="If turned off, others will be unable to join this classroom"
+          i18n-matTooltip
         >
           help_outline
         </mat-icon>
@@ -64,7 +65,7 @@
         [disabled]="!(modified$ | async) || loading"
         (click)="reset()"
       >
-        <span>Reset</span>
+        <span i18n>Reset</span>
       </button>
       <button
         mat-raised-button
@@ -74,7 +75,7 @@
         [disabled]="!(modified$ | async) || loading"
         (click)="save()"
       >
-        <span *appLoading="loading; diameter: 25">Save</span>
+        <span *appLoading="loading; diameter: 25" i18n>Save</span>
       </button>
     </div>
   </section>
