@@ -70,9 +70,6 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
-            },
-            "zh": {
-              "localize": ["zh"]
             }
           },
           "defaultConfiguration": "production"
@@ -86,9 +83,6 @@
             "development": {
               "browserTarget": "tasked:build:development",
               "proxyConfig": "proxy.conf.json"
-            },
-            "zh": {
-              "browserTarget": "tasked:build:zh"
             }
           },
           "defaultConfiguration": "development"
