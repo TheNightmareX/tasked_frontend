@@ -52,7 +52,9 @@ export class ClassroomDetailComponent implements OnInit {
       const id = params.get('id')!;
 
       this.auth.user$.pipe(first()).subscribe((user) => {
-        this.local.lastActivatedClassroomMap[user!.id] = id;
+        const map = this.local.lastActivatedClassroomMap;
+        map.value[user!.id] = id;
+        map.save();
       });
 
       this.classroom$ = this.classroomDetailGql.watch({ id }).valueChanges.pipe(

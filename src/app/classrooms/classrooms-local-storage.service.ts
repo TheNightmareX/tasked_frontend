@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
-import { LocalStorageService } from '../core/local-storage.service';
+import { LocalStorageItem } from '../common/local-storage-item.class';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClassroomsLocalStorageService {
-  lastActivatedClassroomMap: Record<string, string>;
+  lastActivatedClassroomMap: LocalStorageItem<Map>;
 
-  constructor(private storage: LocalStorageService) {
-    this.lastActivatedClassroomMap = this.storage.load({
-      key: 'lastActivatedClassroomMap',
-      validator: (v): v is this['lastActivatedClassroomMap'] =>
+  constructor() {
+    this.lastActivatedClassroomMap = new LocalStorageItem(
+      'lastActivatedClassroomMap',
+      (v) =>
         typeof v == 'object' &&
         !!v &&
         Object.entries(v).every(
           ([userId, classroomId]) =>
             typeof userId == 'string' && typeof classroomId == 'string',
         ),
-      valueOnError: {},
-      valueOnSave: () => this.lastActivatedClassroomMap,
-    });
+      {},
+    );
   }
 }
+
+type Map = Record<string, string>;

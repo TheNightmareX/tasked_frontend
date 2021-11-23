@@ -31,16 +31,19 @@ export class ClassroomRedirectorComponent {
       this.auth.user$.pipe(first()),
     ]).subscribe(([classrooms, user]) => {
       const map = this.storage.lastActivatedClassroomMap;
-      if (user!.id in map) {
-        const exists = classrooms.some((item) => item.id == map[user!.id]);
+      if (user!.id in map.value) {
+        const exists = classrooms.some(
+          (item) => item.id == map.value[user!.id],
+        );
         if (exists) {
           this.notifier.notify(
             NotificationType.Info,
             'Navigated to the last accessed classroom',
           );
-          this.redirect(map[user!.id]);
+          this.redirect(map.value[user!.id]);
         } else {
-          delete map[user!.id];
+          delete map.value[user!.id];
+          map.save();
           this.redirect();
         }
       } else {
