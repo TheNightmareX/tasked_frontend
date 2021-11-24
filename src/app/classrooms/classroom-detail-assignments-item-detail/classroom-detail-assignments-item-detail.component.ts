@@ -22,7 +22,7 @@ export class ClassroomDetailAssignmentsItemDetailComponent implements OnInit {
     // TODO: use <app-username>
     this.infoItems = [
       {
-        name: 'Creator',
+        name: $localize`Creator`,
         value: this.assignment
           ? this.assignment.task.creator.nickname ??
             this.assignment.task.creator.username
@@ -30,7 +30,7 @@ export class ClassroomDetailAssignmentsItemDetailComponent implements OnInit {
         icon: 'person',
       },
       {
-        name: 'Creation Time',
+        name: $localize`Creation Time`,
         value: this.assignment
           ? this.datePipe.transform(this.assignment.createdAt, 'medium')!
           : '',
