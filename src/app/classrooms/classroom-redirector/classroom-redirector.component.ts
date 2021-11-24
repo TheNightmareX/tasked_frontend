@@ -38,7 +38,7 @@ export class ClassroomRedirectorComponent {
         if (exists) {
           this.notifier.notify(
             NotificationType.Info,
-            'Navigated to the last accessed classroom',
+            $localize`Navigated to the last accessed classroom`,
           );
           this.redirect(map.value[user!.id]);
         } else {

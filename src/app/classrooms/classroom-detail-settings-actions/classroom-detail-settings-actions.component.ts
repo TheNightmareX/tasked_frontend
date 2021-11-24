@@ -47,16 +47,16 @@ export class ClassroomDetailSettingsActionsComponent implements OnInit {
     this.mutate(
       (classroom) =>
         this.membershipDeleteGql.mutate({ id: classroom.membership!.id }),
-      `Exited the classroom`,
-      'Failed to exit the classroom',
+      $localize`Exited the classroom`,
+      $localize`Failed to exit the classroom`,
     );
   }
 
   disband() {
     this.mutate(
       (classroom) => this.classroomDeleteGql.mutate({ id: classroom.id }),
-      `Disbanded the classroom`,
-      'Failed to disband the classroom',
+      $localize`Disbanded the classroom`,
+      $localize`Failed to disband the classroom`,
     );
   }
 

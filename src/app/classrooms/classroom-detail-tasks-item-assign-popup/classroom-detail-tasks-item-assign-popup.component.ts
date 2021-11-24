@@ -125,13 +125,13 @@ export class ClassroomDetailTasksItemAssignPopupComponent
             );
             this.notifier.notify(
               NotificationType.Success,
-              `Assignments updated: assigned ${creation}, revoked ${deletion}`,
+              $localize`Assigned: ${creation}; Revoked: ${deletion}`,
             );
           },
           () => {
             this.notifier.notify(
               NotificationType.Error,
-              'Failed to update the assignments',
+              $localize`Failed to update the assignments`,
             );
           },
         );

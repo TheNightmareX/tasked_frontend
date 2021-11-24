@@ -8,7 +8,6 @@ import { AuthService } from 'src/app/auth/auth.service';
 import {
   ClassroomDetailGQL,
   ClassroomDetailQuery,
-  ClassroomMembershipListDocument,
   Role,
 } from 'src/app/graphql';
 import { ClassroomsLocalStorageService } from '../classrooms-local-storage.service';
@@ -62,9 +61,9 @@ export class ClassroomDetailComponent implements OnInit {
         tap((classroom) => {
           this.links = [
             classroom.membership!.role == Role.Student
-              ? ['Assignments', ['assignments']]
-              : ['Tasks', ['tasks']],
-            ['Settings', ['settings']],
+              ? [$localize`Assignments`, ['assignments']]
+              : [$localize`Tasks`, ['tasks']],
+            [$localize`Settings`, ['settings']],
           ];
         }),
       );

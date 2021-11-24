@@ -51,7 +51,7 @@ export class AuthFormLoginComponent implements OnInit {
         () => {
           this.notifier.notify(
             NotificationType.Error,
-            'Invalid username or password',
+            $localize`Invalid username or password`,
           );
         },
       );

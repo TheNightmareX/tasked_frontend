@@ -91,13 +91,13 @@ export class ClassroomDetailSettingsComponent implements OnInit {
           () => {
             this.notifier.notify(
               NotificationType.Success,
-              'Changes have been saved successfully',
+              $localize`Changes have been saved successfully`,
             );
           },
           () => {
             this.notifier.notify(
               NotificationType.Error,
-              'Failed to save the changes',
+              $localize`Failed to save the changes`,
             );
           },
         );

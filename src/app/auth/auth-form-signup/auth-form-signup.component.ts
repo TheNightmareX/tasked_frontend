@@ -58,7 +58,7 @@ export class AuthFormSignupComponent implements OnInit {
         () => {
           this.notifier.notify(
             NotificationType.Error,
-            `Username "${username}" is already taken`,
+            $localize`Username "${username}" is already taken`,
           );
         },
       );

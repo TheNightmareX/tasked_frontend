@@ -40,12 +40,12 @@ export class ClassroomDetailAssignmentsItemComponent implements OnInit {
       ? 'radio_button_checked'
       : 'radio_button_unchecked';
     this.completionTooltip = this.assignment.isCompleted
-      ? 'Mark as pending'
-      : 'Mark as completed';
+      ? $localize`Mark as pending`
+      : $localize`Mark as completed`;
     this.importanceIcon = this.assignment.isImportant ? 'star' : 'star_outline';
     this.importanceTooltip = this.assignment.isImportant
-      ? 'Remove importance mark'
-      : 'Mark as important';
+      ? $localize`Remove importance mark`
+      : $localize`Mark as important`;
   }
 
   switchCompletion() {
@@ -95,7 +95,7 @@ export class ClassroomDetailAssignmentsItemComponent implements OnInit {
         error: () => {
           this.notifier.notify(
             NotificationType.Error,
-            'Failed to update the assignment',
+            $localize`Failed to update the assignment`,
           );
         },
       });

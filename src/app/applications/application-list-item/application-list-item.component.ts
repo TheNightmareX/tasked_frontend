@@ -64,8 +64,8 @@ export class ApplicationListItemComponent implements OnInit {
           },
         },
       ),
-      'Application accepted',
-      'Failed to accept the application',
+      $localize`Application accepted`,
+      $localize`Failed to accept the application`,
     );
   }
 
@@ -73,8 +73,8 @@ export class ApplicationListItemComponent implements OnInit {
     if (!this.application) return;
     this.mutate(
       this.rejectGql.mutate({ id: this.application.id }),
-      'Application rejected',
-      'Failed to reject the application',
+      $localize`Application rejected`,
+      $localize`Failed to reject the application`,
     );
   }
 

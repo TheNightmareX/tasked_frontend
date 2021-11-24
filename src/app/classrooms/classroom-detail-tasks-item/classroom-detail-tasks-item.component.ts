@@ -65,8 +65,8 @@ export class ClassroomDetailTasksItemComponent implements OnInit {
     this.formData.filterUnchanged(data, this.task);
     this.mutate(
       this.updateGql.mutate({ id: this.task.id, data }),
-      'Task updated',
-      'Failed to update the task',
+      $localize`Task updated`,
+      $localize`Failed to update the task`,
     );
   }
 
@@ -81,8 +81,8 @@ export class ClassroomDetailTasksItemComponent implements OnInit {
           },
         },
       ),
-      'Task deleted',
-      'Failed to delete the task',
+      $localize`Task deleted`,
+      $localize`Failed to delete the task`,
     );
   }
 

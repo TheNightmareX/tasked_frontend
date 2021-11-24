@@ -67,13 +67,13 @@ export class ApplicationCreationComponent implements OnInit {
         () => {
           this.notifier.notify(
             NotificationType.Success,
-            `Application sent to classroom #${data.classroom}`,
+            $localize`Application sent to classroom #${data.classroom}`,
           );
         },
         () => {
           this.notifier.notify(
             NotificationType.Error,
-            'Failed to send the application',
+            $localize`Failed to send the application`,
           );
         },
       );

@@ -53,13 +53,16 @@ export class ClassroomDetailTasksCreationBarComponent implements OnInit {
       .pipe(finalize(() => (this.loading = false)))
       .subscribe(
         () => {
-          this.notifier.notify(NotificationType.Success, 'Task created');
+          this.notifier.notify(
+            NotificationType.Success,
+            $localize`Task created`,
+          );
           this.data = '';
         },
         () => {
           this.notifier.notify(
             NotificationType.Error,
-            'Failed to create the task',
+            $localize`Failed to create the task`,
           );
         },
       );

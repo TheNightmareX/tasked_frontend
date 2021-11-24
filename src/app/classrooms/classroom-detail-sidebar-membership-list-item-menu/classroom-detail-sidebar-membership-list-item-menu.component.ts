@@ -91,8 +91,8 @@ export class ClassroomDetailSidebarMembershipListItemMenuComponent
           id: membership.id,
           data: { role: Role.Teacher },
         }),
-      'Member promoted successfully',
-      'Failed to promote the member',
+      $localize`Member promoted successfully`,
+      $localize`Failed to promote the member`,
     );
   }
 
@@ -103,8 +103,8 @@ export class ClassroomDetailSidebarMembershipListItemMenuComponent
           id: membership.id,
           data: { role: Role.Student },
         }),
-      'Member demoted successfully',
-      'Failed to demote the member',
+      $localize`Member demoted successfully`,
+      $localize`Failed to demote the member`,
     );
   }
 
@@ -130,8 +130,8 @@ export class ClassroomDetailSidebarMembershipListItemMenuComponent
             },
           },
         ),
-      'Member removed successfully',
-      'Failed to remove the member',
+      $localize`Member removed successfully`,
+      $localize`Failed to remove the member`,
     );
   }
 

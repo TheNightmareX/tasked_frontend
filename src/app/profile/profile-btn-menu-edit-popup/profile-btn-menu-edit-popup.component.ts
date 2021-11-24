@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import dayjs, { Dayjs } from 'dayjs';
 import { Observable } from 'rxjs';
@@ -61,14 +61,14 @@ export class ProfileBtnMenuEditPopupComponent implements OnInit {
         () => {
           this.notifier.notify(
             NotificationType.Success,
-            'Profile updated successfully',
+            $localize`Profile updated successfully`,
           );
           this.popup.close();
         },
         () => {
           this.notifier.notify(
             NotificationType.Error,
-            'Failed to update the profile',
+            $localize`Failed to update the profile`,
           );
         },
       );

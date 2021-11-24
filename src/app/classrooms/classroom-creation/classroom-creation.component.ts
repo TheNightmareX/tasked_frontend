@@ -61,7 +61,7 @@ export class ClassroomCreationComponent implements OnInit {
         (result) => {
           this.notifier.notify(
             NotificationType.Success,
-            'Classroom created successfully',
+            $localize`Classroom created successfully`,
           );
           this.router.navigate(
             ['/classrooms', result.data!.createClassroom.id],
@@ -73,7 +73,7 @@ export class ClassroomCreationComponent implements OnInit {
         () => {
           this.notifier.notify(
             NotificationType.Error,
-            'Failed to create the classroom',
+            $localize`Failed to create the classroom`,
           );
         },
       );
