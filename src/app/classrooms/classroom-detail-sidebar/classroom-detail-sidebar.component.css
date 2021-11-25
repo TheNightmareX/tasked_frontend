@@ -1,8 +1,13 @@
-:host {
-  display: block;
+mat-list {
   width: 240px;
+  height: 100%;
 }
 
 .description {
   padding: 0 18px;
+}
+
+.memberships {
+  height: 0;
+  overflow: auto;
 }
