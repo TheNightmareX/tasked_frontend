@@ -1,10 +1,11 @@
-<mat-expansion-panel [(expanded)]="expanded">
+<mat-expansion-panel [(expanded)]="expanded" ngForm #form="ngForm">
   <mat-expansion-panel-header>
     <mat-panel-title>
       <div *ngIf="!expanded">{{ task?.title }}</div>
       <mat-form-field *ngIf="expanded" appearance="standard" color="accent">
         <input
           matInput
+          name="title"
           type="text"
           placeholder="Title"
           required
@@ -12,7 +13,6 @@
           (click)="$event.stopPropagation()"
           (keydown)="$event.stopPropagation()"
           [(ngModel)]="data.title"
-          (ngModelChange)="valid = !!title.valid"
           #title="ngModel"
         />
         <mat-hint align="end">{{ data.title?.length ?? 0 }} / 30</mat-hint>
@@ -24,6 +24,7 @@
     <mat-form-field appearance="standard" color="accent">
       <textarea
         matInput
+        name="description"
         rows="5"
         placeholder="Description"
         maxlength="500"
@@ -56,7 +57,7 @@
       <button
         mat-button
         class="uppercase"
-        [disabled]="!valid || loading"
+        [disabled]="!form.valid || loading"
         (click)="update()"
         i18n
       >

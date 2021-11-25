@@ -25,13 +25,6 @@ export class ClassroomDetailTasksItemComponent implements OnInit {
   @Input() task?: Task;
   data: TaskUpdateInput = {};
 
-  /**
-   * The inputs are conditional, so it's impossible to get the validation
-   * status in the template. And because only the `title` field may fail
-   * the validation, so only the `title`'s control will update this value.
-   */
-  valid = true;
-
   loading = false;
 
   /**
