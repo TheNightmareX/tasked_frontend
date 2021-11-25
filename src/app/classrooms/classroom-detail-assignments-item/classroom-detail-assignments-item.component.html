@@ -15,13 +15,13 @@
       {{ assignment?.task?.title }}
     </div>
     <div matLine class="opacity--1">
-      <span matTooltip="Creation Time">
+      <span matTooltip="Creation Time" i18n-matTooltip>
         <mat-icon inline>calendar_today</mat-icon>
         <span>
           {{ assignment?.createdAt | date: 'short' }}
         </span>
       </span>
-      <span matTooltip="Creator">
+      <span matTooltip="Creator" i18n-matTooltip>
         <mat-icon inline>person</mat-icon>
         <app-username [user]="assignment?.task?.creator"></app-username>
       </span>
