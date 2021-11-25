@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -6,6 +7,7 @@ import { leastTime } from 'src/app/common/least-time.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import { FormDataService } from 'src/app/core/form-data.service';
 import {
+  ClassroomTaskListGQL,
   ClassroomTaskListQuery,
   TaskDeleteGQL,
   TaskUpdateGQL,
@@ -46,8 +48,10 @@ export class ClassroomDetailTasksItemComponent implements OnInit {
   private _expanded = false;
 
   constructor(
+    private route: ActivatedRoute,
     private notifier: NotifierService,
     private formData: FormDataService,
+    private listGql: ClassroomTaskListGQL,
     private updateGql: TaskUpdateGQL,
     private deleteGql: TaskDeleteGQL,
   ) {}
@@ -78,6 +82,17 @@ export class ClassroomDetailTasksItemComponent implements OnInit {
         {
           update: (cache, result) => {
             cache.evict({ id: cache.identify(result.data!.deleteTask) });
+            const id = this.route.parent!.snapshot.paramMap.get('id')!;
+            this.listGql.watch({ id }).updateQuery((prev) => ({
+              ...prev,
+              classroom: {
+                ...prev.classroom,
+                tasks: {
+                  ...prev.classroom.tasks,
+                  total: prev.classroom.tasks.total - 1,
+                },
+              },
+            }));
           },
         },
       ),
