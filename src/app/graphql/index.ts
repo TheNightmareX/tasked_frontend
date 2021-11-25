@@ -1381,7 +1381,7 @@ export const ClassroomTaskListDocument = gql`
   query ClassroomTaskList($id: ID!, $limit: Int, $offset: Int) {
     classroom(id: $id) {
       id
-      tasks(limit: $limit, offset: $offset) {
+      tasks(isOwn: true, limit: $limit, offset: $offset) {
         total
         results {
           ...Task
