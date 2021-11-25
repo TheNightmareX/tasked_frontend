@@ -1,4 +1,9 @@
-<mat-expansion-panel [(expanded)]="expanded" ngForm #form="ngForm">
+<mat-expansion-panel
+  [(expanded)]="expanded"
+  (expandedChange)="$event ? this.initData() : null"
+  ngForm
+  #form="ngForm"
+>
   <mat-expansion-panel-header>
     <mat-panel-title>
       <div *ngIf="!expanded">{{ task?.title }}</div>

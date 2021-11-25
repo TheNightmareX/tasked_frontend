@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { leastTime } from 'src/app/common/least-time.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import { FormDataService } from 'src/app/core/form-data.service';
 import {
@@ -26,19 +25,7 @@ export class ClassroomDetailTasksItemComponent implements OnInit {
   data: TaskUpdateInput = {};
 
   loading = false;
-
-  /**
-   * Accessors are needed here because the data should be initialized after
-   * the expansion panel is expanded or closed.
-   */
-  get expanded() {
-    return this._expanded;
-  }
-  set expanded(value: boolean) {
-    this._expanded = value;
-    if (value) this.initData();
-  }
-  private _expanded = false;
+  expanded = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -51,7 +38,7 @@ export class ClassroomDetailTasksItemComponent implements OnInit {
 
   ngOnInit() {}
 
-  private initData() {
+  initData() {
     if (this.task)
       this.data = this.formData.pick(this.task, ['title', 'description']);
   }
