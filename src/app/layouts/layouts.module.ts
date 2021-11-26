@@ -8,6 +8,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { LayoutMainSidenavComponent } from './layout-main-sidenav/layout-main-sidenav.component';
 import { LayoutMainSidenavClassroomsComponent } from './layout-main-sidenav-classrooms/layout-main-sidenav-classrooms.component';
 import { LayoutMainRefetchButtonComponent } from './layout-main-refetch-button/layout-main-refetch-button.component';
+import { LayoutThemeButtonComponent } from './layout-theme-button/layout-theme-button.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { LayoutMainRefetchButtonComponent } from './layout-main-refetch-button/l
     LayoutMainSidenavComponent,
     LayoutMainSidenavClassroomsComponent,
     LayoutMainRefetchButtonComponent,
+    LayoutThemeButtonComponent,
   ],
   imports: [SharedModule, RouterModule, ProfileModule],
 })

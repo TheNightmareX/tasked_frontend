@@ -1,4 +1,8 @@
 <app-layout>
+  <ng-container ngProjectAs="header-actions">
+    <app-layout-theme-button></app-layout-theme-button>
+  </ng-container>
+
   <ng-container ngProjectAs="sidenav">
     <mat-nav-list>
       <a
@@ -19,5 +23,6 @@
       </a>
     </mat-nav-list>
   </ng-container>
+
   <router-outlet></router-outlet>
 </app-layout>
