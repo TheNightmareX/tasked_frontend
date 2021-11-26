@@ -11,18 +11,27 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
-.router-link-active {
-  background-color: rgba(123, 31, 162, 0.15) !important;
-  color: rgb(209, 118, 225) !important;
-}
-.router-link-active:hover {
-  background-color: rgba(123, 31, 162, 0.3) !important;
-}
-
 button.fab {
   position: fixed;
   bottom: 16px;
   right: 16px;
 }
 
-/* Colors from https://github.com/angular/material.angular.io */
+.theme-dark {
+  .router-link-active {
+    color: rgb(209, 118, 225) !important;
+    background-color: rgba(123, 31, 162, 0.15) !important;
+  }
+  .router-link-active:hover {
+    background-color: rgba(123, 31, 162, 0.3) !important;
+  }
+}
+.theme-light {
+  .router-link-active {
+    color: rgb(0, 150, 136) !important;
+    background-color: rgb(225, 243, 241) !important;
+  }
+  .router-link-active:hover {
+    background-color: rgba(181, 232, 227, 0.7) !important;
+  }
+}

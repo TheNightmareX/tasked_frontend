@@ -2,6 +2,12 @@
   height: 100%;
 }
 
+:host-context(.theme-light) {
+  mat-toolbar {
+    background-color: rgb(230, 230, 230);
+  }
+}
+
 mat-drawer-container {
   height: 0;
 }
