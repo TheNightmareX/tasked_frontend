@@ -3,8 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { filterKeys } from 'src/app/common/filter-keys.func';
 import { NotificationType } from 'src/app/common/notification-type.enum';
-import { FormDataService } from 'src/app/core/form-data.service';
+import { pick } from 'src/app/common/pick.func';
 import {
   ClassroomTaskListGQL,
   ClassroomTaskListQuery,
@@ -30,7 +31,6 @@ export class ClassroomDetailTasksItemComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private notifier: NotifierService,
-    private formData: FormDataService,
     private listGql: ClassroomTaskListGQL,
     private updateGql: TaskUpdateGQL,
     private deleteGql: TaskDeleteGQL,
@@ -39,16 +39,15 @@ export class ClassroomDetailTasksItemComponent implements OnInit {
   ngOnInit() {}
 
   initData() {
-    if (this.task)
-      this.data = this.formData.pick(this.task, ['title', 'description']);
+    if (this.task) this.data = pick(this.task, ['title', 'description']);
   }
 
   update() {
-    if (!this.task) return;
-    const data = { ...this.data };
-    this.formData.filterUnchanged(data, this.task);
+    const task = this.task;
+    if (!task) return;
+    const data = filterKeys(this.data, (v, k) => v != task[k as keyof Task]);
     this.mutate(
-      this.updateGql.mutate({ id: this.task.id, data }),
+      this.updateGql.mutate({ id: task.id, data }),
       $localize`Task updated`,
       $localize`Failed to update the task`,
     );

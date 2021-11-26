@@ -4,9 +4,9 @@ import { NotifierService } from 'angular-notifier';
 import { Subject } from 'rxjs';
 import { concatMap, finalize, throttleTime } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
+import { filterKeys } from 'src/app/common/filter-keys.func';
 import { leastTime } from 'src/app/common/least-time.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
-import { FormDataService } from 'src/app/core/form-data.service';
 import { Gender, UserCreateGQL, UserCreateInput } from 'src/app/graphql';
 import { ProfileFormData } from 'src/app/profile/profile-form/profile-form-data.interface';
 
@@ -30,7 +30,6 @@ export class AuthFormSignupComponent implements OnInit {
     private notifier: NotifierService,
     private router: Router,
     private userCreateGql: UserCreateGQL,
-    private formData: FormDataService,
   ) {}
 
   ngOnInit() {
@@ -40,8 +39,15 @@ export class AuthFormSignupComponent implements OnInit {
   private submit() {
     this.loading = true;
     const { username, password, nickname, gender } = this.data;
-    const data: UserCreateInput = { username, password, nickname, gender };
-    this.formData.filterEmpty(data);
+    const data: UserCreateInput = filterKeys(
+      {
+        username,
+        password,
+        nickname,
+        gender,
+      },
+      (v) => v != '',
+    );
     this.userCreateGql
       .mutate({ data })
       .pipe(

@@ -4,9 +4,11 @@ import { NotifierService } from 'angular-notifier';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { debounceTime, finalize, first, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
+import { filterKeys } from 'src/app/common/filter-keys.func';
+import { isEmpty } from 'src/app/common/is-empty.func';
 import { leastTime } from 'src/app/common/least-time.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
-import { FormDataService } from 'src/app/core/form-data.service';
+import { pick } from 'src/app/common/pick.func';
 import {
   ClassroomDetailGQL,
   ClassroomDetailQuery,
@@ -38,7 +40,6 @@ export class ClassroomDetailSettingsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private auth: AuthService,
-    private formData: FormDataService,
     private notifier: NotifierService,
     private queryGql: ClassroomDetailGQL,
     private updateGql: ClassroomUpdateGQL,
@@ -57,7 +58,9 @@ export class ClassroomDetailSettingsComponent implements OnInit {
 
     this.modified$ = combineLatest([this.classroom$, this.change$]).pipe(
       debounceTime(100),
-      map(([classroom]) => this.formData.isModified(this.data, classroom)),
+      map(([classroom]) =>
+        isEmpty(filterKeys(this.data, (v, k) => v != classroom[k])),
+      ),
     );
 
     this.reset();
@@ -65,11 +68,7 @@ export class ClassroomDetailSettingsComponent implements OnInit {
 
   reset() {
     this.classroom$.pipe(first()).subscribe((classroom) => {
-      const currentValues = this.formData.pick(classroom, [
-        'name',
-        'description',
-        'isOpen',
-      ]);
+      const currentValues = pick(classroom, ['name', 'description', 'isOpen']);
       this.data = currentValues;
       this.change$.next();
     });
@@ -77,7 +76,7 @@ export class ClassroomDetailSettingsComponent implements OnInit {
 
   save() {
     this.classroom$.pipe(first()).subscribe((classroom) => {
-      const data = this.formData.filterUnchanged({ ...this.data }, classroom);
+      const data = filterKeys(this.data, (v, k) => v != classroom[k]);
       this.loading = true;
       this.updateGql
         .mutate({ id: classroom.id, data })

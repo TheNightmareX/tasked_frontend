@@ -4,8 +4,9 @@ import dayjs, { Dayjs } from 'dayjs';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
+import { filterKeys } from 'src/app/common/filter-keys.func';
 import { NotificationType } from 'src/app/common/notification-type.enum';
-import { FormDataService } from 'src/app/core/form-data.service';
+import { pick } from 'src/app/common/pick.func';
 import {
   Gender,
   UserFragment,
@@ -34,7 +35,6 @@ export class ProfileBtnMenuEditPopupComponent implements OnInit {
   constructor(
     public auth: AuthService,
     private notifier: NotifierService,
-    private formDataService: FormDataService,
     private userUpdateGql: UserUpdateGQL,
     private popup: PopupComponent,
   ) {}
@@ -75,14 +75,10 @@ export class ProfileBtnMenuEditPopupComponent implements OnInit {
     });
   }
 
-  private cleanData(user: UserFragment) {
-    const data: UserUpdateInput = this.formDataService.pick(this.data, [
-      'nickname',
-      'password',
-      'gender',
-    ]);
-    this.formDataService.filterEmpty(data);
-    this.formDataService.filterUnchanged(data, user!);
-    return data;
+  private cleanData(user: UserFragment): UserUpdateInput {
+    return filterKeys(
+      pick(this.data, ['nickname', 'password', 'gender']),
+      (v, k) => v != '' && v != user[k as keyof typeof user],
+    );
   }
 }
