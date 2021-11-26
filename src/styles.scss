@@ -1,7 +1,7 @@
-@use 'angular-notifier/styles';
-@use 'styles-themes';
-@use 'styles-variables';
-@use 'styles-utilities';
+@use '~angular-notifier/styles';
+@use './themes';
+@use './variables';
+@use './utilities';
 
 html,
 body {
