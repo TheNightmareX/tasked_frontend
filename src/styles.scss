@@ -1,8 +1,7 @@
-@import '../node_modules/angular-notifier/styles.css';
-
-@import './styles-themes.scss';
-@import './styles-variables.scss';
-@import './styles-utilities.scss';
+@use '../node_modules/angular-notifier/styles.css';
+@use './styles-themes.scss';
+@use './styles-variables.scss';
+@use './styles-utilities.scss';
 
 html,
 body {
