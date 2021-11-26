@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { first, map, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
+import { ThemesService } from 'src/app/core/themes.service';
 import {
   ClassroomDetailGQL,
   ClassroomDetailQuery,
@@ -28,6 +29,7 @@ export class ClassroomDetailComponent implements OnInit {
   links: TabLink[] = [];
 
   constructor(
+    public themes: ThemesService,
     private route: ActivatedRoute,
     private media: MediaObserver,
     private local: ClassroomsLocalStorageService,
