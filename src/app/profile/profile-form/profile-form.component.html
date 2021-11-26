@@ -35,6 +35,7 @@
       type="text"
       autocomplete="nickname"
       maxlength="15"
+      pattern="^[^\s]*$"
       [(ngModel)]="data.nickname"
       (ngModelChange)="propagate()"
     />
