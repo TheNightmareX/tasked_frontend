@@ -21,7 +21,7 @@ type Classroom = ClassroomDetailQuery['classroom'];
 @Component({
   selector: 'app-classroom-detail-settings',
   templateUrl: './classroom-detail-settings.component.html',
-  styleUrls: ['./classroom-detail-settings.component.css'],
+  styleUrls: ['./classroom-detail-settings.component.scss'],
 })
 export class ClassroomDetailSettingsComponent implements OnInit {
   data: ClassroomUpdateInput = {

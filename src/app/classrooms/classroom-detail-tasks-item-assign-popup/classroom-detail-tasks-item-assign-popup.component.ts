@@ -20,7 +20,7 @@ import { PopupComponent } from 'src/app/shared/popup/popup.component';
 @Component({
   selector: 'app-classroom-detail-tasks-item-assign-popup',
   templateUrl: './classroom-detail-tasks-item-assign-popup.component.html',
-  styleUrls: ['./classroom-detail-tasks-item-assign-popup.component.css'],
+  styleUrls: ['./classroom-detail-tasks-item-assign-popup.component.scss'],
 })
 export class ClassroomDetailTasksItemAssignPopupComponent
   implements OnInit, OnDestroy

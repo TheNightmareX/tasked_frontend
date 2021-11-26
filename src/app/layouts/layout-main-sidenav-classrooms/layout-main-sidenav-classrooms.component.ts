@@ -9,7 +9,7 @@ type Classroom = ClassroomListQuery['classrooms']['results'][number];
 @Component({
   selector: 'app-layout-main-sidenav-classrooms',
   templateUrl: './layout-main-sidenav-classrooms.component.html',
-  styleUrls: ['./layout-main-sidenav-classrooms.component.css'],
+  styleUrls: ['./layout-main-sidenav-classrooms.component.scss'],
 })
 export class LayoutMainSidenavClassroomsComponent implements OnInit {
   classrooms$!: Observable<Classroom[]>;

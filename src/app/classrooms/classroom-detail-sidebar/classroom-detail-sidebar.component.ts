@@ -9,7 +9,7 @@ type Classroom = ClassroomDetailQuery['classroom'];
 @Component({
   selector: 'app-classroom-detail-sidebar',
   templateUrl: './classroom-detail-sidebar.component.html',
-  styleUrls: ['./classroom-detail-sidebar.component.css'],
+  styleUrls: ['./classroom-detail-sidebar.component.scss'],
 })
 export class ClassroomDetailSidebarComponent implements OnInit {
   classroom$!: Observable<Classroom>;

@@ -9,7 +9,7 @@ import { ClassroomCreateGQL, ClassroomListGQL } from 'src/app/graphql';
 @Component({
   selector: 'app-classroom-creation',
   templateUrl: './classroom-creation.component.html',
-  styleUrls: ['./classroom-creation.component.css'],
+  styleUrls: ['./classroom-creation.component.scss'],
 })
 export class ClassroomCreationComponent implements OnInit {
   data = {

@@ -5,7 +5,7 @@ import { ClassroomDetailGQL, Role } from 'src/app/graphql';
 @Component({
   selector: 'app-classroom-detail-tab-redirector',
   templateUrl: './classroom-detail-tab-redirector.component.html',
-  styleUrls: ['./classroom-detail-tab-redirector.component.css'],
+  styleUrls: ['./classroom-detail-tab-redirector.component.scss'],
 })
 export class ClassroomDetailTabRedirectorComponent implements OnInit {
   constructor(

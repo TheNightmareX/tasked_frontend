@@ -3,8 +3,8 @@
 @import '../node_modules/@angular/material/prebuilt-themes/purple-green.css';
 @import '../node_modules/angular-notifier/styles.css';
 
-@import './styles-variables.css';
-@import './styles-utilities.css';
+@import './styles-variables.scss';
+@import './styles-utilities.scss';
 
 html,
 body {

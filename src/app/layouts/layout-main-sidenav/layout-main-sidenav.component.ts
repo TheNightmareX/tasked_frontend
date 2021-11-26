@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-layout-main-sidenav',
   templateUrl: './layout-main-sidenav.component.html',
-  styleUrls: ['./layout-main-sidenav.component.css'],
+  styleUrls: ['./layout-main-sidenav.component.scss'],
 })
 export class LayoutMainSidenavComponent implements OnInit {
   items: Item[] = [];

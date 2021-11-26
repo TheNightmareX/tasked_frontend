@@ -11,6 +11,9 @@
       "schematics": {
         "@schematics/angular:application": {
           "strict": true
+        },
+        "@schematics/angular:component": {
+          "style": "scss"
         }
       },
       "root": "",
@@ -36,7 +39,7 @@
               "src/assets",
               "src/manifest.webmanifest"
             ],
-            "styles": ["src/styles.css"],
+            "styles": ["src/styles.scss"],
             "scripts": [],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"
@@ -105,7 +108,7 @@
               "src/assets",
               "src/manifest.webmanifest"
             ],
-            "styles": ["src/styles.css"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           }
         }

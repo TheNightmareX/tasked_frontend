@@ -15,7 +15,7 @@ type Assignment =
 @Component({
   selector: 'app-classroom-detail-assignments',
   templateUrl: './classroom-detail-assignments.component.html',
-  styleUrls: ['./classroom-detail-assignments.component.css'],
+  styleUrls: ['./classroom-detail-assignments.component.scss'],
 })
 export class ClassroomDetailAssignmentsComponent implements OnInit {
   assignmentsPending$!: Observable<Assignment[]>;

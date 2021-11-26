@@ -22,7 +22,7 @@ type Membership =
   templateUrl:
     './classroom-detail-sidebar-membership-list-item-menu.component.html',
   styleUrls: [
-    './classroom-detail-sidebar-membership-list-item-menu.component.css',
+    './classroom-detail-sidebar-membership-list-item-menu.component.scss',
   ],
 })
 export class ClassroomDetailSidebarMembershipListItemMenuComponent

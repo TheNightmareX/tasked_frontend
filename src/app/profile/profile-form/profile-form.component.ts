@@ -20,7 +20,7 @@ import { ProfileFormData } from './profile-form-data.interface';
 @Component({
   selector: 'app-profile-form',
   templateUrl: './profile-form.component.html',
-  styleUrls: ['./profile-form.component.css'],
+  styleUrls: ['./profile-form.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

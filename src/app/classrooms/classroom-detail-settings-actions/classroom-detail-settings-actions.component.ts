@@ -18,7 +18,7 @@ type Classroom = ClassroomDetailQuery['classroom'];
 @Component({
   selector: 'app-classroom-detail-settings-actions',
   templateUrl: './classroom-detail-settings-actions.component.html',
-  styleUrls: ['./classroom-detail-settings-actions.component.css'],
+  styleUrls: ['./classroom-detail-settings-actions.component.scss'],
 })
 export class ClassroomDetailSettingsActionsComponent implements OnInit {
   @Input() admin = false;

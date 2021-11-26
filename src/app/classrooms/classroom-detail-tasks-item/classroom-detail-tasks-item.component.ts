@@ -28,7 +28,7 @@ type Task = ClassroomTaskListQuery['classroom']['tasks']['results'][number];
 @Component({
   selector: 'app-classroom-detail-tasks-item',
   templateUrl: './classroom-detail-tasks-item.component.html',
-  styleUrls: ['./classroom-detail-tasks-item.component.css'],
+  styleUrls: ['./classroom-detail-tasks-item.component.scss'],
 })
 export class ClassroomDetailTasksItemComponent
   implements OnInit, OnDestroy, AfterViewInit

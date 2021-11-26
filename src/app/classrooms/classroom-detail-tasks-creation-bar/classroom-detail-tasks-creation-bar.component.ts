@@ -8,7 +8,7 @@ import { ClassroomTaskListGQL, TaskCreateGQL } from 'src/app/graphql';
 @Component({
   selector: 'app-classroom-detail-tasks-creation-bar',
   templateUrl: './classroom-detail-tasks-creation-bar.component.html',
-  styleUrls: ['./classroom-detail-tasks-creation-bar.component.css'],
+  styleUrls: ['./classroom-detail-tasks-creation-bar.component.scss'],
 })
 export class ClassroomDetailTasksCreationBarComponent implements OnInit {
   data = '';

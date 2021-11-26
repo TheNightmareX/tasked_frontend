@@ -19,7 +19,7 @@ import { ProfileFormData } from '../profile-form/profile-form-data.interface';
 @Component({
   selector: 'app-profile-btn-menu-edit-popup',
   templateUrl: './profile-btn-menu-edit-popup.component.html',
-  styleUrls: ['./profile-btn-menu-edit-popup.component.css'],
+  styleUrls: ['./profile-btn-menu-edit-popup.component.scss'],
 })
 export class ProfileBtnMenuEditPopupComponent implements OnInit {
   data: ProfileFormData = {

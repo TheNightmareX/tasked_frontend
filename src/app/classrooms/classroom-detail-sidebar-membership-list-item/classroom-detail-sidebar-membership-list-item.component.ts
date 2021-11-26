@@ -16,7 +16,7 @@ type Membership =
 @Component({
   selector: 'app-classroom-detail-sidebar-membership-list-item',
   templateUrl: './classroom-detail-sidebar-membership-list-item.component.html',
-  styleUrls: ['./classroom-detail-sidebar-membership-list-item.component.css'],
+  styleUrls: ['./classroom-detail-sidebar-membership-list-item.component.scss'],
 })
 export class ClassroomDetailSidebarMembershipListItemComponent
   implements OnInit, OnDestroy

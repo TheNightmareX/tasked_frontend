@@ -11,7 +11,7 @@ import { NotificationType } from 'src/app/common/notification-type.enum';
 @Component({
   selector: 'app-auth-form-login',
   templateUrl: './auth-form-login.component.html',
-  styleUrls: ['./auth-form-login.component.css'],
+  styleUrls: ['./auth-form-login.component.scss'],
 })
 export class AuthFormLoginComponent implements OnInit {
   data = { username: '', password: '' };

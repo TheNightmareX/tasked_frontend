@@ -16,7 +16,7 @@ type Membership =
 @Component({
   selector: 'app-classroom-detail-sidebar-membership-list',
   templateUrl: './classroom-detail-sidebar-membership-list.component.html',
-  styleUrls: ['./classroom-detail-sidebar-membership-list.component.css'],
+  styleUrls: ['./classroom-detail-sidebar-membership-list.component.scss'],
 })
 export class ClassroomDetailSidebarMembershipListComponent implements OnInit {
   memberships$!: Observable<Membership[]>;

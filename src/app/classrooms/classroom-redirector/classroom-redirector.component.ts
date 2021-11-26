@@ -11,7 +11,7 @@ import { ClassroomsLocalStorageService } from '../classrooms-local-storage.servi
 @Component({
   selector: 'app-classroom-redirector',
   templateUrl: './classroom-redirector.component.html',
-  styleUrls: ['./classroom-redirector.component.css'],
+  styleUrls: ['./classroom-redirector.component.scss'],
 })
 export class ClassroomRedirectorComponent {
   constructor(

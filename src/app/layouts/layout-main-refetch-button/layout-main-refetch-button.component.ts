@@ -7,7 +7,7 @@ import { leastTime } from 'src/app/common/least-time.operator';
 @Component({
   selector: 'app-layout-main-refetch-button',
   templateUrl: './layout-main-refetch-button.component.html',
-  styleUrls: ['./layout-main-refetch-button.component.css'],
+  styleUrls: ['./layout-main-refetch-button.component.scss'],
 })
 export class LayoutMainRefetchButtonComponent implements OnInit {
   loading = false;

@@ -12,7 +12,7 @@ import { PopupComponent } from 'src/app/shared/popup/popup.component';
 @Component({
   selector: 'app-application-creation',
   templateUrl: './application-creation.component.html',
-  styleUrls: ['./application-creation.component.css'],
+  styleUrls: ['./application-creation.component.scss'],
 })
 export class ApplicationCreationComponent implements OnInit {
   data = {

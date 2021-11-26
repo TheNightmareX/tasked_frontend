@@ -8,7 +8,7 @@ type Assignment =
 @Component({
   selector: 'app-classroom-detail-assignments-item-detail',
   templateUrl: './classroom-detail-assignments-item-detail.component.html',
-  styleUrls: ['./classroom-detail-assignments-item-detail.component.css'],
+  styleUrls: ['./classroom-detail-assignments-item-detail.component.scss'],
   viewProviders: [DatePipe],
 })
 export class ClassroomDetailAssignmentsItemDetailComponent implements OnInit {

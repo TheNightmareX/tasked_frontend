@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 @Component({
   selector: 'app-profile-btn-menu',
   templateUrl: './profile-btn-menu.component.html',
-  styleUrls: ['./profile-btn-menu.component.css'],
+  styleUrls: ['./profile-btn-menu.component.scss'],
 })
 export class ProfileBtnMenuComponent implements OnInit {
   constructor(public auth: AuthService, private router: Router) {}

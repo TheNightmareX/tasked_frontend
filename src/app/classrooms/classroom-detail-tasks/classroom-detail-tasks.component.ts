@@ -14,7 +14,7 @@ type Task = ClassroomTaskListQuery['classroom']['tasks']['results'][number];
 @Component({
   selector: 'app-classroom-detail-tasks',
   templateUrl: './classroom-detail-tasks.component.html',
-  styleUrls: ['./classroom-detail-tasks.component.css'],
+  styleUrls: ['./classroom-detail-tasks.component.scss'],
 })
 export class ClassroomDetailTasksComponent implements OnInit {
   tasks$!: Observable<Task[]>;

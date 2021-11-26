@@ -13,7 +13,7 @@ import { ProfileFormData } from 'src/app/profile/profile-form/profile-form-data.
 @Component({
   selector: 'app-auth-form-signup',
   templateUrl: './auth-form-signup.component.html',
-  styleUrls: ['./auth-form-signup.component.css'],
+  styleUrls: ['./auth-form-signup.component.scss'],
 })
 export class AuthFormSignupComponent implements OnInit {
   data: ProfileFormData = {

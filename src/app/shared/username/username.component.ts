@@ -13,7 +13,7 @@ type User = Pick<UserFragment, 'username' | 'nickname'> &
 @Component({
   selector: 'app-username',
   templateUrl: './username.component.html',
-  styleUrls: ['./username.component.css'],
+  styleUrls: ['./username.component.scss'],
 })
 export class UsernameComponent implements OnInit, OnChanges {
   @Input() user?: User;
