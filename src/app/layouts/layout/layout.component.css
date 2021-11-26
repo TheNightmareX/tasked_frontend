@@ -2,10 +2,10 @@
   height: 100%;
 }
 
-mat-toolbar {
+.toolbar-container {
   z-index: 2;
 }
-mat-toolbar > .logo {
+.toolbar-container .logo {
   cursor: pointer;
 }
 
