@@ -35,3 +35,10 @@ button.fab {
     background-color: rgba(181, 232, 227, 0.7) !important;
   }
 }
+
+.theme-light {
+  .mat-list-base .mat-list-item .mat-list-icon,
+  .mat-list-base .mat-list-option .mat-list-icon {
+    opacity: 0.7;
+  }
+}
