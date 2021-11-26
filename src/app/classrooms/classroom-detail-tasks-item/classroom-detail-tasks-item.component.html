@@ -53,7 +53,13 @@
     </mat-list>
 
     <mat-action-row fxLayout>
-      <button mat-button class="uppercase" (click)="popup.openSheet()" i18n>
+      <button
+        mat-button
+        class="uppercase"
+        [disabled]="modified"
+        (click)="popup.openSheet()"
+        i18n
+      >
         Assign
       </button>
 
@@ -62,11 +68,11 @@
       <button
         mat-button
         class="uppercase"
-        [disabled]="!form.valid || loading"
+        [disabled]="!form.valid || !modified || loading"
         (click)="update()"
         i18n
       >
-        Update
+        Save
       </button>
 
       <button
