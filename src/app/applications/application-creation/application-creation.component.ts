@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
-import { finalize } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { debounceTime, finalize, map, tap } from 'rxjs/operators';
 import { leastTime } from 'src/app/common/least-time.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import {
+  ClassroomDetailGQL,
+  ClassroomDetailQuery,
   JoinApplicationCreateGQL,
   JoinApplicationListGQL,
 } from 'src/app/graphql';
@@ -19,17 +22,29 @@ export class ApplicationCreationComponent implements OnInit {
     classroom: null as number | null,
     message: '',
   };
-
+  classroom?: Classroom;
   loading = false;
+  validated = false;
+  idChange$ = new Subject();
 
   constructor(
     private notifier: NotifierService,
     private createGql: JoinApplicationCreateGQL,
-    private listGql: JoinApplicationListGQL,
+    private applicationListGql: JoinApplicationListGQL,
+    private classroomGql: ClassroomDetailGQL,
     private popup: PopupComponent,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.idChange$
+      .pipe(
+        tap(() => (this.validated = false)),
+        debounceTime(300),
+      )
+      .subscribe(() => {
+        this.validateClassroom();
+      });
+  }
 
   send() {
     if (this.loading) return;
@@ -41,7 +56,7 @@ export class ApplicationCreationComponent implements OnInit {
         { data },
         {
           update: (_, result) => {
-            const query = this.listGql.watch();
+            const query = this.applicationListGql.watch();
             query.updateQuery((prev) => ({
               ...prev,
               joinApplications: {
@@ -78,4 +93,27 @@ export class ApplicationCreationComponent implements OnInit {
         },
       );
   }
+
+  validateClassroom() {
+    if (this.data.classroom)
+      this.classroomGql
+        .fetch({ id: this.data.classroom + '' })
+        .pipe(map((result) => result.data.classroom))
+        .subscribe(
+          (result) => {
+            this.classroom = result;
+            this.validated = true;
+          },
+          () => {
+            this.classroom = undefined;
+            this.validated = false;
+          },
+        );
+    else {
+      this.classroom = undefined;
+      this.validated = false;
+    }
+  }
 }
+
+type Classroom = ClassroomDetailQuery['classroom'];

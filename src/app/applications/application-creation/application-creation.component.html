@@ -1,5 +1,11 @@
 <form class="container" #form="ngForm" (ngSubmit)="send()">
-  <div matDialogTitle i18n>New Application</div>
+  <div matDialogTitle i18n fxLayout fxLayoutAlign="start center">
+    <span>New Application</span>
+    <ng-container *ngIf="classroom">
+      <mat-icon>arrow_right</mat-icon>
+      <span>{{ classroom!.name }}</span>
+    </ng-container>
+  </div>
 
   <div matDialogContent fxLayout="column">
     <mat-form-field color="accent">
@@ -10,6 +16,7 @@
         type="number"
         required
         [(ngModel)]="data.classroom"
+        (ngModelChange)="idChange$.next()"
       />
     </mat-form-field>
 
@@ -31,7 +38,7 @@
       mat-button
       type="submit"
       class="uppercase"
-      [disabled]="!form.valid || loading"
+      [disabled]="!form.valid || loading || !validated"
       i18n
     >
       Send
