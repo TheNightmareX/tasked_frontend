@@ -18,7 +18,7 @@ type User = Pick<UserFragment, 'username' | 'nickname'> &
 export class UsernameComponent implements OnInit, OnChanges {
   @Input() user?: User;
   @Input() color = false;
-  @HostBinding('class') classList: string[] = [];
+  classList: string[] = [];
 
   constructor() {}
 
