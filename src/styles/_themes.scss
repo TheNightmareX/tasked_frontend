@@ -12,4 +12,5 @@ $theme: mat.define-dark-theme(
     ),
   )
 );
+
 @include mat.all-component-themes($theme);

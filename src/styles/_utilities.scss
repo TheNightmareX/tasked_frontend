@@ -1,15 +1,17 @@
+@use "./text-colors";
+
 .uppercase {
   text-transform: uppercase;
 }
 
 .text--blue {
-  color: var(--text-color--blue);
+  color: text-colors.$blue;
 }
 .text--pink {
-  color: var(--text-color--pink);
+  color: text-colors.$pink;
 }
 .text--primary {
-  color: var(--text-color--primary);
+  color: text-colors.$primary;
 }
 
 .opacity--1 {
