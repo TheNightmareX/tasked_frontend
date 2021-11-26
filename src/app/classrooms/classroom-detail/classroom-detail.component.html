@@ -1,17 +1,4 @@
 <div class="container" fxLayout="column">
-  <mat-toolbar fxLayout fxLayoutAlign="space-between center">
-    <div></div>
-    <div class="title">
-      <span class="name">{{ (classroom$ | async)?.name }}</span>
-      <span class="id opacity--3">#{{ (classroom$ | async)?.id }}</span>
-    </div>
-    <div>
-      <button mat-icon-button (click)="drawer.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
-    </div>
-  </mat-toolbar>
-
   <mat-drawer-container fxFlex>
     <mat-drawer
       position="end"
@@ -42,3 +29,24 @@
     </mat-drawer-content>
   </mat-drawer-container>
 </div>
+
+<ng-template #toolbar>
+  <mat-toolbar color="primary" fxLayout fxLayoutAlign="space-between center">
+    <div>
+      <button mat-icon-button routerLink="/classrooms">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
+
+    <div class="title">
+      <span class="name">{{ (classroom$ | async)?.name }}</span>
+      <span class="id opacity--3">#{{ (classroom$ | async)?.id }}</span>
+    </div>
+
+    <div>
+      <button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+</ng-template>

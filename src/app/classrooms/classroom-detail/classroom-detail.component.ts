@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 import { MatDrawerMode } from '@angular/material/sidenav';
 import { ActivatedRoute } from '@angular/router';
@@ -10,6 +17,7 @@ import {
   ClassroomDetailQuery,
   Role,
 } from 'src/app/graphql';
+import { LayoutComponent } from 'src/app/layouts/layout/layout.component';
 import { ClassroomsLocalStorageService } from '../classrooms-local-storage.service';
 
 type Classroom = ClassroomDetailQuery['classroom'];
@@ -19,13 +27,15 @@ type Classroom = ClassroomDetailQuery['classroom'];
   templateUrl: './classroom-detail.component.html',
   styleUrls: ['./classroom-detail.component.css'],
 })
-export class ClassroomDetailComponent implements OnInit {
+export class ClassroomDetailComponent
+  implements OnInit, OnDestroy, AfterViewInit
+{
   sidebarOpened$!: Observable<boolean>;
   sidebarMode$!: Observable<MatDrawerMode>;
-
   classroom$!: Observable<Classroom>;
-
   links: TabLink[] = [];
+
+  @ViewChild('toolbar') private toolbar!: TemplateRef<unknown>;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,6 +43,7 @@ export class ClassroomDetailComponent implements OnInit {
     private local: ClassroomsLocalStorageService,
     private auth: AuthService,
     private classroomDetailGql: ClassroomDetailGQL,
+    private layout: LayoutComponent,
   ) {}
 
   ngOnInit() {
@@ -68,6 +79,16 @@ export class ClassroomDetailComponent implements OnInit {
         }),
       );
     });
+  }
+
+  ngOnDestroy() {
+    this.layout.toolbar = undefined;
+    this.layout.sidenavOpened = undefined;
+  }
+
+  ngAfterViewInit() {
+    this.layout.toolbar = this.toolbar;
+    this.layout.sidenavOpened = false;
   }
 }
 
