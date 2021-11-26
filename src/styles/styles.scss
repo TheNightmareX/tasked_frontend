@@ -1,7 +1,6 @@
 @use '~angular-notifier/styles';
 @use './themes';
 @use './utilities';
-@use './text-colors';
 
 html,
 body {
@@ -14,7 +13,7 @@ body {
 
 .router-link-active {
   background-color: rgba(123, 31, 162, 0.15) !important;
-  color: text-colors.$primary !important;
+  color: rgb(209, 118, 225) !important;
 }
 .router-link-active:hover {
   background-color: rgba(123, 31, 162, 0.3) !important;
