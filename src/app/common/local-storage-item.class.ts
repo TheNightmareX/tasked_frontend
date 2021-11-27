@@ -1,13 +1,14 @@
 export class LocalStorageItem<Value> {
-  value: Value = this.initial;
-  passed = false;
+  value: Value;
+  passed: boolean;
 
   constructor(
     public key: Key,
     private validator: (dirty: unknown) => boolean,
     private initial: Value,
   ) {
-    this.load().save();
+    const result = this.load().save();
+    [this.value, this.passed] = [result.value, result.passed];
   }
 
   load() {
