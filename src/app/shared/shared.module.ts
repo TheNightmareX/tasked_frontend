@@ -23,6 +23,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
+import { AutoFormFieldColorDirective } from './auto-form-field-color.directive';
 import { EqualDirective } from './equal.directive';
 import { FetchMoreTriggerComponent } from './fetch-more-trigger/fetch-more-trigger.component';
 import { LoadingDirective } from './loading.directive';
@@ -62,6 +63,7 @@ const components = [
   PopupComponent,
   UsernameComponent,
   FetchMoreTriggerComponent,
+  AutoFormFieldColorDirective,
 ];
 const directives = [
   EqualDirective,
