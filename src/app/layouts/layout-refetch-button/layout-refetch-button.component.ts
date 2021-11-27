@@ -5,11 +5,11 @@ import { finalize, tap } from 'rxjs/operators';
 import { leastTime } from 'src/app/common/least-time.operator';
 
 @Component({
-  selector: 'app-layout-main-refetch-button',
-  templateUrl: './layout-main-refetch-button.component.html',
-  styleUrls: ['./layout-main-refetch-button.component.scss'],
+  selector: 'app-layout-refetch-button',
+  templateUrl: './layout-refetch-button.component.html',
+  styleUrls: ['./layout-refetch-button.component.scss'],
 })
-export class LayoutMainRefetchButtonComponent implements OnInit {
+export class LayoutRefetchButtonComponent implements OnInit {
   loading = false;
   disabled = false;
 

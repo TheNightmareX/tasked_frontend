@@ -3,12 +3,12 @@ import { RouterModule } from '@angular/router';
 import { ProfileModule } from '../profile/profile.module';
 import { SharedModule } from '../shared/shared.module';
 import { LayoutAuthComponent } from './layout-auth/layout-auth.component';
-import { LayoutMainComponent } from './layout-main/layout-main.component';
-import { LayoutComponent } from './layout/layout.component';
-import { LayoutMainSidenavComponent } from './layout-main-sidenav/layout-main-sidenav.component';
 import { LayoutMainSidenavClassroomsComponent } from './layout-main-sidenav-classrooms/layout-main-sidenav-classrooms.component';
-import { LayoutMainRefetchButtonComponent } from './layout-main-refetch-button/layout-main-refetch-button.component';
+import { LayoutMainSidenavComponent } from './layout-main-sidenav/layout-main-sidenav.component';
+import { LayoutMainComponent } from './layout-main/layout-main.component';
+import { LayoutRefetchButtonComponent } from './layout-refetch-button/layout-refetch-button.component';
 import { LayoutThemeButtonComponent } from './layout-theme-button/layout-theme-button.component';
+import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { LayoutThemeButtonComponent } from './layout-theme-button/layout-theme-b
     LayoutMainComponent,
     LayoutMainSidenavComponent,
     LayoutMainSidenavClassroomsComponent,
-    LayoutMainRefetchButtonComponent,
+    LayoutRefetchButtonComponent,
     LayoutThemeButtonComponent,
   ],
   imports: [SharedModule, RouterModule, ProfileModule],
