@@ -29,7 +29,8 @@ export class LocalStorageItem<Value> {
     }
   }
 
-  save() {
+  save(value = this.value) {
+    this.value = value;
     localStorage.setItem(this.key, JSON.stringify(this.value));
     return this;
   }

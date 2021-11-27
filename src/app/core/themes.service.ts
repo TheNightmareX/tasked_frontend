@@ -27,8 +27,7 @@ export class ThemesService {
   apply(theme: Theme) {
     this.$body.classList.remove(this.getClassName(this.current.value));
     this.$body.classList.add(this.getClassName(theme));
-    this.current.value = theme;
-    this.current.save();
+    this.current.save(theme);
     this._current$.next(theme);
   }
 

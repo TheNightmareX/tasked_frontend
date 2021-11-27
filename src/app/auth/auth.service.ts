@@ -30,8 +30,7 @@ export class AuthService {
     this.user$ = this.userQuery.valueChanges.pipe(
       map(({ data }) => data.me),
       catchError(() => {
-        this.token.value = undefined;
-        this.token.save();
+        this.token.save(undefined);
         return of(undefined);
       }),
     );
@@ -41,16 +40,14 @@ export class AuthService {
     return this.authGql.mutate({ username, password }).pipe(
       map(({ data }) => data!.auth),
       tap(({ token }) => {
-        this.token.value = token;
-        this.token.save();
+        this.token.save(token);
         this.userQuery.refetch();
       }),
     );
   }
 
   logout() {
-    this.token.value = undefined;
-    this.token.save();
+    this.token.save(undefined);
     this.apollo.client.clearStore();
   }
 }
