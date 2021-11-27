@@ -1,3 +1,5 @@
 <button mat-icon-button (click)="themes.toggle()">
-  <mat-icon>palette</mat-icon>
+  <mat-icon>
+    {{ (themes.current$ | async) == 'light' ? 'dark_mode' : 'light_mode' }}
+  </mat-icon>
 </button>
