@@ -16,7 +16,7 @@
       mat-button
       *ngIf="canUpdate$ | async"
       class="uppercase"
-      color="accent"
+      appAutoFormFieldColor
       [disabled]="!form.valid"
       type="submit"
       i18n
