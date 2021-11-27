@@ -7,6 +7,9 @@
     "7563035552061651664": " Send ",
     "2717176364637241670": "Application sent to classroom #{$PH}",
     "3041981777919572572": "Failed to send the application",
+    "7317290694079257887": "Accepted",
+    "4416413576346763682": "Pending",
+    "4188654437346976139": "Rejected",
     "925225581717718370": "Application accepted",
     "4269890147710899999": "Failed to accept the application",
     "6418732645560808168": "Application rejected",
@@ -59,6 +62,8 @@
     "3059569567253187666": "Failed to demote the member",
     "2369424568276560376": "Member removed successfully",
     "4093666798179309739": "Failed to remove the member",
+    "1951089763019042037": "Student",
+    "4250948520990652627": "Teacher",
     "2102848494051331650": "No description provided...",
     "2282448674304680084": "New Task",
     "5887960889618527515": "Task created",
@@ -95,6 +100,9 @@
     "3975139752887045953": " Must consist of 6 - 20 characters ",
     "3241357959735682038": "Confirm Password",
     "6266112190506810262": " Must match the previous password above ",
-    "3948439187870398089": "Gender"
+    "3948439187870398089": "Gender",
+    "8012344910054029733": "Male",
+    "5667840900782067941": "Female",
+    "9021394200579901857": "Alien"
   }
 }
