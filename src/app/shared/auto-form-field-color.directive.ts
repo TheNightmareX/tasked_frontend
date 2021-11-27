@@ -12,6 +12,7 @@ export class AutoFormFieldColorDirective implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.matFormField.color = this.themes.light ? 'primary' : 'accent';
+    this.matFormField.color =
+      this.themes.current == 'light' ? 'primary' : 'accent';
   }
 }

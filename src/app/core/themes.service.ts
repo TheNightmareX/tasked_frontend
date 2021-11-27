@@ -5,37 +5,32 @@ import { LocalStorageItem } from '../common/local-storage-item.class';
   providedIn: 'root',
 })
 export class ThemesService {
-  current = new LocalStorageItem(
+  get current() {
+    return this._current.value;
+  }
+  private _current = new LocalStorageItem<Theme>(
     'theme',
     (v) => (v as Theme) == 'light' || (v as Theme) == 'dark',
     'light',
   );
-
-  get light() {
-    return this.current.value == 'light';
-  }
-  get dark() {
-    return this.current.value == 'dark';
-  }
 
   private $body = document.querySelector('body')!;
 
   constructor() {}
 
   init() {
-    this.apply(this.current.value);
+    this.apply(this.current);
   }
 
   apply(theme: Theme) {
-    if (this.current)
-      this.$body.classList.remove(this.getClassName(this.current.value));
+    this.$body.classList.remove(this.getClassName(this.current));
     this.$body.classList.add(this.getClassName(theme));
-    this.current.value = theme;
-    this.current.save();
+    this._current.value = theme;
+    this._current.save();
   }
 
   toggle() {
-    if (this.light) this.apply('dark');
+    if (this.current == 'light') this.apply('dark');
     else this.apply('light');
   }
 
