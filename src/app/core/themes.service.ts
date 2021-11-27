@@ -17,7 +17,7 @@ export class ThemesService {
     this.current = new LocalStorageItem(
       'theme',
       (v) => (v as Theme) == 'light' || (v as Theme) == 'dark',
-      'light',
+      this.getPreference(),
     );
   }
 
@@ -39,6 +39,12 @@ export class ThemesService {
 
   private getClassName(theme: Theme) {
     return `theme-${theme}`;
+  }
+
+  private getPreference(): Theme {
+    return window.matchMedia('(prefers-color-scheme: light)').matches
+      ? 'light'
+      : 'dark';
   }
 }
 
