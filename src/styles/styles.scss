@@ -37,8 +37,12 @@ button.fab {
 }
 
 .theme-light {
-  .mat-list-base .mat-list-item .mat-list-icon,
-  .mat-list-base .mat-list-option .mat-list-icon {
-    opacity: 0.7;
+  mat-icon {
+    color: rgba(0, 0, 0, 0.54);
+  }
+  .mat-button-disabled mat-icon,
+  .mat-primary mat-icon,
+  .router-link-active mat-icon {
+    color: inherit;
   }
 }
