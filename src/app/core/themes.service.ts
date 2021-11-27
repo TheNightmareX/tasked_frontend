@@ -17,7 +17,7 @@ export class ThemesService {
     this.current = new LocalStorageItem(
       'theme',
       (v) => (v as Theme) == 'light' || (v as Theme) == 'dark',
-      this.getPreference(),
+      () => this.getPreference(),
     );
   }
 

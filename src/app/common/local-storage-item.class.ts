@@ -5,7 +5,7 @@ export class LocalStorageItem<Value> {
   constructor(
     public key: Key,
     private validator: (dirty: unknown) => boolean,
-    private initial: Value,
+    private initial: Value | (() => Value),
   ) {
     const result = this.load().save();
     [this.value, this.passed] = [result.value, result.passed];
@@ -23,7 +23,8 @@ export class LocalStorageItem<Value> {
     } catch (error) {
       if (!(error instanceof UseInitialValue || error instanceof SyntaxError))
         throw error;
-      this.value = this.initial;
+      this.value =
+        this.initial instanceof Function ? this.initial() : this.initial;
       this.passed = false;
     } finally {
       return this;
