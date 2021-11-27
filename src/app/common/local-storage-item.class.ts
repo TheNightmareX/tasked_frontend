@@ -1,5 +1,5 @@
 export class LocalStorageItem<Value> {
-  value;
+  value: Value;
 
   constructor(
     public key: Key,
