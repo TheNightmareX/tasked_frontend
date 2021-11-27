@@ -10,15 +10,16 @@ export class ThemesService {
     return this._current$.asObservable();
   }
   private _current$ = new ReplaySubject<Theme>(1);
-
+  private current: LocalStorageItem<Theme>;
   private $body = document.querySelector('body')!;
-  private current = new LocalStorageItem<Theme>(
-    'theme',
-    (v) => (v as Theme) == 'light' || (v as Theme) == 'dark',
-    'light',
-  );
 
-  constructor() {}
+  constructor() {
+    this.current = new LocalStorageItem(
+      'theme',
+      (v) => (v as Theme) == 'light' || (v as Theme) == 'dark',
+      'light',
+    );
+  }
 
   init() {
     this.apply(this.current.value);
