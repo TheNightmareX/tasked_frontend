@@ -1,6 +1,5 @@
 query ClassroomAssignmentList(
   $id: ID!
-  $limit: Int
   $offset: Int
   $isCompleted: Boolean
   $isOwn: Boolean
@@ -8,7 +7,7 @@ query ClassroomAssignmentList(
   classroom(id: $id) {
     id
     assignments(
-      limit: $limit
+      limit: 20
       offset: $offset
       isCompleted: $isCompleted
       isOwn: $isOwn

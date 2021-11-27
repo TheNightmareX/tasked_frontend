@@ -509,7 +509,6 @@ export type AuthMutation = {
 
 export type ClassroomAssignmentListQueryVariables = Exact<{
   id: Scalars['ID'];
-  limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   isCompleted?: Maybe<Scalars['Boolean']>;
   isOwn?: Maybe<Scalars['Boolean']>;
@@ -607,7 +606,6 @@ export type ClassroomDetailQuery = {
 };
 
 export type ClassroomListQueryVariables = Exact<{
-  limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 }>;
 
@@ -666,7 +664,6 @@ export type ClassroomMembershipListQuery = {
 
 export type ClassroomTaskListQueryVariables = Exact<{
   id: Scalars['ID'];
-  limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 }>;
 
@@ -798,7 +795,6 @@ export type JoinApplicationCreateMutation = {
 };
 
 export type JoinApplicationListQueryVariables = Exact<{
-  limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   isPending?: Maybe<Scalars['Boolean']>;
 }>;
@@ -1208,7 +1204,6 @@ export class AuthGQL extends Apollo.Mutation<
 export const ClassroomAssignmentListDocument = gql`
   query ClassroomAssignmentList(
     $id: ID!
-    $limit: Int
     $offset: Int
     $isCompleted: Boolean
     $isOwn: Boolean
@@ -1216,7 +1211,7 @@ export const ClassroomAssignmentListDocument = gql`
     classroom(id: $id) {
       id
       assignments(
-        limit: $limit
+        limit: 20
         offset: $offset
         isCompleted: $isCompleted
         isOwn: $isOwn
@@ -1325,8 +1320,8 @@ export class ClassroomDetailGQL extends Apollo.Query<
   }
 }
 export const ClassroomListDocument = gql`
-  query ClassroomList($limit: Int, $offset: Int) {
-    classrooms(limit: $limit, offset: $offset, isJoined: true) {
+  query ClassroomList($offset: Int) {
+    classrooms(limit: 20, offset: $offset, isJoined: true) {
       total
       results {
         ...Classroom
@@ -1378,10 +1373,10 @@ export class ClassroomMembershipListGQL extends Apollo.Query<
   }
 }
 export const ClassroomTaskListDocument = gql`
-  query ClassroomTaskList($id: ID!, $limit: Int, $offset: Int) {
+  query ClassroomTaskList($id: ID!, $offset: Int) {
     classroom(id: $id) {
       id
-      tasks(isOwn: true, limit: $limit, offset: $offset) {
+      tasks(limit: 20, offset: $offset, isOwn: true) {
         total
         results {
           ...Task
@@ -1478,8 +1473,8 @@ export class JoinApplicationCreateGQL extends Apollo.Mutation<
   }
 }
 export const JoinApplicationListDocument = gql`
-  query JoinApplicationList($limit: Int, $offset: Int, $isPending: Boolean) {
-    joinApplications(limit: $limit, offset: $offset, isPending: $isPending) {
+  query JoinApplicationList($offset: Int, $isPending: Boolean) {
+    joinApplications(limit: 20, offset: $offset, isPending: $isPending) {
       total
       results {
         ...JoinApplication
