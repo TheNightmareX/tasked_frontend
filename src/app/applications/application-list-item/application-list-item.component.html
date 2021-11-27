@@ -31,7 +31,9 @@
     </ng-template>
 
     <ng-template #status>
-      <div class="opacity--2 mat-body">{{ application?.status }}</div>
+      <div class="opacity--2 mat-body">
+        {{ application ? applicationStatusText[application.status] : null }}
+      </div>
     </ng-template>
   </ng-container>
 </mat-list-item>

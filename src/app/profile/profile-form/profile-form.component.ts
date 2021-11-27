@@ -45,9 +45,9 @@ export class ProfileFormComponent
     gender: Gender.Unknown,
   };
   genderSelections = [
-    { text: 'Male', value: Gender.Male },
-    { text: 'Female', value: Gender.Female },
-    { text: 'Alien', value: Gender.Unknown },
+    { text: $localize`Male`, value: Gender.Male },
+    { text: $localize`Female`, value: Gender.Female },
+    { text: $localize`Alien`, value: Gender.Unknown },
   ];
 
   @ViewChild(NgForm) private form?: NgForm;

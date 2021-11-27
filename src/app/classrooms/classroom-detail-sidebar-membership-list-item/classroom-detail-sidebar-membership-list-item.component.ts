@@ -24,6 +24,10 @@ export class ClassroomDetailSidebarMembershipListItemComponent
   @Input() membership?: Membership;
   icon?: string;
   iconColor?: string | null;
+  roleText = {
+    [Role.Student]: $localize`Student`,
+    [Role.Teacher]: $localize`Teacher`,
+  };
 
   @ViewChild(MatMenuTrigger) private menuTrigger?: MatMenuTrigger;
   private subscription?: Subscription;

@@ -24,6 +24,11 @@ export class ApplicationListItemComponent implements OnInit {
   @Input() actions = false;
   loading = false;
   ApplicationStatus = ApplicationStatus;
+  applicationStatusText = {
+    [ApplicationStatus.Accepted]: $localize`Accepted`,
+    [ApplicationStatus.Pending]: $localize`Pending`,
+    [ApplicationStatus.Rejected]: $localize`Rejected`,
+  };
 
   constructor(
     private notifier: NotifierService,

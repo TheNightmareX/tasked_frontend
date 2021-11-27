@@ -10,7 +10,7 @@
     <app-username [user]="membership?.owner" [color]="true"></app-username>
   </span>
   <span matLine>
-    {{ membership?.role }}
+    {{ membership ? roleText[membership.role] : null }}
   </span>
   <div class="menu-helper" [matMenuTriggerFor]="menu" #helper></div>
 </button>
