@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit, OnDestroy {
-  isLargeScreen = true;
+  isLargeScreen = false;
   sidenavOpened?: boolean;
   toolbar?: TemplateRef<unknown>;
 
