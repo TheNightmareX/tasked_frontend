@@ -1,5 +1,5 @@
 export class LocalStorageItem<Value> {
-  value: Value;
+  value: Value = this.initial;
   passed = false;
 
   constructor(
@@ -7,25 +7,31 @@ export class LocalStorageItem<Value> {
     private validator: (dirty: unknown) => boolean,
     private initial: Value,
   ) {
-    [this.value, this.passed] = this.load();
+    this.load().save();
   }
 
-  load(): [value: Value, passed: boolean] {
+  load() {
     try {
       const raw = localStorage.getItem(this.key);
       if (raw == null) throw new UseInitialValue();
       const dirty = JSON.parse(raw);
       if (!this.validator(dirty)) throw new UseInitialValue();
-      return [dirty, true];
+      const validated = dirty;
+      this.value = validated;
+      this.passed = true;
     } catch (error) {
-      if (error instanceof UseInitialValue || error instanceof SyntaxError)
-        return [this.initial, false];
-      else throw error;
+      if (!(error instanceof UseInitialValue || error instanceof SyntaxError))
+        throw error;
+      this.value = this.initial;
+      this.passed = false;
+    } finally {
+      return this;
     }
   }
 
   save() {
     localStorage.setItem(this.key, JSON.stringify(this.value));
+    return this;
   }
 }
 
