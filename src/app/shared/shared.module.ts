@@ -28,7 +28,6 @@ import { EqualDirective } from './equal.directive';
 import { FetchMoreTriggerComponent } from './fetch-more-trigger/fetch-more-trigger.component';
 import { LoadingDirective } from './loading.directive';
 import { PopupComponent } from './popup/popup.component';
-import { StopRipplePropagationDirective } from './stop-ripple-propagation.directive';
 import { UsernameComponent } from './username/username.component';
 
 const modules = [
@@ -65,11 +64,7 @@ const components = [
   FetchMoreTriggerComponent,
   AutoFormFieldColorDirective,
 ];
-const directives = [
-  EqualDirective,
-  LoadingDirective,
-  StopRipplePropagationDirective,
-];
+const directives = [EqualDirective, LoadingDirective];
 
 @NgModule({
   declarations: [components, directives],

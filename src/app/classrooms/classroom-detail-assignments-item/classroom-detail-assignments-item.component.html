@@ -1,5 +1,10 @@
 <button mat-list-item (click)="popup.open()">
-  <div class="actions" (click)="$event.stopPropagation()">
+  <div
+    class="actions"
+    (click)="$event.stopPropagation()"
+    (touchstart)="$event.stopPropagation()"
+    (mousedown)="$event.stopPropagation()"
+  >
     <button
       mat-icon-button
       [matTooltip]="completionTooltip"
@@ -28,12 +33,16 @@
     </div>
   </div>
 
-  <div class="actions" (click)="$event.stopPropagation()">
+  <div
+    class="actions"
+    (click)="$event.stopPropagation()"
+    (touchstart)="$event.stopPropagation()"
+    (mousedown)="$event.stopPropagation()"
+  >
     <button
       mat-icon-button
       [matTooltip]="importanceTooltip"
       (click)="switchImportance()"
-      appStopRipplePropagation
     >
       <mat-icon>{{ importanceIcon }}</mat-icon>
     </button>
