@@ -11,8 +11,8 @@ type User = MeQuery['me'];
   providedIn: 'root',
 })
 export class AuthService {
-  token: LocalStorageItem<string | undefined>;
-  user$: Observable<User | undefined>;
+  token: LocalStorageItem<string | null>;
+  user$: Observable<User | null>;
 
   private userQuery;
 
@@ -23,15 +23,15 @@ export class AuthService {
   ) {
     this.token = new LocalStorageItem(
       'token',
-      (v) => v == undefined || typeof v == 'string',
-      undefined,
+      (v) => v == null || typeof v == 'string',
+      null,
     );
     this.userQuery = this.meGql.watch();
     this.user$ = this.userQuery.valueChanges.pipe(
       map(({ data }) => data.me),
       catchError(() => {
-        this.token.save(undefined);
-        return of(undefined);
+        this.token.save(null);
+        return of(null);
       }),
     );
   }
@@ -47,7 +47,7 @@ export class AuthService {
   }
 
   logout() {
-    this.token.save(undefined);
+    this.token.save(null);
     this.apollo.client.clearStore();
   }
 }
