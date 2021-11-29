@@ -60,7 +60,7 @@ export class RoomDetailTasksItemAssignPopupComponent
         const items: Record<string, Item> = {};
 
         memberships
-          .filter((item) => item.role == Role.Student)
+          .filter((item) => item.role == Role.Member)
           .forEach((membership) => {
             items[membership.id] = {
               membership,

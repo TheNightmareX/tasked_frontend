@@ -20,7 +20,7 @@ export class RoomDetailTabRedirectorComponent implements OnInit {
       this.router.navigate([
         '/rooms',
         id,
-        result.data.room.membership!.role == Role.Student
+        result.data.room.membership!.role == Role.Member
           ? 'assignments'
           : 'tasks',
       ]);

@@ -59,18 +59,18 @@ export class RoomDetailSidebarMembershipListItemMenuComponent
       ]).subscribe(([room, user]) => {
         const isSelf = this.membership?.owner.id == user?.id;
         if (room.creator.id == user?.id) {
-          this.canPromote = this.membership?.role == Role.Student;
-          this.canDemote = this.membership?.role == Role.Teacher && !isSelf;
+          this.canPromote = this.membership?.role == Role.Member;
+          this.canDemote = this.membership?.role == Role.Manager && !isSelf;
           this.canRemove = !isSelf;
         } else {
-          if (room.membership!.role == Role.Student) {
+          if (room.membership!.role == Role.Member) {
             this.canPromote = false;
             this.canDemote = false;
             this.canRemove = false;
           } else {
-            this.canPromote = this.membership?.role == Role.Student;
+            this.canPromote = this.membership?.role == Role.Member;
             this.canDemote = false;
-            this.canRemove = this.membership?.role == Role.Student && !isSelf;
+            this.canRemove = this.membership?.role == Role.Member && !isSelf;
           }
         }
       });
@@ -86,7 +86,7 @@ export class RoomDetailSidebarMembershipListItemMenuComponent
       (membership) =>
         this.updateGql.mutate({
           id: membership.id,
-          data: { role: Role.Teacher },
+          data: { role: Role.Manager },
         }),
       $localize`Member promoted successfully`,
       $localize`Failed to promote the member`,
@@ -98,7 +98,7 @@ export class RoomDetailSidebarMembershipListItemMenuComponent
       (membership) =>
         this.updateGql.mutate({
           id: membership.id,
-          data: { role: Role.Student },
+          data: { role: Role.Member },
         }),
       $localize`Member demoted successfully`,
       $localize`Failed to demote the member`,

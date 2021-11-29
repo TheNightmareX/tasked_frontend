@@ -55,7 +55,7 @@ export class RoomDetailSidebarMembershipListComponent implements OnInit {
                 ? 1
                 : a.role == b.role
                 ? 0
-                : a.role == Role.Teacher
+                : a.role == Role.Manager
                 ? -1
                 : 1,
             ),

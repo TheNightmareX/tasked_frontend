@@ -364,8 +364,8 @@ export type QueryUsersArgs = {
 };
 
 export enum Role {
-  Student = 'Student',
-  Teacher = 'Teacher',
+  Member = 'Member',
+  Manager = 'Manager',
 }
 
 export type Task = {

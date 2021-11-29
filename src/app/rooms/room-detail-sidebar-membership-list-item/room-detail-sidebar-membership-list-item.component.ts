@@ -25,8 +25,8 @@ export class RoomDetailSidebarMembershipListItemComponent
   icon?: string;
   iconColor?: string | null;
   roleText = {
-    [Role.Student]: $localize`Student`,
-    [Role.Teacher]: $localize`Teacher`,
+    [Role.Member]: $localize`Member`,
+    [Role.Manager]: $localize`Manager`,
   };
 
   @ViewChild(MatMenuTrigger) private menuTrigger?: MatMenuTrigger;
@@ -44,7 +44,7 @@ export class RoomDetailSidebarMembershipListItemComponent
           if (!this.membership) return;
 
           this.icon =
-            this.membership.role == Role.Student ? 'person' : 'manage_accounts';
+            this.membership.role == Role.Member ? 'person' : 'manage_accounts';
 
           this.iconColor =
             this.membership.owner.id == room.creator?.id ? 'accent' : null;

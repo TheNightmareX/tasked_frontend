@@ -58,7 +58,7 @@ export class RoomDetailComponent implements OnInit {
         map(({ data }) => data.room),
         tap((room) => {
           this.links = [
-            room.membership!.role == Role.Student
+            room.membership!.role == Role.Member
               ? [$localize`Assignments`, ['assignments']]
               : [$localize`Tasks`, ['tasks']],
             [$localize`Settings`, ['settings']],
