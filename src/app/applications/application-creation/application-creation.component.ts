@@ -7,8 +7,8 @@ import { NotificationType } from 'src/app/common/notification-type.enum';
 import {
   RoomDetailGQL,
   RoomDetailQuery,
-  JoinApplicationCreateGQL,
-  JoinApplicationListGQL,
+  ApplicationCreateGQL,
+  ApplicationListGQL,
 } from 'src/app/graphql';
 import { PopupComponent } from 'src/app/shared/popup/popup.component';
 
@@ -29,8 +29,8 @@ export class ApplicationCreationComponent implements OnInit {
 
   constructor(
     private notifier: NotifierService,
-    private createGql: JoinApplicationCreateGQL,
-    private applicationListGql: JoinApplicationListGQL,
+    private createGql: ApplicationCreateGQL,
+    private applicationListGql: ApplicationListGQL,
     private roomGql: RoomDetailGQL,
     private popup: PopupComponent,
   ) {}
@@ -59,12 +59,12 @@ export class ApplicationCreationComponent implements OnInit {
             const query = this.applicationListGql.watch();
             query.updateQuery((prev) => ({
               ...prev,
-              joinApplications: {
-                ...prev.joinApplications,
-                total: prev.joinApplications.total + 1,
+              applications: {
+                ...prev.applications,
+                total: prev.applications.total + 1,
                 results: [
-                  result.data!.createJoinApplication,
-                  ...prev.joinApplications.results,
+                  result.data!.createApplication,
+                  ...prev.applications.results,
                 ],
               },
             }));

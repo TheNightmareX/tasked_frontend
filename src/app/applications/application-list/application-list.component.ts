@@ -5,13 +5,12 @@ import { from, Observable } from 'rxjs';
 import { finalize, map, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import {
-  JoinApplicationListGQL,
-  JoinApplicationListQuery,
-  JoinApplicationListQueryVariables,
+  ApplicationListGQL,
+  ApplicationListQuery,
+  ApplicationListQueryVariables,
 } from 'src/app/graphql';
 
-type Application =
-  JoinApplicationListQuery['joinApplications']['results'][number];
+type Application = ApplicationListQuery['applications']['results'][number];
 
 @Component({
   selector: 'app-application-list',
@@ -25,21 +24,18 @@ export class ApplicationListComponent implements OnInit {
   loading = false;
   allLoaded = false;
 
-  private query!: QueryRef<
-    JoinApplicationListQuery,
-    JoinApplicationListQueryVariables
-  >;
+  private query!: QueryRef<ApplicationListQuery, ApplicationListQueryVariables>;
 
   constructor(
     public auth: AuthService,
     private datePipe: DatePipe,
-    private listGql: JoinApplicationListGQL,
+    private listGql: ApplicationListGQL,
   ) {}
 
   ngOnInit() {
     this.query = this.listGql.watch();
     this.applicationGroups$ = this.query.valueChanges.pipe(
-      map((result) => result.data.joinApplications),
+      map((result) => result.data.applications),
       tap((data) => (this.allLoaded = data.results.length >= data.total)),
       map((data) => data.results),
       map((items) => {
@@ -58,7 +54,7 @@ export class ApplicationListComponent implements OnInit {
     if (this.allLoaded) return;
     if (this.loading) return;
 
-    const data = this.query.getCurrentResult().data.joinApplications;
+    const data = this.query.getCurrentResult().data.applications;
     this.loading = true;
     from(this.query.fetchMore({ variables: { offset: data.results.length } }))
       .pipe(finalize(() => (this.loading = false)))
@@ -66,11 +62,11 @@ export class ApplicationListComponent implements OnInit {
         const scrollTop = this.scrollableContainer?.scrollTop;
         this.query.updateQuery((prev) => ({
           ...prev,
-          joinApplications: {
-            ...prev.joinApplications,
+          applications: {
+            ...prev.applications,
             results: [
-              ...prev.joinApplications.results,
-              ...result.data.joinApplications.results,
+              ...prev.applications.results,
+              ...result.data.applications.results,
             ],
           },
         }));

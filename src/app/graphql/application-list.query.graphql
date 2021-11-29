@@ -1,0 +1,8 @@
+query ApplicationList($offset: Int, $isPending: Boolean) {
+  applications(limit: 20, offset: $offset, isPending: $isPending) {
+    total
+    results {
+      ...Application
+    }
+  }
+}

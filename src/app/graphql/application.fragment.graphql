@@ -1,4 +1,4 @@
-fragment JoinApplication on JoinApplication {
+fragment Application on Application {
   id
   owner {
     ...User

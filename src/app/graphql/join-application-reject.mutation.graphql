@@ -1,5 +1,0 @@
-mutation JoinApplicationReject($id: ID!) {
-  rejectJoinApplication(id: $id) {
-    ...JoinApplication
-  }
-}

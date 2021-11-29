@@ -6,13 +6,12 @@ import { NotificationType } from 'src/app/common/notification-type.enum';
 import {
   ApplicationStatus,
   RoomMembershipListGQL,
-  JoinApplicationAcceptGQL,
-  JoinApplicationListQuery,
-  JoinApplicationRejectGQL,
+  ApplicationAcceptGQL,
+  ApplicationListQuery,
+  ApplicationRejectGQL,
 } from 'src/app/graphql';
 
-type Application =
-  JoinApplicationListQuery['joinApplications']['results'][number];
+type Application = ApplicationListQuery['applications']['results'][number];
 
 @Component({
   selector: 'app-application-list-item',
@@ -32,8 +31,8 @@ export class ApplicationListItemComponent implements OnInit {
 
   constructor(
     private notifier: NotifierService,
-    private acceptGql: JoinApplicationAcceptGQL,
-    private rejectGql: JoinApplicationRejectGQL,
+    private acceptGql: ApplicationAcceptGQL,
+    private rejectGql: ApplicationRejectGQL,
     private roomMembershipListGql: RoomMembershipListGQL,
   ) {}
 
@@ -61,7 +60,7 @@ export class ApplicationListItemComponent implements OnInit {
                   total: prev.room.memberships.total + 1,
                   results: [
                     ...prev.room.memberships.results,
-                    result.data!.acceptJoinApplication.membership,
+                    result.data!.acceptApplication.membership,
                   ],
                 },
               },

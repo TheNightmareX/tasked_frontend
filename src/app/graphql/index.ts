@@ -20,9 +20,9 @@ export type Scalars = {
   DateTime: any;
 };
 
-export type AcceptJoinApplicationResult = {
-  __typename?: 'AcceptJoinApplicationResult';
-  application: JoinApplication;
+export type AcceptApplicationResult = {
+  __typename?: 'AcceptApplicationResult';
+  application: Application;
   membership: Membership;
 };
 
@@ -68,7 +68,7 @@ export type Room = {
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   isOpen: Scalars['Boolean'];
-  joinApplications: PaginatedJoinApplications;
+  applications: PaginatedApplications;
   membership?: Maybe<Membership>;
   memberships: PaginatedMemberships;
   name: Scalars['String'];
@@ -83,7 +83,7 @@ export type RoomAssignmentsArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
-export type RoomJoinApplicationsArgs = {
+export type RoomApplicationsArgs = {
   isPending?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -117,8 +117,8 @@ export enum Gender {
   Unknown = 'Unknown',
 }
 
-export type JoinApplication = {
-  __typename?: 'JoinApplication';
+export type Application = {
+  __typename?: 'Application';
   room: Room;
   createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
@@ -128,7 +128,7 @@ export type JoinApplication = {
   updatedAt: Scalars['DateTime'];
 };
 
-export type JoinApplicationCreateInput = {
+export type ApplicationCreateInput = {
   room: Scalars['ID'];
   message?: Maybe<Scalars['String']>;
 };
@@ -157,18 +157,18 @@ export type MembershipUpdateInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  acceptJoinApplication: AcceptJoinApplicationResult;
+  acceptApplication: AcceptApplicationResult;
   auth: AuthResult;
   createAssignment: Assignment;
   createRoom: Room;
-  createJoinApplication: JoinApplication;
+  createApplication: Application;
   createTask: Task;
   createUser: User;
   deleteAssignment: Assignment;
   deleteRoom: Room;
   deleteMembership: Membership;
   deleteTask: Task;
-  rejectJoinApplication: JoinApplication;
+  rejectApplication: Application;
   updateAssignment: Assignment;
   updateRoom: Room;
   updateMembership: Membership;
@@ -176,7 +176,7 @@ export type Mutation = {
   updateUser: User;
 };
 
-export type MutationAcceptJoinApplicationArgs = {
+export type MutationAcceptApplicationArgs = {
   id: Scalars['ID'];
 };
 
@@ -193,8 +193,8 @@ export type MutationCreateRoomArgs = {
   data: RoomCreateInput;
 };
 
-export type MutationCreateJoinApplicationArgs = {
-  data: JoinApplicationCreateInput;
+export type MutationCreateApplicationArgs = {
+  data: ApplicationCreateInput;
 };
 
 export type MutationCreateTaskArgs = {
@@ -221,7 +221,7 @@ export type MutationDeleteTaskArgs = {
   id: Scalars['ID'];
 };
 
-export type MutationRejectJoinApplicationArgs = {
+export type MutationRejectApplicationArgs = {
   id: Scalars['ID'];
 };
 
@@ -262,9 +262,9 @@ export type PaginatedRooms = {
   total: Scalars['Int'];
 };
 
-export type PaginatedJoinApplications = {
-  __typename?: 'PaginatedJoinApplications';
-  results: Array<JoinApplication>;
+export type PaginatedApplications = {
+  __typename?: 'PaginatedApplications';
+  results: Array<Application>;
   total: Scalars['Int'];
 };
 
@@ -292,8 +292,8 @@ export type Query = {
   assignments: PaginatedAssignments;
   room: Room;
   rooms: PaginatedRooms;
-  joinApplication: JoinApplication;
-  joinApplications: PaginatedJoinApplications;
+  application: Application;
+  applications: PaginatedApplications;
   me: User;
   membership: Membership;
   memberships: PaginatedMemberships;
@@ -325,11 +325,11 @@ export type QueryRoomsArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
-export type QueryJoinApplicationArgs = {
+export type QueryApplicationArgs = {
   id: Scalars['ID'];
 };
 
-export type QueryJoinApplicationsArgs = {
+export type QueryApplicationsArgs = {
   isPending?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -408,7 +408,7 @@ export type User = {
   createdAt: Scalars['DateTime'];
   gender: Gender;
   id: Scalars['ID'];
-  joinApplications: PaginatedJoinApplications;
+  applications: PaginatedApplications;
   memberships: PaginatedMemberships;
   nickname?: Maybe<Scalars['String']>;
   tasks: PaginatedTasks;
@@ -430,7 +430,7 @@ export type UserRoomsArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
-export type UserJoinApplicationsArgs = {
+export type UserApplicationsArgs = {
   isPending?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -731,16 +731,16 @@ export type RoomFragment = {
     | undefined;
 };
 
-export type JoinApplicationAcceptMutationVariables = Exact<{
+export type ApplicationAcceptMutationVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
-export type JoinApplicationAcceptMutation = {
+export type ApplicationAcceptMutation = {
   __typename?: 'Mutation';
-  acceptJoinApplication: {
-    __typename?: 'AcceptJoinApplicationResult';
+  acceptApplication: {
+    __typename?: 'AcceptApplicationResult';
     application: {
-      __typename?: 'JoinApplication';
+      __typename?: 'Application';
       id: string;
       message?: string | null | undefined;
       status: ApplicationStatus;
@@ -770,14 +770,14 @@ export type JoinApplicationAcceptMutation = {
   };
 };
 
-export type JoinApplicationCreateMutationVariables = Exact<{
-  data: JoinApplicationCreateInput;
+export type ApplicationCreateMutationVariables = Exact<{
+  data: ApplicationCreateInput;
 }>;
 
-export type JoinApplicationCreateMutation = {
+export type ApplicationCreateMutation = {
   __typename?: 'Mutation';
-  createJoinApplication: {
-    __typename?: 'JoinApplication';
+  createApplication: {
+    __typename?: 'Application';
     id: string;
     message?: string | null | undefined;
     status: ApplicationStatus;
@@ -794,18 +794,18 @@ export type JoinApplicationCreateMutation = {
   };
 };
 
-export type JoinApplicationListQueryVariables = Exact<{
+export type ApplicationListQueryVariables = Exact<{
   offset?: Maybe<Scalars['Int']>;
   isPending?: Maybe<Scalars['Boolean']>;
 }>;
 
-export type JoinApplicationListQuery = {
+export type ApplicationListQuery = {
   __typename?: 'Query';
-  joinApplications: {
-    __typename?: 'PaginatedJoinApplications';
+  applications: {
+    __typename?: 'PaginatedApplications';
     total: number;
     results: Array<{
-      __typename?: 'JoinApplication';
+      __typename?: 'Application';
       id: string;
       message?: string | null | undefined;
       status: ApplicationStatus;
@@ -823,14 +823,14 @@ export type JoinApplicationListQuery = {
   };
 };
 
-export type JoinApplicationRejectMutationVariables = Exact<{
+export type ApplicationRejectMutationVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
-export type JoinApplicationRejectMutation = {
+export type ApplicationRejectMutation = {
   __typename?: 'Mutation';
-  rejectJoinApplication: {
-    __typename?: 'JoinApplication';
+  rejectApplication: {
+    __typename?: 'Application';
     id: string;
     message?: string | null | undefined;
     status: ApplicationStatus;
@@ -847,8 +847,8 @@ export type JoinApplicationRejectMutation = {
   };
 };
 
-export type JoinApplicationFragment = {
-  __typename?: 'JoinApplication';
+export type ApplicationFragment = {
+  __typename?: 'Application';
   id: string;
   message?: string | null | undefined;
   status: ApplicationStatus;
@@ -1067,8 +1067,8 @@ export const UserFragmentDoc = gql`
     updatedAt
   }
 `;
-export const JoinApplicationFragmentDoc = gql`
-  fragment JoinApplication on JoinApplication {
+export const ApplicationFragmentDoc = gql`
+  fragment Application on Application {
     id
     owner {
       ...User
@@ -1422,98 +1422,98 @@ export class RoomUpdateGQL extends Apollo.Mutation<
     super(apollo);
   }
 }
-export const JoinApplicationAcceptDocument = gql`
-  mutation JoinApplicationAccept($id: ID!) {
-    acceptJoinApplication(id: $id) {
+export const ApplicationAcceptDocument = gql`
+  mutation ApplicationAccept($id: ID!) {
+    acceptApplication(id: $id) {
       application {
-        ...JoinApplication
+        ...Application
       }
       membership {
         ...Membership
       }
     }
   }
-  ${JoinApplicationFragmentDoc}
+  ${ApplicationFragmentDoc}
   ${MembershipFragmentDoc}
 `;
 
 @Injectable({
   providedIn: 'root',
 })
-export class JoinApplicationAcceptGQL extends Apollo.Mutation<
-  JoinApplicationAcceptMutation,
-  JoinApplicationAcceptMutationVariables
+export class ApplicationAcceptGQL extends Apollo.Mutation<
+  ApplicationAcceptMutation,
+  ApplicationAcceptMutationVariables
 > {
-  document = JoinApplicationAcceptDocument;
+  document = ApplicationAcceptDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
   }
 }
-export const JoinApplicationCreateDocument = gql`
-  mutation JoinApplicationCreate($data: JoinApplicationCreateInput!) {
-    createJoinApplication(data: $data) {
-      ...JoinApplication
+export const ApplicationCreateDocument = gql`
+  mutation ApplicationCreate($data: ApplicationCreateInput!) {
+    createApplication(data: $data) {
+      ...Application
     }
   }
-  ${JoinApplicationFragmentDoc}
+  ${ApplicationFragmentDoc}
 `;
 
 @Injectable({
   providedIn: 'root',
 })
-export class JoinApplicationCreateGQL extends Apollo.Mutation<
-  JoinApplicationCreateMutation,
-  JoinApplicationCreateMutationVariables
+export class ApplicationCreateGQL extends Apollo.Mutation<
+  ApplicationCreateMutation,
+  ApplicationCreateMutationVariables
 > {
-  document = JoinApplicationCreateDocument;
+  document = ApplicationCreateDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
   }
 }
-export const JoinApplicationListDocument = gql`
-  query JoinApplicationList($offset: Int, $isPending: Boolean) {
-    joinApplications(limit: 20, offset: $offset, isPending: $isPending) {
+export const ApplicationListDocument = gql`
+  query ApplicationList($offset: Int, $isPending: Boolean) {
+    applications(limit: 20, offset: $offset, isPending: $isPending) {
       total
       results {
-        ...JoinApplication
+        ...Application
       }
     }
   }
-  ${JoinApplicationFragmentDoc}
+  ${ApplicationFragmentDoc}
 `;
 
 @Injectable({
   providedIn: 'root',
 })
-export class JoinApplicationListGQL extends Apollo.Query<
-  JoinApplicationListQuery,
-  JoinApplicationListQueryVariables
+export class ApplicationListGQL extends Apollo.Query<
+  ApplicationListQuery,
+  ApplicationListQueryVariables
 > {
-  document = JoinApplicationListDocument;
+  document = ApplicationListDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
   }
 }
-export const JoinApplicationRejectDocument = gql`
-  mutation JoinApplicationReject($id: ID!) {
-    rejectJoinApplication(id: $id) {
-      ...JoinApplication
+export const ApplicationRejectDocument = gql`
+  mutation ApplicationReject($id: ID!) {
+    rejectApplication(id: $id) {
+      ...Application
     }
   }
-  ${JoinApplicationFragmentDoc}
+  ${ApplicationFragmentDoc}
 `;
 
 @Injectable({
   providedIn: 'root',
 })
-export class JoinApplicationRejectGQL extends Apollo.Mutation<
-  JoinApplicationRejectMutation,
-  JoinApplicationRejectMutationVariables
+export class ApplicationRejectGQL extends Apollo.Mutation<
+  ApplicationRejectMutation,
+  ApplicationRejectMutationVariables
 > {
-  document = JoinApplicationRejectDocument;
+  document = ApplicationRejectDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
