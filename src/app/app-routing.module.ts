@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '/classrooms/last',
+    redirectTo: '/rooms/last',
   },
   {
     path: '',
@@ -25,11 +25,9 @@ const routes: Routes = [
     component: LayoutMainComponent,
     children: [
       {
-        path: 'classrooms',
+        path: 'rooms',
         loadChildren: () =>
-          import('./classrooms/classrooms.module').then(
-            (m) => m.ClassroomsModule,
-          ),
+          import('./rooms/rooms.module').then((m) => m.RoomsModule),
       },
       {
         path: 'applications',
@@ -42,7 +40,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/classrooms/last',
+    redirectTo: '/rooms/last',
   },
 ];
 

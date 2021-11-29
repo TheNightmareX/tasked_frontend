@@ -5,8 +5,8 @@ import { debounceTime, finalize, map, tap } from 'rxjs/operators';
 import { leastTime } from 'src/app/common/least-time.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import {
-  ClassroomDetailGQL,
-  ClassroomDetailQuery,
+  RoomDetailGQL,
+  RoomDetailQuery,
   JoinApplicationCreateGQL,
   JoinApplicationListGQL,
 } from 'src/app/graphql';
@@ -19,10 +19,10 @@ import { PopupComponent } from 'src/app/shared/popup/popup.component';
 })
 export class ApplicationCreationComponent implements OnInit {
   data = {
-    classroom: null as number | null,
+    room: null as number | null,
     message: '',
   };
-  classroom?: Classroom;
+  room?: Room;
   loading = false;
   validated = false;
   idChange$ = new Subject();
@@ -31,7 +31,7 @@ export class ApplicationCreationComponent implements OnInit {
     private notifier: NotifierService,
     private createGql: JoinApplicationCreateGQL,
     private applicationListGql: JoinApplicationListGQL,
-    private classroomGql: ClassroomDetailGQL,
+    private roomGql: RoomDetailGQL,
     private popup: PopupComponent,
   ) {}
 
@@ -42,7 +42,7 @@ export class ApplicationCreationComponent implements OnInit {
         debounceTime(300),
       )
       .subscribe(() => {
-        this.validateClassroom();
+        this.validateRoom();
       });
   }
 
@@ -50,7 +50,7 @@ export class ApplicationCreationComponent implements OnInit {
     if (this.loading) return;
 
     this.loading = true;
-    const data = { ...this.data, classroom: this.data.classroom + '' };
+    const data = { ...this.data, room: this.data.room + '' };
     this.createGql
       .mutate(
         { data },
@@ -82,7 +82,7 @@ export class ApplicationCreationComponent implements OnInit {
         () => {
           this.notifier.notify(
             NotificationType.Success,
-            $localize`Application sent to classroom #${data.classroom}`,
+            $localize`Application sent to room #${data.room}`,
           );
         },
         () => {
@@ -94,26 +94,26 @@ export class ApplicationCreationComponent implements OnInit {
       );
   }
 
-  validateClassroom() {
-    if (this.data.classroom)
-      this.classroomGql
-        .fetch({ id: this.data.classroom + '' })
-        .pipe(map((result) => result.data.classroom))
+  validateRoom() {
+    if (this.data.room)
+      this.roomGql
+        .fetch({ id: this.data.room + '' })
+        .pipe(map((result) => result.data.room))
         .subscribe(
           (result) => {
-            this.classroom = result;
+            this.room = result;
             this.validated = true;
           },
           () => {
-            this.classroom = undefined;
+            this.room = undefined;
             this.validated = false;
           },
         );
     else {
-      this.classroom = undefined;
+      this.room = undefined;
       this.validated = false;
     }
   }
 }
 
-type Classroom = ClassroomDetailQuery['classroom'];
+type Room = RoomDetailQuery['room'];

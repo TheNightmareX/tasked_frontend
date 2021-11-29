@@ -1,14 +1,14 @@
 <a
   mat-list-item
-  *ngFor="let classroom of classrooms$ | async; trackBy: trackByClassroom"
-  [routerLink]="['/classrooms', classroom.id]"
+  *ngFor="let room of rooms$ | async; trackBy: trackByRoom"
+  [routerLink]="['/rooms', room.id]"
   routerLinkActive="router-link-active"
-  (click)="deactivateIfActivated(classroom)"
+  (click)="deactivateIfActivated(room)"
 >
-  <div matLine>{{ classroom.name }}</div>
+  <div matLine>{{ room.name }}</div>
 </a>
 
-<a mat-list-item routerLink="/classrooms/create">
+<a mat-list-item routerLink="/rooms/create">
   <div matLine fxLayout fxLayoutAlign="center center">
     <mat-icon>add</mat-icon>
   </div>

@@ -1,0 +1,37 @@
+query RoomAssignmentList(
+  $id: ID!
+  $offset: Int
+  $isCompleted: Boolean
+  $isOwn: Boolean
+) {
+  room(id: $id) {
+    id
+    assignments(
+      limit: 20
+      offset: $offset
+      isCompleted: $isCompleted
+      isOwn: $isOwn
+    ) {
+      total
+      results {
+        id
+        recipient {
+          id
+        }
+        task {
+          id
+          title
+          description
+          creator {
+            id
+            username
+            nickname
+          }
+        }
+        isCompleted
+        isImportant
+        createdAt
+      }
+    }
+  }
+}

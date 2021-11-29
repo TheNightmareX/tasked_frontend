@@ -1,5 +1,0 @@
-mutation ClassroomDelete($id: ID!) {
-  deleteClassroom(id: $id) {
-    id
-  }
-}

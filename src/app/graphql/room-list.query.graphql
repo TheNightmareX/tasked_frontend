@@ -1,0 +1,8 @@
+query RoomList($offset: Int) {
+  rooms(limit: 20, offset: $offset, isJoined: true) {
+    total
+    results {
+      ...Room
+    }
+  }
+}

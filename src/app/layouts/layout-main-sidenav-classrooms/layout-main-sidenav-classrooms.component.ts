@@ -2,38 +2,34 @@ import { Component, OnInit, TrackByFunction } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ClassroomListGQL, ClassroomListQuery } from 'src/app/graphql';
+import { RoomListGQL, RoomListQuery } from 'src/app/graphql';
 
-type Classroom = ClassroomListQuery['classrooms']['results'][number];
+type Room = RoomListQuery['rooms']['results'][number];
 
 @Component({
-  selector: 'app-layout-main-sidenav-classrooms',
-  templateUrl: './layout-main-sidenav-classrooms.component.html',
-  styleUrls: ['./layout-main-sidenav-classrooms.component.scss'],
+  selector: 'app-layout-main-sidenav-rooms',
+  templateUrl: './layout-main-sidenav-rooms.component.html',
+  styleUrls: ['./layout-main-sidenav-rooms.component.scss'],
 })
-export class LayoutMainSidenavClassroomsComponent implements OnInit {
-  classrooms$!: Observable<Classroom[]>;
+export class LayoutMainSidenavRoomsComponent implements OnInit {
+  rooms$!: Observable<Room[]>;
 
-  constructor(
-    private router: Router,
-    private classroomListGql: ClassroomListGQL,
-  ) {}
+  constructor(private router: Router, private roomListGql: RoomListGQL) {}
 
-  trackByClassroom: TrackByFunction<Classroom> = (_, { id }) => id;
+  trackByRoom: TrackByFunction<Room> = (_, { id }) => id;
 
   ngOnInit() {
-    this.classrooms$ = this.classroomListGql
+    this.rooms$ = this.roomListGql
       .watch()
-      .valueChanges.pipe(map(({ data }) => data.classrooms.results));
+      .valueChanges.pipe(map(({ data }) => data.rooms.results));
   }
 
-  deactivateIfActivated(classroom: Classroom) {
-    if (this.isClassroomActivated(classroom.id))
-      this.router.navigate(['/classrooms']);
+  deactivateIfActivated(room: Room) {
+    if (this.isRoomActivated(room.id)) this.router.navigate(['/rooms']);
   }
 
-  private isClassroomActivated(id: string) {
-    const tree = this.router.createUrlTree(['/classrooms', id]);
+  private isRoomActivated(id: string) {
+    const tree = this.router.createUrlTree(['/rooms', id]);
     const isActive = this.router.isActive(tree, {
       paths: 'subset',
       fragment: 'ignored',

@@ -3,16 +3,16 @@
 
   <div matDialogContent fxLayout="column">
     <mat-form-field appAutoFormFieldColor>
-      <mat-label i18n>Classroom ID</mat-label>
+      <mat-label i18n>Room ID</mat-label>
       <input
         matInput
-        name="classroom"
+        name="room"
         type="number"
         required
-        [(ngModel)]="data.classroom"
+        [(ngModel)]="data.room"
         (ngModelChange)="idChange$.next()"
       />
-      <mat-hint *ngIf="classroom">{{ classroom.name }}</mat-hint>
+      <mat-hint *ngIf="room">{{ room.name }}</mat-hint>
     </mat-form-field>
 
     <mat-form-field appAutoFormFieldColor>

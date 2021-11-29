@@ -5,7 +5,7 @@ import { finalize } from 'rxjs/operators';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import {
   ApplicationStatus,
-  ClassroomMembershipListGQL,
+  RoomMembershipListGQL,
   JoinApplicationAcceptGQL,
   JoinApplicationListQuery,
   JoinApplicationRejectGQL,
@@ -34,7 +34,7 @@ export class ApplicationListItemComponent implements OnInit {
     private notifier: NotifierService,
     private acceptGql: JoinApplicationAcceptGQL,
     private rejectGql: JoinApplicationRejectGQL,
-    private classroomMembershipListGql: ClassroomMembershipListGQL,
+    private roomMembershipListGql: RoomMembershipListGQL,
   ) {}
 
   ngOnInit() {}
@@ -48,19 +48,19 @@ export class ApplicationListItemComponent implements OnInit {
         { id: application.id },
         {
           update: (_, result) => {
-            const query = this.classroomMembershipListGql.watch({
-              id: application.classroom.id,
+            const query = this.roomMembershipListGql.watch({
+              id: application.room.id,
             });
             if (query.getCurrentResult().loading) return;
             query.updateQuery((prev) => ({
               ...prev,
-              classroom: {
-                ...prev.classroom,
+              room: {
+                ...prev.room,
                 memberships: {
-                  ...prev.classroom.memberships,
-                  total: prev.classroom.memberships.total + 1,
+                  ...prev.room.memberships,
+                  total: prev.room.memberships.total + 1,
                   results: [
-                    ...prev.classroom.memberships.results,
+                    ...prev.room.memberships.results,
                     result.data!.acceptJoinApplication.membership,
                   ],
                 },

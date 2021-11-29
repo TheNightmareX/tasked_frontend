@@ -3,7 +3,7 @@ fragment JoinApplication on JoinApplication {
   owner {
     ...User
   }
-  classroom {
+  room {
     id
     name
   }

@@ -1,8 +1,0 @@
-query ClassroomList($offset: Int) {
-  classrooms(limit: 20, offset: $offset, isJoined: true) {
-    total
-    results {
-      ...Classroom
-    }
-  }
-}

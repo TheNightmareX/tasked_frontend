@@ -1,0 +1,25 @@
+<mat-action-list>
+  <h3 matSubheader *ngIf="(assignmentsPending$ | async)?.length" i18n>
+    Pending
+  </h3>
+
+  <app-room-detail-assignments-item
+    *ngFor="let assignment of assignmentsPending$ | async"
+    [assignment]="assignment"
+  ></app-room-detail-assignments-item>
+
+  <h3 matSubheader *ngIf="(assignmentsCompleted$ | async)?.length" i18n>
+    Completed
+  </h3>
+
+  <app-room-detail-assignments-item
+    *ngFor="let assignment of assignmentsCompleted$ | async"
+    [assignment]="assignment"
+  ></app-room-detail-assignments-item>
+
+  <app-fetch-more-trigger
+    *ngIf="!allLoaded"
+    [loading]="loading"
+    (trigger)="fetchMore()"
+  ></app-fetch-more-trigger>
+</mat-action-list>

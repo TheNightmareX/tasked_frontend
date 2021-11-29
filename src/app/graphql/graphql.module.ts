@@ -22,10 +22,10 @@ import { AuthInterceptor } from '../auth/auth.interceptor';
           typePolicies: {
             Query: {
               fields: {
-                classroom: {
+                room: {
                   // use the existing cache if possible
                   read: (_, { args, toReference }) =>
-                    toReference({ __typename: 'Classroom', id: args!.id }),
+                    toReference({ __typename: 'Room', id: args!.id }),
                 },
               },
             },

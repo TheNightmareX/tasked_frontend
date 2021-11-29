@@ -60,8 +60,8 @@ export type AuthResult = {
   user: User;
 };
 
-export type Classroom = {
-  __typename?: 'Classroom';
+export type Room = {
+  __typename?: 'Room';
   assignments: PaginatedAssignments;
   createdAt: Scalars['DateTime'];
   creator: User;
@@ -76,36 +76,36 @@ export type Classroom = {
   updatedAt: Scalars['DateTime'];
 };
 
-export type ClassroomAssignmentsArgs = {
+export type RoomAssignmentsArgs = {
   isCompleted?: Maybe<Scalars['Boolean']>;
   isOwn?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
 
-export type ClassroomJoinApplicationsArgs = {
+export type RoomJoinApplicationsArgs = {
   isPending?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
 
-export type ClassroomMembershipsArgs = {
+export type RoomMembershipsArgs = {
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
 
-export type ClassroomTasksArgs = {
+export type RoomTasksArgs = {
   isOwn?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
 
-export type ClassroomCreateInput = {
+export type RoomCreateInput = {
   description?: Maybe<Scalars['String']>;
   name: Scalars['String'];
 };
 
-export type ClassroomUpdateInput = {
+export type RoomUpdateInput = {
   description?: Maybe<Scalars['String']>;
   isOpen?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
@@ -119,7 +119,7 @@ export enum Gender {
 
 export type JoinApplication = {
   __typename?: 'JoinApplication';
-  classroom: Classroom;
+  room: Room;
   createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
   message?: Maybe<Scalars['String']>;
@@ -129,14 +129,14 @@ export type JoinApplication = {
 };
 
 export type JoinApplicationCreateInput = {
-  classroom: Scalars['ID'];
+  room: Scalars['ID'];
   message?: Maybe<Scalars['String']>;
 };
 
 export type Membership = {
   __typename?: 'Membership';
   assignments: PaginatedAssignments;
-  classroom: Classroom;
+  room: Room;
   createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
   owner: User;
@@ -160,17 +160,17 @@ export type Mutation = {
   acceptJoinApplication: AcceptJoinApplicationResult;
   auth: AuthResult;
   createAssignment: Assignment;
-  createClassroom: Classroom;
+  createRoom: Room;
   createJoinApplication: JoinApplication;
   createTask: Task;
   createUser: User;
   deleteAssignment: Assignment;
-  deleteClassroom: Classroom;
+  deleteRoom: Room;
   deleteMembership: Membership;
   deleteTask: Task;
   rejectJoinApplication: JoinApplication;
   updateAssignment: Assignment;
-  updateClassroom: Classroom;
+  updateRoom: Room;
   updateMembership: Membership;
   updateTask: Task;
   updateUser: User;
@@ -189,8 +189,8 @@ export type MutationCreateAssignmentArgs = {
   data: AssignmentCreateInput;
 };
 
-export type MutationCreateClassroomArgs = {
-  data: ClassroomCreateInput;
+export type MutationCreateRoomArgs = {
+  data: RoomCreateInput;
 };
 
 export type MutationCreateJoinApplicationArgs = {
@@ -209,7 +209,7 @@ export type MutationDeleteAssignmentArgs = {
   id: Scalars['ID'];
 };
 
-export type MutationDeleteClassroomArgs = {
+export type MutationDeleteRoomArgs = {
   id: Scalars['ID'];
 };
 
@@ -230,8 +230,8 @@ export type MutationUpdateAssignmentArgs = {
   id: Scalars['ID'];
 };
 
-export type MutationUpdateClassroomArgs = {
-  data: ClassroomUpdateInput;
+export type MutationUpdateRoomArgs = {
+  data: RoomUpdateInput;
   id: Scalars['ID'];
 };
 
@@ -256,9 +256,9 @@ export type PaginatedAssignments = {
   total: Scalars['Int'];
 };
 
-export type PaginatedClassrooms = {
-  __typename?: 'PaginatedClassrooms';
-  results: Array<Classroom>;
+export type PaginatedRooms = {
+  __typename?: 'PaginatedRooms';
+  results: Array<Room>;
   total: Scalars['Int'];
 };
 
@@ -290,8 +290,8 @@ export type Query = {
   __typename?: 'Query';
   assignment: Assignment;
   assignments: PaginatedAssignments;
-  classroom: Classroom;
-  classrooms: PaginatedClassrooms;
+  room: Room;
+  rooms: PaginatedRooms;
   joinApplication: JoinApplication;
   joinApplications: PaginatedJoinApplications;
   me: User;
@@ -314,11 +314,11 @@ export type QueryAssignmentsArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
-export type QueryClassroomArgs = {
+export type QueryRoomArgs = {
   id: Scalars['ID'];
 };
 
-export type QueryClassroomsArgs = {
+export type QueryRoomsArgs = {
   isJoined?: Maybe<Scalars['Boolean']>;
   isOpen?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
@@ -371,7 +371,7 @@ export enum Role {
 export type Task = {
   __typename?: 'Task';
   assignments: PaginatedAssignments;
-  classroom: Classroom;
+  room: Room;
   createdAt: Scalars['DateTime'];
   creator: User;
   description?: Maybe<Scalars['String']>;
@@ -389,13 +389,13 @@ export type TaskAssignmentsArgs = {
 };
 
 export type TaskCreateInput = {
-  classroom: Scalars['ID'];
+  room: Scalars['ID'];
   description?: Maybe<Scalars['String']>;
   title: Scalars['String'];
 };
 
 export type TaskUpdateInput = {
-  classroom?: Maybe<Scalars['ID']>;
+  room?: Maybe<Scalars['ID']>;
   description?: Maybe<Scalars['String']>;
   isActive?: Maybe<Scalars['Boolean']>;
   title?: Maybe<Scalars['String']>;
@@ -404,7 +404,7 @@ export type TaskUpdateInput = {
 export type User = {
   __typename?: 'User';
   assignments: PaginatedAssignments;
-  classrooms: PaginatedClassrooms;
+  rooms: PaginatedRooms;
   createdAt: Scalars['DateTime'];
   gender: Gender;
   id: Scalars['ID'];
@@ -423,7 +423,7 @@ export type UserAssignmentsArgs = {
   offset?: Maybe<Scalars['Int']>;
 };
 
-export type UserClassroomsArgs = {
+export type UserRoomsArgs = {
   isJoined?: Maybe<Scalars['Boolean']>;
   isOpen?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
@@ -507,17 +507,17 @@ export type AuthMutation = {
   auth: { __typename?: 'AuthResult'; token: string };
 };
 
-export type ClassroomAssignmentListQueryVariables = Exact<{
+export type RoomAssignmentListQueryVariables = Exact<{
   id: Scalars['ID'];
   offset?: Maybe<Scalars['Int']>;
   isCompleted?: Maybe<Scalars['Boolean']>;
   isOwn?: Maybe<Scalars['Boolean']>;
 }>;
 
-export type ClassroomAssignmentListQuery = {
+export type RoomAssignmentListQuery = {
   __typename?: 'Query';
-  classroom: {
-    __typename?: 'Classroom';
+  room: {
+    __typename?: 'Room';
     id: string;
     assignments: {
       __typename?: 'PaginatedAssignments';
@@ -546,14 +546,14 @@ export type ClassroomAssignmentListQuery = {
   };
 };
 
-export type ClassroomCreateMutationVariables = Exact<{
-  data: ClassroomCreateInput;
+export type RoomCreateMutationVariables = Exact<{
+  data: RoomCreateInput;
 }>;
 
-export type ClassroomCreateMutation = {
+export type RoomCreateMutation = {
   __typename?: 'Mutation';
-  createClassroom: {
-    __typename?: 'Classroom';
+  createRoom: {
+    __typename?: 'Room';
     id: string;
     name: string;
     description?: string | null | undefined;
@@ -571,23 +571,23 @@ export type ClassroomCreateMutation = {
   };
 };
 
-export type ClassroomDeleteMutationVariables = Exact<{
+export type RoomDeleteMutationVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
-export type ClassroomDeleteMutation = {
+export type RoomDeleteMutation = {
   __typename?: 'Mutation';
-  deleteClassroom: { __typename?: 'Classroom'; id: string };
+  deleteRoom: { __typename?: 'Room'; id: string };
 };
 
-export type ClassroomDetailQueryVariables = Exact<{
+export type RoomDetailQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
-export type ClassroomDetailQuery = {
+export type RoomDetailQuery = {
   __typename?: 'Query';
-  classroom: {
-    __typename?: 'Classroom';
+  room: {
+    __typename?: 'Room';
     id: string;
     name: string;
     description?: string | null | undefined;
@@ -605,17 +605,17 @@ export type ClassroomDetailQuery = {
   };
 };
 
-export type ClassroomListQueryVariables = Exact<{
+export type RoomListQueryVariables = Exact<{
   offset?: Maybe<Scalars['Int']>;
 }>;
 
-export type ClassroomListQuery = {
+export type RoomListQuery = {
   __typename?: 'Query';
-  classrooms: {
-    __typename?: 'PaginatedClassrooms';
+  rooms: {
+    __typename?: 'PaginatedRooms';
     total: number;
     results: Array<{
-      __typename?: 'Classroom';
+      __typename?: 'Room';
       id: string;
       name: string;
       description?: string | null | undefined;
@@ -634,14 +634,14 @@ export type ClassroomListQuery = {
   };
 };
 
-export type ClassroomMembershipListQueryVariables = Exact<{
+export type RoomMembershipListQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
-export type ClassroomMembershipListQuery = {
+export type RoomMembershipListQuery = {
   __typename?: 'Query';
-  classroom: {
-    __typename?: 'Classroom';
+  room: {
+    __typename?: 'Room';
     id: string;
     memberships: {
       __typename?: 'PaginatedMemberships';
@@ -662,15 +662,15 @@ export type ClassroomMembershipListQuery = {
   };
 };
 
-export type ClassroomTaskListQueryVariables = Exact<{
+export type RoomTaskListQueryVariables = Exact<{
   id: Scalars['ID'];
   offset?: Maybe<Scalars['Int']>;
 }>;
 
-export type ClassroomTaskListQuery = {
+export type RoomTaskListQuery = {
   __typename?: 'Query';
-  classroom: {
-    __typename?: 'Classroom';
+  room: {
+    __typename?: 'Room';
     id: string;
     tasks: {
       __typename?: 'PaginatedTasks';
@@ -687,15 +687,15 @@ export type ClassroomTaskListQuery = {
   };
 };
 
-export type ClassroomUpdateMutationVariables = Exact<{
+export type RoomUpdateMutationVariables = Exact<{
   id: Scalars['ID'];
-  data: ClassroomUpdateInput;
+  data: RoomUpdateInput;
 }>;
 
-export type ClassroomUpdateMutation = {
+export type RoomUpdateMutation = {
   __typename?: 'Mutation';
-  updateClassroom: {
-    __typename?: 'Classroom';
+  updateRoom: {
+    __typename?: 'Room';
     id: string;
     name: string;
     description?: string | null | undefined;
@@ -713,8 +713,8 @@ export type ClassroomUpdateMutation = {
   };
 };
 
-export type ClassroomFragment = {
-  __typename?: 'Classroom';
+export type RoomFragment = {
+  __typename?: 'Room';
   id: string;
   name: string;
   description?: string | null | undefined;
@@ -753,7 +753,7 @@ export type JoinApplicationAcceptMutation = {
         gender: Gender;
         updatedAt: any;
       };
-      classroom: { __typename?: 'Classroom'; id: string; name: string };
+      room: { __typename?: 'Room'; id: string; name: string };
     };
     membership: {
       __typename?: 'Membership';
@@ -790,7 +790,7 @@ export type JoinApplicationCreateMutation = {
       gender: Gender;
       updatedAt: any;
     };
-    classroom: { __typename?: 'Classroom'; id: string; name: string };
+    room: { __typename?: 'Room'; id: string; name: string };
   };
 };
 
@@ -818,7 +818,7 @@ export type JoinApplicationListQuery = {
         gender: Gender;
         updatedAt: any;
       };
-      classroom: { __typename?: 'Classroom'; id: string; name: string };
+      room: { __typename?: 'Room'; id: string; name: string };
     }>;
   };
 };
@@ -843,7 +843,7 @@ export type JoinApplicationRejectMutation = {
       gender: Gender;
       updatedAt: any;
     };
-    classroom: { __typename?: 'Classroom'; id: string; name: string };
+    room: { __typename?: 'Room'; id: string; name: string };
   };
 };
 
@@ -861,7 +861,7 @@ export type JoinApplicationFragment = {
     gender: Gender;
     updatedAt: any;
   };
-  classroom: { __typename?: 'Classroom'; id: string; name: string };
+  room: { __typename?: 'Room'; id: string; name: string };
 };
 
 export type MeQueryVariables = Exact<{ [key: string]: never }>;
@@ -1041,8 +1041,8 @@ export type UserFragment = {
   updatedAt: any;
 };
 
-export const ClassroomFragmentDoc = gql`
-  fragment Classroom on Classroom {
+export const RoomFragmentDoc = gql`
+  fragment Room on Room {
     id
     name
     description
@@ -1073,7 +1073,7 @@ export const JoinApplicationFragmentDoc = gql`
     owner {
       ...User
     }
-    classroom {
+    room {
       id
       name
     }
@@ -1201,14 +1201,14 @@ export class AuthGQL extends Apollo.Mutation<
     super(apollo);
   }
 }
-export const ClassroomAssignmentListDocument = gql`
-  query ClassroomAssignmentList(
+export const RoomAssignmentListDocument = gql`
+  query RoomAssignmentList(
     $id: ID!
     $offset: Int
     $isCompleted: Boolean
     $isOwn: Boolean
   ) {
-    classroom(id: $id) {
+    room(id: $id) {
       id
       assignments(
         limit: 20
@@ -1244,41 +1244,41 @@ export const ClassroomAssignmentListDocument = gql`
 @Injectable({
   providedIn: 'root',
 })
-export class ClassroomAssignmentListGQL extends Apollo.Query<
-  ClassroomAssignmentListQuery,
-  ClassroomAssignmentListQueryVariables
+export class RoomAssignmentListGQL extends Apollo.Query<
+  RoomAssignmentListQuery,
+  RoomAssignmentListQueryVariables
 > {
-  document = ClassroomAssignmentListDocument;
+  document = RoomAssignmentListDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
   }
 }
-export const ClassroomCreateDocument = gql`
-  mutation ClassroomCreate($data: ClassroomCreateInput!) {
-    createClassroom(data: $data) {
-      ...Classroom
+export const RoomCreateDocument = gql`
+  mutation RoomCreate($data: RoomCreateInput!) {
+    createRoom(data: $data) {
+      ...Room
     }
   }
-  ${ClassroomFragmentDoc}
+  ${RoomFragmentDoc}
 `;
 
 @Injectable({
   providedIn: 'root',
 })
-export class ClassroomCreateGQL extends Apollo.Mutation<
-  ClassroomCreateMutation,
-  ClassroomCreateMutationVariables
+export class RoomCreateGQL extends Apollo.Mutation<
+  RoomCreateMutation,
+  RoomCreateMutationVariables
 > {
-  document = ClassroomCreateDocument;
+  document = RoomCreateDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
   }
 }
-export const ClassroomDeleteDocument = gql`
-  mutation ClassroomDelete($id: ID!) {
-    deleteClassroom(id: $id) {
+export const RoomDeleteDocument = gql`
+  mutation RoomDelete($id: ID!) {
+    deleteRoom(id: $id) {
       id
     }
   }
@@ -1287,66 +1287,66 @@ export const ClassroomDeleteDocument = gql`
 @Injectable({
   providedIn: 'root',
 })
-export class ClassroomDeleteGQL extends Apollo.Mutation<
-  ClassroomDeleteMutation,
-  ClassroomDeleteMutationVariables
+export class RoomDeleteGQL extends Apollo.Mutation<
+  RoomDeleteMutation,
+  RoomDeleteMutationVariables
 > {
-  document = ClassroomDeleteDocument;
+  document = RoomDeleteDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
   }
 }
-export const ClassroomDetailDocument = gql`
-  query ClassroomDetail($id: ID!) {
-    classroom(id: $id) {
-      ...Classroom
+export const RoomDetailDocument = gql`
+  query RoomDetail($id: ID!) {
+    room(id: $id) {
+      ...Room
     }
   }
-  ${ClassroomFragmentDoc}
+  ${RoomFragmentDoc}
 `;
 
 @Injectable({
   providedIn: 'root',
 })
-export class ClassroomDetailGQL extends Apollo.Query<
-  ClassroomDetailQuery,
-  ClassroomDetailQueryVariables
+export class RoomDetailGQL extends Apollo.Query<
+  RoomDetailQuery,
+  RoomDetailQueryVariables
 > {
-  document = ClassroomDetailDocument;
+  document = RoomDetailDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
   }
 }
-export const ClassroomListDocument = gql`
-  query ClassroomList($offset: Int) {
-    classrooms(limit: 20, offset: $offset, isJoined: true) {
+export const RoomListDocument = gql`
+  query RoomList($offset: Int) {
+    rooms(limit: 20, offset: $offset, isJoined: true) {
       total
       results {
-        ...Classroom
+        ...Room
       }
     }
   }
-  ${ClassroomFragmentDoc}
+  ${RoomFragmentDoc}
 `;
 
 @Injectable({
   providedIn: 'root',
 })
-export class ClassroomListGQL extends Apollo.Query<
-  ClassroomListQuery,
-  ClassroomListQueryVariables
+export class RoomListGQL extends Apollo.Query<
+  RoomListQuery,
+  RoomListQueryVariables
 > {
-  document = ClassroomListDocument;
+  document = RoomListDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
   }
 }
-export const ClassroomMembershipListDocument = gql`
-  query ClassroomMembershipList($id: ID!) {
-    classroom(id: $id) {
+export const RoomMembershipListDocument = gql`
+  query RoomMembershipList($id: ID!) {
+    room(id: $id) {
       id
       memberships {
         total
@@ -1362,19 +1362,19 @@ export const ClassroomMembershipListDocument = gql`
 @Injectable({
   providedIn: 'root',
 })
-export class ClassroomMembershipListGQL extends Apollo.Query<
-  ClassroomMembershipListQuery,
-  ClassroomMembershipListQueryVariables
+export class RoomMembershipListGQL extends Apollo.Query<
+  RoomMembershipListQuery,
+  RoomMembershipListQueryVariables
 > {
-  document = ClassroomMembershipListDocument;
+  document = RoomMembershipListDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
   }
 }
-export const ClassroomTaskListDocument = gql`
-  query ClassroomTaskList($id: ID!, $offset: Int) {
-    classroom(id: $id) {
+export const RoomTaskListDocument = gql`
+  query RoomTaskList($id: ID!, $offset: Int) {
+    room(id: $id) {
       id
       tasks(limit: 20, offset: $offset, isOwn: true) {
         total
@@ -1390,33 +1390,33 @@ export const ClassroomTaskListDocument = gql`
 @Injectable({
   providedIn: 'root',
 })
-export class ClassroomTaskListGQL extends Apollo.Query<
-  ClassroomTaskListQuery,
-  ClassroomTaskListQueryVariables
+export class RoomTaskListGQL extends Apollo.Query<
+  RoomTaskListQuery,
+  RoomTaskListQueryVariables
 > {
-  document = ClassroomTaskListDocument;
+  document = RoomTaskListDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);
   }
 }
-export const ClassroomUpdateDocument = gql`
-  mutation ClassroomUpdate($id: ID!, $data: ClassroomUpdateInput!) {
-    updateClassroom(id: $id, data: $data) {
-      ...Classroom
+export const RoomUpdateDocument = gql`
+  mutation RoomUpdate($id: ID!, $data: RoomUpdateInput!) {
+    updateRoom(id: $id, data: $data) {
+      ...Room
     }
   }
-  ${ClassroomFragmentDoc}
+  ${RoomFragmentDoc}
 `;
 
 @Injectable({
   providedIn: 'root',
 })
-export class ClassroomUpdateGQL extends Apollo.Mutation<
-  ClassroomUpdateMutation,
-  ClassroomUpdateMutationVariables
+export class RoomUpdateGQL extends Apollo.Mutation<
+  RoomUpdateMutation,
+  RoomUpdateMutationVariables
 > {
-  document = ClassroomUpdateDocument;
+  document = RoomUpdateDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

@@ -1,5 +1,0 @@
-mutation ClassroomUpdate($id: ID!, $data: ClassroomUpdateInput!) {
-  updateClassroom(id: $id, data: $data) {
-    ...Classroom
-  }
-}
