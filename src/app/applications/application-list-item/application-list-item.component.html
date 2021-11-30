@@ -16,8 +16,8 @@
     <ng-container
       *ngIf="application?.status == ApplicationStatus.Pending; else status"
     >
-      <button mat-icon-button (click)="delete()">
-        <mat-icon>delete</mat-icon>
+      <button mat-icon-button [disabled]="loading" (click)="delete()">
+        <mat-icon>cancel</mat-icon>
       </button>
     </ng-container>
   </ng-container>
@@ -26,10 +26,10 @@
     <ng-container
       *ngIf="application?.status == ApplicationStatus.Pending; else status"
     >
-      <button mat-icon-button (click)="accept()">
+      <button mat-icon-button [disabled]="loading" (click)="accept()">
         <mat-icon>check</mat-icon>
       </button>
-      <button mat-icon-button (click)="reject()">
+      <button mat-icon-button [disabled]="loading" (click)="reject()">
         <mat-icon>clear</mat-icon>
       </button>
     </ng-container>

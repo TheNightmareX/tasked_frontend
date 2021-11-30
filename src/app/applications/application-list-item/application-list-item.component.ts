@@ -116,6 +116,7 @@ export class ApplicationListItemComponent implements OnInit {
     messageOnFailure: string,
   ) {
     if (this.loading) return;
+    this.loading = true;
     mutation.pipe(finalize(() => (this.loading = false))).subscribe(
       () => this.notifier.notify(NotificationType.Success, messageOnSuccess),
       () => this.notifier.notify(NotificationType.Error, messageOnFailure),
