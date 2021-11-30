@@ -20,7 +20,7 @@ type Application = ApplicationListQuery['applications']['results'][number];
 })
 export class ApplicationListItemComponent implements OnInit {
   @Input() application?: Application;
-  @Input() actions = false;
+  @Input() own = false;
   loading = false;
   ApplicationStatus = ApplicationStatus;
   applicationStatusText = {

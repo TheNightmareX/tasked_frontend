@@ -12,28 +12,26 @@
     {{ application?.createdAt | date: 'mediumTime' }}
   </div>
 
-  <ng-container>
-    <ng-container
-      *ngIf="actions; then statusWithActions; else status"
-    ></ng-container>
-
-    <ng-template #statusWithActions>
-      <ng-container
-        *ngIf="application?.status == ApplicationStatus.Pending; else status"
-      >
-        <button mat-icon-button (click)="accept()">
-          <mat-icon>check</mat-icon>
-        </button>
-        <button mat-icon-button (click)="reject()">
-          <mat-icon>clear</mat-icon>
-        </button>
-      </ng-container>
-    </ng-template>
-
-    <ng-template #status>
-      <div class="opacity--2 mat-body">
-        {{ application ? applicationStatusText[application.status] : null }}
-      </div>
-    </ng-template>
+  <ng-container *ngIf="own">
+    <ng-container [ngTemplateOutlet]="status"></ng-container>
   </ng-container>
+
+  <ng-container *ngIf="!own">
+    <ng-container
+      *ngIf="application?.status == ApplicationStatus.Pending; else status"
+    >
+      <button mat-icon-button (click)="accept()">
+        <mat-icon>check</mat-icon>
+      </button>
+      <button mat-icon-button (click)="reject()">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #status>
+    <div class="opacity--2 mat-body">
+      {{ application ? applicationStatusText[application.status] : null }}
+    </div>
+  </ng-template>
 </mat-list-item>
