@@ -113,6 +113,7 @@ export type Mutation = {
   createRoom: Room;
   createTask: Task;
   createUser: User;
+  deleteApplication: Application;
   deleteAssignment: Assignment;
   deleteMembership: Membership;
   deleteRoom: Room;
@@ -152,6 +153,10 @@ export type MutationCreateTaskArgs = {
 
 export type MutationCreateUserArgs = {
   data: UserCreateInput;
+};
+
+export type MutationDeleteApplicationArgs = {
+  id: Scalars['ID'];
 };
 
 export type MutationDeleteAssignmentArgs = {
