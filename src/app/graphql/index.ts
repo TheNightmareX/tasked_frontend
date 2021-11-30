@@ -528,6 +528,15 @@ export type ApplicationCreateMutation = {
   };
 };
 
+export type ApplicationDeleteMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type ApplicationDeleteMutation = {
+  __typename?: 'Mutation';
+  deleteApplication: { __typename?: 'Application'; id: string };
+};
+
 export type ApplicationListQueryVariables = Exact<{
   offset?: Maybe<Scalars['Int']>;
   isPending?: Maybe<Scalars['Boolean']>;
@@ -1164,6 +1173,27 @@ export class ApplicationCreateGQL extends Apollo.Mutation<
   ApplicationCreateMutationVariables
 > {
   document = ApplicationCreateDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
+export const ApplicationDeleteDocument = gql`
+  mutation ApplicationDelete($id: ID!) {
+    deleteApplication(id: $id) {
+      id
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ApplicationDeleteGQL extends Apollo.Mutation<
+  ApplicationDeleteMutation,
+  ApplicationDeleteMutationVariables
+> {
+  document = ApplicationDeleteDocument;
 
   constructor(apollo: Apollo.Apollo) {
     super(apollo);

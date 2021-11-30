@@ -13,7 +13,13 @@
   </div>
 
   <ng-container *ngIf="own">
-    <ng-container [ngTemplateOutlet]="status"></ng-container>
+    <ng-container
+      *ngIf="application?.status == ApplicationStatus.Pending; else status"
+    >
+      <button mat-icon-button (click)="delete()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </ng-container>
   </ng-container>
 
   <ng-container *ngIf="!own">

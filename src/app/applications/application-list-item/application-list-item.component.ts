@@ -9,6 +9,8 @@ import {
   ApplicationAcceptGQL,
   ApplicationListQuery,
   ApplicationRejectGQL,
+  ApplicationDeleteGQL,
+  ApplicationListGQL,
 } from 'src/app/graphql';
 
 type Application = ApplicationListQuery['applications']['results'][number];
@@ -31,8 +33,10 @@ export class ApplicationListItemComponent implements OnInit {
 
   constructor(
     private notifier: NotifierService,
+    private listGql: ApplicationListGQL,
     private acceptGql: ApplicationAcceptGQL,
     private rejectGql: ApplicationRejectGQL,
+    private deleteGql: ApplicationDeleteGQL,
     private roomMembershipListGql: RoomMembershipListGQL,
   ) {}
 
@@ -79,6 +83,30 @@ export class ApplicationListItemComponent implements OnInit {
       this.rejectGql.mutate({ id: this.application.id }),
       $localize`Application rejected`,
       $localize`Failed to reject the application`,
+    );
+  }
+
+  delete() {
+    if (!this.application) return;
+    this.mutate(
+      this.deleteGql.mutate(
+        { id: this.application.id },
+        {
+          update: (cache, result) => {
+            cache.evict({ id: cache.identify(result.data!.deleteApplication) });
+            const query = this.listGql.watch();
+            query.updateQuery((prev) => ({
+              ...prev,
+              applications: {
+                ...prev.applications,
+                total: prev.applications.total - 1,
+              },
+            }));
+          },
+        },
+      ),
+      $localize`Application deleted`,
+      $localize`Failed to delete the application`,
     );
   }
 
