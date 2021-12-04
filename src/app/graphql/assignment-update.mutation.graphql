@@ -3,5 +3,6 @@ mutation AssignmentUpdate($id: ID!, $data: AssignmentUpdateInput!) {
     id
     isCompleted
     isImportant
+    updatedAt
   }
 }

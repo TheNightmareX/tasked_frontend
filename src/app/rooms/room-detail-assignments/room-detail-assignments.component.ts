@@ -40,9 +40,17 @@ export class RoomDetailAssignmentsComponent implements OnInit {
       map((result) => result.data.room.assignments),
       tap(({ results, total }) => (this.allLoaded = results.length >= total)),
       map(({ results }) =>
-        [...results].sort((a, b) =>
-          a.isImportant == b.isImportant ? 0 : a.isImportant ? -1 : 1,
-        ),
+        [...results]
+          .sort(
+            (a, b) =>
+              -(
+                new Date(a.updatedAt).getTime() -
+                new Date(b.updatedAt).getTime()
+              ),
+          )
+          .sort((a, b) =>
+            a.isImportant == b.isImportant ? 0 : a.isImportant ? -1 : 1,
+          ),
       ),
     );
     this.assignmentsPending$ = assignments$.pipe(

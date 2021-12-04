@@ -78,6 +78,7 @@ export class RoomDetailAssignmentsItemComponent implements OnInit {
                   id,
                   isCompleted,
                   isImportant,
+                  updatedAt: new Date().toISOString(),
                   ...data,
                 },
               },

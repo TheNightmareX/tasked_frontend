@@ -708,6 +708,7 @@ export type AssignmentUpdateMutation = {
     id: string;
     isCompleted: boolean;
     isImportant: boolean;
+    updatedAt: any;
   };
 };
 
@@ -798,6 +799,7 @@ export type RoomAssignmentListQuery = {
         isCompleted: boolean;
         isImportant: boolean;
         createdAt: any;
+        updatedAt: any;
         recipient: { __typename?: 'Membership'; id: string };
         task: {
           __typename?: 'Task';
@@ -1361,6 +1363,7 @@ export const AssignmentUpdateDocument = gql`
       id
       isCompleted
       isImportant
+      updatedAt
     }
   }
 `;
@@ -1490,6 +1493,7 @@ export const RoomAssignmentListDocument = gql`
           isCompleted
           isImportant
           createdAt
+          updatedAt
         }
       }
     }
