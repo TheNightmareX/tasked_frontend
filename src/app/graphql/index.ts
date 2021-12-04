@@ -42,6 +42,14 @@ export type ApplicationCreateInput = {
   room: Scalars['ID'];
 };
 
+export type ApplicationOrderMap = {
+  createdAt?: Maybe<QueryOrder>;
+  id?: Maybe<QueryOrder>;
+  message?: Maybe<QueryOrder>;
+  status?: Maybe<QueryOrder>;
+  updatedAt?: Maybe<QueryOrder>;
+};
+
 export enum ApplicationStatus {
   Accepted = 'Accepted',
   Pending = 'Pending',
@@ -63,6 +71,14 @@ export type AssignmentCreateInput = {
   isImportant?: Maybe<Scalars['Boolean']>;
   recipient: Scalars['ID'];
   task: Scalars['ID'];
+};
+
+export type AssignmentOrderMap = {
+  createdAt?: Maybe<QueryOrder>;
+  id?: Maybe<QueryOrder>;
+  isCompleted?: Maybe<QueryOrder>;
+  isImportant?: Maybe<QueryOrder>;
+  updatedAt?: Maybe<QueryOrder>;
 };
 
 export type AssignmentUpdateInput = {
@@ -98,6 +114,14 @@ export type MembershipAssignmentsArgs = {
   isOwn?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<AssignmentOrderMap>;
+};
+
+export type MembershipOrderMap = {
+  createdAt?: Maybe<QueryOrder>;
+  id?: Maybe<QueryOrder>;
+  role?: Maybe<QueryOrder>;
+  updatedAt?: Maybe<QueryOrder>;
 };
 
 export type MembershipUpdateInput = {
@@ -265,6 +289,7 @@ export type QueryApplicationsArgs = {
   isPending?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<ApplicationOrderMap>;
 };
 
 export type QueryAssignmentArgs = {
@@ -276,6 +301,7 @@ export type QueryAssignmentsArgs = {
   isOwn?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<AssignmentOrderMap>;
 };
 
 export type QueryMembershipArgs = {
@@ -285,6 +311,7 @@ export type QueryMembershipArgs = {
 export type QueryMembershipsArgs = {
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<MembershipOrderMap>;
 };
 
 export type QueryRoomArgs = {
@@ -296,6 +323,7 @@ export type QueryRoomsArgs = {
   isOpen?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<RoomOrderMap>;
 };
 
 export type QueryTaskArgs = {
@@ -306,6 +334,7 @@ export type QueryTasksArgs = {
   isOwn?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<TaskOrderMap>;
 };
 
 export type QueryUserArgs = {
@@ -315,7 +344,13 @@ export type QueryUserArgs = {
 export type QueryUsersArgs = {
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<UserOrderMap>;
 };
+
+export enum QueryOrder {
+  Asc = 'ASC',
+  Desc = 'DESC',
+}
 
 export enum Role {
   Manager = 'Manager',
@@ -342,6 +377,7 @@ export type RoomApplicationsArgs = {
   isPending?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<ApplicationOrderMap>;
 };
 
 export type RoomAssignmentsArgs = {
@@ -349,22 +385,34 @@ export type RoomAssignmentsArgs = {
   isOwn?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<AssignmentOrderMap>;
 };
 
 export type RoomMembershipsArgs = {
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<MembershipOrderMap>;
 };
 
 export type RoomTasksArgs = {
   isOwn?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<TaskOrderMap>;
 };
 
 export type RoomCreateInput = {
   description?: Maybe<Scalars['String']>;
   name: Scalars['String'];
+};
+
+export type RoomOrderMap = {
+  createdAt?: Maybe<QueryOrder>;
+  description?: Maybe<QueryOrder>;
+  id?: Maybe<QueryOrder>;
+  isOpen?: Maybe<QueryOrder>;
+  name?: Maybe<QueryOrder>;
+  updatedAt?: Maybe<QueryOrder>;
 };
 
 export type RoomUpdateInput = {
@@ -391,12 +439,21 @@ export type TaskAssignmentsArgs = {
   isOwn?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<AssignmentOrderMap>;
 };
 
 export type TaskCreateInput = {
   description?: Maybe<Scalars['String']>;
   room: Scalars['ID'];
   title: Scalars['String'];
+};
+
+export type TaskOrderMap = {
+  createdAt?: Maybe<QueryOrder>;
+  description?: Maybe<QueryOrder>;
+  id?: Maybe<QueryOrder>;
+  title?: Maybe<QueryOrder>;
+  updatedAt?: Maybe<QueryOrder>;
 };
 
 export type TaskUpdateInput = {
@@ -425,6 +482,7 @@ export type UserApplicationsArgs = {
   isPending?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<ApplicationOrderMap>;
 };
 
 export type UserAssignmentsArgs = {
@@ -432,11 +490,13 @@ export type UserAssignmentsArgs = {
   isOwn?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<AssignmentOrderMap>;
 };
 
 export type UserMembershipsArgs = {
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<MembershipOrderMap>;
 };
 
 export type UserRoomsArgs = {
@@ -444,12 +504,14 @@ export type UserRoomsArgs = {
   isOpen?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<RoomOrderMap>;
 };
 
 export type UserTasksArgs = {
   isOwn?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<TaskOrderMap>;
 };
 
 export type UserCreateInput = {
@@ -457,6 +519,12 @@ export type UserCreateInput = {
   nickname?: Maybe<Scalars['String']>;
   password: Scalars['String'];
   username: Scalars['String'];
+};
+
+export type UserOrderMap = {
+  id?: Maybe<QueryOrder>;
+  nickname?: Maybe<QueryOrder>;
+  username?: Maybe<QueryOrder>;
 };
 
 export type UserUpdateInput = {
