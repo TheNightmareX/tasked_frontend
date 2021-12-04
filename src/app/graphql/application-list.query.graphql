@@ -1,5 +1,5 @@
 query ApplicationList($offset: Int) {
-  applications(limit: 20, offset: $offset) {
+  applications(limit: 20, offset: $offset, order: { id: DESC }) {
     total
     results {
       ...Application

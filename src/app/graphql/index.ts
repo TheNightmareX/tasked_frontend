@@ -1267,7 +1267,7 @@ export class ApplicationDeleteGQL extends Apollo.Mutation<
 }
 export const ApplicationListDocument = gql`
   query ApplicationList($offset: Int) {
-    applications(limit: 20, offset: $offset) {
+    applications(limit: 20, offset: $offset, order: { id: DESC }) {
       total
       results {
         ...Application
@@ -1465,7 +1465,12 @@ export const RoomAssignmentListDocument = gql`
   query RoomAssignmentList($id: ID!, $offset: Int, $isOwn: Boolean) {
     room(id: $id) {
       id
-      assignments(limit: 20, offset: $offset, isOwn: $isOwn) {
+      assignments(
+        limit: 20
+        offset: $offset
+        order: { updatedAt: DESC }
+        isOwn: $isOwn
+      ) {
         total
         results {
           id
@@ -1626,7 +1631,7 @@ export const RoomTaskListDocument = gql`
   query RoomTaskList($id: ID!, $offset: Int) {
     room(id: $id) {
       id
-      tasks(limit: 20, offset: $offset, isOwn: true) {
+      tasks(limit: 20, offset: $offset, order: { id: DESC }, isOwn: true) {
         total
         results {
           ...Task

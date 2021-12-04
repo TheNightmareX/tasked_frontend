@@ -1,7 +1,12 @@
 query RoomAssignmentList($id: ID!, $offset: Int, $isOwn: Boolean) {
   room(id: $id) {
     id
-    assignments(limit: 20, offset: $offset, isOwn: $isOwn) {
+    assignments(
+      limit: 20
+      offset: $offset
+      order: { updatedAt: DESC }
+      isOwn: $isOwn
+    ) {
       total
       results {
         id
