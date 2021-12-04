@@ -607,7 +607,6 @@ export type ApplicationDeleteMutation = {
 
 export type ApplicationListQueryVariables = Exact<{
   offset?: Maybe<Scalars['Int']>;
-  isPending?: Maybe<Scalars['Boolean']>;
 }>;
 
 export type ApplicationListQuery = {
@@ -782,7 +781,6 @@ export type MembershipFragment = {
 export type RoomAssignmentListQueryVariables = Exact<{
   id: Scalars['ID'];
   offset?: Maybe<Scalars['Int']>;
-  isCompleted?: Maybe<Scalars['Boolean']>;
   isOwn?: Maybe<Scalars['Boolean']>;
 }>;
 
@@ -1268,8 +1266,8 @@ export class ApplicationDeleteGQL extends Apollo.Mutation<
   }
 }
 export const ApplicationListDocument = gql`
-  query ApplicationList($offset: Int, $isPending: Boolean) {
-    applications(limit: 20, offset: $offset, isPending: $isPending) {
+  query ApplicationList($offset: Int) {
+    applications(limit: 20, offset: $offset) {
       total
       results {
         ...Application
@@ -1464,20 +1462,10 @@ export class MembershipUpdateGQL extends Apollo.Mutation<
   }
 }
 export const RoomAssignmentListDocument = gql`
-  query RoomAssignmentList(
-    $id: ID!
-    $offset: Int
-    $isCompleted: Boolean
-    $isOwn: Boolean
-  ) {
+  query RoomAssignmentList($id: ID!, $offset: Int, $isOwn: Boolean) {
     room(id: $id) {
       id
-      assignments(
-        limit: 20
-        offset: $offset
-        isCompleted: $isCompleted
-        isOwn: $isOwn
-      ) {
+      assignments(limit: 20, offset: $offset, isOwn: $isOwn) {
         total
         results {
           id

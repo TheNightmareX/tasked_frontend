@@ -1,17 +1,7 @@
-query RoomAssignmentList(
-  $id: ID!
-  $offset: Int
-  $isCompleted: Boolean
-  $isOwn: Boolean
-) {
+query RoomAssignmentList($id: ID!, $offset: Int, $isOwn: Boolean) {
   room(id: $id) {
     id
-    assignments(
-      limit: 20
-      offset: $offset
-      isCompleted: $isCompleted
-      isOwn: $isOwn
-    ) {
+    assignments(limit: 20, offset: $offset, isOwn: $isOwn) {
       total
       results {
         id
