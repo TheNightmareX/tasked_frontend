@@ -21,7 +21,7 @@ $theme-light: mat.define-light-theme(
 $theme-dark: mat.define-dark-theme(
   (
     color: (
-      primary: mat.define-palette(mat.$purple-palette, 700),
+      primary: mat.define-palette(mat.$purple-palette, 500),
       accent: mat.define-palette(mat.$green-palette, A200),
     ),
   )
