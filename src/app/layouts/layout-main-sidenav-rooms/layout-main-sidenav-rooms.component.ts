@@ -20,7 +20,7 @@ export class LayoutMainSidenavRoomsComponent implements OnInit {
 
   ngOnInit() {
     this.rooms$ = this.roomListGql
-      .watch()
+      .watch({ isJoined: true })
       .valueChanges.pipe(map(({ data }) => data.rooms.results));
   }
 
