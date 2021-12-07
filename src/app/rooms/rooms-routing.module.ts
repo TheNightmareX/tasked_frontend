@@ -7,6 +7,7 @@ import { RoomDetailSettingsComponent } from './room-detail-settings/room-detail-
 import { RoomDetailTabRedirectorComponent } from './room-detail-tab-redirector/room-detail-tab-redirector.component';
 import { RoomDetailTasksComponent } from './room-detail-tasks/room-detail-tasks.component';
 import { RoomDetailComponent } from './room-detail/room-detail.component';
+import { RoomListComponent } from './room-list/room-list.component';
 import { RoomRedirectorComponent } from './room-redirector/room-redirector.component';
 import { RoomsComponent } from './rooms.component';
 
@@ -19,8 +20,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'create',
-        pathMatch: 'full',
+        component: RoomListComponent,
       },
       {
         path: 'create',

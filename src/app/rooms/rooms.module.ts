@@ -17,6 +17,8 @@ import { RoomDetailTasksItemAssignPopupComponent } from './room-detail-tasks-ite
 import { RoomDetailTasksItemComponent } from './room-detail-tasks-item/room-detail-tasks-item.component';
 import { RoomDetailTasksComponent } from './room-detail-tasks/room-detail-tasks.component';
 import { RoomDetailComponent } from './room-detail/room-detail.component';
+import { RoomListItemComponent } from './room-list-item/room-list-item.component';
+import { RoomListComponent } from './room-list/room-list.component';
 import { RoomRedirectorComponent } from './room-redirector/room-redirector.component';
 import { RoomsRoutingModule } from './rooms-routing.module';
 import { RoomsComponent } from './rooms.component';
@@ -42,6 +44,8 @@ import { RoomsComponent } from './rooms.component';
     RoomDetailSidebarMembershipListItemComponent,
     RoomDetailSidebarMembershipListItemMenuComponent,
     RoomRedirectorComponent,
+    RoomListComponent,
+    RoomListItemComponent,
   ],
   imports: [SharedModule, RoomsRoutingModule],
 })

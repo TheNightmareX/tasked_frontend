@@ -1,0 +1,9 @@
+<button mat-list-item>
+  <div matLine>
+    <span>{{ room?.name }}</span>
+    <span class="opacity--2">#{{ room?.id }}</span>
+  </div>
+  <div matLine>
+    <app-username [user]="room?.creator"></app-username>
+  </div>
+</button>
