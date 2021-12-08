@@ -17,24 +17,29 @@ export class RoomListComponent implements OnInit {
   constructor(private listGql: RoomListGQL) {}
 
   ngOnInit() {
-    this.rooms$ = this.listGql
-      .fetch({ joinedOnly: true })
-      .pipe(map((result) => result.data.rooms.results));
+    this.search();
   }
 
   search() {
-    if (this.loading || !this.searchValue) return;
-    this.loading = true;
-    this.rooms$ = this.listGql
-      .fetch(
-        { filter: { name__like: `%${this.searchValue}%` } },
-        { fetchPolicy: 'network-only' },
-      )
-      .pipe(
-        leastTime(500),
-        map((result) => result.data.rooms.results),
-        finalize(() => (this.loading = false)),
-      );
+    if (this.loading) return;
+
+    if (!this.searchValue) {
+      this.rooms$ = this.listGql
+        .fetch({ joinedOnly: true })
+        .pipe(map((result) => result.data.rooms.results));
+    } else {
+      this.loading = true;
+      this.rooms$ = this.listGql
+        .fetch(
+          { filter: { name__like: `%${this.searchValue}%` } },
+          { fetchPolicy: 'network-only' },
+        )
+        .pipe(
+          leastTime(500),
+          map((result) => result.data.rooms.results),
+          finalize(() => (this.loading = false)),
+        );
+    }
   }
 }
 
