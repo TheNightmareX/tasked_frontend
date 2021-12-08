@@ -1,4 +1,4 @@
-<button mat-list-item>
+<button mat-list-item (click)="popup.open()">
   <div matLine>
     <span>{{ room?.name }}</span>
     <span class="opacity--2">#{{ room?.id }}</span>
@@ -7,3 +7,30 @@
     <app-username [user]="room?.creator"></app-username>
   </div>
 </button>
+
+<app-popup #popup>
+  <ng-template>
+    <form (ngSubmit)="apply(popup)">
+      <div matDialogTitle>Join</div>
+
+      <div matDialogContent>
+        <mat-form-field appAutoFormFieldColor>
+          <mat-label i18n>Message</mat-label>
+          <input
+            matInput
+            name="text"
+            type="text"
+            [disabled]="this.loading"
+            [(ngModel)]="message"
+          />
+        </mat-form-field>
+      </div>
+
+      <div matDialogActions fxLayout fxLayoutAlign="end">
+        <button mat-button class="uppercase" [disabled]="this.loading">
+          Send
+        </button>
+      </div>
+    </form>
+  </ng-template>
+</app-popup>
