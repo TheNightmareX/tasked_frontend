@@ -1,4 +1,4 @@
-<div class="container" fxLayout="column" fxLayoutGap="16px">
+<div class="container" ngClass.xs="mobile" fxLayout="column" fxLayoutGap="16px">
   <form
     fxLayout
     fxLayoutAlign="start center"
@@ -9,14 +9,19 @@
       <mat-label i18n>Search</mat-label>
       <input matInput name="search" type="search" [(ngModel)]="searchValue" />
     </mat-form-field>
+
     <button
       mat-raised-button
+      fxHide.xs
       class="uppercase"
       color="primary"
       [disabled]="loading"
       i18n
     >
       Search
+    </button>
+    <button mat-icon-button fxHide.gt-xs [disabled]="loading">
+      <mat-icon>search</mat-icon>
     </button>
   </form>
 
