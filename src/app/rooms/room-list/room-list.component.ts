@@ -21,12 +21,15 @@ export class RoomListComponent implements OnInit {
     if (this.loading || !this.searchValue) return;
     this.loading = true;
     this.listGql
-      .fetch({
-        filter: { name__like: `%${this.searchValue}%` },
-        isJoined: false,
-      })
+      .fetch(
+        {
+          filter: { name__like: `%${this.searchValue}%` },
+          isJoined: false,
+        },
+        { fetchPolicy: 'network-only' },
+      )
       .pipe(
-        leastTime(200),
+        leastTime(500),
         map((result) => result.data.rooms.results),
         finalize(() => (this.loading = false)),
       )
