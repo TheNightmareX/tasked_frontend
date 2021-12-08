@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 import { leastTime } from 'src/app/common/least-time.operator';
 import { RoomListGQL, RoomListQuery } from 'src/app/graphql';
@@ -9,7 +10,7 @@ import { RoomListGQL, RoomListQuery } from 'src/app/graphql';
   styleUrls: ['./room-list.component.scss'],
 })
 export class RoomListComponent implements OnInit {
-  rooms: Room[] = [];
+  rooms$: Observable<Room[]> = of([]);
   searchValue = '';
   loading = false;
 
@@ -20,7 +21,7 @@ export class RoomListComponent implements OnInit {
   search() {
     if (this.loading || !this.searchValue) return;
     this.loading = true;
-    this.listGql
+    this.rooms$ = this.listGql
       .fetch(
         {
           filter: { name__like: `%${this.searchValue}%` },
@@ -32,8 +33,7 @@ export class RoomListComponent implements OnInit {
         leastTime(500),
         map((result) => result.data.rooms.results),
         finalize(() => (this.loading = false)),
-      )
-      .subscribe((rooms) => (this.rooms = rooms));
+      );
   }
 }
 
