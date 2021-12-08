@@ -25,7 +25,7 @@ export class RoomListComponent implements OnInit {
       .fetch(
         {
           filter: { name__like: `%${this.searchValue}%` },
-          isJoined: false,
+          joinedOnly: false,
         },
         { fetchPolicy: 'network-only' },
       )

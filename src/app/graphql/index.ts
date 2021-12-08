@@ -470,7 +470,7 @@ export type QueryRoomArgs = {
 
 export type QueryRoomsArgs = {
   filter?: Maybe<RoomFilterMap>;
-  isJoined?: Maybe<Scalars['Boolean']>;
+  joinedOnly?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   order?: Maybe<RoomOrderMap>;
@@ -783,7 +783,7 @@ export type UserMembershipsArgs = {
 
 export type UserRoomsArgs = {
   filter?: Maybe<RoomFilterMap>;
-  isJoined?: Maybe<Scalars['Boolean']>;
+  joinedOnly?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   order?: Maybe<RoomOrderMap>;
@@ -1229,7 +1229,7 @@ export type RoomDetailQuery = {
 export type RoomListQueryVariables = Exact<{
   offset?: Maybe<Scalars['Int']>;
   filter?: Maybe<RoomFilterMap>;
-  isJoined?: Maybe<Scalars['Boolean']>;
+  joinedOnly?: Maybe<Scalars['Boolean']>;
 }>;
 
 export type RoomListQuery = {
@@ -1930,8 +1930,13 @@ export class RoomDetailGQL extends Apollo.Query<
   }
 }
 export const RoomListDocument = gql`
-  query RoomList($offset: Int, $filter: RoomFilterMap, $isJoined: Boolean) {
-    rooms(limit: 20, offset: $offset, filter: $filter, isJoined: $isJoined) {
+  query RoomList($offset: Int, $filter: RoomFilterMap, $joinedOnly: Boolean) {
+    rooms(
+      limit: 20
+      offset: $offset
+      filter: $filter
+      joinedOnly: $joinedOnly
+    ) {
       total
       results {
         ...Room
