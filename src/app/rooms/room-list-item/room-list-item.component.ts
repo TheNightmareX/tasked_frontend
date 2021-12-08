@@ -4,7 +4,11 @@ import { NotifierService } from 'angular-notifier';
 import { finalize } from 'rxjs/operators';
 import { leastTime } from 'src/app/common/least-time.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
-import { ApplicationCreateGQL, RoomListQuery } from 'src/app/graphql';
+import {
+  ApplicationCreateGQL,
+  ApplicationListGQL,
+  RoomListQuery,
+} from 'src/app/graphql';
 import { PopupComponent } from 'src/app/shared/popup/popup.component';
 
 @Component({
@@ -23,6 +27,7 @@ export class RoomListItemComponent implements OnInit {
     private router: Router,
     private notifier: NotifierService,
     private applicationCreateGql: ApplicationCreateGQL,
+    private applicationListGql: ApplicationListGQL,
   ) {}
 
   ngOnInit() {}
@@ -37,9 +42,26 @@ export class RoomListItemComponent implements OnInit {
     if (!this.room) return;
     this.loading = true;
     this.applicationCreateGql
-      .mutate({
-        data: { room: this.room.id, message: this.message },
-      })
+      .mutate(
+        {
+          data: { room: this.room.id, message: this.message },
+        },
+        {
+          update: (_, result) => {
+            const query = this.applicationListGql.watch();
+            query.updateQuery((prev) => ({
+              ...prev,
+              applications: {
+                ...prev.applications,
+                results: [
+                  result.data!.createApplication,
+                  ...prev.applications.results,
+                ],
+              },
+            }));
+          },
+        },
+      )
       .pipe(
         leastTime(1000),
         finalize(() => (this.loading = false)),
