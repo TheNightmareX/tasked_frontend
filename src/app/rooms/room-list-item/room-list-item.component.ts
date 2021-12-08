@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { finalize } from 'rxjs/operators';
 import { leastTime } from 'src/app/common/least-time.operator';
@@ -19,11 +20,18 @@ export class RoomListItemComponent implements OnInit {
   @ViewChild(PopupComponent) private popup!: PopupComponent;
 
   constructor(
+    private router: Router,
     private notifier: NotifierService,
     private applicationCreateGql: ApplicationCreateGQL,
   ) {}
 
   ngOnInit() {}
+
+  handleClick() {
+    if (!this.room) return;
+    if (this.room.membership) this.router.navigate(['/rooms', this.room.id]);
+    else this.popup.open();
+  }
 
   apply() {
     if (!this.room) return;

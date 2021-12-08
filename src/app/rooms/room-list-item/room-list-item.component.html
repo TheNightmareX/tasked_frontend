@@ -1,7 +1,8 @@
-<button mat-list-item (click)="popup.open()">
+<button mat-list-item (click)="handleClick()">
   <div matLine>
     <span>{{ room?.name }}</span>
     <span class="opacity--2">#{{ room?.id }}</span>
+    <mat-icon *ngIf="!room?.membership" inline>priority_high</mat-icon>
   </div>
   <div matLine>
     <app-username [user]="room?.creator"></app-username>
