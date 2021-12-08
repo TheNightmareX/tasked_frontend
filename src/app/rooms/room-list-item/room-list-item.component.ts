@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import { finalize } from 'rxjs/operators';
 import { leastTime } from 'src/app/common/least-time.operator';
@@ -16,6 +16,8 @@ export class RoomListItemComponent implements OnInit {
   message = '';
   loading = false;
 
+  @ViewChild(PopupComponent) private popup!: PopupComponent;
+
   constructor(
     private notifier: NotifierService,
     private applicationCreateGql: ApplicationCreateGQL,
@@ -23,7 +25,7 @@ export class RoomListItemComponent implements OnInit {
 
   ngOnInit() {}
 
-  apply(popup: PopupComponent) {
+  apply() {
     if (!this.room) return;
     this.loading = true;
     this.applicationCreateGql
@@ -37,7 +39,7 @@ export class RoomListItemComponent implements OnInit {
       .subscribe(
         () => {
           this.notifier.notify(NotificationType.Success, 'Application sent');
-          popup.close();
+          this.popup.close();
         },
         () => {
           this.notifier.notify(
