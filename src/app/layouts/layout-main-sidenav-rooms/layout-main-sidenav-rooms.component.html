@@ -3,12 +3,17 @@
   *ngFor="let room of rooms$ | async; trackBy: trackByRoom"
   [routerLink]="['/rooms', room.id]"
   routerLinkActive="router-link-active"
-  (click)="deactivateIfActivated(room)"
+  (click)="deactivateIfActivated(room.id)"
 >
   <div matLine>{{ room.name }}</div>
 </a>
 
-<a mat-list-item routerLink="/rooms/create">
+<a
+  mat-list-item
+  [routerLink]="['/rooms', 'create']"
+  routerLinkActive="router-link-active"
+  (click)="deactivateIfActivated('create')"
+>
   <div matLine fxLayout fxLayoutAlign="center center">
     <mat-icon>add</mat-icon>
   </div>

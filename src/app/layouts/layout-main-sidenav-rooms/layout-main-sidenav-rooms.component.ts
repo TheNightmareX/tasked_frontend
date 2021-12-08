@@ -24,12 +24,12 @@ export class LayoutMainSidenavRoomsComponent implements OnInit {
       .valueChanges.pipe(map(({ data }) => data.rooms.results));
   }
 
-  deactivateIfActivated(room: Room) {
-    if (this.isRoomActivated(room.id)) this.router.navigate(['/rooms']);
+  deactivateIfActivated(path: string) {
+    if (this.isRouteActivated(path)) this.router.navigate(['/rooms']);
   }
 
-  private isRoomActivated(id: string) {
-    const tree = this.router.createUrlTree(['/rooms', id]);
+  private isRouteActivated(path: string) {
+    const tree = this.router.createUrlTree(['/rooms', path]);
     const isActive = this.router.isActive(tree, {
       paths: 'subset',
       fragment: 'ignored',
