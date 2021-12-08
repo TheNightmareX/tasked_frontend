@@ -10,13 +10,17 @@ import { RoomListGQL, RoomListQuery } from 'src/app/graphql';
   styleUrls: ['./room-list.component.scss'],
 })
 export class RoomListComponent implements OnInit {
-  rooms$: Observable<Room[]> = of([]);
+  rooms$!: Observable<Room[]>;
   searchValue = '';
   loading = false;
 
   constructor(private listGql: RoomListGQL) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.rooms$ = this.listGql
+      .fetch({ joinedOnly: true })
+      .pipe(map((result) => result.data.rooms.results));
+  }
 
   search() {
     if (this.loading || !this.searchValue) return;
