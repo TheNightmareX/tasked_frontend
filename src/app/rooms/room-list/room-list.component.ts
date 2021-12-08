@@ -23,10 +23,7 @@ export class RoomListComponent implements OnInit {
     this.loading = true;
     this.rooms$ = this.listGql
       .fetch(
-        {
-          filter: { name__like: `%${this.searchValue}%` },
-          joinedOnly: false,
-        },
+        { filter: { name__like: `%${this.searchValue}%` } },
         { fetchPolicy: 'network-only' },
       )
       .pipe(
