@@ -1,10 +1,12 @@
 <app-layout>
-  <ng-container ngProjectAs="header-actions">
-    <app-layout-theme-button></app-layout-theme-button>
-  </ng-container>
+  <app-layout-header ngProjectAs="header">
+    <ng-container ngProjectAs="actions">
+      <app-layout-theme-button></app-layout-theme-button>
+    </ng-container>
+  </app-layout-header>
 
-  <ng-container ngProjectAs="sidenav">
-    <mat-nav-list>
+  <app-layout-content ngProjectAs="content">
+    <mat-nav-list ngProjectAs="sidenav">
       <a
         mat-list-item
         routerLink="/auth/login"
@@ -22,7 +24,6 @@
         <span matLine i18n>Signup</span>
       </a>
     </mat-nav-list>
-  </ng-container>
-
-  <router-outlet></router-outlet>
+    <router-outlet ngProjectAs="content"></router-outlet>
+  </app-layout-content>
 </app-layout>

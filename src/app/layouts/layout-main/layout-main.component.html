@@ -1,11 +1,13 @@
 <app-layout>
-  <ng-container ngProjectAs="header-actions">
-    <app-layout-theme-button></app-layout-theme-button>
-    <app-layout-refetch-button></app-layout-refetch-button>
-    <app-profile-btn></app-profile-btn>
-  </ng-container>
-  <ng-container ngProjectAs="sidenav">
-    <app-layout-main-sidenav></app-layout-main-sidenav>
-  </ng-container>
-  <router-outlet></router-outlet>
+  <app-layout-header ngProjectAs="header">
+    <ng-container ngProjectAs="actions">
+      <app-layout-theme-button></app-layout-theme-button>
+      <app-layout-refetch-button></app-layout-refetch-button>
+      <app-profile-btn></app-profile-btn>
+    </ng-container>
+  </app-layout-header>
+  <app-layout-content ngProjectAs="content">
+    <app-layout-main-sidenav ngProjectAs="sidenav"></app-layout-main-sidenav>
+    <router-outlet ngProjectAs="content"></router-outlet>
+  </app-layout-content>
 </app-layout>
