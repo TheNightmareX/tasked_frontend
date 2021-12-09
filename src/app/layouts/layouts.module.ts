@@ -8,8 +8,8 @@ import { LayoutHeaderComponent } from './layout-header/layout-header.component';
 import { MainLayoutSidenavRoomsComponent } from './main-layout-sidenav-rooms/main-layout-sidenav-rooms.component';
 import { MainLayoutSidenavComponent } from './main-layout-sidenav/main-layout-sidenav.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
-import { LayoutRefetchButtonComponent } from './layout-refetch-button/layout-refetch-button.component';
-import { LayoutThemeButtonComponent } from './layout-theme-button/layout-theme-button.component';
+import { RefetchButtonComponent } from './refetch-button/refetch-button.component';
+import { ThemeButtonComponent } from './theme-button/theme-button.component';
 import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
@@ -21,8 +21,8 @@ import { LayoutComponent } from './layout/layout.component';
     MainLayoutComponent,
     MainLayoutSidenavComponent,
     MainLayoutSidenavRoomsComponent,
-    LayoutRefetchButtonComponent,
-    LayoutThemeButtonComponent,
+    RefetchButtonComponent,
+    ThemeButtonComponent,
   ],
   imports: [SharedModule, RouterModule, ProfileModule],
 })
