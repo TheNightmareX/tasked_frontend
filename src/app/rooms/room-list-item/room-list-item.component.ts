@@ -70,6 +70,7 @@ export class RoomListItemComponent implements OnInit {
         () => {
           this.notifier.notify(NotificationType.Success, 'Application sent');
           this.popup.close();
+          this.router.navigate(['/applications']);
         },
         () => {
           this.notifier.notify(
