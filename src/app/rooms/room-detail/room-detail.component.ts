@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 import { MatDrawerMode } from '@angular/material/sidenav';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { first, map, tap } from 'rxjs/operators';
+import { catchError, first, map, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ThemesService } from 'src/app/core/themes.service';
 import { RoomDetailGQL, RoomDetailQuery, Role } from 'src/app/graphql';
@@ -26,6 +26,7 @@ export class RoomDetailComponent implements OnInit {
 
   constructor(
     public themes: ThemesService,
+    private router: Router,
     private route: ActivatedRoute,
     private media: MediaObserver,
     private local: RoomsLocalStorageService,
@@ -63,6 +64,10 @@ export class RoomDetailComponent implements OnInit {
               : [$localize`Tasks`, ['tasks']],
             [$localize`Settings`, ['settings']],
           ];
+        }),
+        catchError((err) => {
+          this.router.navigate(['/rooms']);
+          throw err;
         }),
       );
     });
