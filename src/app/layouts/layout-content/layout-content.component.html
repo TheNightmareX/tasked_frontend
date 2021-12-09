@@ -2,10 +2,9 @@
   <mat-sidenav
     fxLayout="column"
     fxLayoutAlign="stretch"
-    [opened]="sidenavOpened ?? isLargeScreen"
-    [mode]="isLargeScreen ? 'side' : 'over'"
-    [class.bgc--none]="isLargeScreen"
-    #sidenav
+    [opened]="landscape$ | async"
+    [mode]="(landscape$ | async) ? 'side' : 'over'"
+    [class.bgc--none]="landscape$ | async"
   >
     <ng-content select="sidenav"></ng-content>
   </mat-sidenav>

@@ -1,6 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
-import { Subscription } from 'rxjs';
+import { MatSidenav } from '@angular/material/sidenav';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
@@ -8,23 +10,19 @@ import { AuthService } from 'src/app/auth/auth.service';
   templateUrl: './layout-content.component.html',
   styleUrls: ['./layout-content.component.scss'],
 })
-export class LayoutContentComponent implements OnInit, OnDestroy {
-  isLargeScreen = false;
-  sidenavOpened?: boolean;
-
-  private subscription!: Subscription;
+export class LayoutContentComponent implements OnInit {
+  @ViewChild(MatSidenav) sidenav!: MatSidenav;
+  landscape$!: Observable<boolean>;
 
   constructor(public auth: AuthService, private media: MediaObserver) {}
 
   ngOnInit() {
-    this.subscription = this.media.asObservable().subscribe((items) => {
-      this.isLargeScreen = items.some(
-        (item) => item.mqAlias == 'gt-md' && item.matches,
+    this.landscape$ = this.media
+      .asObservable()
+      .pipe(
+        map((items) =>
+          items.some((item) => item.mqAlias == 'gt-md' && item.matches),
+        ),
       );
-    });
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 }
