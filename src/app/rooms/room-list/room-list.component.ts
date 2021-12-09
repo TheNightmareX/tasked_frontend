@@ -34,10 +34,16 @@ export class RoomListComponent implements OnInit {
   }
 
   private loadSearch() {
+    const searchId = /^#(\d+)$/.exec(this.searchValue)?.[1];
     this.loading = true;
     this.rooms$ = this.listGql
       .fetch(
-        { filter: { name__like: `%${this.searchValue}%` } },
+        {
+          filter:
+            searchId != undefined
+              ? { id: searchId }
+              : { name__like: `%${this.searchValue}%` },
+        },
         { fetchPolicy: 'network-only' },
       )
       .pipe(
