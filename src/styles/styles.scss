@@ -11,12 +11,6 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
-button.fab {
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
-}
-
 .theme-dark {
   .router-link-active {
     color: rgb(209, 118, 225) !important;
