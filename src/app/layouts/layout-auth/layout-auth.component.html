@@ -1,11 +1,14 @@
 <app-layout>
-  <app-layout-header ngProjectAs="header">
+  <app-layout-header
+    ngProjectAs="header"
+    (toggleSidebar)="content.sidenav.toggle()"
+  >
     <ng-container ngProjectAs="actions">
       <app-layout-theme-button></app-layout-theme-button>
     </ng-container>
   </app-layout-header>
 
-  <app-layout-content ngProjectAs="content">
+  <app-layout-content ngProjectAs="content" #content>
     <mat-nav-list ngProjectAs="sidenav">
       <a
         mat-list-item
