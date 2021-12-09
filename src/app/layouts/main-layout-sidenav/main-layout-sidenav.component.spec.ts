@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LayoutAuthComponent } from './layout-auth.component';
+import { MainLayoutSidenavComponent } from './main-layout-sidenav.component';
 
-describe('LayoutAuthComponent', () => {
-  let component: LayoutAuthComponent;
-  let fixture: ComponentFixture<LayoutAuthComponent>;
+describe('MainLayoutSidenavComponent', () => {
+  let component: MainLayoutSidenavComponent;
+  let fixture: ComponentFixture<MainLayoutSidenavComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LayoutAuthComponent],
+      declarations: [MainLayoutSidenavComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LayoutAuthComponent);
+    fixture = TestBed.createComponent(MainLayoutSidenavComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -7,11 +7,11 @@ import { RoomListGQL, RoomListQuery } from 'src/app/graphql';
 type Room = RoomListQuery['rooms']['results'][number];
 
 @Component({
-  selector: 'app-layout-main-sidenav-rooms',
-  templateUrl: './layout-main-sidenav-rooms.component.html',
-  styleUrls: ['./layout-main-sidenav-rooms.component.scss'],
+  selector: 'app-main-layout-sidenav-rooms',
+  templateUrl: './main-layout-sidenav-rooms.component.html',
+  styleUrls: ['./main-layout-sidenav-rooms.component.scss'],
 })
-export class LayoutMainSidenavRoomsComponent implements OnInit {
+export class MainLayoutSidenavRoomsComponent implements OnInit {
   rooms$!: Observable<Room[]>;
 
   constructor(private router: Router, private roomListGql: RoomListGQL) {}

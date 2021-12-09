@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ProfileModule } from '../profile/profile.module';
 import { SharedModule } from '../shared/shared.module';
-import { LayoutAuthComponent } from './layout-auth/layout-auth.component';
+import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
 import { LayoutContentComponent } from './layout-content/layout-content.component';
 import { LayoutHeaderComponent } from './layout-header/layout-header.component';
-import { LayoutMainSidenavRoomsComponent } from './layout-main-sidenav-rooms/layout-main-sidenav-rooms.component';
-import { LayoutMainSidenavComponent } from './layout-main-sidenav/layout-main-sidenav.component';
-import { LayoutMainComponent } from './layout-main/layout-main.component';
+import { MainLayoutSidenavRoomsComponent } from './main-layout-sidenav-rooms/main-layout-sidenav-rooms.component';
+import { MainLayoutSidenavComponent } from './main-layout-sidenav/main-layout-sidenav.component';
+import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { LayoutRefetchButtonComponent } from './layout-refetch-button/layout-refetch-button.component';
 import { LayoutThemeButtonComponent } from './layout-theme-button/layout-theme-button.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -17,10 +17,10 @@ import { LayoutComponent } from './layout/layout.component';
     LayoutComponent,
     LayoutHeaderComponent,
     LayoutContentComponent,
-    LayoutAuthComponent,
-    LayoutMainComponent,
-    LayoutMainSidenavComponent,
-    LayoutMainSidenavRoomsComponent,
+    AuthLayoutComponent,
+    MainLayoutComponent,
+    MainLayoutSidenavComponent,
+    MainLayoutSidenavRoomsComponent,
     LayoutRefetchButtonComponent,
     LayoutThemeButtonComponent,
   ],

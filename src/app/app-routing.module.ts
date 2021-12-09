@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { LayoutAuthComponent } from './layouts/layout-auth/layout-auth.component';
-import { LayoutMainComponent } from './layouts/layout-main/layout-main.component';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 
 const routes: Routes = [
   {
@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: LayoutAuthComponent,
+    component: AuthLayoutComponent,
     children: [
       {
         path: 'auth',
@@ -22,7 +22,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: LayoutMainComponent,
+    component: MainLayoutComponent,
     children: [
       {
         path: 'rooms',

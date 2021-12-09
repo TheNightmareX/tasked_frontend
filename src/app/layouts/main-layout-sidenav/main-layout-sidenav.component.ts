@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-layout-main-sidenav',
-  templateUrl: './layout-main-sidenav.component.html',
-  styleUrls: ['./layout-main-sidenav.component.scss'],
+  selector: 'app-main-layout-sidenav',
+  templateUrl: './main-layout-sidenav.component.html',
+  styleUrls: ['./main-layout-sidenav.component.scss'],
 })
-export class LayoutMainSidenavComponent implements OnInit {
+export class MainLayoutSidenavComponent implements OnInit {
   items: Item[] = [];
 
   constructor() {}

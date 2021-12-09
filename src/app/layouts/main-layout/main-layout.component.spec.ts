@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LayoutMainSidenavComponent } from './layout-main-sidenav.component';
+import { MainLayoutComponent } from './main-layout.component';
 
-describe('LayoutMainSidenavComponent', () => {
-  let component: LayoutMainSidenavComponent;
-  let fixture: ComponentFixture<LayoutMainSidenavComponent>;
+describe('MainLayoutComponent', () => {
+  let component: MainLayoutComponent;
+  let fixture: ComponentFixture<MainLayoutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LayoutMainSidenavComponent],
+      declarations: [MainLayoutComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LayoutMainSidenavComponent);
+    fixture = TestBed.createComponent(MainLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
