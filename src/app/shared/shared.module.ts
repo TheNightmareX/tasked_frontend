@@ -23,8 +23,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
+import { ValidatorsModule } from '../validators/validators.module';
 import { AutoFormFieldColorDirective } from './auto-form-field-color.directive';
-import { EqualDirective } from './equal.directive';
 import { FetchMoreTriggerComponent } from './fetch-more-trigger/fetch-more-trigger.component';
 import { LoadingDirective } from './loading.directive';
 import { PopupComponent } from './popup/popup.component';
@@ -57,6 +57,7 @@ const modules = [
     MatSlideToggleModule,
     MatExpansionModule,
   ],
+  ValidatorsModule,
 ];
 const components = [
   PopupComponent,
@@ -64,7 +65,7 @@ const components = [
   FetchMoreTriggerComponent,
   AutoFormFieldColorDirective,
 ];
-const directives = [EqualDirective, LoadingDirective];
+const directives = [LoadingDirective];
 
 @NgModule({
   declarations: [components, directives],
