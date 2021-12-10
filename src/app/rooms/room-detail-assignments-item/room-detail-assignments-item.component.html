@@ -19,16 +19,16 @@
     <div matLine>
       {{ assignment?.task?.title }}
     </div>
-    <div matLine class="opacity--1">
-      <span matTooltip="Creation Time" i18n-matTooltip>
-        <mat-icon inline>calendar_today</mat-icon>
-        <span>
-          {{ assignment?.createdAt | date: 'short' }}
-        </span>
-      </span>
+    <div matLine class="opacity--1" fxLayout fxLayoutGap="4px">
       <span matTooltip="Creator" i18n-matTooltip>
         <mat-icon inline>person</mat-icon>
-        <app-username [user]="assignment?.task?.creator"></app-username>
+        <span>
+          <app-username [user]="assignment?.task?.creator"></app-username>
+        </span>
+      </span>
+      <span matTooltip="Creation Time" i18n-matTooltip>
+        <mat-icon inline>calendar_today</mat-icon>
+        <span>{{ assignment?.createdAt | date: 'short' }}</span>
       </span>
     </div>
   </div>
