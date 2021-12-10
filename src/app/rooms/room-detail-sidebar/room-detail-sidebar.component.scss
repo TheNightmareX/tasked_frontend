@@ -5,6 +5,8 @@ mat-list {
 
 .description {
   padding: 0 18px;
+  max-height: 142px;
+  overflow: auto;
 }
 
 .memberships {
