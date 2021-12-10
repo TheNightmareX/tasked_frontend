@@ -11,7 +11,8 @@ export class ThemesService {
   }
   private _current$ = new ReplaySubject<Theme>(1);
   private current: LocalStorageItem<Theme>;
-  private $root = document.documentElement;
+  private $root: HTMLHtmlElement;
+  private $themeColorMeta: HTMLMetaElement;
 
   constructor() {
     this.current = new LocalStorageItem(
@@ -19,6 +20,10 @@ export class ThemesService {
       (v) => (v as Theme) == 'light' || (v as Theme) == 'dark',
       () => this.getPreference(),
     );
+    this.$root = document.documentElement as HTMLHtmlElement;
+    this.$themeColorMeta = document.querySelector(
+      'meta[name="theme-color"]',
+    ) as HTMLMetaElement;
   }
 
   init() {
@@ -28,6 +33,7 @@ export class ThemesService {
   apply(theme: Theme) {
     this.$root.classList.remove(this.getClassName(this.current.value));
     this.$root.classList.add(this.getClassName(theme));
+    this.$themeColorMeta.content = this.getThemeColor();
     this.current.save(theme);
     this._current$.next(theme);
   }
@@ -44,6 +50,12 @@ export class ThemesService {
     return window.matchMedia('(prefers-color-scheme: light)').matches
       ? 'light'
       : 'dark';
+  }
+
+  private getThemeColor() {
+    return getComputedStyle(this.$root)
+      .getPropertyValue('--pwa-theme-color')
+      .trim();
   }
 }
 
