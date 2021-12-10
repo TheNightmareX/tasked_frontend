@@ -1,12 +1,6 @@
 {
   "locale": "en-US",
   "translations": {
-    "6609618079638744324": "New Application",
-    "7280540641401506069": "Room ID",
-    "8066608938393600549": "Message",
-    "7563035552061651664": " Send ",
-    "3086731468475324039": "Application sent to room #{$PH}",
-    "3041981777919572572": "Failed to send the application",
     "7317290694079257887": "Accepted",
     "4416413576346763682": "Pending",
     "4188654437346976139": "Rejected",
@@ -105,6 +99,10 @@
     "2967523390822720408": "Failed to delete the task",
     "6904866445262015585": "Tasks",
     "4930506384627295710": "Settings",
+    "8066608938393600549": "Message",
+    "4580988005648117665": "Search",
+    "7141565067222964704": " Search by room name or ID (prefix \"#\" is required for ID) ",
+    "2212695292809375179": " Search ",
     "1235417386402685252": "Navigated to the last accessed room"
   }
 }
