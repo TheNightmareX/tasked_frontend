@@ -59,13 +59,14 @@ const modules = [
   ],
   ValidatorsModule,
 ];
+
 const components = [
   PopupComponent,
   UsernameComponent,
   FetchMoreTriggerComponent,
-  AutoFormFieldColorDirective,
 ];
-const directives = [LoadingDirective];
+
+const directives = [AutoFormFieldColorDirective, LoadingDirective];
 
 @NgModule({
   declarations: [components, directives],
