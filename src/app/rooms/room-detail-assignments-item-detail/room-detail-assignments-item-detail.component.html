@@ -8,8 +8,8 @@
     {{ assignment?.task?.title }}
   </h2>
 
-  <p *ngIf="assignment?.task?.description">
-    {{ assignment?.task?.description }}
+  <p *ngIf="assignment?.task?.description" class="preserve">
+    <ng-container>{{ assignment?.task?.description }}</ng-container>
   </p>
 
   <mat-list dense>
