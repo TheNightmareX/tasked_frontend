@@ -33,6 +33,7 @@ import { UsernameComponent } from './username/username.component';
 const modules = [
   CommonModule,
   FormsModule,
+  RouterModule,
   FlexLayoutModule,
   IntersectionObserverModule,
   [
@@ -70,7 +71,7 @@ const directives = [AutoFormFieldColorDirective, LoadingDirective];
 
 @NgModule({
   declarations: [components, directives],
-  imports: [modules, RouterModule],
+  imports: [modules],
   exports: [modules, components, directives],
 })
 export class SharedModule {}
