@@ -30,7 +30,7 @@
 
   <mat-divider></mat-divider>
 
-  <mat-action-list>
+  <mat-action-list fxFlex>
     <app-room-list-item
       *ngFor="let room of rooms$ | async"
       [room]="room"
