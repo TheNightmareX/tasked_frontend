@@ -11,7 +11,7 @@ export class ThemesService {
   }
   private _current$ = new ReplaySubject<Theme>(1);
   private current: LocalStorageItem<Theme>;
-  private $body = document.querySelector('body')!;
+  private $root = document.documentElement;
 
   constructor() {
     this.current = new LocalStorageItem(
@@ -26,15 +26,14 @@ export class ThemesService {
   }
 
   apply(theme: Theme) {
-    this.$body.classList.remove(this.getClassName(this.current.value));
-    this.$body.classList.add(this.getClassName(theme));
+    this.$root.classList.remove(this.getClassName(this.current.value));
+    this.$root.classList.add(this.getClassName(theme));
     this.current.save(theme);
     this._current$.next(theme);
   }
 
   toggle() {
-    if (this.current.value == 'light') this.apply('dark');
-    else this.apply('light');
+    this.apply(this.current.value == 'light' ? 'dark' : 'light');
   }
 
   private getClassName(theme: Theme) {
