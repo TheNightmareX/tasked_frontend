@@ -51,6 +51,7 @@ export class RoomRedirectorComponent {
   private redirect(id?: string) {
     this.router.navigate(['../', ...(id ? [id] : [])], {
       relativeTo: this.route,
+      replaceUrl: true,
     });
   }
 }

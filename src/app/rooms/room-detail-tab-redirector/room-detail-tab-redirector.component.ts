@@ -17,13 +17,16 @@ export class RoomDetailTabRedirectorComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id')!;
     this.roomGql.fetch({ id }).subscribe((result) => {
-      this.router.navigate([
-        '/rooms',
-        id,
-        result.data.room.membership!.role == Role.Member
-          ? 'assignments'
-          : 'tasks',
-      ]);
+      this.router.navigate(
+        [
+          '/rooms',
+          id,
+          result.data.room.membership!.role == Role.Member
+            ? 'assignments'
+            : 'tasks',
+        ],
+        { replaceUrl: true },
+      );
     });
   }
 }
