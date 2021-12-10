@@ -8,6 +8,9 @@
     <mat-form-field fxFlex appearance="standard">
       <mat-label i18n>Search</mat-label>
       <input matInput name="search" type="search" [(ngModel)]="searchValue" />
+      <mat-hint i18n>
+        Search by room name or ID (prefix "#" is required for ID)
+      </mat-hint>
     </mat-form-field>
 
     <button
