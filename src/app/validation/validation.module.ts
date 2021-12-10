@@ -6,4 +6,4 @@ import { EqualDirective } from './equal.directive';
   imports: [],
   exports: [EqualDirective],
 })
-export class ValidatorsModule {}
+export class ValidationModule {}
