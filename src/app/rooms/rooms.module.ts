@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { MainModule } from '../main/main.module';
 import { SharedModule } from '../shared/shared.module';
 import { RoomCreationComponent } from './room-creation/room-creation.component';
 import { RoomDetailAssignmentsItemDetailComponent } from './room-detail-assignments-item-detail/room-detail-assignments-item-detail.component';
@@ -48,6 +47,6 @@ import { RoomsComponent } from './rooms.component';
     RoomListComponent,
     RoomListItemComponent,
   ],
-  imports: [SharedModule, MainModule, RoomsRoutingModule],
+  imports: [SharedModule, RoomsRoutingModule],
 })
 export class RoomsModule {}
