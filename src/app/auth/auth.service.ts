@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NotifierService } from 'angular-notifier';
 import { Apollo } from 'apollo-angular';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -17,9 +18,10 @@ export class AuthService {
   private userQuery;
 
   constructor(
+    private notifier: NotifierService,
+    private apollo: Apollo,
     private authGql: AuthGQL,
     private meGql: MeGQL,
-    private apollo: Apollo,
   ) {
     this.token = new LocalStorageItem(
       'token',
@@ -49,5 +51,6 @@ export class AuthService {
   logout() {
     this.token.save(null);
     this.apollo.client.clearStore();
+    this.notifier.hideAll();
   }
 }
