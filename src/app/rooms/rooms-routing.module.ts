@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '../auth/auth.guard';
 import { RoomCreationComponent } from './room-creation/room-creation.component';
 import { RoomDetailAssignmentsComponent } from './room-detail-assignments/room-detail-assignments.component';
 import { RoomDetailSettingsComponent } from './room-detail-settings/room-detail-settings.component';
@@ -15,8 +14,6 @@ const routes: Routes = [
   {
     path: '',
     component: RoomsComponent,
-    canActivate: [AuthGuard],
-    canActivateChild: [AuthGuard],
     children: [
       {
         path: '',
