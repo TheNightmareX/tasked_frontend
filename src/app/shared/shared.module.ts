@@ -18,6 +18,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -26,6 +27,7 @@ import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
 import { ValidationModule } from '../validation/validation.module';
 import { AutoFormFieldColorDirective } from './auto-form-field-color.directive';
 import { FetchMoreTriggerComponent } from './fetch-more-trigger/fetch-more-trigger.component';
+import { HintDirective } from './hint.directive';
 import { LoadingDirective } from './loading.directive';
 import { PopupComponent } from './popup/popup.component';
 import { UsernameComponent } from './username/username.component';
@@ -57,6 +59,7 @@ const modules = [
     MatTooltipModule,
     MatSlideToggleModule,
     MatExpansionModule,
+    MatSnackBarModule,
   ],
   ValidationModule,
 ];
@@ -67,7 +70,11 @@ const components = [
   FetchMoreTriggerComponent,
 ];
 
-const directives = [AutoFormFieldColorDirective, LoadingDirective];
+const directives = [
+  AutoFormFieldColorDirective,
+  LoadingDirective,
+  HintDirective,
+];
 
 @NgModule({
   declarations: [components, directives],
