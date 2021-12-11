@@ -2,6 +2,13 @@
   <header>
     <ng-content select="header"></ng-content>
   </header>
+
+  <mat-progress-bar
+    *ngIf="loading"
+    color="accent"
+    mode="indeterminate"
+  ></mat-progress-bar>
+
   <main fxFlex>
     <ng-content select="content"></ng-content>
   </main>
