@@ -80,7 +80,7 @@ export class RoomDetailSettingsActionsComponent implements OnInit {
       .subscribe(
         ([result, room]) => {
           this.notifier.notify(NotificationType.Success, messageOnSucceed);
-          this.router.navigate(['/rooms']);
+          this.router.navigate(['/app/rooms']);
           const cache = this.apollo.client.cache;
           cache.evict({ id: cache.identify(room) });
         },

@@ -25,11 +25,11 @@ export class MainLayoutSidenavRoomsComponent implements OnInit {
   }
 
   deactivateIfActivated(path: string) {
-    if (this.isRouteActivated(path)) this.router.navigate(['/rooms']);
+    if (this.isRouteActivated(path)) this.router.navigate(['/app/rooms']);
   }
 
   private isRouteActivated(path: string) {
-    const tree = this.router.createUrlTree(['/rooms', path]);
+    const tree = this.router.createUrlTree(['/app/rooms', path]);
     const isActive = this.router.isActive(tree, {
       paths: 'subset',
       fragment: 'ignored',

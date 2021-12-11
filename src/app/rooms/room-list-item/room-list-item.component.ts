@@ -34,7 +34,8 @@ export class RoomListItemComponent implements OnInit {
 
   handleClick() {
     if (!this.room) return;
-    if (this.room.membership) this.router.navigate(['/rooms', this.room.id]);
+    if (this.room.membership)
+      this.router.navigate(['/app/rooms', this.room.id]);
     else this.popup.open();
   }
 
@@ -70,7 +71,7 @@ export class RoomListItemComponent implements OnInit {
         () => {
           this.notifier.notify(NotificationType.Success, 'Application sent');
           this.popup.close();
-          this.router.navigate(['/applications']);
+          this.router.navigate(['/app/applications']);
         },
         () => {
           this.notifier.notify(

@@ -66,7 +66,7 @@ export class RoomDetailComponent implements OnInit {
           ];
         }),
         catchError((err) => {
-          this.router.navigate(['/rooms']);
+          this.router.navigate(['/app/rooms']);
           throw err;
         }),
       );

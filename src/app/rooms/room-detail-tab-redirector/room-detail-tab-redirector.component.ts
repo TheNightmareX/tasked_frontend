@@ -19,7 +19,7 @@ export class RoomDetailTabRedirectorComponent implements OnInit {
     this.roomGql.fetch({ id }).subscribe((result) => {
       this.router.navigate(
         [
-          '/rooms',
+          '/app/rooms',
           id,
           result.data.room.membership!.role == Role.Member
             ? 'assignments'

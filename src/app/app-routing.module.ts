@@ -7,23 +7,22 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '/rooms/last',
+    redirectTo: '/app/rooms/last',
   },
   {
-    path: '',
+    path: 'auth',
     component: AuthLayoutComponent,
-    children: [
-      {
-        path: 'auth',
-        loadChildren: () =>
-          import('./auth/auth.module').then((m) => m.AuthModule),
-      },
-    ],
+    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    path: '',
+    path: 'app',
     component: MainLayoutComponent,
     children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'rooms',
+      },
       {
         path: 'rooms',
         loadChildren: () =>
@@ -40,7 +39,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/rooms',
+    redirectTo: '/app',
   },
 ];
 

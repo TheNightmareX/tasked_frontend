@@ -16,7 +16,6 @@ import { RoomsLocalStorageService } from '../rooms-local-storage.service';
 export class RoomRedirectorComponent {
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private storage: RoomsLocalStorageService,
     private auth: AuthService,
     private notifier: NotifierService,
@@ -49,9 +48,8 @@ export class RoomRedirectorComponent {
   }
 
   private redirect(id?: string) {
-    this.router.navigate(['../', ...(id ? [id] : [])], {
-      relativeTo: this.route,
-      replaceUrl: true,
-    });
+    const commands = ['/app/rooms'];
+    if (id) commands.push(id);
+    this.router.navigate(commands, { replaceUrl: true });
   }
 }

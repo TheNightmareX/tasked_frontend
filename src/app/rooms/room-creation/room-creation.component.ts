@@ -60,7 +60,7 @@ export class RoomCreationComponent implements OnInit {
             NotificationType.Success,
             $localize`Room created successfully`,
           );
-          this.router.navigate(['/rooms', result.data!.createRoom.id], {
+          this.router.navigate(['/app/rooms', result.data!.createRoom.id], {
             relativeTo: this.route,
           });
         },
