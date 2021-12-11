@@ -1,10 +1,4 @@
-import {
-  Component,
-  HostBinding,
-  Input,
-  OnChanges,
-  OnInit,
-} from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Gender, UserFragment } from 'src/app/graphql';
 
 type User = Pick<UserFragment, 'username' | 'nickname'> &
