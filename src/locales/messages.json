@@ -18,9 +18,9 @@
     "5018804994794983050": "Signup",
     "9178182467454450952": "Confirm",
     "8043252513855752156": "Username \"{$PH}\" is already taken",
+    "8869796857691972806": "Data refreshed",
     "6658000829978978023": "Applications",
     "6318077128670918892": "Rooms",
-    "8869796857691972806": "Data refreshed",
     "4915431133669985304": "Profile",
     "4943998242904350511": " Submit ",
     "8574312887796880083": " Unable to update until {$INTERPOLATION} ",
@@ -104,6 +104,7 @@
     "4580988005648117665": "Search",
     "7141565067222964704": " Search by room name or ID (prefix \"#\" is required for ID) ",
     "2212695292809375179": " Search ",
-    "1235417386402685252": "Navigated to the last accessed room"
+    "1235417386402685252": "Navigated to the last accessed room",
+    "5601530442010506564": "Got it"
   }
 }
