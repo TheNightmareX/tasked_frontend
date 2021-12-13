@@ -1,3 +1,4 @@
+import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -38,6 +39,7 @@ const modules = [
   FormsModule,
   RouterModule,
   FlexLayoutModule,
+  OverlayModule,
   IntersectionObserverModule,
   [
     MatRippleModule,

@@ -4,7 +4,7 @@
   </header>
 
   <mat-progress-bar
-    *ngIf="loading.value$ | async"
+    *ngIf="loading$ | async"
     color="accent"
     mode="indeterminate"
   ></mat-progress-bar>
@@ -13,3 +13,7 @@
     <ng-content select="content"></ng-content>
   </main>
 </div>
+
+<ng-template #spinner>
+  <mat-spinner diameter="50"></mat-spinner>
+</ng-template>
