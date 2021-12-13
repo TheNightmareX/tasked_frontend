@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { LoadingService } from 'src/app/core/loading.service';
 
 @Component({
   selector: 'app-layout',
@@ -7,14 +7,7 @@ import { NavigationEnd, NavigationStart, Router } from '@angular/router';
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit {
-  loading = false;
+  constructor(public loading: LoadingService) {}
 
-  constructor(private router: Router) {}
-
-  ngOnInit() {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) this.loading = true;
-      else if (event instanceof NavigationEnd) this.loading = false;
-    });
-  }
+  ngOnInit() {}
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { LoadingService } from './core/loading.service';
 import { ThemesService } from './core/themes.service';
 
 @Component({
@@ -7,9 +9,18 @@ import { ThemesService } from './core/themes.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private themes: ThemesService) {}
+  constructor(
+    private router: Router,
+    private themes: ThemesService,
+    private loading: LoadingService,
+  ) {}
 
   ngOnInit() {
     this.themes.init();
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) this.loading.count++;
+      else if (event instanceof NavigationEnd) this.loading.count--;
+    });
   }
 }
