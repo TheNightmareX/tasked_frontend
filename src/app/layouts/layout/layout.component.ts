@@ -1,4 +1,4 @@
-import { Overlay } from '@angular/cdk/overlay';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import {
   Component,
@@ -8,9 +8,9 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { Observable } from 'rxjs';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { Observable, ReplaySubject } from 'rxjs';
 import { debounceTime, tap } from 'rxjs/operators';
-import { LoadingService } from 'src/app/core/loading.service';
 
 @Component({
   selector: 'app-layout',
@@ -20,20 +20,24 @@ import { LoadingService } from 'src/app/core/loading.service';
 export class LayoutComponent implements OnInit, OnDestroy {
   loading$: Observable<boolean>;
 
+  private _loading$ = new ReplaySubject<boolean>(1);
+
   @ViewChild('spinner')
   private spinnerTemplateRef!: TemplateRef<never>;
-  private spinnerOverlayRef;
+  private spinnerOverlayRef!: OverlayRef;
 
   constructor(
-    private loading: LoadingService,
+    private router: Router,
     private viewContainerRef: ViewContainerRef,
     private overlay: Overlay,
   ) {
-    this.loading$ = this.loading.value$.pipe(
+    this.loading$ = this._loading$.pipe(
       debounceTime(100),
       tap((v) => (v ? this.showSpinner() : this.hideSpinner())),
     );
+  }
 
+  ngOnInit() {
     this.spinnerOverlayRef = this.overlay.create({
       positionStrategy: this.overlay
         .position()
@@ -42,12 +46,15 @@ export class LayoutComponent implements OnInit, OnDestroy {
         .centerVertically(),
       hasBackdrop: true,
     });
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) this._loading$.next(true);
+      else if (event instanceof NavigationEnd) this._loading$.next(false);
+    });
   }
 
-  ngOnInit() {}
-
   ngOnDestroy() {
-    this.hideSpinner();
+    this.spinnerOverlayRef.dispose();
   }
 
   private showSpinner() {
