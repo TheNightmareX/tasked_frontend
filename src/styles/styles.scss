@@ -40,3 +40,9 @@ body {
     color: inherit;
   }
 }
+
+.theme-dark {
+  ngx-skeleton-loader {
+    opacity: 0.05;
+  }
+}
