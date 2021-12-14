@@ -11,7 +11,7 @@
 
 <app-popup #popup>
   <ng-template>
-    <form (ngSubmit)="apply()">
+    <form class="popup" ngClass.xs="mobile" (ngSubmit)="apply()">
       <div matDialogTitle i18n>Join</div>
 
       <div matDialogContent>
