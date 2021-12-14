@@ -1,16 +1,24 @@
 <div class="container" fxLayout="column">
+  <ng-container *ngIf="loadingInitial">
+    <ngx-skeleton-loader
+      count="2"
+      [theme]="{ height: '40px' }"
+    ></ngx-skeleton-loader>
+  </ng-container>
+
   <mat-accordion fxFlex>
     <app-room-detail-tasks-item
       *ngFor="let task of tasks$ | async; trackBy: identifyTask"
       [task]="task"
     ></app-room-detail-tasks-item>
     <app-fetch-more-trigger
-      *ngIf="!allLoaded"
-      [loading]="loading"
+      *ngIf="loadingMoreNeeded"
+      [loading]="loadingMore"
       (trigger)="fetchMore()"
     ></app-fetch-more-trigger>
   </mat-accordion>
 
   <mat-divider></mat-divider>
+
   <app-room-detail-tasks-creation-bar></app-room-detail-tasks-creation-bar>
 </div>

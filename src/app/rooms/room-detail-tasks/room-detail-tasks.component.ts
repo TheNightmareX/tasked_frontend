@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { QueryRef } from 'apollo-angular';
 import { from, Observable } from 'rxjs';
 import { finalize, map, tap } from 'rxjs/operators';
+import { postpone } from 'src/app/common/postpone.operator';
 import {
   RoomTaskListGQL,
   RoomTaskListQuery,
@@ -18,8 +19,9 @@ type Task = RoomTaskListQuery['room']['tasks']['results'][number];
 })
 export class RoomDetailTasksComponent implements OnInit {
   tasks$!: Observable<Task[]>;
-  loading = false;
-  allLoaded = false;
+  loadingInitial = true;
+  loadingMore = false;
+  loadingMoreNeeded = true;
 
   private query!: QueryRef<RoomTaskListQuery, RoomTaskListQueryVariables>;
 
@@ -32,8 +34,12 @@ export class RoomDetailTasksComponent implements OnInit {
     const id = this.route.parent!.snapshot.paramMap.get('id')!;
     this.query = this.listGql.watch({ id });
     this.tasks$ = this.query.valueChanges.pipe(
+      postpone(500),
       map((result) => result.data.room.tasks),
-      tap(({ results, total }) => (this.allLoaded = results.length >= total)),
+      tap(({ results, total }) => {
+        this.loadingInitial = false;
+        this.loadingMoreNeeded = results.length < total;
+      }),
       map(({ results }) => results),
     );
   }
@@ -43,16 +49,16 @@ export class RoomDetailTasksComponent implements OnInit {
   }
 
   fetchMore() {
-    if (this.allLoaded || this.loading) return;
+    if (!this.loadingMoreNeeded || this.loadingMore) return;
 
     const current = this.query.getCurrentResult().data.room.tasks;
-    this.loading = true;
+    this.loadingMore = true;
     from(
       this.query.fetchMore({ variables: { offset: current.results.length } }),
     )
       .pipe(
         map((result) => result.data.room.tasks),
-        finalize(() => (this.loading = false)),
+        finalize(() => (this.loadingMore = false)),
       )
       .subscribe(({ results, total }) => {
         this.query.updateQuery((prev) => ({
