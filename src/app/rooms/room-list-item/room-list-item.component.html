@@ -12,7 +12,7 @@
 <app-popup #popup>
   <ng-template>
     <form (ngSubmit)="apply()">
-      <div matDialogTitle>Join</div>
+      <div matDialogTitle i18n>Join</div>
 
       <div matDialogContent>
         <mat-form-field appAutoFormFieldColor>
@@ -28,7 +28,7 @@
       </div>
 
       <div matDialogActions fxLayout fxLayoutAlign="end">
-        <button mat-button class="uppercase" [disabled]="this.loading">
+        <button mat-button class="uppercase" [disabled]="this.loading" i18n>
           Send
         </button>
       </div>
