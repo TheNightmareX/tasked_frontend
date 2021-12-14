@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { QueryRef } from 'apollo-angular';
 import { from, Observable } from 'rxjs';
 import { finalize, map, tap } from 'rxjs/operators';
+import { postpone } from 'src/app/common/postpone.operator';
 import {
   RoomAssignmentListGQL,
   RoomAssignmentListQuery,
@@ -20,8 +21,9 @@ type Assignment =
 export class RoomDetailAssignmentsComponent implements OnInit {
   assignmentsPending$!: Observable<Assignment[]>;
   assignmentsCompleted$!: Observable<Assignment[]>;
-  loading = false;
-  allLoaded = false;
+  loadingInitial = true;
+  loadingMore = false;
+  loadingMoreNeeded = true;
 
   private query!: QueryRef<
     RoomAssignmentListQuery,
@@ -37,8 +39,12 @@ export class RoomDetailAssignmentsComponent implements OnInit {
     const id = this.route.parent!.snapshot.paramMap.get('id')!;
     this.query = this.listGql.watch({ id, isOwn: true });
     const assignments$ = this.query.valueChanges.pipe(
+      postpone(500),
       map((result) => result.data.room.assignments),
-      tap(({ results, total }) => (this.allLoaded = results.length >= total)),
+      tap(({ results, total }) => {
+        this.loadingInitial = false;
+        this.loadingMoreNeeded = results.length < total;
+      }),
       map(({ results }) =>
         [...results]
           .sort(
@@ -62,16 +68,15 @@ export class RoomDetailAssignmentsComponent implements OnInit {
   }
 
   fetchMore() {
-    if (this.allLoaded) return;
-    if (this.loading) return;
+    if (!this.loadingMoreNeeded || this.loadingMore) return;
 
     const data = this.query.getCurrentResult().data.room.assignments;
 
-    this.loading = true;
+    this.loadingMore = true;
     from(this.query.fetchMore({ variables: { offset: data.results.length } }))
       .pipe(
         map((result) => result.data.room.assignments),
-        finalize(() => (this.loading = false)),
+        finalize(() => (this.loadingMore = false)),
       )
       .subscribe(({ results, total }) => {
         this.query.updateQuery((prev) => ({
