@@ -1,5 +1,7 @@
 <mat-list>
-  <mat-divider></mat-divider>
+  <ngx-skeleton-loader *ngIf="loadingInitial" count="3"></ngx-skeleton-loader>
+
+  <mat-divider *ngIf="(applicationGroups$ | async)?.length"></mat-divider>
 
   <ng-container *ngFor="let group of applicationGroups$ | async">
     <h2 matSubheader>{{ group[0] }}</h2>
@@ -11,9 +13,9 @@
     <mat-divider></mat-divider>
   </ng-container>
 
-  <div *ngIf="(applicationGroups$ | async)?.length && !allLoaded">
+  <div *ngIf="(applicationGroups$ | async)?.length && loadingMoreNeeded">
     <app-fetch-more-trigger
-      [loading]="loading"
+      [loading]="loadingMore"
       (trigger)="fetchMore()"
     ></app-fetch-more-trigger>
   </div>

@@ -21,8 +21,9 @@ type Application = ApplicationListQuery['applications']['results'][number];
 export class ApplicationListComponent implements OnInit {
   @Input() scrollableContainer?: HTMLElement;
   applicationGroups$!: Observable<[string, Application[]][]>;
-  loading = false;
-  allLoaded = false;
+  loadingInitial = true;
+  loadingMore = false;
+  loadingMoreNeeded = false;
 
   private query!: QueryRef<ApplicationListQuery, ApplicationListQueryVariables>;
 
@@ -36,7 +37,10 @@ export class ApplicationListComponent implements OnInit {
     this.query = this.listGql.watch();
     this.applicationGroups$ = this.query.valueChanges.pipe(
       map((result) => result.data.applications),
-      tap((data) => (this.allLoaded = data.results.length >= data.total)),
+      tap(({ results, total }) => {
+        this.loadingInitial = false;
+        this.loadingMoreNeeded = results.length < total;
+      }),
       map((data) => data.results),
       map((items) => {
         const groups: Record<string, Application[]> = {};
@@ -51,13 +55,12 @@ export class ApplicationListComponent implements OnInit {
   }
 
   fetchMore() {
-    if (this.allLoaded) return;
-    if (this.loading) return;
+    if (!this.loadingMoreNeeded || this.loadingMore) return;
 
     const data = this.query.getCurrentResult().data.applications;
-    this.loading = true;
+    this.loadingMore = true;
     from(this.query.fetchMore({ variables: { offset: data.results.length } }))
-      .pipe(finalize(() => (this.loading = false)))
+      .pipe(finalize(() => (this.loadingMore = false)))
       .subscribe((result) => {
         const scrollTop = this.scrollableContainer?.scrollTop;
         this.query.updateQuery((prev) => ({
