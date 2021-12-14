@@ -4,6 +4,7 @@ import { QueryRef } from 'apollo-angular';
 import { from, Observable, of, timer } from 'rxjs';
 import { delayWhen, finalize, map, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
+import { postpone } from 'src/app/common/postpone.operator';
 import {
   ApplicationListGQL,
   ApplicationListQuery,
@@ -23,7 +24,7 @@ export class ApplicationListComponent implements OnInit {
   applicationGroups$!: Observable<[string, Application[]][]>;
   loadingInitial = true;
   loadingMore = false;
-  loadingMoreNeeded = false;
+  loadingMoreNeeded = true;
 
   private query!: QueryRef<ApplicationListQuery, ApplicationListQueryVariables>;
 
@@ -36,7 +37,7 @@ export class ApplicationListComponent implements OnInit {
   ngOnInit() {
     this.query = this.listGql.watch();
     this.applicationGroups$ = this.query.valueChanges.pipe(
-      delayWhen(() => (this.loadingInitial ? timer(500) : of(null))),
+      postpone(500),
       map((result) => result.data.applications),
       tap(({ results, total }) => {
         this.loadingInitial = false;
