@@ -3,7 +3,7 @@ import { NotifierService } from 'angular-notifier';
 import { Apollo } from 'apollo-angular';
 import { from } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
-import { leastTime } from 'src/app/common/least-time.operator';
+import { postpone } from 'src/app/common/postpone.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 
 @Component({
@@ -25,7 +25,7 @@ export class RefetchButtonComponent implements OnInit {
     this.loading = true;
     from(this.apollo.client.refetchQueries({ include: 'active' }))
       .pipe(
-        leastTime(1000),
+        postpone(1000),
         tap(() => {
           this.loading = false;
           this.notifier.notify(
@@ -33,7 +33,7 @@ export class RefetchButtonComponent implements OnInit {
             $localize`Data refreshed`,
           );
         }),
-        leastTime(3000),
+        postpone(3000),
         tap(() => (this.disabled = false)),
         finalize(() => {
           this.loading = false;

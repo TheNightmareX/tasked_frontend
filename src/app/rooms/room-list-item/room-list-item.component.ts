@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { finalize } from 'rxjs/operators';
-import { leastTime } from 'src/app/common/least-time.operator';
+import { postpone } from 'src/app/common/postpone.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import {
   ApplicationCreateGQL,
@@ -64,7 +64,7 @@ export class RoomListItemComponent implements OnInit {
         },
       )
       .pipe(
-        leastTime(1000),
+        postpone(1000),
         finalize(() => (this.loading = false)),
       )
       .subscribe(

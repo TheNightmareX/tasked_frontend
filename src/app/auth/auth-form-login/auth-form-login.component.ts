@@ -5,7 +5,7 @@ import { NotifierService } from 'angular-notifier';
 import { Subject } from 'rxjs';
 import { finalize, throttleTime } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
-import { leastTime } from 'src/app/common/least-time.operator';
+import { postpone } from 'src/app/common/postpone.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 
 @Component({
@@ -39,7 +39,7 @@ export class AuthFormLoginComponent implements OnInit {
     this.auth
       .login(username, password)
       .pipe(
-        leastTime(1000),
+        postpone(1000),
         finalize(() => {
           this.loading = false;
         }),

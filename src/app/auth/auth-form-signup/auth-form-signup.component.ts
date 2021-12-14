@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { concatMap, finalize, throttleTime } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { filterKeys } from 'src/app/common/filter-keys.func';
-import { leastTime } from 'src/app/common/least-time.operator';
+import { postpone } from 'src/app/common/postpone.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import { Gender, UserCreateGQL, UserCreateInput } from 'src/app/graphql';
 import { ProfileFormData } from 'src/app/profile/profile-form/profile-form-data.interface';
@@ -52,7 +52,7 @@ export class AuthFormSignupComponent implements OnInit {
       .mutate({ data })
       .pipe(
         concatMap(() => this.auth.login(username, password)),
-        leastTime(1000),
+        postpone(1000),
         finalize(() => {
           this.loading = false;
         }),

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { combineLatest, forkJoin, Subscription } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
-import { leastTime } from 'src/app/common/least-time.operator';
+import { postpone } from 'src/app/common/postpone.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import {
   AssignmentCreateGQL,
@@ -105,7 +105,7 @@ export class RoomDetailTasksItemAssignPopupComponent
     if (operations)
       forkJoin(operations)
         .pipe(
-          leastTime(1000),
+          postpone(1000),
           finalize(() => {
             this.loading = false;
             // Close the popup whether succeed or not because I'm lazy to

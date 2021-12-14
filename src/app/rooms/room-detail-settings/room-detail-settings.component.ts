@@ -6,7 +6,7 @@ import { debounceTime, finalize, first, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { filterKeys } from 'src/app/common/filter-keys.func';
 import { isEmpty } from 'src/app/common/is-empty.func';
-import { leastTime } from 'src/app/common/least-time.operator';
+import { postpone } from 'src/app/common/postpone.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import { pick } from 'src/app/common/pick.func';
 import {
@@ -79,7 +79,7 @@ export class RoomDetailSettingsComponent implements OnInit {
       this.updateGql
         .mutate({ id: room.id, data })
         .pipe(
-          leastTime(1000),
+          postpone(1000),
           finalize(() => {
             this.loading = false;
           }),

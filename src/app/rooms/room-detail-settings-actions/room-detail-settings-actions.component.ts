@@ -4,7 +4,7 @@ import { NotifierService } from 'angular-notifier';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { concatMap, finalize, first, map } from 'rxjs/operators';
-import { leastTime } from 'src/app/common/least-time.operator';
+import { postpone } from 'src/app/common/postpone.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import {
   RoomDeleteGQL,
@@ -72,7 +72,7 @@ export class RoomDetailSettingsActionsComponent implements OnInit {
           mutation(room).pipe(map((result) => [result, room] as const)),
         ),
         first(),
-        leastTime(1000),
+        postpone(1000),
         finalize(() => {
           this.loading = false;
         }),
