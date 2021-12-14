@@ -1,7 +1,8 @@
 import { Component, OnInit, TrackByFunction } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { postpone } from 'src/app/common/postpone.operator';
 import { RoomListGQL, RoomListQuery } from 'src/app/graphql';
 
 type Room = RoomListQuery['rooms']['results'][number];
@@ -13,15 +14,20 @@ type Room = RoomListQuery['rooms']['results'][number];
 })
 export class MainLayoutSidenavRoomsComponent implements OnInit {
   rooms$!: Observable<Room[]>;
+  loading = true;
 
   constructor(private router: Router, private roomListGql: RoomListGQL) {}
 
-  trackByRoom: TrackByFunction<Room> = (_, { id }) => id;
+  identifyRoom: TrackByFunction<Room> = (_, { id }) => id;
 
   ngOnInit() {
     this.rooms$ = this.roomListGql
       .watch({ joinedOnly: true })
-      .valueChanges.pipe(map(({ data }) => data.rooms.results));
+      .valueChanges.pipe(
+        postpone(500),
+        tap(() => (this.loading = false)),
+        map(({ data }) => data.rooms.results),
+      );
   }
 
   deactivateIfActivated(path: string) {
