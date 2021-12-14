@@ -69,14 +69,17 @@ export class RoomListItemComponent implements OnInit {
       )
       .subscribe(
         () => {
-          this.notifier.notify(NotificationType.Success, 'Application sent');
+          this.notifier.notify(
+            NotificationType.Success,
+            $localize`Application sent`,
+          );
           this.popup.close();
           this.router.navigate(['/app/applications']);
         },
         () => {
           this.notifier.notify(
             NotificationType.Error,
-            'Failed to send the application',
+            $localize`Failed to send the application`,
           );
         },
       );
