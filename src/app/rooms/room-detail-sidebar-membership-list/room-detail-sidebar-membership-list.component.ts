@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
+import { postpone } from 'src/app/common/postpone.operator';
 import {
+  Role,
   RoomDetailGQL,
   RoomMembershipListGQL,
   RoomMembershipListQuery,
-  Role,
 } from 'src/app/graphql';
 
 type Membership =
@@ -20,6 +21,7 @@ type Membership =
 })
 export class RoomDetailSidebarMembershipListComponent implements OnInit {
   memberships$!: Observable<Membership[]>;
+  loading = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,6 +33,7 @@ export class RoomDetailSidebarMembershipListComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id')!;
+      this.loading = true;
 
       this.memberships$ = combineLatest([
         this.listGql
@@ -43,6 +46,8 @@ export class RoomDetailSidebarMembershipListComponent implements OnInit {
           .valueChanges.pipe(map((result) => result.data.room)),
         this.auth.user$,
       ]).pipe(
+        postpone(500),
+        tap(() => (this.loading = false)),
         map(([memberships, room, user]) =>
           memberships
             .sort((a, b) =>
