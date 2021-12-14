@@ -1,8 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { QueryRef } from 'apollo-angular';
-import { from, Observable } from 'rxjs';
-import { finalize, map, tap } from 'rxjs/operators';
+import { from, Observable, of, timer } from 'rxjs';
+import { delayWhen, finalize, map, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import {
   ApplicationListGQL,
@@ -36,6 +36,7 @@ export class ApplicationListComponent implements OnInit {
   ngOnInit() {
     this.query = this.listGql.watch();
     this.applicationGroups$ = this.query.valueChanges.pipe(
+      delayWhen(() => (this.loadingInitial ? timer(500) : of(null))),
       map((result) => result.data.applications),
       tap(({ results, total }) => {
         this.loadingInitial = false;
