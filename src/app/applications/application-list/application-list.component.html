@@ -1,5 +1,18 @@
 <mat-list>
-  <ngx-skeleton-loader *ngIf="loadingInitial" count="3"></ngx-skeleton-loader>
+  <ng-container *ngIf="loadingInitial">
+    <ngx-skeleton-loader
+      count="1"
+      [theme]="{ width: '60%' }"
+    ></ngx-skeleton-loader>
+    <ngx-skeleton-loader
+      count="1"
+      [theme]="{ width: '80%' }"
+    ></ngx-skeleton-loader>
+    <ngx-skeleton-loader
+      count="1"
+      [theme]="{ width: '40%' }"
+    ></ngx-skeleton-loader>
+  </ng-container>
 
   <mat-divider *ngIf="(applicationGroups$ | async)?.length"></mat-divider>
 

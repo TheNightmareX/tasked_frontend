@@ -1,8 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { QueryRef } from 'apollo-angular';
-import { from, Observable, of, timer } from 'rxjs';
-import { delayWhen, finalize, map, tap } from 'rxjs/operators';
+import { from, Observable } from 'rxjs';
+import { finalize, map, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { postpone } from 'src/app/common/postpone.operator';
 import {
