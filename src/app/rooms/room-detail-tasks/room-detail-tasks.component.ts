@@ -21,7 +21,7 @@ export class RoomDetailTasksComponent implements OnInit {
   tasks$!: Observable<Task[]>;
   loadingInitial = true;
   loadingMore = false;
-  loadingMoreNeeded = true;
+  loadingMoreNeeded = false;
 
   private query!: QueryRef<RoomTaskListQuery, RoomTaskListQueryVariables>;
 

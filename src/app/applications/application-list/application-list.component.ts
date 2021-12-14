@@ -24,7 +24,7 @@ export class ApplicationListComponent implements OnInit {
   applicationGroups$!: Observable<[string, Application[]][]>;
   loadingInitial = true;
   loadingMore = false;
-  loadingMoreNeeded = true;
+  loadingMoreNeeded = false;
 
   private query!: QueryRef<ApplicationListQuery, ApplicationListQueryVariables>;
 

@@ -23,7 +23,7 @@ export class RoomDetailAssignmentsComponent implements OnInit {
   assignmentsCompleted$!: Observable<Assignment[]>;
   loadingInitial = true;
   loadingMore = false;
-  loadingMoreNeeded = true;
+  loadingMoreNeeded = false;
 
   private query!: QueryRef<
     RoomAssignmentListQuery,
