@@ -27,7 +27,8 @@ export class RoomDetailTasksItemAssignPopupComponent
 {
   @Input() task?: Task;
   items: Item[] = [];
-  loading = false;
+  loadingInitial = true;
+  loadingUpdate = false;
 
   private taskId!: string;
   private subscription?: Subscription;
@@ -56,25 +57,29 @@ export class RoomDetailTasksItemAssignPopupComponent
           .valueChanges.pipe(
             map((result) => result.data.task.assignments.results),
           ),
-      ]).subscribe(([memberships, assignments]) => {
-        const items: Record<string, Item> = {};
+      ])
+        .pipe(postpone(500))
+        .subscribe(([memberships, assignments]) => {
+          this.loadingInitial = false;
 
-        memberships
-          .filter((item) => item.role == Role.Member)
-          .forEach((membership) => {
-            items[membership.id] = {
-              membership,
-              selected: false,
-            };
+          const items: Record<string, Item> = {};
+
+          memberships
+            .filter((item) => item.role == Role.Member)
+            .forEach((membership) => {
+              items[membership.id] = {
+                membership,
+                selected: false,
+              };
+            });
+
+          assignments.forEach((assignment) => {
+            items[assignment.recipient.id].selected = true;
+            items[assignment.recipient.id].assignment = assignment;
           });
 
-        assignments.forEach((assignment) => {
-          items[assignment.recipient.id].selected = true;
-          items[assignment.recipient.id].assignment = assignment;
+          this.items = Object.values(items);
         });
-
-        this.items = Object.values(items);
-      });
   }
 
   ngOnDestroy() {
@@ -83,8 +88,8 @@ export class RoomDetailTasksItemAssignPopupComponent
 
   update() {
     if (!this.task) return;
-    if (this.loading) return;
-    this.loading = true;
+    if (this.loadingUpdate) return;
+    this.loadingUpdate = true;
 
     const operations = this.items
       .filter((item) => {
@@ -107,7 +112,7 @@ export class RoomDetailTasksItemAssignPopupComponent
         .pipe(
           postpone(1000),
           finalize(() => {
-            this.loading = false;
+            this.loadingUpdate = false;
             // Close the popup whether succeed or not because I'm lazy to
             // restore the selections if it fails. :]
             this.popup.close();
