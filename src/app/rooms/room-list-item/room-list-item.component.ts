@@ -49,6 +49,7 @@ export class RoomListItemComponent implements OnInit {
         {
           update: (_, result) => {
             const query = this.applicationListGql.watch();
+            if (query.getCurrentResult().loading) return;
             query.updateQuery((prev) => ({
               ...prev,
               applications: {
