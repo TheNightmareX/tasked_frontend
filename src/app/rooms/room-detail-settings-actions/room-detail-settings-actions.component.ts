@@ -4,13 +4,12 @@ import { NotifierService } from 'angular-notifier';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { concatMap, finalize, first, map } from 'rxjs/operators';
-import { postpone } from 'src/app/common/postpone.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import {
+  MembershipDeleteGQL,
   RoomDeleteGQL,
   RoomDetailGQL,
   RoomDetailQuery,
-  MembershipDeleteGQL,
 } from 'src/app/graphql';
 
 type Room = RoomDetailQuery['room'];
@@ -72,7 +71,7 @@ export class RoomDetailSettingsActionsComponent implements OnInit {
           mutation(room).pipe(map((result) => [result, room] as const)),
         ),
         first(),
-        postpone(1000),
+
         finalize(() => {
           this.loading = false;
         }),

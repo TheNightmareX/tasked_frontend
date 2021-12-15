@@ -5,7 +5,6 @@ import { NotifierService } from 'angular-notifier';
 import { Subject } from 'rxjs';
 import { finalize, throttleTime } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
-import { postpone } from 'src/app/common/postpone.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 
 @Component({
@@ -39,7 +38,6 @@ export class AuthFormLoginComponent implements OnInit {
     this.auth
       .login(username, password)
       .pipe(
-        postpone(1000),
         finalize(() => {
           this.loading = false;
         }),

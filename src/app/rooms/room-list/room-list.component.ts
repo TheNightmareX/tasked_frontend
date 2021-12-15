@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
-import { postpone } from 'src/app/common/postpone.operator';
 import { RoomListGQL, RoomListQuery } from 'src/app/graphql';
 
 @Component({
@@ -25,7 +24,6 @@ export class RoomListComponent implements OnInit {
     this.loading = true;
 
     this.rooms$ = (this.searchValue ? this.search() : this.list()).pipe(
-      postpone(500),
       finalize(() => (this.loading = false)),
     );
     if (!this.searchValue) this.list();

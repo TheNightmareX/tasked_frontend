@@ -2,7 +2,6 @@ import { Component, OnInit, TrackByFunction } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { postpone } from 'src/app/common/postpone.operator';
 import { RoomListGQL, RoomListQuery } from 'src/app/graphql';
 
 type Room = RoomListQuery['rooms']['results'][number];
@@ -24,7 +23,6 @@ export class MainLayoutSidenavRoomsComponent implements OnInit {
     this.rooms$ = this.roomListGql
       .watch({ joinedOnly: true })
       .valueChanges.pipe(
-        postpone(500),
         tap(() => (this.loading = false)),
         map(({ data }) => data.rooms.results),
       );

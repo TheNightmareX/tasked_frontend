@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { QueryRef } from 'apollo-angular';
 import { from, Observable } from 'rxjs';
 import { finalize, map, tap } from 'rxjs/operators';
-import { postpone } from 'src/app/common/postpone.operator';
 import {
   RoomAssignmentListGQL,
   RoomAssignmentListQuery,
@@ -39,7 +38,6 @@ export class RoomDetailAssignmentsComponent implements OnInit {
     const id = this.route.parent!.snapshot.paramMap.get('id')!;
     this.query = this.listGql.watch({ id, isOwn: true });
     const assignments$ = this.query.valueChanges.pipe(
-      postpone(500),
       map((result) => result.data.room.assignments),
       tap(({ results, total }) => {
         this.loadingInitial = false;

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { finalize } from 'rxjs/operators';
-import { postpone } from 'src/app/common/postpone.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import { RoomCreateGQL, RoomListGQL } from 'src/app/graphql';
 
@@ -49,7 +48,6 @@ export class RoomCreationComponent implements OnInit {
         },
       )
       .pipe(
-        postpone(1000),
         finalize(() => {
           this.loading = false;
         }),

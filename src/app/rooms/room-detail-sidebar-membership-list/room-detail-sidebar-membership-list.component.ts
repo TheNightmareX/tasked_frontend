@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
-import { postpone } from 'src/app/common/postpone.operator';
 import {
   Role,
   RoomDetailGQL,
@@ -46,7 +45,6 @@ export class RoomDetailSidebarMembershipListComponent implements OnInit {
           .valueChanges.pipe(map((result) => result.data.room)),
         this.auth.user$,
       ]).pipe(
-        postpone(500),
         tap(() => (this.loading = false)),
         map(([memberships, room, user]) =>
           memberships

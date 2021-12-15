@@ -3,15 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { combineLatest, forkJoin, Subscription } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
-import { postpone } from 'src/app/common/postpone.operator';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import {
   AssignmentCreateGQL,
   AssignmentDeleteGQL,
+  Role,
   RoomMembershipListGQL,
   RoomMembershipListQuery,
   RoomTaskListQuery,
-  Role,
   TaskAssignmentListGQL,
   TaskAssignmentListQuery,
 } from 'src/app/graphql';
@@ -57,29 +56,27 @@ export class RoomDetailTasksItemAssignPopupComponent
           .valueChanges.pipe(
             map((result) => result.data.task.assignments.results),
           ),
-      ])
-        .pipe(postpone(500))
-        .subscribe(([memberships, assignments]) => {
-          this.loadingInitial = false;
+      ]).subscribe(([memberships, assignments]) => {
+        this.loadingInitial = false;
 
-          const items: Record<string, Item> = {};
+        const items: Record<string, Item> = {};
 
-          memberships
-            .filter((item) => item.role == Role.Member)
-            .forEach((membership) => {
-              items[membership.id] = {
-                membership,
-                selected: false,
-              };
-            });
-
-          assignments.forEach((assignment) => {
-            items[assignment.recipient.id].selected = true;
-            items[assignment.recipient.id].assignment = assignment;
+        memberships
+          .filter((item) => item.role == Role.Member)
+          .forEach((membership) => {
+            items[membership.id] = {
+              membership,
+              selected: false,
+            };
           });
 
-          this.items = Object.values(items);
+        assignments.forEach((assignment) => {
+          items[assignment.recipient.id].selected = true;
+          items[assignment.recipient.id].assignment = assignment;
         });
+
+        this.items = Object.values(items);
+      });
   }
 
   ngOnDestroy() {
@@ -110,7 +107,6 @@ export class RoomDetailTasksItemAssignPopupComponent
     if (operations)
       forkJoin(operations)
         .pipe(
-          postpone(1000),
           finalize(() => {
             this.loadingUpdate = false;
             // Close the popup whether succeed or not because I'm lazy to
