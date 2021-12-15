@@ -9,13 +9,13 @@
     <input
       matInput
       name="data"
-      maxlength="15"
+      maxlength="30"
       type="text"
       [disabled]="loading"
       [(ngModel)]="data"
       #model="ngModel"
     />
-    <mat-hint align="end">{{ data.length }} / 15</mat-hint>
+    <mat-hint align="end">{{ data.length }} / 30</mat-hint>
   </mat-form-field>
   <button
     mat-icon-button
