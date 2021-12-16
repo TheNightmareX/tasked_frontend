@@ -20,13 +20,11 @@ export class RoomDetailAssignmentsItemDetailComponent implements OnInit {
 
   ngOnInit() {
     // TODO: use <app-username>
+    const user = this.assignment?.task?.creator?.owner;
     this.infoItems = [
       {
         name: $localize`Creator`,
-        value: this.assignment
-          ? this.assignment.task.creator.nickname ??
-            this.assignment.task.creator.username
-          : '',
+        value: user ? user.nickname ?? user.username : '',
         icon: 'person',
       },
       {

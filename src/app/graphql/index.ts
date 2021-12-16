@@ -212,15 +212,24 @@ export type Membership = {
   owner: User;
   role: Role;
   room: Room;
+  tasks: PaginatedTasks;
   updatedAt: Scalars['DateTime'];
 };
 
 export type MembershipAssignmentsArgs = {
   filter?: Maybe<AssignmentFilterMap>;
-  isOwn?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   order?: Maybe<AssignmentOrderMap>;
+  ownOnly?: Maybe<Scalars['Boolean']>;
+};
+
+export type MembershipTasksArgs = {
+  filter?: Maybe<TaskFilterMap>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<TaskOrderMap>;
+  ownOnly?: Maybe<Scalars['Boolean']>;
 };
 
 export type MembershipFilterMap = {
@@ -447,10 +456,10 @@ export type QueryAssignmentArgs = {
 
 export type QueryAssignmentsArgs = {
   filter?: Maybe<AssignmentFilterMap>;
-  isOwn?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   order?: Maybe<AssignmentOrderMap>;
+  ownOnly?: Maybe<Scalars['Boolean']>;
 };
 
 export type QueryMembershipArgs = {
@@ -482,10 +491,10 @@ export type QueryTaskArgs = {
 
 export type QueryTasksArgs = {
   filter?: Maybe<TaskFilterMap>;
-  isOwn?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   order?: Maybe<TaskOrderMap>;
+  ownOnly?: Maybe<Scalars['Boolean']>;
 };
 
 export type QueryUserArgs = {
@@ -534,10 +543,10 @@ export type RoomApplicationsArgs = {
 
 export type RoomAssignmentsArgs = {
   filter?: Maybe<AssignmentFilterMap>;
-  isOwn?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   order?: Maybe<AssignmentOrderMap>;
+  ownOnly?: Maybe<Scalars['Boolean']>;
 };
 
 export type RoomMembershipsArgs = {
@@ -549,10 +558,10 @@ export type RoomMembershipsArgs = {
 
 export type RoomTasksArgs = {
   filter?: Maybe<TaskFilterMap>;
-  isOwn?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   order?: Maybe<TaskOrderMap>;
+  ownOnly?: Maybe<Scalars['Boolean']>;
 };
 
 export type RoomCreateInput = {
@@ -642,7 +651,7 @@ export type Task = {
   __typename?: 'Task';
   assignments: PaginatedAssignments;
   createdAt: Scalars['DateTime'];
-  creator: User;
+  creator: Membership;
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   isActive: Scalars['Boolean'];
@@ -653,10 +662,10 @@ export type Task = {
 
 export type TaskAssignmentsArgs = {
   filter?: Maybe<AssignmentFilterMap>;
-  isOwn?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   order?: Maybe<AssignmentOrderMap>;
+  ownOnly?: Maybe<Scalars['Boolean']>;
 };
 
 export type TaskCreateInput = {
@@ -768,10 +777,10 @@ export type UserApplicationsArgs = {
 
 export type UserAssignmentsArgs = {
   filter?: Maybe<AssignmentFilterMap>;
-  isOwn?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   order?: Maybe<AssignmentOrderMap>;
+  ownOnly?: Maybe<Scalars['Boolean']>;
 };
 
 export type UserMembershipsArgs = {
@@ -791,10 +800,10 @@ export type UserRoomsArgs = {
 
 export type UserTasksArgs = {
   filter?: Maybe<TaskFilterMap>;
-  isOwn?: Maybe<Scalars['Boolean']>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   order?: Maybe<TaskOrderMap>;
+  ownOnly?: Maybe<Scalars['Boolean']>;
 };
 
 export type UserCreateInput = {
@@ -1131,7 +1140,7 @@ export type MembershipFragment = {
 export type RoomAssignmentListQueryVariables = Exact<{
   id: Scalars['ID'];
   offset?: Maybe<Scalars['Int']>;
-  isOwn?: Maybe<Scalars['Boolean']>;
+  ownOnly?: Maybe<Scalars['Boolean']>;
 }>;
 
 export type RoomAssignmentListQuery = {
@@ -1156,10 +1165,16 @@ export type RoomAssignmentListQuery = {
           title: string;
           description?: string | null | undefined;
           creator: {
-            __typename?: 'User';
+            __typename?: 'Membership';
             id: string;
-            username: string;
-            nickname?: string | null | undefined;
+            role: Role;
+            owner: {
+              __typename?: 'User';
+              id: string;
+              username: string;
+              nickname?: string | null | undefined;
+              gender: Gender;
+            };
           };
         };
       }>;
@@ -1816,14 +1831,14 @@ export class MembershipUpdateGQL extends Apollo.Mutation<
   }
 }
 export const RoomAssignmentListDocument = gql`
-  query RoomAssignmentList($id: ID!, $offset: Int, $isOwn: Boolean) {
+  query RoomAssignmentList($id: ID!, $offset: Int, $ownOnly: Boolean) {
     room(id: $id) {
       id
       assignments(
         limit: 20
         offset: $offset
         order: { updatedAt: DESC }
-        isOwn: $isOwn
+        ownOnly: $ownOnly
       ) {
         total
         results {
@@ -1836,9 +1851,7 @@ export const RoomAssignmentListDocument = gql`
             title
             description
             creator {
-              id
-              username
-              nickname
+              ...Membership
             }
           }
           isCompleted
@@ -1849,6 +1862,7 @@ export const RoomAssignmentListDocument = gql`
       }
     }
   }
+  ${MembershipFragmentDoc}
 `;
 
 @Injectable({
@@ -1991,7 +2005,7 @@ export const RoomTaskListDocument = gql`
   query RoomTaskList($id: ID!, $offset: Int) {
     room(id: $id) {
       id
-      tasks(limit: 20, offset: $offset, order: { id: DESC }, isOwn: true) {
+      tasks(limit: 20, offset: $offset, order: { id: DESC }, ownOnly: true) {
         total
         results {
           ...Task

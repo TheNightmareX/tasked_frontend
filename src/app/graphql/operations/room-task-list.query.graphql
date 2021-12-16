@@ -1,7 +1,7 @@
 query RoomTaskList($id: ID!, $offset: Int) {
   room(id: $id) {
     id
-    tasks(limit: 20, offset: $offset, order: { id: DESC }, isOwn: true) {
+    tasks(limit: 20, offset: $offset, order: { id: DESC }, ownOnly: true) {
       total
       results {
         ...Task

@@ -1,11 +1,11 @@
-query RoomAssignmentList($id: ID!, $offset: Int, $isOwn: Boolean) {
+query RoomAssignmentList($id: ID!, $offset: Int, $ownOnly: Boolean) {
   room(id: $id) {
     id
     assignments(
       limit: 20
       offset: $offset
       order: { updatedAt: DESC }
-      isOwn: $isOwn
+      ownOnly: $ownOnly
     ) {
       total
       results {
@@ -18,9 +18,7 @@ query RoomAssignmentList($id: ID!, $offset: Int, $isOwn: Boolean) {
           title
           description
           creator {
-            id
-            username
-            nickname
+            ...Membership
           }
         }
         isCompleted

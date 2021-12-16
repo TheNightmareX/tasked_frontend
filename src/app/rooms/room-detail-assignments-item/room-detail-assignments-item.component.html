@@ -23,7 +23,9 @@
       <span matTooltip="Creator" i18n-matTooltip>
         <mat-icon inline>person</mat-icon>
         <span>
-          <app-username [user]="assignment?.task?.creator"></app-username>
+          <app-username
+            [user]="assignment?.task?.creator?.owner"
+          ></app-username>
         </span>
       </span>
       <span matTooltip="Creation Time" i18n-matTooltip>

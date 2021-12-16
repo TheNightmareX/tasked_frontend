@@ -36,7 +36,7 @@ export class RoomDetailAssignmentsComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.parent!.snapshot.paramMap.get('id')!;
-    this.query = this.listGql.watch({ id, isOwn: true });
+    this.query = this.listGql.watch({ id, ownOnly: true });
     const assignments$ = this.query.valueChanges.pipe(
       map((result) => result.data.room.assignments),
       tap(({ results, total }) => {
