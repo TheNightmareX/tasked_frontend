@@ -910,8 +910,6 @@ export type ApplicationAcceptMutation = {
         id: string;
         username: string;
         nickname?: string | null | undefined;
-        gender: Gender;
-        updatedAt: any;
       };
       room: { __typename?: 'Room'; id: string; name: string };
     };
@@ -947,8 +945,6 @@ export type ApplicationCreateMutation = {
       id: string;
       username: string;
       nickname?: string | null | undefined;
-      gender: Gender;
-      updatedAt: any;
     };
     room: { __typename?: 'Room'; id: string; name: string };
   };
@@ -983,8 +979,6 @@ export type ApplicationListQuery = {
         id: string;
         username: string;
         nickname?: string | null | undefined;
-        gender: Gender;
-        updatedAt: any;
       };
       room: { __typename?: 'Room'; id: string; name: string };
     }>;
@@ -1008,8 +1002,6 @@ export type ApplicationRejectMutation = {
       id: string;
       username: string;
       nickname?: string | null | undefined;
-      gender: Gender;
-      updatedAt: any;
     };
     room: { __typename?: 'Room'; id: string; name: string };
   };
@@ -1026,8 +1018,6 @@ export type ApplicationFragment = {
     id: string;
     username: string;
     nickname?: string | null | undefined;
-    gender: Gender;
-    updatedAt: any;
   };
   room: { __typename?: 'Room'; id: string; name: string };
 };
@@ -1068,6 +1058,12 @@ export type AssignmentUpdateMutation = {
     isImportant: boolean;
     updatedAt: any;
   };
+};
+
+export type AssignmentFragment = {
+  __typename?: 'Assignment';
+  id: string;
+  recipient: { __typename?: 'Membership'; id: string };
 };
 
 export type AuthMutationVariables = Exact<{
@@ -1369,12 +1365,6 @@ export type RoomFragment = {
     | undefined;
 };
 
-export type AssignmentFragment = {
-  __typename?: 'Assignment';
-  id: string;
-  recipient: { __typename?: 'Membership'; id: string };
-};
-
 export type TaskAssignmentListQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -1489,20 +1479,13 @@ export type UserFragment = {
   updatedAt: any;
 };
 
-export const UserFragmentDoc = gql`
-  fragment User on User {
-    id
-    username
-    nickname
-    gender
-    updatedAt
-  }
-`;
 export const ApplicationFragmentDoc = gql`
   fragment Application on Application {
     id
     owner {
-      ...User
+      id
+      username
+      nickname
     }
     room {
       id
@@ -1512,7 +1495,14 @@ export const ApplicationFragmentDoc = gql`
     status
     createdAt
   }
-  ${UserFragmentDoc}
+`;
+export const AssignmentFragmentDoc = gql`
+  fragment Assignment on Assignment {
+    id
+    recipient {
+      id
+    }
+  }
 `;
 export const MembershipFragmentDoc = gql`
   fragment Membership on Membership {
@@ -1543,14 +1533,6 @@ export const RoomFragmentDoc = gql`
     }
   }
 `;
-export const AssignmentFragmentDoc = gql`
-  fragment Assignment on Assignment {
-    id
-    recipient {
-      id
-    }
-  }
-`;
 export const TaskFragmentDoc = gql`
   fragment Task on Task {
     id
@@ -1560,6 +1542,15 @@ export const TaskFragmentDoc = gql`
       total
     }
     createdAt
+  }
+`;
+export const UserFragmentDoc = gql`
+  fragment User on User {
+    id
+    username
+    nickname
+    gender
+    updatedAt
   }
 `;
 export const ApplicationAcceptDocument = gql`

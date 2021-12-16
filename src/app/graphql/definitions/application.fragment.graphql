@@ -1,7 +1,9 @@
 fragment Application on Application {
   id
   owner {
-    ...User
+    id
+    username
+    nickname
   }
   room {
     id
