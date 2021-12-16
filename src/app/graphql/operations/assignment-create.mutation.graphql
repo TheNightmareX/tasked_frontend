@@ -1,5 +1,5 @@
 mutation AssignmentCreate($data: AssignmentCreateInput!) {
   createAssignment(data: $data) {
-    ...TaskAssignmentListAssignment
+    ...Assignment
   }
 }

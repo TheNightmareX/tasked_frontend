@@ -1369,7 +1369,7 @@ export type RoomFragment = {
     | undefined;
 };
 
-export type TaskAssignmentListAssignmentFragment = {
+export type AssignmentFragment = {
   __typename?: 'Assignment';
   id: string;
   recipient: { __typename?: 'Membership'; id: string };
@@ -1543,8 +1543,8 @@ export const RoomFragmentDoc = gql`
     }
   }
 `;
-export const TaskAssignmentListAssignmentFragmentDoc = gql`
-  fragment TaskAssignmentListAssignment on Assignment {
+export const AssignmentFragmentDoc = gql`
+  fragment Assignment on Assignment {
     id
     recipient {
       id
@@ -1683,10 +1683,10 @@ export class ApplicationRejectGQL extends Apollo.Mutation<
 export const AssignmentCreateDocument = gql`
   mutation AssignmentCreate($data: AssignmentCreateInput!) {
     createAssignment(data: $data) {
-      ...TaskAssignmentListAssignment
+      ...Assignment
     }
   }
-  ${TaskAssignmentListAssignmentFragmentDoc}
+  ${AssignmentFragmentDoc}
 `;
 
 @Injectable({
@@ -2058,12 +2058,12 @@ export const TaskAssignmentListDocument = gql`
       assignments {
         total
         results {
-          ...TaskAssignmentListAssignment
+          ...Assignment
         }
       }
     }
   }
-  ${TaskAssignmentListAssignmentFragmentDoc}
+  ${AssignmentFragmentDoc}
 `;
 
 @Injectable({
