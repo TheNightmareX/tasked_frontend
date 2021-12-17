@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ThemesService } from 'src/app/core/themes.service';
+import { ThemeService } from 'src/app/core/theme.service';
 
 @Component({
   selector: 'app-theme-button',
@@ -7,7 +7,7 @@ import { ThemesService } from 'src/app/core/themes.service';
   styleUrls: ['./theme-button.component.scss'],
 })
 export class ThemeButtonComponent implements OnInit {
-  constructor(public themes: ThemesService) {}
+  constructor(public theme: ThemeService) {}
 
   ngOnInit() {}
 }

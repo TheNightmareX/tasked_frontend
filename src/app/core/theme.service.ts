@@ -5,7 +5,7 @@ import { LocalStorageItem } from '../local-storage/local-storage-item.class';
 @Injectable({
   providedIn: 'root',
 })
-export class ThemesService {
+export class ThemeService {
   get current$() {
     return this._current$.asObservable();
   }

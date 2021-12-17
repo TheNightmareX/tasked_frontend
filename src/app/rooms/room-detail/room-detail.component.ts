@@ -5,8 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { catchError, first, map, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
-import { ThemesService } from 'src/app/core/themes.service';
-import { RoomDetailGQL, RoomDetailQuery, Role } from 'src/app/graphql';
+import { ThemeService } from 'src/app/core/theme.service';
+import { Role, RoomDetailGQL, RoomDetailQuery } from 'src/app/graphql';
 import { RoomsLocalStorageService } from '../rooms-local-storage.service';
 
 type Room = RoomDetailQuery['room'];
@@ -25,7 +25,7 @@ export class RoomDetailComponent implements OnInit {
   links: TabLink[] = [];
 
   constructor(
-    public themes: ThemesService,
+    public theme: ThemeService,
     private router: Router,
     private route: ActivatedRoute,
     private media: MediaObserver,

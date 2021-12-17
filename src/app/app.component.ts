@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ThemesService } from './core/themes.service';
+import { ThemeService } from './core/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +7,9 @@ import { ThemesService } from './core/themes.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private themes: ThemesService) {}
+  constructor(private theme: ThemeService) {}
 
   ngOnInit() {
-    this.themes.init();
+    this.theme.init();
   }
 }
