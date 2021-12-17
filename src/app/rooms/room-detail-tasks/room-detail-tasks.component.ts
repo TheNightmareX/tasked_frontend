@@ -18,12 +18,12 @@ type Task = MembershipTaskListQuery['membership']['tasks']['results'][number];
   styleUrls: ['./room-detail-tasks.component.scss'],
 })
 export class RoomDetailTasksComponent implements OnInit {
-  tasks$?: Observable<Task[]>;
+  tasks$!: Observable<Task[]>;
   loadingInitial = true;
   loadingMore = false;
   loadingMoreNeeded = false;
 
-  private query?: QueryRef<
+  private query!: QueryRef<
     MembershipTaskListQuery,
     MembershipTaskListQueryVariables
   >;
@@ -35,22 +35,21 @@ export class RoomDetailTasksComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const id = this.route.parent!.snapshot.paramMap.get('id')!;
-    this.roomGql
-      .fetch({ id })
-      .pipe(map((result) => result.data.room.membership?.id))
-      .subscribe((id) => {
-        if (!id) return;
-        this.query = this.listGql.watch({ id });
-        this.tasks$ = this.query.valueChanges.pipe(
-          map((result) => result.data.membership.tasks),
-          tap(({ results, total }) => {
-            this.loadingInitial = false;
-            this.loadingMoreNeeded = results.length < total;
-          }),
-          map(({ results }) => results),
-        );
-      });
+    const classroomId = this.route.parent!.snapshot.paramMap.get('id')!;
+
+    const membershipId = this.roomGql
+      .watch({ id: classroomId })
+      .getCurrentResult().data.room.membership!.id;
+
+    this.query = this.listGql.watch({ id: membershipId });
+    this.tasks$ = this.query.valueChanges.pipe(
+      map((result) => result.data.membership.tasks),
+      tap(({ results, total }) => {
+        this.loadingInitial = false;
+        this.loadingMoreNeeded = results.length < total;
+      }),
+      map(({ results }) => results),
+    );
   }
 
   identifyTask(index: number, task: Task) {
@@ -58,18 +57,19 @@ export class RoomDetailTasksComponent implements OnInit {
   }
 
   fetchMore() {
-    const query = this.query;
-    if (!query || !this.loadingMoreNeeded || this.loadingMore) return;
+    if (!this.loadingMoreNeeded || this.loadingMore) return;
 
-    const current = query.getCurrentResult().data.membership.tasks;
+    const current = this.query.getCurrentResult().data.membership.tasks;
     this.loadingMore = true;
-    from(query.fetchMore({ variables: { offset: current.results.length } }))
+    from(
+      this.query.fetchMore({ variables: { offset: current.results.length } }),
+    )
       .pipe(
         map((result) => result.data.membership.tasks),
         finalize(() => (this.loadingMore = false)),
       )
       .subscribe(({ results, total }) => {
-        query.updateQuery((prev) => ({
+        this.query.updateQuery((prev) => ({
           ...prev,
           membership: {
             ...prev.membership,
