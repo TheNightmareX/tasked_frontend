@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { combineLatest } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import { RoomListGQL } from 'src/app/graphql';
-import { RoomsLocalStorageService } from '../rooms-local-storage.service';
+import { ActivatedRoomMapStorage } from 'src/app/local-storage/activated-room-map-storage.service';
 
 @Component({
   selector: 'app-room-redirector',
@@ -16,7 +16,7 @@ import { RoomsLocalStorageService } from '../rooms-local-storage.service';
 export class RoomRedirectorComponent {
   constructor(
     private router: Router,
-    private storage: RoomsLocalStorageService,
+    private activatedRoomMap: ActivatedRoomMapStorage,
     private auth: AuthService,
     private notifier: NotifierService,
     private listGql: RoomListGQL,
@@ -27,7 +27,7 @@ export class RoomRedirectorComponent {
       this.listGql.fetch().pipe(map((result) => result.data.rooms.results)),
       this.auth.user$.pipe(first()),
     ]).subscribe(([rooms, user]) => {
-      const map = this.storage.lastActivatedRoomMap;
+      const map = this.activatedRoomMap;
       if (user!.id in map.value) {
         const exists = rooms.some((item) => item.id == map.value[user!.id]);
         if (exists) {

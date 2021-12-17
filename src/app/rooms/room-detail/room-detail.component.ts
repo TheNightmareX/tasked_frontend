@@ -7,7 +7,7 @@ import { catchError, first, map, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ThemeService } from 'src/app/core/theme.service';
 import { Role, RoomDetailGQL, RoomDetailQuery } from 'src/app/graphql';
-import { RoomsLocalStorageService } from '../rooms-local-storage.service';
+import { ActivatedRoomMapStorage } from 'src/app/local-storage/activated-room-map-storage.service';
 
 type Room = RoomDetailQuery['room'];
 
@@ -29,7 +29,7 @@ export class RoomDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private media: MediaObserver,
-    private local: RoomsLocalStorageService,
+    private activatedRoomMap: ActivatedRoomMapStorage,
     private auth: AuthService,
     private roomDetailGql: RoomDetailGQL,
   ) {}
@@ -50,7 +50,7 @@ export class RoomDetailComponent implements OnInit {
       const id = params.get('id')!;
 
       this.auth.user$.pipe(first()).subscribe((user) => {
-        const map = this.local.lastActivatedRoomMap;
+        const map = this.activatedRoomMap;
         map.value[user!.id] = id;
         map.save();
       });
