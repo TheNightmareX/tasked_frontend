@@ -39,7 +39,7 @@
         </a>
       </nav>
       <main fxFlex>
-        <router-outlet></router-outlet>
+        <router-outlet *ngIf="room$ | async"></router-outlet>
       </main>
     </mat-drawer-content>
   </mat-drawer-container>

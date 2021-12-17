@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 import { MatDrawerMode } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, first, map, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ThemeService } from 'src/app/core/theme.service';
@@ -58,16 +58,17 @@ export class RoomDetailComponent implements OnInit {
       this.room$ = this.roomDetailGql.watch({ id }).valueChanges.pipe(
         map(({ data }) => data.room),
         tap((room) => {
+          if (!room.membership) throw new Error('Inaccessible room');
           this.links = [
-            room.membership!.role == Role.Member
+            room.membership.role == Role.Member
               ? [$localize`Assignments`, ['assignments']]
               : [$localize`Tasks`, ['tasks']],
             [$localize`Settings`, ['settings']],
           ];
         }),
-        catchError((err) => {
+        catchError(() => {
           this.router.navigate(['/app/rooms']);
-          throw err;
+          return of<Room>();
         }),
       );
     });
