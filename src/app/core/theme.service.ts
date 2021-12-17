@@ -1,25 +1,18 @@
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
 import { LocalStorageItem } from '../local-storage/local-storage-item.class';
+import { ThemeStorage } from '../local-storage/theme-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThemeService {
-  get current$() {
-    return this._current$.asObservable();
-  }
-  private _current$ = new ReplaySubject<Theme>(1);
-  private current: LocalStorageItem<Theme>;
+  public current: LocalStorageItem<Theme>;
+
   private $root: HTMLHtmlElement;
   private $themeColorMeta: HTMLMetaElement;
 
-  constructor() {
-    this.current = new LocalStorageItem(
-      'theme',
-      (v) => (v as Theme) == 'light' || (v as Theme) == 'dark',
-      () => this.getPreference(),
-    );
+  constructor(storage: ThemeStorage) {
+    this.current = storage.next(this.getPreference());
     this.$root = document.documentElement as HTMLHtmlElement;
     this.$themeColorMeta = document.querySelector(
       'meta[name="theme-color"]',
@@ -35,7 +28,6 @@ export class ThemeService {
     this.$root.classList.add(this.getClassName(theme));
     this.$themeColorMeta.content = this.getThemeColor();
     this.current.next(theme).save();
-    this._current$.next(theme);
   }
 
   toggle() {

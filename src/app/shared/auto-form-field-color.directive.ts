@@ -15,7 +15,7 @@ export class AutoFormFieldColorDirective implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.subscription = this.theme.current$.subscribe((theme) => {
+    this.subscription = this.theme.current.value$.subscribe((theme) => {
       this.matFormField.color = theme == 'light' ? 'primary' : 'accent';
     });
   }
