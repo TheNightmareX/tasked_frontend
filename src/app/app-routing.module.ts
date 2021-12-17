@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
+import { DelayGuard } from './core/delay.guard';
 
 const routes: Routes = [
   {
@@ -11,11 +12,12 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+    canLoad: [DelayGuard],
   },
   {
     path: 'app',
     loadChildren: () => import('./main/main.module').then((m) => m.MainModule),
-    canLoad: [AuthGuard],
+    canLoad: [DelayGuard, AuthGuard],
   },
   {
     path: '**',

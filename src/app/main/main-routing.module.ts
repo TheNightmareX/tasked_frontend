@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DelayGuard } from '../core/delay.guard';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
         path: 'rooms',
         loadChildren: () =>
           import('../rooms/rooms.module').then((m) => m.RoomsModule),
+        canLoad: [DelayGuard],
       },
       {
         path: 'applications',
@@ -23,6 +25,7 @@ const routes: Routes = [
           import('../applications/applications.module').then(
             (m) => m.ApplicationsModule,
           ),
+        canLoad: [DelayGuard],
       },
     ],
   },
