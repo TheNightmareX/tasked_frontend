@@ -1,9 +1,9 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { RoomAssignmentListQuery } from 'src/app/graphql';
+import { MembershipAssignmentListQuery } from 'src/app/graphql';
 
 type Assignment =
-  RoomAssignmentListQuery['room']['assignments']['results'][number];
+  MembershipAssignmentListQuery['membership']['assignments']['results'][number];
 
 @Component({
   selector: 'app-room-detail-assignments-item-detail',

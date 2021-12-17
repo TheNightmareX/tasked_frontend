@@ -4,12 +4,13 @@ import { QueryRef } from 'apollo-angular';
 import { from, Observable } from 'rxjs';
 import { finalize, map, tap } from 'rxjs/operators';
 import {
-  RoomTaskListGQL,
-  RoomTaskListQuery,
-  RoomTaskListQueryVariables,
+  MembershipTaskListGQL,
+  MembershipTaskListQuery,
+  MembershipTaskListQueryVariables,
+  RoomDetailGQL,
 } from 'src/app/graphql';
 
-type Task = RoomTaskListQuery['room']['tasks']['results'][number];
+type Task = MembershipTaskListQuery['membership']['tasks']['results'][number];
 
 @Component({
   selector: 'app-room-detail-tasks',
@@ -22,18 +23,27 @@ export class RoomDetailTasksComponent implements OnInit {
   loadingMore = false;
   loadingMoreNeeded = false;
 
-  private query!: QueryRef<RoomTaskListQuery, RoomTaskListQueryVariables>;
+  private query!: QueryRef<
+    MembershipTaskListQuery,
+    MembershipTaskListQueryVariables
+  >;
 
   constructor(
     private route: ActivatedRoute,
-    private listGql: RoomTaskListGQL,
+    private roomGql: RoomDetailGQL,
+    private listGql: MembershipTaskListGQL,
   ) {}
 
   ngOnInit() {
-    const id = this.route.parent!.snapshot.paramMap.get('id')!;
-    this.query = this.listGql.watch({ id });
+    const classroomId = this.route.parent!.snapshot.paramMap.get('id')!;
+
+    const membershipId = this.roomGql
+      .watch({ id: classroomId })
+      .getCurrentResult().data.room.membership!.id;
+
+    this.query = this.listGql.watch({ id: membershipId });
     this.tasks$ = this.query.valueChanges.pipe(
-      map((result) => result.data.room.tasks),
+      map((result) => result.data.membership.tasks),
       tap(({ results, total }) => {
         this.loadingInitial = false;
         this.loadingMoreNeeded = results.length < total;
@@ -49,24 +59,24 @@ export class RoomDetailTasksComponent implements OnInit {
   fetchMore() {
     if (!this.loadingMoreNeeded || this.loadingMore) return;
 
-    const current = this.query.getCurrentResult().data.room.tasks;
+    const current = this.query.getCurrentResult().data.membership.tasks;
     this.loadingMore = true;
     from(
       this.query.fetchMore({ variables: { offset: current.results.length } }),
     )
       .pipe(
-        map((result) => result.data.room.tasks),
+        map((result) => result.data.membership.tasks),
         finalize(() => (this.loadingMore = false)),
       )
       .subscribe(({ results, total }) => {
         this.query.updateQuery((prev) => ({
           ...prev,
-          room: {
-            ...prev.room,
+          membership: {
+            ...prev.membership,
             tasks: {
-              ...prev.room.tasks,
+              ...prev.membership.tasks,
               total,
-              results: [...prev.room.tasks.results, ...results],
+              results: [...prev.membership.tasks.results, ...results],
             },
           },
         }));

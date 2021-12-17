@@ -4,10 +4,13 @@ import { NotifierService } from 'angular-notifier';
 import { timer } from 'rxjs';
 import { concatMap, finalize } from 'rxjs/operators';
 import { NotificationType } from 'src/app/common/notification-type.enum';
-import { AssignmentUpdateGQL, RoomAssignmentListQuery } from 'src/app/graphql';
+import {
+  AssignmentUpdateGQL,
+  MembershipAssignmentListQuery,
+} from 'src/app/graphql';
 
 type Assignment =
-  RoomAssignmentListQuery['room']['assignments']['results'][number];
+  MembershipAssignmentListQuery['membership']['assignments']['results'][number];
 
 @Component({
   selector: 'app-room-detail-assignments-item',

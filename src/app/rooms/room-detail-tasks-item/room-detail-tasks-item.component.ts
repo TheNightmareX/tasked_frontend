@@ -9,21 +9,21 @@ import {
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
-import { filterKeys } from 'src/app/common/filter-keys.func';
 import { Observable, Subscription } from 'rxjs';
 import { delay, finalize } from 'rxjs/operators';
+import { filterKeys } from 'src/app/common/filter-keys.func';
+import { isEmpty } from 'src/app/common/is-empty.func';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import { pick } from 'src/app/common/pick.func';
 import {
-  RoomTaskListGQL,
-  RoomTaskListQuery,
+  MembershipTaskListGQL,
+  MembershipTaskListQuery,
   TaskDeleteGQL,
   TaskUpdateGQL,
   TaskUpdateInput,
 } from 'src/app/graphql';
-import { isEmpty } from 'src/app/common/is-empty.func';
 
-type Task = RoomTaskListQuery['room']['tasks']['results'][number];
+type Task = MembershipTaskListQuery['membership']['tasks']['results'][number];
 
 @Component({
   selector: 'app-room-detail-tasks-item',
@@ -55,15 +55,17 @@ export class RoomDetailTasksItemComponent
   constructor(
     private route: ActivatedRoute,
     private notifier: NotifierService,
-    private listGql: RoomTaskListGQL,
+    private listGql: MembershipTaskListGQL,
     private updateGql: TaskUpdateGQL,
     private deleteGql: TaskDeleteGQL,
   ) {}
 
   ngOnInit() {}
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+
   ngAfterViewInit() {
     this.subscription.add(
       this.form
@@ -98,11 +100,11 @@ export class RoomDetailTasksItemComponent
             const id = this.route.parent!.snapshot.paramMap.get('id')!;
             this.listGql.watch({ id }).updateQuery((prev) => ({
               ...prev,
-              room: {
-                ...prev.room,
+              membership: {
+                ...prev.membership,
                 tasks: {
-                  ...prev.room.tasks,
-                  total: prev.room.tasks.total - 1,
+                  ...prev.membership.tasks,
+                  total: prev.membership.tasks.total - 1,
                 },
               },
             }));

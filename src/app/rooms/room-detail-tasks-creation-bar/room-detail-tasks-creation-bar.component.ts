@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { finalize } from 'rxjs/operators';
 import { NotificationType } from 'src/app/common/notification-type.enum';
-import { RoomTaskListGQL, TaskCreateGQL } from 'src/app/graphql';
+import { MembershipTaskListGQL, TaskCreateGQL } from 'src/app/graphql';
 
 @Component({
   selector: 'app-room-detail-tasks-creation-bar',
@@ -17,7 +17,7 @@ export class RoomDetailTasksCreationBarComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private notifier: NotifierService,
-    private listGql: RoomTaskListGQL,
+    private listGql: MembershipTaskListGQL,
     private createGql: TaskCreateGQL,
   ) {}
 
@@ -35,14 +35,14 @@ export class RoomDetailTasksCreationBarComponent implements OnInit {
             const query = this.listGql.watch({ id: roomId });
             query.updateQuery((prev) => ({
               ...prev,
-              room: {
-                ...prev.room,
+              membership: {
+                ...prev.membership,
                 tasks: {
-                  ...prev.room.tasks,
-                  total: prev.room.tasks.total + 1,
+                  ...prev.membership.tasks,
+                  total: prev.membership.tasks.total + 1,
                   results: [
                     result.data!.createTask,
-                    ...prev.room.tasks.results,
+                    ...prev.membership.tasks.results,
                   ],
                 },
               },

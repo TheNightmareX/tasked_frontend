@@ -4,13 +4,14 @@ import { QueryRef } from 'apollo-angular';
 import { from, Observable } from 'rxjs';
 import { finalize, map, tap } from 'rxjs/operators';
 import {
-  RoomAssignmentListGQL,
-  RoomAssignmentListQuery,
-  RoomAssignmentListQueryVariables,
+  MembershipAssignmentListGQL,
+  MembershipAssignmentListQuery,
+  MembershipAssignmentListQueryVariables,
+  RoomDetailGQL,
 } from 'src/app/graphql';
 
 type Assignment =
-  RoomAssignmentListQuery['room']['assignments']['results'][number];
+  MembershipAssignmentListQuery['membership']['assignments']['results'][number];
 
 @Component({
   selector: 'app-room-detail-assignments',
@@ -25,20 +26,27 @@ export class RoomDetailAssignmentsComponent implements OnInit {
   loadingMoreNeeded = false;
 
   private query!: QueryRef<
-    RoomAssignmentListQuery,
-    RoomAssignmentListQueryVariables
+    MembershipAssignmentListQuery,
+    MembershipAssignmentListQueryVariables
   >;
 
   constructor(
     private route: ActivatedRoute,
-    private listGql: RoomAssignmentListGQL,
+    private roomGql: RoomDetailGQL,
+    private listGql: MembershipAssignmentListGQL,
   ) {}
 
   ngOnInit() {
-    const id = this.route.parent!.snapshot.paramMap.get('id')!;
-    this.query = this.listGql.watch({ id });
+    const classroomId = this.route.parent!.snapshot.paramMap.get('id')!;
+
+    const membershipId = this.roomGql
+      .watch({ id: classroomId })
+      .getCurrentResult().data.room.membership!.id;
+
+    this.query = this.listGql.watch({ id: membershipId });
+
     const assignments$ = this.query.valueChanges.pipe(
-      map((result) => result.data.room.assignments),
+      map((result) => result.data.membership.assignments),
       tap(({ results, total }) => {
         this.loadingInitial = false;
         this.loadingMoreNeeded = results.length < total;
@@ -68,23 +76,23 @@ export class RoomDetailAssignmentsComponent implements OnInit {
   fetchMore() {
     if (!this.loadingMoreNeeded || this.loadingMore) return;
 
-    const data = this.query.getCurrentResult().data.room.assignments;
+    const data = this.query.getCurrentResult().data.membership.assignments;
 
     this.loadingMore = true;
     from(this.query.fetchMore({ variables: { offset: data.results.length } }))
       .pipe(
-        map((result) => result.data.room.assignments),
+        map((result) => result.data.membership.assignments),
         finalize(() => (this.loadingMore = false)),
       )
       .subscribe(({ results, total }) => {
         this.query.updateQuery((prev) => ({
           ...prev,
-          room: {
-            ...prev.room,
+          membership: {
+            ...prev.membership,
             assignments: {
-              ...prev.room.assignments,
+              ...prev.membership.assignments,
               total,
-              results: [...prev.room.assignments.results, ...results],
+              results: [...prev.membership.assignments.results, ...results],
             },
           },
         }));

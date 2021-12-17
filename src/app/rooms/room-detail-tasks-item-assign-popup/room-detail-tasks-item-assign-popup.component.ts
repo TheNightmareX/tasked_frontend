@@ -7,10 +7,10 @@ import { NotificationType } from 'src/app/common/notification-type.enum';
 import {
   AssignmentCreateGQL,
   AssignmentDeleteGQL,
+  MembershipTaskListQuery,
   Role,
   RoomMembershipListGQL,
   RoomMembershipListQuery,
-  RoomTaskListQuery,
   TaskAssignmentListGQL,
   TaskAssignmentListQuery,
 } from 'src/app/graphql';
@@ -192,7 +192,7 @@ export class RoomDetailTasksItemAssignPopupComponent
   }
 }
 
-type Task = RoomTaskListQuery['room']['tasks']['results'][number];
+type Task = MembershipTaskListQuery['membership']['tasks']['results'][number];
 
 type Membership =
   RoomMembershipListQuery['room']['memberships']['results'][number];
