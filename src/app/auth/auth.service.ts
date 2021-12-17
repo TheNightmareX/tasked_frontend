@@ -3,7 +3,7 @@ import { NotifierService } from 'angular-notifier';
 import { Apollo } from 'apollo-angular';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { LocalStorageItem } from '../common/local-storage-item.class';
+import { LocalStorageItem } from '../local-storage/local-storage-item.class';
 import { AuthGQL, MeGQL, MeQuery } from '../graphql';
 
 type User = MeQuery['me'];
