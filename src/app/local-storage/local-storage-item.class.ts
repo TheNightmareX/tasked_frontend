@@ -23,10 +23,10 @@ export class LocalStorageItem<Value> {
    * @param value
    * @returns
    */
-  next(value: Value) {
+  next<Next extends Value>(value: Next) {
     this._value = value;
     this._value$.next(value);
-    return this;
+    return this as unknown as LocalStorageItem<Next>;
   }
 
   /**
