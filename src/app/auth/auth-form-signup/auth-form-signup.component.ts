@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Subject } from 'rxjs';
 import { concatMap, finalize, throttleTime } from 'rxjs/operators';
@@ -25,9 +25,10 @@ export class AuthFormSignupComponent implements OnInit {
   submit$ = new Subject<Event>();
 
   constructor(
+    private router: Router,
+    private route: ActivatedRoute,
     private auth: AuthService,
     private notifier: NotifierService,
-    private router: Router,
     private userCreateGql: UserCreateGQL,
   ) {}
 
@@ -51,14 +52,12 @@ export class AuthFormSignupComponent implements OnInit {
       .mutate({ data })
       .pipe(
         concatMap(() => this.auth.login(username, password)),
-
-        finalize(() => {
-          this.loading = false;
-        }),
+        finalize(() => (this.loading = false)),
       )
       .subscribe(
         () => {
-          this.router.navigate(['/']);
+          const next = this.route.snapshot.queryParams['next'];
+          this.router.navigate([next ?? '/']);
         },
         () => {
           this.notifier.notify(

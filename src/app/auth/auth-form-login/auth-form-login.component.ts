@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatInput } from '@angular/material/input';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Subject } from 'rxjs';
 import { finalize, throttleTime } from 'rxjs/operators';
@@ -21,6 +21,7 @@ export class AuthFormLoginComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private auth: AuthService,
     private notifier: NotifierService,
   ) {}
@@ -44,7 +45,8 @@ export class AuthFormLoginComponent implements OnInit {
       )
       .subscribe(
         () => {
-          this.router.navigate(['/']);
+          const next = this.route.snapshot.queryParams['next'];
+          this.router.navigate([next ?? '/']);
         },
         () => {
           this.notifier.notify(

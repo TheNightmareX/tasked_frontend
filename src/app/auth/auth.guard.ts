@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Router } from '@angular/router';
+import { CanLoad, Route, Router, UrlSegment } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
@@ -9,8 +9,11 @@ import { AuthService } from './auth.service';
 export class AuthGuard implements CanLoad {
   constructor(private auth: AuthService, private router: Router) {}
 
-  canLoad() {
-    const redirection = this.router.parseUrl('/auth');
+  canLoad(route: Route, segments: UrlSegment[]) {
+    const target = segments.reduce((url, item) => (url += `/${item.path}`), '');
+    const redirection = this.router.createUrlTree(['/auth'], {
+      queryParams: { next: target },
+    });
     // Check the token first because subscribing `user$` may cause a request
     // when the cache is cleared.
     return this.auth.token.value
