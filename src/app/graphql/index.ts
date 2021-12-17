@@ -1136,7 +1136,6 @@ export type MembershipFragment = {
 export type RoomAssignmentListQueryVariables = Exact<{
   id: Scalars['ID'];
   offset?: Maybe<Scalars['Int']>;
-  ownOnly?: Maybe<Scalars['Boolean']>;
 }>;
 
 export type RoomAssignmentListQuery = {
@@ -1822,14 +1821,14 @@ export class MembershipUpdateGQL extends Apollo.Mutation<
   }
 }
 export const RoomAssignmentListDocument = gql`
-  query RoomAssignmentList($id: ID!, $offset: Int, $ownOnly: Boolean) {
+  query RoomAssignmentList($id: ID!, $offset: Int) {
     room(id: $id) {
       id
       assignments(
         limit: 20
         offset: $offset
         order: { updatedAt: DESC }
-        ownOnly: $ownOnly
+        ownOnly: true
       ) {
         total
         results {
