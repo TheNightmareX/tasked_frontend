@@ -1,16 +1,38 @@
+import { Observable, ReplaySubject } from 'rxjs';
+
 export class LocalStorageItem<Value> {
-  value: Value;
-  passed: boolean;
+  get value() {
+    return this._value;
+  }
+  private _value!: Value;
+
+  value$: Observable<Value>;
+  private _value$ = new ReplaySubject<Value>(1);
 
   constructor(
     public key: Key,
     private validator: (dirty: unknown) => boolean,
     private initial: Value | (() => Value),
   ) {
-    const result = this.load().save();
-    [this.value, this.passed] = [result.value, result.passed];
+    this.value$ = this._value$.asObservable();
+    this.load().save();
   }
 
+  /**
+   * Update the current value.
+   * @param value
+   * @returns
+   */
+  next(value: Value) {
+    this._value = value;
+    this._value$.next(value);
+    return this;
+  }
+
+  /**
+   * Load a value from `LocalStorage` and overwrite the current one.
+   * @returns
+   */
   load() {
     try {
       const raw = localStorage.getItem(this.key);
@@ -18,21 +40,23 @@ export class LocalStorageItem<Value> {
       const dirty = JSON.parse(raw);
       if (!this.validator(dirty)) throw new UseInitialValue();
       const validated = dirty;
-      this.value = validated;
-      this.passed = true;
+      this.next(validated);
     } catch (error) {
       if (!(error instanceof UseInitialValue || error instanceof SyntaxError))
         throw error;
-      this.value =
-        this.initial instanceof Function ? this.initial() : this.initial;
-      this.passed = false;
+      this.next(
+        this.initial instanceof Function ? this.initial() : this.initial,
+      );
     } finally {
       return this;
     }
   }
 
-  save(value = this.value) {
-    this.value = value;
+  /**
+   * Save the current value to `LocalStorage`.
+   * @returns
+   */
+  save() {
     localStorage.setItem(this.key, JSON.stringify(this.value));
     return this;
   }

@@ -27,7 +27,7 @@ export class AuthService {
     this.user$ = this.userQuery.valueChanges.pipe(
       map(({ data }) => data.me),
       catchError(() => {
-        this.token.save(null);
+        this.token.next(null).save();
         return of(null);
       }),
     );
@@ -37,14 +37,14 @@ export class AuthService {
     return this.authGql.mutate({ username, password }).pipe(
       map(({ data }) => data!.auth),
       tap(({ token }) => {
-        this.token.save(token);
+        this.token.next(token).save();
         this.userQuery.refetch();
       }),
     );
   }
 
   logout() {
-    this.token.save(null);
+    this.token.next(null).save();
     this.apollo.client.clearStore();
     this.notifier.hideAll();
   }

@@ -34,7 +34,7 @@ export class ThemesService {
     this.$root.classList.remove(this.getClassName(this.current.value));
     this.$root.classList.add(this.getClassName(theme));
     this.$themeColorMeta.content = this.getThemeColor();
-    this.current.save(theme);
+    this.current.next(theme).save();
     this._current$.next(theme);
   }
 
@@ -59,4 +59,4 @@ export class ThemesService {
   }
 }
 
-type Theme = 'light' | 'dark';
+export type Theme = 'light' | 'dark';
