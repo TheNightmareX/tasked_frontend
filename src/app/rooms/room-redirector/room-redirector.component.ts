@@ -6,7 +6,7 @@ import { first, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import { RoomListGQL } from 'src/app/graphql';
-import { ActivatedRoomMapStorage } from 'src/app/local-storage/activated-room-map-storage.service';
+import { ActivatedRoomMapStorage } from 'src/app/local-storage/activated-room-map.storage';
 
 @Component({
   selector: 'app-room-redirector',

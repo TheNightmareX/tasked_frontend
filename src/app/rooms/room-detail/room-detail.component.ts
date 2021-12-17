@@ -7,7 +7,7 @@ import { catchError, first, map, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ThemeService } from 'src/app/core/theme.service';
 import { Role, RoomDetailGQL, RoomDetailQuery } from 'src/app/graphql';
-import { ActivatedRoomMapStorage } from 'src/app/local-storage/activated-room-map-storage.service';
+import { ActivatedRoomMapStorage } from 'src/app/local-storage/activated-room-map.storage';
 
 type Room = RoomDetailQuery['room'];
 
