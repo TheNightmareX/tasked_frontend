@@ -1,4 +1,7 @@
-import { Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
+
+const INITIAL = Symbol();
 
 export class LocalStorageItem<Value> {
   get value() {
@@ -7,14 +10,16 @@ export class LocalStorageItem<Value> {
   private _value!: Value;
 
   value$: Observable<Value>;
-  private _value$ = new ReplaySubject<Value>(1);
+  private _value$ = new BehaviorSubject<Value | typeof INITIAL>(INITIAL);
 
   constructor(
     public key: Key,
     private validator: (dirty: unknown) => boolean,
     private initial: Value | (() => Value),
   ) {
-    this.value$ = this._value$.asObservable();
+    this.value$ = this._value$
+      .asObservable()
+      .pipe(filter((value): value is Value => value != INITIAL));
     this.load().save();
   }
 

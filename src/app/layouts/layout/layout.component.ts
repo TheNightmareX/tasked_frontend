@@ -9,7 +9,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
-import { Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { debounceTime, tap } from 'rxjs/operators';
 
 @Component({
@@ -20,7 +20,7 @@ import { debounceTime, tap } from 'rxjs/operators';
 export class LayoutComponent implements OnInit, OnDestroy {
   loading$: Observable<boolean>;
 
-  private _loading$ = new ReplaySubject<boolean>(1);
+  private _loading$ = new BehaviorSubject<boolean>(false);
 
   @ViewChild('spinner')
   private spinnerTemplateRef!: TemplateRef<never>;
