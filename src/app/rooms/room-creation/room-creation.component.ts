@@ -35,15 +35,22 @@ export class RoomCreationComponent implements OnInit {
         { data: this.data },
         {
           update: (_, result) => {
-            const query = this.listGql.watch();
-            query.updateQuery((prev) => ({
-              ...prev,
-              rooms: {
-                ...prev.rooms,
-                total: prev.rooms.total + 1,
-                results: [...prev.rooms.results, result.data!.createRoom],
-              },
-            }));
+            const queries = [
+              this.listGql.watch(),
+              this.listGql.watch({ joinedOnly: true }),
+            ];
+            queries
+              .filter((query) => query.getCurrentResult().data)
+              .forEach((query) =>
+                query.updateQuery((prev) => ({
+                  ...prev,
+                  rooms: {
+                    ...prev.rooms,
+                    total: prev.rooms.total + 1,
+                    results: [...prev.rooms.results, result.data!.createRoom],
+                  },
+                })),
+              );
           },
         },
       )
@@ -62,7 +69,8 @@ export class RoomCreationComponent implements OnInit {
             relativeTo: this.route,
           });
         },
-        () => {
+        (err) => {
+          console.debug(err);
           this.notifier.notify(
             NotificationType.Error,
             $localize`Failed to create the room`,
