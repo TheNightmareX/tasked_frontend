@@ -3,7 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { finalize } from 'rxjs/operators';
 import { NotificationType } from 'src/app/common/notification-type.enum';
-import { MembershipTaskListGQL, TaskCreateGQL } from 'src/app/graphql';
+import {
+  MembershipTaskListGQL,
+  RoomDetailGQL,
+  TaskCreateGQL,
+} from 'src/app/graphql';
 
 @Component({
   selector: 'app-room-detail-tasks-creation-bar',
@@ -19,20 +23,26 @@ export class RoomDetailTasksCreationBarComponent implements OnInit {
     private notifier: NotifierService,
     private listGql: MembershipTaskListGQL,
     private createGql: TaskCreateGQL,
+    private roomDetailGql: RoomDetailGQL,
   ) {}
 
   ngOnInit() {}
 
   create() {
     if (this.loading) return;
+
     const roomId = this.route.parent!.snapshot.paramMap.get('id')!;
+    const membershipId = this.roomDetailGql
+      .watch({ id: roomId })
+      .getCurrentResult().data.room.membership!.id;
+
     this.loading = true;
     this.createGql
       .mutate(
         { data: { room: roomId, title: this.data } },
         {
           update: (_, result) => {
-            const query = this.listGql.watch({ id: roomId });
+            const query = this.listGql.watch({ id: membershipId });
             query.updateQuery((prev) => ({
               ...prev,
               membership: {

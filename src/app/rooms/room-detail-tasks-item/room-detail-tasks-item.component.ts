@@ -18,6 +18,7 @@ import { pick } from 'src/app/common/pick.func';
 import {
   MembershipTaskListGQL,
   MembershipTaskListQuery,
+  RoomDetailGQL,
   TaskDeleteGQL,
   TaskUpdateGQL,
   TaskUpdateInput,
@@ -58,6 +59,7 @@ export class RoomDetailTasksItemComponent
     private listGql: MembershipTaskListGQL,
     private updateGql: TaskUpdateGQL,
     private deleteGql: TaskDeleteGQL,
+    private roomDetailGql: RoomDetailGQL,
   ) {}
 
   ngOnInit() {}
@@ -97,8 +99,13 @@ export class RoomDetailTasksItemComponent
         {
           update: (cache, result) => {
             cache.evict({ id: cache.identify(result.data!.deleteTask) });
-            const id = this.route.parent!.snapshot.paramMap.get('id')!;
-            this.listGql.watch({ id }).updateQuery((prev) => ({
+
+            const roomId = this.route.parent!.snapshot.paramMap.get('id')!;
+            const membershipId = this.roomDetailGql
+              .watch({ id: roomId })
+              .getCurrentResult().data.room.membership!.id;
+
+            this.listGql.watch({ id: membershipId }).updateQuery((prev) => ({
               ...prev,
               membership: {
                 ...prev.membership,
