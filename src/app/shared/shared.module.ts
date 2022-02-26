@@ -11,7 +11,6 @@ import { ValidationModule } from '../validation/validation.module';
 import { ContainerComponent } from './container/container.component';
 import { LoadingDirective } from './loading.directive';
 import { UsernameComponent } from './username/username.component';
-import { HelpIconComponent } from './help-icon/help-icon.component';
 
 const modules = [
   CommonModule,
@@ -25,7 +24,7 @@ const modules = [
   ValidationModule,
 ];
 
-const components = [UsernameComponent, ContainerComponent, HelpIconComponent];
+const components = [UsernameComponent, ContainerComponent];
 
 const directives = [LoadingDirective];
 
