@@ -6,7 +6,7 @@ import { first, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import { RoomListGQL } from 'src/app/graphql';
-import { ActivatedRoomMapStorage } from 'src/app/local-storage/activated-room-map.storage';
+import { RoomsActivatedMapStorage } from '../rooms-activated-map.storage';
 
 @Component({
   selector: 'app-room-redirector',
@@ -16,7 +16,7 @@ import { ActivatedRoomMapStorage } from 'src/app/local-storage/activated-room-ma
 export class RoomRedirectorComponent {
   constructor(
     private router: Router,
-    private activatedRoomMap: ActivatedRoomMapStorage,
+    private activatedRoomsMap: RoomsActivatedMapStorage,
     private auth: AuthService,
     private notifier: NotifierService,
     private listGql: RoomListGQL,
@@ -27,7 +27,7 @@ export class RoomRedirectorComponent {
       this.listGql.fetch().pipe(map((result) => result.data.rooms.results)),
       this.auth.user$.pipe(first()),
     ]).subscribe(([rooms, user]) => {
-      const map = this.activatedRoomMap;
+      const map = this.activatedRoomsMap;
       if (user!.id in map.value) {
         const exists = rooms.some((item) => item.id == map.value[user!.id]);
         if (exists) {

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { LocalStorageItem } from './local-storage-item.class';
+import { LocalStorageItem } from '../local-storage/local-storage-item.class';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ActivatedRoomMapStorage extends LocalStorageItem<Map> {
+export class RoomsActivatedMapStorage extends LocalStorageItem<Map> {
   constructor() {
     super(
       'roomMap',
