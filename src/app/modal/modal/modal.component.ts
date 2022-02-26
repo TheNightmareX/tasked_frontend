@@ -17,19 +17,19 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
  * content as a dialog in desktop devices but a bottom sheet in mobile devices.
  *
  * **NOTE**: Providers like {@link MatDialogRef} and {@link MatBottomSheetRef}
- * are not available, inject {@link PopupComponent} instead.
+ * are not available, inject {@link ModalComponent} instead.
  */
 @Component({
-  selector: 'app-popup',
-  templateUrl: './popup.component.html',
-  styleUrls: ['./popup.component.scss'],
+  selector: 'app-modal',
+  templateUrl: './modal.component.html',
+  styleUrls: ['./modal.component.scss'],
 })
-export class PopupComponent implements OnInit {
+export class ModalComponent implements OnInit {
   @Input() closable = true;
 
   @ContentChild(TemplateRef) private contentTemplate!: TemplateRef<never>;
-  private sheetRef?: MatBottomSheetRef<PopupComponent>;
-  private dialogRef?: MatDialogRef<PopupComponent>;
+  private sheetRef?: MatBottomSheetRef<ModalComponent>;
+  private dialogRef?: MatDialogRef<ModalComponent>;
 
   constructor(
     private media: MediaObserver,

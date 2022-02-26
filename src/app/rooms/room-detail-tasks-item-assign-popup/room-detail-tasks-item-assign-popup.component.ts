@@ -14,7 +14,7 @@ import {
   TaskAssignmentListGQL,
   TaskAssignmentListQuery,
 } from 'src/app/graphql';
-import { PopupComponent } from 'src/app/shared/popup/popup.component';
+import { ModalComponent } from 'src/app/modal/modal/modal.component';
 
 @Component({
   selector: 'app-room-detail-tasks-item-assign-popup',
@@ -33,7 +33,7 @@ export class RoomDetailTasksItemAssignPopupComponent
   private subscription?: Subscription;
 
   constructor(
-    public popup: PopupComponent,
+    public popup: ModalComponent,
     private route: ActivatedRoute,
     private notifier: NotifierService,
     private membershipListGqL: RoomMembershipListGQL,

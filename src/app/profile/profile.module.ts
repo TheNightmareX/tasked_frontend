@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ModalModule } from '../modal/modal.module';
 import { ProfileBtnMenuComponent } from '../profile/profile-btn-menu/profile-btn-menu.component';
 import { ProfileBtnComponent } from '../profile/profile-btn/profile-btn.component';
 import { ProfileFormComponent } from '../profile/profile-form/profile-form.component';
@@ -13,7 +14,7 @@ import { ProfileBtnMenuEditPopupComponent } from './profile-btn-menu-edit-popup/
     ProfileBtnMenuEditPopupComponent,
     ProfileFormComponent,
   ],
-  imports: [SharedModule, ThemeModule],
+  imports: [SharedModule, ThemeModule, ModalModule],
   exports: [
     ProfileBtnComponent,
     ProfileBtnMenuComponent,

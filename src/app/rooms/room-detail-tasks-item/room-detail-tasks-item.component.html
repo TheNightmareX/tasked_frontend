@@ -57,7 +57,7 @@
         mat-button
         class="uppercase"
         [disabled]="modified"
-        (click)="popup.openSheet()"
+        (click)="modal.openSheet()"
         i18n
       >
         Assign
@@ -89,10 +89,10 @@
   </ng-template>
 </mat-expansion-panel>
 
-<app-popup #popup>
+<app-modal #modal>
   <ng-template>
     <app-room-detail-tasks-item-assign-popup
       [task]="task"
     ></app-room-detail-tasks-item-assign-popup>
   </ng-template>
-</app-popup>
+</app-modal>

@@ -8,7 +8,7 @@ import {
   ApplicationListGQL,
   RoomListQuery,
 } from 'src/app/graphql';
-import { PopupComponent } from 'src/app/shared/popup/popup.component';
+import { ModalComponent } from 'src/app/modal/modal/modal.component';
 
 @Component({
   selector: 'app-room-list-item',
@@ -20,7 +20,7 @@ export class RoomListItemComponent implements OnInit {
   message = '';
   loading = false;
 
-  @ViewChild(PopupComponent) private popup!: PopupComponent;
+  @ViewChild(ModalComponent) private popup!: ModalComponent;
 
   constructor(
     private router: Router,

@@ -3,7 +3,7 @@
   <app-username [user]="(auth.user$ | async) ?? undefined"></app-username>
 </div>
 <mat-divider></mat-divider>
-<button mat-menu-item (click)="editPopup.open()">
+<button mat-menu-item (click)="modal.open()">
   <mat-icon>edit</mat-icon>
   <span i18n>Profile</span>
 </button>
@@ -12,11 +12,11 @@
   <span i18n>Logout</span>
 </button>
 
-<app-popup #editPopup>
+<app-modal #modal>
   <ng-template>
     <app-profile-btn-menu-edit-popup
       ngClass.gt-xs="dialog"
-      (update)="editPopup.close()"
+      (update)="modal.close()"
     ></app-profile-btn-menu-edit-popup>
   </ng-template>
-</app-popup>
+</app-modal>

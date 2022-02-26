@@ -1,4 +1,4 @@
-<button mat-list-item (click)="popup.open()">
+<button mat-list-item (click)="modal.open()">
   <div
     class="actions"
     (click)="$event.stopPropagation()"
@@ -51,10 +51,10 @@
   </div>
 </button>
 
-<app-popup #popup>
+<app-modal #modal>
   <ng-template>
     <app-room-detail-assignments-item-detail
       [assignment]="assignment"
     ></app-room-detail-assignments-item-detail>
   </ng-template>
-</app-popup>
+</app-modal>
