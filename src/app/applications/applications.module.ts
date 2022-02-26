@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { ContainerModule } from '../container/container.module';
 import { InfinityScrollModule } from '../infinity-scroll/infinity-scroll.module';
 import { SharedModule } from '../shared/shared.module';
 import { UsernameModule } from '../username/username.module';
@@ -24,6 +25,7 @@ import { ApplicationsComponent } from './applications.component';
     ApplicationsRoutingModule,
     NgxSkeletonLoaderModule,
     InfinityScrollModule,
+    ContainerModule,
   ],
 })
 export class ApplicationsModule {}

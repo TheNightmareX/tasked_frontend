@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { ContainerModule } from '../container/container.module';
 import { HelpIconModule } from '../help-icon/help-icon.module';
 import { InfinityScrollModule } from '../infinity-scroll/infinity-scroll.module';
 import { LoadingModule } from '../loading/loading.module';
@@ -70,6 +71,7 @@ import { RoomsComponent } from './rooms.component';
     HelpIconModule,
     LoadingModule,
     UsernameModule,
+    ContainerModule,
   ],
 })
 export class RoomsModule {}

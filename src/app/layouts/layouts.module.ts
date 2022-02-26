@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
+import { ContainerModule } from '../container/container.module';
 import { LoadingModule } from '../loading/loading.module';
 import { ProfileModule } from '../profile/profile.module';
 import { SharedModule } from '../shared/shared.module';
@@ -26,6 +27,7 @@ import { RefetchButtonComponent } from './refetch-button/refetch-button.componen
     OverlayModule,
     ProfileModule,
     LoadingModule,
+    ContainerModule,
   ],
   exports: [
     LayoutComponent,
