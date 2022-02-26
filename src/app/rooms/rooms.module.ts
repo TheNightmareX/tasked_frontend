@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { InfinityScrollModule } from '../infinity-scroll/infinity-scroll.module';
 import { SharedModule } from '../shared/shared.module';
 import { ThemeModule } from '../theme/theme.module';
 import { RoomCreationComponent } from './room-creation/room-creation.component';
@@ -48,6 +49,11 @@ import { RoomsComponent } from './rooms.component';
     RoomListComponent,
     RoomListItemComponent,
   ],
-  imports: [RoomsRoutingModule, SharedModule, ThemeModule],
+  imports: [
+    RoomsRoutingModule,
+    SharedModule,
+    ThemeModule,
+    InfinityScrollModule,
+  ],
 })
 export class RoomsModule {}

@@ -9,7 +9,6 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { MaterialModule } from '../material/material.module';
 import { ValidationModule } from '../validation/validation.module';
 import { ContainerComponent } from './container/container.component';
-import { FetchMoreTriggerComponent } from './fetch-more-trigger/fetch-more-trigger.component';
 import { HintDirective } from './hint.directive';
 import { LoadingDirective } from './loading.directive';
 import { PopupComponent } from './popup/popup.component';
@@ -27,12 +26,7 @@ const modules = [
   ValidationModule,
 ];
 
-const components = [
-  PopupComponent,
-  UsernameComponent,
-  FetchMoreTriggerComponent,
-  ContainerComponent,
-];
+const components = [PopupComponent, UsernameComponent, ContainerComponent];
 
 const directives = [LoadingDirective, HintDirective];
 
