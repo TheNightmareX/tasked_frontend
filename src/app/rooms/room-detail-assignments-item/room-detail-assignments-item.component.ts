@@ -33,7 +33,7 @@ export class RoomDetailAssignmentsItemComponent implements OnInit {
     private notifier: NotifierService,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (!this.assignment) return;
 
     this.completionIcon = this.assignment.isCompleted
@@ -48,12 +48,12 @@ export class RoomDetailAssignmentsItemComponent implements OnInit {
       : $localize`Mark as important`;
   }
 
-  switchCompletion() {
+  switchCompletion(): void {
     if (!this.assignment) return;
     this.update({ isCompleted: !this.assignment.isCompleted });
   }
 
-  switchImportance() {
+  switchImportance(): void {
     if (!this.assignment) return;
     this.update({ isImportant: !this.assignment.isImportant });
   }

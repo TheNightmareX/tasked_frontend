@@ -33,7 +33,7 @@ export class ApplicationListComponent implements OnInit {
     private listGql: ApplicationListGQL,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.query = this.listGql.watch();
     this.applicationGroups$ = this.query.valueChanges.pipe(
       map((result) => result.data.applications),
@@ -54,7 +54,7 @@ export class ApplicationListComponent implements OnInit {
     );
   }
 
-  fetchMore() {
+  fetchMore(): void {
     if (!this.loadingMoreNeeded || this.loadingMore) return;
 
     const data = this.query.getCurrentResult().data.applications;

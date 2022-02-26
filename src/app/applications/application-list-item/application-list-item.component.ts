@@ -40,9 +40,9 @@ export class ApplicationListItemComponent implements OnInit {
     private roomMembershipListGql: RoomMembershipListGQL,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
-  accept() {
+  accept(): void {
     if (!this.application) return;
     const application = this.application;
 
@@ -77,7 +77,7 @@ export class ApplicationListItemComponent implements OnInit {
     );
   }
 
-  reject() {
+  reject(): void {
     if (!this.application) return;
     this.mutate(
       this.rejectGql.mutate({ id: this.application.id }),
@@ -86,7 +86,7 @@ export class ApplicationListItemComponent implements OnInit {
     );
   }
 
-  delete() {
+  delete(): void {
     if (!this.application) return;
     this.mutate(
       this.deleteGql.mutate(

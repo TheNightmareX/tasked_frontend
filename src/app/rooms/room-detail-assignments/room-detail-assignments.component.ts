@@ -36,7 +36,7 @@ export class RoomDetailAssignmentsComponent implements OnInit {
     private listGql: MembershipAssignmentListGQL,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     const classroomId = this.route.parent!.snapshot.paramMap.get('id')!;
 
     const membershipId = this.roomGql
@@ -73,7 +73,7 @@ export class RoomDetailAssignmentsComponent implements OnInit {
     );
   }
 
-  fetchMore() {
+  fetchMore(): void {
     if (!this.loadingMoreNeeded || this.loadingMore) return;
 
     const data = this.query.getCurrentResult().data.membership.assignments;

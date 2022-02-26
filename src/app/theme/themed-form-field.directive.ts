@@ -17,14 +17,14 @@ export class ThemedFormFieldDirective implements OnInit, OnDestroy {
     @Host() private matFormField: MatFormField,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.subscription = this.theme.current.value$$.subscribe((theme) => {
       if (this.themed)
         this.matFormField.color = theme == 'light' ? 'primary' : 'accent';
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 }

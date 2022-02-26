@@ -3,12 +3,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {
-  Gender,
-  Role,
-  RoomDetailGQL,
-  RoomMembershipListQuery,
-} from 'src/app/graphql';
+import { Role, RoomDetailGQL, RoomMembershipListQuery } from 'src/app/graphql';
 
 type Membership =
   RoomMembershipListQuery['room']['memberships']['results'][number];
@@ -34,7 +29,7 @@ export class RoomDetailSidebarMembershipListItemComponent
 
   constructor(private route: ActivatedRoute, private roomGql: RoomDetailGQL) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.subscription?.unsubscribe();
       this.subscription = this.roomGql
@@ -52,7 +47,7 @@ export class RoomDetailSidebarMembershipListItemComponent
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription?.unsubscribe();
   }
 
@@ -65,7 +60,7 @@ export class RoomDetailSidebarMembershipListItemComponent
    * @param item
    * @param helper
    */
-  openMenu(event: MouseEvent, item: HTMLElement, helper: HTMLElement) {
+  openMenu(event: MouseEvent, item: HTMLElement, helper: HTMLElement): void {
     const { left: itemX, top: itemY } = item.getBoundingClientRect();
     const { clientX, clientY } = event;
     const left = clientX - itemX;

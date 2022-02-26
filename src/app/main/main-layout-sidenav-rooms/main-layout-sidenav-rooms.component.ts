@@ -19,7 +19,7 @@ export class MainLayoutSidenavRoomsComponent implements OnInit {
 
   identifyRoom: TrackByFunction<Room> = (_, { id }) => id;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.rooms$ = this.roomListGql
       .watch({ joinedOnly: true })
       .valueChanges.pipe(
@@ -28,7 +28,7 @@ export class MainLayoutSidenavRoomsComponent implements OnInit {
       );
   }
 
-  deactivateIfActivated(path: string) {
+  deactivateIfActivated(path: string): void {
     if (this.isRouteActivated(path)) this.router.navigate(['/app/rooms']);
   }
 

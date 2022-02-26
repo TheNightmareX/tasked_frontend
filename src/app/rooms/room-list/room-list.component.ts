@@ -15,11 +15,11 @@ export class RoomListComponent implements OnInit {
 
   constructor(private listGql: RoomListGQL) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.rooms$ = this.list();
   }
 
-  load() {
+  load(): void {
     if (this.loading) return;
     this.loading = true;
 

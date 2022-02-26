@@ -42,7 +42,7 @@ export class RoomDetailTasksItemAssignPopupComponent
     private assignmentDeleteGql: AssignmentDeleteGQL,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.taskId = this.route.parent!.snapshot.paramMap.get('id')!;
     if (this.task)
       this.subscription = combineLatest([
@@ -79,11 +79,11 @@ export class RoomDetailTasksItemAssignPopupComponent
       });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription?.unsubscribe();
   }
 
-  update() {
+  update(): void {
     if (!this.task) return;
     if (this.loadingUpdate) return;
     this.loadingUpdate = true;
@@ -138,7 +138,7 @@ export class RoomDetailTasksItemAssignPopupComponent
         );
   }
 
-  identifyItem(index: number, item: Item) {
+  identifyItem(index: number, item: Item): string {
     return item.membership.id;
   }
 

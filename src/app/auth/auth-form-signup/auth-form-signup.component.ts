@@ -32,7 +32,7 @@ export class AuthFormSignupComponent implements OnInit {
     private userCreateGql: UserCreateGQL,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.submit$$.pipe(throttleTime(1000)).subscribe(() => this.submit());
   }
 

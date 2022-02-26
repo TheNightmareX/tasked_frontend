@@ -9,5 +9,5 @@ import { ThemeService } from 'src/app/theme/theme.service';
 export class ThemeButtonComponent implements OnInit {
   constructor(public theme: ThemeService) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 }

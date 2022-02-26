@@ -44,7 +44,7 @@ export class RoomDetailSettingsComponent implements OnInit {
     private updateGql: RoomUpdateGQL,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     const id = this.route.parent!.snapshot.paramMap.get('id')!;
 
     this.room$ = this.queryGql
@@ -63,7 +63,7 @@ export class RoomDetailSettingsComponent implements OnInit {
     this.reset();
   }
 
-  reset() {
+  reset(): void {
     this.room$.pipe(first()).subscribe((room) => {
       const currentValues = pick(room, ['name', 'description', 'isOpen']);
       this.data = currentValues;
@@ -71,7 +71,7 @@ export class RoomDetailSettingsComponent implements OnInit {
     });
   }
 
-  save() {
+  save(): void {
     this.room$.pipe(first()).subscribe((room) => {
       const data = filterKeys(this.data, (v, k) => v != room[k]);
       this.loading = true;

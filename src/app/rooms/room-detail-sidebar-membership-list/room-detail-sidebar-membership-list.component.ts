@@ -29,7 +29,7 @@ export class RoomDetailSidebarMembershipListComponent implements OnInit {
     private roomGql: RoomDetailGQL,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id')!;
       this.loading = true;

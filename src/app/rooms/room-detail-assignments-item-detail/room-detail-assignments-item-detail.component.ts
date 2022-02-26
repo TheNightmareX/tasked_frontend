@@ -18,7 +18,7 @@ export class RoomDetailAssignmentsItemDetailComponent implements OnInit {
 
   constructor(private datePipe: DatePipe) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     // TODO: use <app-username>
     const user = this.assignment?.task?.creator?.owner;
     this.infoItems = [

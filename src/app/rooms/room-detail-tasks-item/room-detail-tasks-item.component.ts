@@ -44,7 +44,7 @@ export class RoomDetailTasksItemComponent
   private subscription = new Subscription();
 
   @Input()
-  get task() {
+  get task(): Task | undefined {
     return this._task;
   }
   set task(v: Task | undefined) {
@@ -62,13 +62,13 @@ export class RoomDetailTasksItemComponent
     private roomDetailGql: RoomDetailGQL,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.subscription.add(
       this.form
         .valueChanges!.pipe(delay(0))
@@ -76,11 +76,11 @@ export class RoomDetailTasksItemComponent
     );
   }
 
-  initData() {
+  initData(): void {
     if (this.task) this.data = pick(this.task, ['title', 'description']);
   }
 
-  update() {
+  update(): void {
     const task = this.task;
     if (!task) return;
     const data = filterKeys(this.data, (v, k) => v != task[k as keyof Task]);
@@ -91,7 +91,7 @@ export class RoomDetailTasksItemComponent
     );
   }
 
-  delete() {
+  delete(): void {
     if (!this.task) return;
     this.mutate(
       this.deleteGql.mutate(

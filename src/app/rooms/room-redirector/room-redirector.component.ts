@@ -23,7 +23,7 @@ export class RoomRedirectorComponent {
     private listGql: RoomListGQL,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     combineLatest([
       this.listGql.fetch().pipe(map((result) => result.data.rooms.results)),
       this.auth.user$.pipe(first()),

@@ -16,9 +16,9 @@ export class RefetchButtonComponent implements OnInit {
 
   constructor(private apollo: Apollo, private notifier: NotifierService) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
-  refetch() {
+  refetch(): void {
     if (this.disabled) return;
     this.disabled = true;
     this.loading = true;

@@ -44,7 +44,7 @@ export class RoomDetailSidebarMembershipListItemMenuComponent
     private deleteGql: MembershipDeleteGQL,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       if (!this.membership) return;
 
@@ -77,11 +77,11 @@ export class RoomDetailSidebarMembershipListItemMenuComponent
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription?.unsubscribe();
   }
 
-  promote() {
+  promote(): void {
     this.mutate(
       (membership) =>
         this.updateGql.mutate({
@@ -93,7 +93,7 @@ export class RoomDetailSidebarMembershipListItemMenuComponent
     );
   }
 
-  demote() {
+  demote(): void {
     this.mutate(
       (membership) =>
         this.updateGql.mutate({
@@ -105,7 +105,7 @@ export class RoomDetailSidebarMembershipListItemMenuComponent
     );
   }
 
-  remove() {
+  remove(): void {
     this.mutate(
       (membership) =>
         this.deleteGql.mutate(

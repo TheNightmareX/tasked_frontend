@@ -14,7 +14,7 @@ export class RoomDetailTabRedirectorComponent implements OnInit {
     private roomGql: RoomDetailGQL,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
     this.roomGql.fetch({ id }).subscribe((result) => {
       this.router.navigate(

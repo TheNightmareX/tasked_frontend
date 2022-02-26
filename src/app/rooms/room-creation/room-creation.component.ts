@@ -26,9 +26,9 @@ export class RoomCreationComponent implements OnInit {
     private listGql: RoomListGQL,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
-  submit() {
+  submit(): void {
     this.loading = true;
     this.createGql
       .mutate(

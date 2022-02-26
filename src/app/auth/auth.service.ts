@@ -4,10 +4,11 @@ import { Apollo } from 'apollo-angular';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { AuthGQL, MeGQL, MeQuery } from '../graphql';
+import { AuthGQL, AuthMutation, MeGQL, MeQuery } from '../graphql';
 import { AuthTokenStorage } from './auth-token.storage';
 
 type User = MeQuery['me'];
+type AuthResult = AuthMutation['auth'];
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +35,7 @@ export class AuthService {
     );
   }
 
-  login(username: string, password: string) {
+  login(username: string, password: string): Observable<AuthResult> {
     return this.authGql.mutate({ username, password }).pipe(
       map(({ data }) => data!.auth),
       tap(({ token }) => {
@@ -44,7 +45,7 @@ export class AuthService {
     );
   }
 
-  logout() {
+  logout(): void {
     this.token.next(null).save();
     this.apollo.client.clearStore();
     this.notifier.hideAll();

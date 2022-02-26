@@ -16,11 +16,11 @@ export class UsernameComponent implements OnInit, OnChanges {
 
   constructor() {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.updateClassList();
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.updateClassList();
   }
 

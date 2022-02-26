@@ -35,7 +35,7 @@ export class RoomDetailComponent implements OnInit {
     private roomDetailGql: RoomDetailGQL,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.sidebarOpened$ = this.media
       .asObservable()
       .pipe(

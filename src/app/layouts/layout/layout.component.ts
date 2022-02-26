@@ -36,7 +36,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.spinnerOverlayRef = this.overlay.create({
       positionStrategy: this.overlay
         .position()
@@ -52,7 +52,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.spinnerOverlayRef.dispose();
   }
 

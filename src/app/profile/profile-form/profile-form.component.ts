@@ -10,6 +10,7 @@ import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   NgForm,
+  ValidationErrors,
   Validator,
 } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
@@ -53,7 +54,7 @@ export class ProfileFormComponent
 
   @ViewChild(NgForm) private form?: NgForm;
   @ViewChild(MatInput) private firstInput?: MatInput;
-  private onChange = (v: unknown) => {};
+  private onChange = (_v: unknown) => {};
   private onTouched = () => {};
 
   /**
@@ -64,19 +65,19 @@ export class ProfileFormComponent
 
   constructor() {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     setTimeout(() => {
       this.firstInput?.focus();
     });
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.form
       ?.statusChanges!.pipe(map(() => !!this.form?.valid))
       .subscribe((valid) => (this.valid = valid));
   }
 
-  propagate() {
+  propagate(): void {
     // wait for the validation
     setTimeout(() => {
       this.onChange(this.data);
@@ -84,18 +85,18 @@ export class ProfileFormComponent
     });
   }
 
-  validate() {
+  validate(): ValidationErrors | null {
     return this.valid ? null : { profile: 'error' };
   }
 
-  writeValue(data: ProfileFormData) {
+  writeValue(data: ProfileFormData): void {
     Object.assign(this.data, data);
   }
 
-  registerOnChange(fn: (v: unknown) => void) {
+  registerOnChange(fn: (v: unknown) => void): void {
     this.onChange = fn;
   }
-  registerOnTouched(fn: () => void) {
+  registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 }

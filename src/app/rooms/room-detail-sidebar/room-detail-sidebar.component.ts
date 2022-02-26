@@ -16,7 +16,7 @@ export class RoomDetailSidebarComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private roomGql: RoomDetailGQL) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id')!;
       this.room$ = this.roomGql

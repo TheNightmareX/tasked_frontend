@@ -1,5 +1,10 @@
 import { Directive, Input } from '@angular/core';
-import { AbstractControl, NG_VALIDATORS, Validator } from '@angular/forms';
+import {
+  AbstractControl,
+  NG_VALIDATORS,
+  ValidationErrors,
+  Validator,
+} from '@angular/forms';
 
 @Directive({
   selector: '[appEqual]',
@@ -12,7 +17,7 @@ export class EqualDirective implements Validator {
 
   constructor() {}
 
-  validate(control: AbstractControl) {
+  validate(control: AbstractControl): ValidationErrors | null {
     if (control.value == this.appEqual) return null;
     else return { equal: false };
   }

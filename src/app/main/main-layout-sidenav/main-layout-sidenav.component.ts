@@ -10,7 +10,7 @@ export class MainLayoutSidenavComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.items = [
       {
         title: 'Applications',

@@ -29,16 +29,16 @@ export class RoomListItemComponent implements OnInit {
     private applicationListGql: ApplicationListGQL,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
-  handleClick() {
+  handleClick(): void {
     if (!this.room) return;
     if (this.room.membership)
       this.router.navigate(['/app/rooms', this.room.id]);
     else this.popup.open();
   }
 
-  apply() {
+  apply(): void {
     if (!this.room) return;
     this.loading = true;
     this.applicationCreateGql

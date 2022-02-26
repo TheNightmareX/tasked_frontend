@@ -37,27 +37,27 @@ export class ModalComponent implements OnInit {
     private sheet: MatBottomSheet,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
-  open(breakpoint = 'xs') {
+  open(breakpoint = 'xs'): void {
     const isPhone = this.media.isActive(breakpoint);
     if (isPhone) this.openSheet();
     else this.openDialog();
   }
 
-  openDialog() {
+  openDialog(): void {
     this.dialogRef = this.dialog.open(this.contentTemplate, {
       disableClose: !this.closable,
     });
   }
 
-  openSheet() {
+  openSheet(): void {
     this.sheetRef = this.sheet.open(this.contentTemplate, {
       disableClose: !this.closable,
     });
   }
 
-  close() {
+  close(): void {
     this.dialogRef?.close();
     this.sheetRef?.dismiss();
   }

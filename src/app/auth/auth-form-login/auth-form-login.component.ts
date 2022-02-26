@@ -26,7 +26,7 @@ export class AuthFormLoginComponent implements OnInit {
     private notifier: NotifierService,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.submit$$.pipe(throttleTime(1000)).subscribe(() => this.submit());
     setTimeout(() => {
       this.firstInput?.focus();

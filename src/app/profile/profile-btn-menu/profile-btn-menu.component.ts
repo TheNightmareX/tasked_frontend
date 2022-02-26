@@ -10,9 +10,9 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class ProfileBtnMenuComponent implements OnInit {
   constructor(public auth: AuthService, private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
-  logout() {
+  logout(): void {
     this.router.navigate(['/auth']);
   }
 }

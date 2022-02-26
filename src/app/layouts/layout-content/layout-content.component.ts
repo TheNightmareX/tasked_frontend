@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 
@@ -16,7 +16,7 @@ export class LayoutContentComponent implements OnInit {
 
   constructor(public auth: AuthService, private media: MediaObserver) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.landscape$ = this.media
       .asObservable()
       .pipe(

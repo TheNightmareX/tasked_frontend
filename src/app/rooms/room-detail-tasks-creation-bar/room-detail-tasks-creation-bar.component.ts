@@ -26,9 +26,9 @@ export class RoomDetailTasksCreationBarComponent implements OnInit {
     private roomDetailGql: RoomDetailGQL,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
-  create() {
+  create(): void {
     if (this.loading) return;
 
     const roomId = this.route.parent!.snapshot.paramMap.get('id')!;

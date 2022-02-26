@@ -40,7 +40,7 @@ export class ProfileBtnMenuEditPopupComponent implements OnInit {
     private popup: ModalComponent,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.auth.user$.pipe(first()).subscribe((user) => {
       this.data.username = user!.username;
       this.data.nickname = user!.nickname ?? '';
@@ -54,7 +54,7 @@ export class ProfileBtnMenuEditPopupComponent implements OnInit {
     );
   }
 
-  submit() {
+  submit(): void {
     this.auth.user$.pipe(first()).subscribe((user) => {
       const id = user!.id + '';
       const data = this.cleanData(user!);

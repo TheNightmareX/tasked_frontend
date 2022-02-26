@@ -2,7 +2,7 @@ import { Observable, timer } from 'rxjs';
 
 export const postpone =
   (time: number) =>
-  <T>(source: Observable<T>) => {
+  <T>(source: Observable<T>): Observable<T> => {
     return new Observable<T>((subscriber) => {
       let postponed:
         | (['value', T] | ['error', Error] | ['complete', null])[]

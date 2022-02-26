@@ -35,14 +35,14 @@ export class RoomDetailSettingsActionsComponent implements OnInit {
     private roomDeleteGql: RoomDeleteGQL,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     const id = this.route.parent!.snapshot.paramMap.get('id')!;
     this.room$ = this.roomGql
       .watch({ id })
       .valueChanges.pipe(map((result) => result.data.room));
   }
 
-  exit() {
+  exit(): void {
     this.mutate(
       (room) => this.membershipDeleteGql.mutate({ id: room.membership!.id }),
       $localize`Exited the room`,
@@ -50,7 +50,7 @@ export class RoomDetailSettingsActionsComponent implements OnInit {
     );
   }
 
-  disband() {
+  disband(): void {
     this.mutate(
       (room) => this.roomDeleteGql.mutate({ id: room.id }),
       $localize`Disbanded the room`,
@@ -77,7 +77,7 @@ export class RoomDetailSettingsActionsComponent implements OnInit {
         }),
       )
       .subscribe(
-        ([result, room]) => {
+        ([, room]) => {
           this.notifier.notify(NotificationType.Success, messageOnSucceed);
           this.router.navigate(['/app/rooms']);
           const cache = this.apollo.client.cache;

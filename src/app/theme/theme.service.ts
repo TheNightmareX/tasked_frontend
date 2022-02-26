@@ -20,18 +20,18 @@ export class ThemeService {
     ) as HTMLMetaElement;
   }
 
-  init() {
+  init(): void {
     this.apply(this.current.value);
   }
 
-  apply(theme: Theme) {
+  apply(theme: Theme): void {
     this.$root.classList.remove(this.getClassName(this.current.value));
     this.$root.classList.add(this.getClassName(theme));
     this.$themeColorMeta.content = this.getThemeColor();
     this.current.next(theme).save();
   }
 
-  toggle() {
+  toggle(): void {
     this.apply(this.current.value == 'light' ? 'dark' : 'light');
   }
 
