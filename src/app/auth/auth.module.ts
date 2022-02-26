@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { LayoutsModule } from '../layouts/layouts.module';
 import { LoadingModule } from '../loading/loading.module';
 import { ProfileModule } from '../profile/profile.module';
@@ -21,6 +22,7 @@ import { AuthComponent } from './auth.component';
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
     AuthRoutingModule,
     LayoutsModule,
     ProfileModule,

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ModalModule } from '../modal/modal.module';
 import { ProfileBtnMenuComponent } from '../profile/profile-btn-menu/profile-btn-menu.component';
@@ -16,7 +17,14 @@ import { ProfileBtnMenuEditPopupComponent } from './profile-btn-menu-edit-popup/
     ProfileBtnMenuEditPopupComponent,
     ProfileFormComponent,
   ],
-  imports: [CommonModule, SharedModule, RouterModule, ThemeModule, ModalModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    FormsModule,
+    RouterModule,
+    ThemeModule,
+    ModalModule,
+  ],
   exports: [
     ProfileBtnComponent,
     ProfileBtnMenuComponent,
