@@ -1,12 +1,14 @@
-import { Directive, Host, OnDestroy, OnInit } from '@angular/core';
+import { Directive, Host, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatFormField } from '@angular/material/form-field';
 import { Subscription } from 'rxjs';
 import { ThemeService } from './theme.service';
 
 @Directive({
-  selector: '[appThemedFormField]',
+  selector: 'mat-form-field',
 })
 export class ThemedFormFieldDirective implements OnInit, OnDestroy {
+  @Input() themed = true;
+
   private subscription!: Subscription;
 
   constructor(
@@ -16,7 +18,8 @@ export class ThemedFormFieldDirective implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.theme.current.value$.subscribe((theme) => {
-      this.matFormField.color = theme == 'light' ? 'primary' : 'accent';
+      if (this.themed)
+        this.matFormField.color = theme == 'light' ? 'primary' : 'accent';
     });
   }
 

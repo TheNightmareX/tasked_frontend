@@ -7,7 +7,7 @@
   <mat-expansion-panel-header>
     <mat-panel-title>
       <div *ngIf="!expanded">{{ task?.title }}</div>
-      <mat-form-field *ngIf="expanded" appearance="standard" appThemedFormField>
+      <mat-form-field *ngIf="expanded" appearance="standard">
         <input
           matInput
           name="title"
@@ -26,7 +26,7 @@
   </mat-expansion-panel-header>
 
   <ng-template matExpansionPanelContent>
-    <mat-form-field appearance="standard" appThemedFormField>
+    <mat-form-field appearance="standard">
       <textarea
         matInput
         name="description"
