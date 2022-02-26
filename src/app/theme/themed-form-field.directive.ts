@@ -4,9 +4,9 @@ import { Subscription } from 'rxjs';
 import { ThemeService } from './theme.service';
 
 @Directive({
-  selector: '[appAutoFormFieldColor]',
+  selector: '[appThemedFormField]',
 })
-export class AutoFormFieldColorDirective implements OnInit, OnDestroy {
+export class ThemedFormFieldDirective implements OnInit, OnDestroy {
   private subscription!: Subscription;
 
   constructor(
