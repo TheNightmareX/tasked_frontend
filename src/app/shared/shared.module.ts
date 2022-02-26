@@ -9,6 +9,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { MaterialModule } from '../material/material.module';
 import { ValidationModule } from '../validation/validation.module';
 import { AutoFormFieldColorDirective } from './auto-form-field-color.directive';
+import { ContainerComponent } from './container/container.component';
 import { FetchMoreTriggerComponent } from './fetch-more-trigger/fetch-more-trigger.component';
 import { HintDirective } from './hint.directive';
 import { LoadingDirective } from './loading.directive';
@@ -31,6 +32,7 @@ const components = [
   PopupComponent,
   UsernameComponent,
   FetchMoreTriggerComponent,
+  ContainerComponent,
 ];
 
 const directives = [
