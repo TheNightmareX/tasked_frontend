@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LocalStorageItem } from '../local-storage/local-storage-item.class';
+import { LocalStorageItem } from '../common/local-storage-item.class';
 import { ThemeStorage } from './theme.storage';
 
 @Injectable({
