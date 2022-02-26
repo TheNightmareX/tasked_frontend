@@ -8,7 +8,6 @@ import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { MaterialModule } from '../material/material.module';
 import { ValidationModule } from '../validation/validation.module';
-import { AutoFormFieldColorDirective } from './auto-form-field-color.directive';
 import { ContainerComponent } from './container/container.component';
 import { FetchMoreTriggerComponent } from './fetch-more-trigger/fetch-more-trigger.component';
 import { HintDirective } from './hint.directive';
@@ -35,11 +34,7 @@ const components = [
   ContainerComponent,
 ];
 
-const directives = [
-  AutoFormFieldColorDirective,
-  LoadingDirective,
-  HintDirective,
-];
+const directives = [LoadingDirective, HintDirective];
 
 @NgModule({
   declarations: [components, directives],

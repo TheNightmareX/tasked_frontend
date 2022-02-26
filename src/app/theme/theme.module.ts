@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { ThemeButtonComponent } from './theme-button/theme-button.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { AutoFormFieldColorDirective } from './auto-form-field-color.directive';
 
 @NgModule({
-  declarations: [ThemeButtonComponent],
+  declarations: [ThemeButtonComponent, AutoFormFieldColorDirective],
   imports: [CommonModule, MatButtonModule, MatIconModule],
-  exports: [ThemeButtonComponent],
+  exports: [ThemeButtonComponent, AutoFormFieldColorDirective],
 })
 export class ThemeModule {}
