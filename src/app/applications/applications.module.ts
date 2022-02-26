@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { InfinityScrollModule } from '../infinity-scroll/infinity-scroll.module';
 import { SharedModule } from '../shared/shared.module';
 import { ApplicationListItemComponent } from './application-list-item/application-list-item.component';
@@ -16,6 +17,7 @@ import { ApplicationsComponent } from './applications.component';
   imports: [
     CommonModule,
     SharedModule,
+    FlexLayoutModule,
     ApplicationsRoutingModule,
     InfinityScrollModule,
   ],

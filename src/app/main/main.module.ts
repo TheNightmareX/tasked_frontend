@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { LayoutsModule } from '../layouts/layouts.module';
 import { ProfileModule } from '../profile/profile.module';
 import { SharedModule } from '../shared/shared.module';
@@ -18,6 +19,7 @@ import { MainRoutingModule } from './main-routing.module';
   imports: [
     CommonModule,
     SharedModule,
+    FlexLayoutModule,
     MainRoutingModule,
     LayoutsModule,
     ProfileModule,

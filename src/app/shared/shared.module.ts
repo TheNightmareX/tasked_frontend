@@ -1,17 +1,11 @@
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { MaterialModule } from '../material/material.module';
 import { ValidationModule } from '../validation/validation.module';
 import { ContainerComponent } from './container/container.component';
 import { UsernameComponent } from './username/username.component';
 
-const modules = [
-  FlexLayoutModule,
-  NgxSkeletonLoaderModule,
-  MaterialModule,
-  ValidationModule,
-];
+const modules = [NgxSkeletonLoaderModule, MaterialModule, ValidationModule];
 
 const components = [UsernameComponent, ContainerComponent];
 

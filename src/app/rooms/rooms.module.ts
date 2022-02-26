@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { HelpIconModule } from '../help-icon/help-icon.module';
 import { InfinityScrollModule } from '../infinity-scroll/infinity-scroll.module';
@@ -58,6 +59,7 @@ import { RoomsComponent } from './rooms.component';
     CommonModule,
     SharedModule,
     FormsModule,
+    FlexLayoutModule,
     RoomsRoutingModule,
     ThemeModule,
     InfinityScrollModule,

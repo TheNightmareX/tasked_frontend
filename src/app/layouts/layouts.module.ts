@@ -1,6 +1,7 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { LoadingModule } from '../loading/loading.module';
 import { ProfileModule } from '../profile/profile.module';
@@ -20,6 +21,7 @@ import { RefetchButtonComponent } from './refetch-button/refetch-button.componen
   imports: [
     CommonModule,
     SharedModule,
+    FlexLayoutModule,
     RouterModule,
     OverlayModule,
     ProfileModule,

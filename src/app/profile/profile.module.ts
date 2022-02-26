@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ModalModule } from '../modal/modal.module';
@@ -21,6 +22,7 @@ import { ProfileBtnMenuEditPopupComponent } from './profile-btn-menu-edit-popup/
     CommonModule,
     SharedModule,
     FormsModule,
+    FlexLayoutModule,
     RouterModule,
     ThemeModule,
     ModalModule,
