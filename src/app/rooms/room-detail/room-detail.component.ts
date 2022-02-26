@@ -5,9 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError, first, map, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
-import { ThemeService } from 'src/app/core/theme.service';
 import { Role, RoomDetailGQL, RoomDetailQuery } from 'src/app/graphql';
 import { ActivatedRoomMapStorage } from 'src/app/local-storage/activated-room-map.storage';
+import { ThemeService } from 'src/app/theme/theme.service';
 
 type Room = RoomDetailQuery['room'];
 

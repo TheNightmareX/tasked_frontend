@@ -1,7 +1,7 @@
 import { Directive, Host, OnDestroy, OnInit } from '@angular/core';
 import { MatFormField } from '@angular/material/form-field';
 import { Subscription } from 'rxjs';
-import { ThemeService } from '../core/theme.service';
+import { ThemeService } from '../theme/theme.service';
 
 @Directive({
   selector: '[appAutoFormFieldColor]',
