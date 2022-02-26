@@ -5,7 +5,6 @@ import { LayoutContentComponent } from './layout-content/layout-content.componen
 import { LayoutHeaderComponent } from './layout-header/layout-header.component';
 import { LayoutComponent } from './layout/layout.component';
 import { RefetchButtonComponent } from './refetch-button/refetch-button.component';
-import { ThemeButtonComponent } from './theme-button/theme-button.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +12,6 @@ import { ThemeButtonComponent } from './theme-button/theme-button.component';
     LayoutHeaderComponent,
     LayoutContentComponent,
     RefetchButtonComponent,
-    ThemeButtonComponent,
   ],
   imports: [SharedModule, ProfileModule],
   exports: [
@@ -21,7 +19,6 @@ import { ThemeButtonComponent } from './theme-button/theme-button.component';
     LayoutHeaderComponent,
     LayoutContentComponent,
     RefetchButtonComponent,
-    ThemeButtonComponent,
   ],
 })
 export class LayoutsModule {}
