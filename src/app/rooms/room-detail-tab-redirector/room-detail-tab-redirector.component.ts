@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RoomDetailGQL, Role } from 'src/app/graphql';
+import { Role, RoomDetailGQL } from 'src/app/graphql';
 
 @Component({
   selector: 'app-room-detail-tab-redirector',

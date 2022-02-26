@@ -7,15 +7,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+
 import { LayoutsModule } from '../layouts/layouts.module';
 import { LoadingModule } from '../loading/loading.module';
 import { ProfileModule } from '../profile/profile.module';
 import { ThemeModule } from '../theme/theme.module';
+import { AuthComponent } from './auth.component';
 import { AuthFormLayoutComponent } from './auth-form-layout/auth-form-layout.component';
 import { AuthFormLoginComponent } from './auth-form-login/auth-form-login.component';
 import { AuthFormSignupComponent } from './auth-form-signup/auth-form-signup.component';
 import { AuthRoutingModule } from './auth-routing.module';
-import { AuthComponent } from './auth.component';
 
 @NgModule({
   declarations: [

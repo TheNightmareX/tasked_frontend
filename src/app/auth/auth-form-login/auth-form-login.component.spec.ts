@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { AuthFormLoginComponent } from './auth-form-login.component';
 
 describe('AuthLoginComponent', () => {

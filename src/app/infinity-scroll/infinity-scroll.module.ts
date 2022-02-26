@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InfinityScrollTriggerComponent } from './infinity-scroll-trigger/infinity-scroll-trigger.component';
-import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { IntersectionObserverModule } from '@ng-web-apis/intersection-observer';
+
+import { InfinityScrollTriggerComponent } from './infinity-scroll-trigger/infinity-scroll-trigger.component';
 
 @NgModule({
   declarations: [InfinityScrollTriggerComponent],

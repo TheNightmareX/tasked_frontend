@@ -12,12 +12,13 @@ import {
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
+
 import { ContainerModule } from '../container/container.module';
 import { LoadingModule } from '../loading/loading.module';
 import { ProfileModule } from '../profile/profile.module';
+import { LayoutComponent } from './layout/layout.component';
 import { LayoutContentComponent } from './layout-content/layout-content.component';
 import { LayoutHeaderComponent } from './layout-header/layout-header.component';
-import { LayoutComponent } from './layout/layout.component';
 import { RefetchButtonComponent } from './refetch-button/refetch-button.component';
 
 @NgModule({

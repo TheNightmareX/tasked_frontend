@@ -12,9 +12,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router';
+
 import { ModalModule } from '../modal/modal.module';
-import { ProfileBtnMenuComponent } from '../profile/profile-btn-menu/profile-btn-menu.component';
 import { ProfileBtnComponent } from '../profile/profile-btn/profile-btn.component';
+import { ProfileBtnMenuComponent } from '../profile/profile-btn-menu/profile-btn-menu.component';
 import { ProfileFormComponent } from '../profile/profile-form/profile-form.component';
 import { ThemeModule } from '../theme/theme.module';
 import { UsernameModule } from '../username/username.module';

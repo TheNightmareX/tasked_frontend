@@ -6,6 +6,7 @@ import { first, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import { RoomListGQL } from 'src/app/graphql';
+
 import { RoomsActivatedMapStorage } from '../rooms-activated-map.storage';
 
 @Component({

@@ -4,13 +4,13 @@ import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import {
-  ApplicationStatus,
-  RoomMembershipListGQL,
   ApplicationAcceptGQL,
-  ApplicationListQuery,
-  ApplicationRejectGQL,
   ApplicationDeleteGQL,
   ApplicationListGQL,
+  ApplicationListQuery,
+  ApplicationRejectGQL,
+  ApplicationStatus,
+  RoomMembershipListGQL,
 } from 'src/app/graphql';
 
 type Application = ApplicationListQuery['applications']['results'][number];

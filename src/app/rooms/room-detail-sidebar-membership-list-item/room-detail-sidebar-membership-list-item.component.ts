@@ -4,10 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
-  RoomDetailGQL,
-  RoomMembershipListQuery,
   Gender,
   Role,
+  RoomDetailGQL,
+  RoomMembershipListQuery,
 } from 'src/app/graphql';
 
 type Membership =

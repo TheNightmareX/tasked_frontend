@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HelpIconComponent } from './help-icon/help-icon.component';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
+import { HelpIconComponent } from './help-icon/help-icon.component';
 
 @NgModule({
   declarations: [HelpIconComponent],

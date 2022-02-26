@@ -7,14 +7,15 @@ import {
 } from '@angular/core';
 import {
   ControlValueAccessor,
-  NgForm,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
+  NgForm,
   Validator,
 } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { map } from 'rxjs/operators';
 import { Gender } from 'src/app/graphql';
+
 import { ProfileFormData } from './profile-form-data.interface';
 
 @Component({

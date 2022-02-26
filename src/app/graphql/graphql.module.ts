@@ -1,4 +1,4 @@
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import {
   ApolloClientOptions,
@@ -7,6 +7,7 @@ import {
 } from '@apollo/client/core';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpBatchLink } from 'apollo-angular/http';
+
 import { GraphqlAuthInterceptor } from './graphql-auth.interceptor';
 
 @NgModule({

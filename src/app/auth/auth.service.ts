@@ -3,6 +3,7 @@ import { NotifierService } from 'angular-notifier';
 import { Apollo } from 'apollo-angular';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+
 import { AuthGQL, MeGQL, MeQuery } from '../graphql';
 import { AuthTokenStorage } from './auth-token.storage';
 

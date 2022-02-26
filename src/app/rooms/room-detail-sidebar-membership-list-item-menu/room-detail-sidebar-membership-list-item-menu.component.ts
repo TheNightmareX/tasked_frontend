@@ -6,12 +6,12 @@ import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import {
-  RoomDetailGQL,
-  RoomMembershipListGQL,
-  RoomMembershipListQuery,
   MembershipDeleteGQL,
   MembershipUpdateGQL,
   Role,
+  RoomDetailGQL,
+  RoomMembershipListGQL,
+  RoomMembershipListQuery,
 } from 'src/app/graphql';
 
 type Membership =
