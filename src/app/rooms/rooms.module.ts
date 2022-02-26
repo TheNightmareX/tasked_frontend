@@ -2,13 +2,25 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ContainerModule } from '../container/container.module';
 import { HelpIconModule } from '../help-icon/help-icon.module';
 import { InfinityScrollModule } from '../infinity-scroll/infinity-scroll.module';
 import { LoadingModule } from '../loading/loading.module';
 import { ModalModule } from '../modal/modal.module';
-import { SharedModule } from '../shared/shared.module';
 import { ThemeModule } from '../theme/theme.module';
 import { UsernameModule } from '../username/username.module';
 import { RoomCreationComponent } from './room-creation/room-creation.component';
@@ -60,10 +72,22 @@ import { RoomsComponent } from './rooms.component';
   ],
   imports: [
     CommonModule,
-    SharedModule,
     FormsModule,
     FlexLayoutModule,
     RoomsRoutingModule,
+    MatDividerModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatSidenavModule,
+    MatListModule,
+    MatExpansionModule,
+    MatMenuModule,
+    MatTooltipModule,
+    MatTabsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    MatSlideToggleModule,
     NgxSkeletonLoaderModule,
     ThemeModule,
     InfinityScrollModule,

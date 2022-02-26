@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LayoutsModule } from '../layouts/layouts.module';
 import { ProfileModule } from '../profile/profile.module';
-import { SharedModule } from '../shared/shared.module';
 import { ThemeModule } from '../theme/theme.module';
 import { MainLayoutSidenavRoomsComponent } from './main-layout-sidenav-rooms/main-layout-sidenav-rooms.component';
 import { MainLayoutSidenavComponent } from './main-layout-sidenav/main-layout-sidenav.component';
@@ -19,9 +21,11 @@ import { MainRoutingModule } from './main-routing.module';
   ],
   imports: [
     CommonModule,
-    SharedModule,
     FlexLayoutModule,
     MainRoutingModule,
+    MatDividerModule,
+    MatIconModule,
+    MatListModule,
     NgxSkeletonLoaderModule,
     LayoutsModule,
     ProfileModule,
