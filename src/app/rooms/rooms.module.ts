@@ -9,6 +9,7 @@ import { LoadingModule } from '../loading/loading.module';
 import { ModalModule } from '../modal/modal.module';
 import { SharedModule } from '../shared/shared.module';
 import { ThemeModule } from '../theme/theme.module';
+import { UsernameModule } from '../username/username.module';
 import { RoomCreationComponent } from './room-creation/room-creation.component';
 import { RoomDetailAssignmentsItemDetailComponent } from './room-detail-assignments-item-detail/room-detail-assignments-item-detail.component';
 import { RoomDetailAssignmentsItemComponent } from './room-detail-assignments-item/room-detail-assignments-item.component';
@@ -68,6 +69,7 @@ import { RoomsComponent } from './rooms.component';
     ModalModule,
     HelpIconModule,
     LoadingModule,
+    UsernameModule,
   ],
 })
 export class RoomsModule {}

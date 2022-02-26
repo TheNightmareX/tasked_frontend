@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { MaterialModule } from '../material/material.module';
 import { ContainerComponent } from './container/container.component';
-import { UsernameComponent } from './username/username.component';
 
 const modules = [MaterialModule];
 
-const components = [UsernameComponent, ContainerComponent];
+const components = [ContainerComponent];
 
 @NgModule({
   declarations: [components],
