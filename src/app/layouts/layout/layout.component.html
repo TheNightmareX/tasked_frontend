@@ -1,4 +1,4 @@
-<div class="container" fxLayout="column">
+<app-container class="container" fxLayout="column">
   <header>
     <ng-content select="header"></ng-content>
   </header>
@@ -12,7 +12,7 @@
   <main fxFlex>
     <ng-content select="content"></ng-content>
   </main>
-</div>
+</app-container>
 
 <ng-template #spinner>
   <mat-spinner diameter="50"></mat-spinner>

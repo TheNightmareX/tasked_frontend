@@ -1,7 +1,7 @@
-<div class="container" #container>
+<app-container class="container" #container>
   <div class="content">
     <app-application-list
-      [scrollableContainer]="container"
+      [scrollableContainer]="container.element"
     ></app-application-list>
   </div>
-</div>
+</app-container>
