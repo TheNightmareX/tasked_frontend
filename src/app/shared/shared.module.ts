@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
@@ -10,7 +9,6 @@ import { ContainerComponent } from './container/container.component';
 import { UsernameComponent } from './username/username.component';
 
 const modules = [
-  CommonModule,
   FormsModule,
   RouterModule,
   FlexLayoutModule,

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { LayoutsModule } from '../layouts/layouts.module';
 import { ProfileModule } from '../profile/profile.module';
@@ -15,11 +16,12 @@ import { MainRoutingModule } from './main-routing.module';
     MainLayoutSidenavRoomsComponent,
   ],
   imports: [
+    CommonModule,
     SharedModule,
+    MainRoutingModule,
     LayoutsModule,
     ProfileModule,
     ThemeModule,
-    MainRoutingModule,
   ],
 })
 export class MainModule {}

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HelpIconModule } from '../help-icon/help-icon.module';
 import { InfinityScrollModule } from '../infinity-scroll/infinity-scroll.module';
@@ -53,8 +54,9 @@ import { RoomsComponent } from './rooms.component';
     RoomListItemComponent,
   ],
   imports: [
-    RoomsRoutingModule,
+    CommonModule,
     SharedModule,
+    RoomsRoutingModule,
     ThemeModule,
     InfinityScrollModule,
     ModalModule,

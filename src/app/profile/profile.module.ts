@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ModalModule } from '../modal/modal.module';
 import { ProfileBtnMenuComponent } from '../profile/profile-btn-menu/profile-btn-menu.component';
@@ -14,7 +15,7 @@ import { ProfileBtnMenuEditPopupComponent } from './profile-btn-menu-edit-popup/
     ProfileBtnMenuEditPopupComponent,
     ProfileFormComponent,
   ],
-  imports: [SharedModule, ThemeModule, ModalModule],
+  imports: [CommonModule, SharedModule, ThemeModule, ModalModule],
   exports: [
     ProfileBtnComponent,
     ProfileBtnMenuComponent,

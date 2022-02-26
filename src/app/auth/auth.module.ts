@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { LayoutsModule } from '../layouts/layouts.module';
 import { LoadingModule } from '../loading/loading.module';
@@ -18,8 +19,9 @@ import { AuthComponent } from './auth.component';
     AuthFormSignupComponent,
   ],
   imports: [
-    AuthRoutingModule,
+    CommonModule,
     SharedModule,
+    AuthRoutingModule,
     LayoutsModule,
     ProfileModule,
     ThemeModule,

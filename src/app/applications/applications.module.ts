@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { InfinityScrollModule } from '../infinity-scroll/infinity-scroll.module';
 import { SharedModule } from '../shared/shared.module';
@@ -12,6 +13,11 @@ import { ApplicationsComponent } from './applications.component';
     ApplicationListComponent,
     ApplicationListItemComponent,
   ],
-  imports: [ApplicationsRoutingModule, SharedModule, InfinityScrollModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    ApplicationsRoutingModule,
+    InfinityScrollModule,
+  ],
 })
 export class ApplicationsModule {}
