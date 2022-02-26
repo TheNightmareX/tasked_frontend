@@ -9,6 +9,7 @@ import { ProfileBtnComponent } from '../profile/profile-btn/profile-btn.componen
 import { ProfileFormComponent } from '../profile/profile-form/profile-form.component';
 import { SharedModule } from '../shared/shared.module';
 import { ThemeModule } from '../theme/theme.module';
+import { ValidationModule } from '../validation/validation.module';
 import { ProfileBtnMenuEditPopupComponent } from './profile-btn-menu-edit-popup/profile-btn-menu-edit-popup.component';
 
 @NgModule({
@@ -24,6 +25,7 @@ import { ProfileBtnMenuEditPopupComponent } from './profile-btn-menu-edit-popup/
     FormsModule,
     FlexLayoutModule,
     RouterModule,
+    ValidationModule,
     ThemeModule,
     ModalModule,
   ],
