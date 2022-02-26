@@ -11,11 +11,11 @@
       *ngFor="let task of tasks$ | async; trackBy: identifyTask"
       [task]="task"
     ></app-room-detail-tasks-item>
-    <app-fetch-more-trigger
+    <app-infinity-scroll-trigger
       *ngIf="loadingMoreNeeded"
       [loading]="loadingMore"
       (trigger)="fetchMore()"
-    ></app-fetch-more-trigger>
+    ></app-infinity-scroll-trigger>
   </mat-accordion>
 
   <mat-divider></mat-divider>

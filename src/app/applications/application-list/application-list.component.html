@@ -27,9 +27,9 @@
   </ng-container>
 
   <div *ngIf="(applicationGroups$ | async)?.length && loadingMoreNeeded">
-    <app-fetch-more-trigger
+    <app-infinity-scroll-trigger
       [loading]="loadingMore"
       (trigger)="fetchMore()"
-    ></app-fetch-more-trigger>
+    ></app-infinity-scroll-trigger>
   </div>
 </mat-list>

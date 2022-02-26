@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-fetch-more-trigger',
-  templateUrl: './fetch-more-trigger.component.html',
-  styleUrls: ['./fetch-more-trigger.component.scss'],
+  selector: 'app-infinity-scroll-trigger',
+  templateUrl: './infinity-scroll-trigger.component.html',
+  styleUrls: ['./infinity-scroll-trigger.component.scss'],
 })
-export class FetchMoreTriggerComponent implements OnInit {
+export class InfinityScrollTriggerComponent implements OnInit {
   @Output() trigger = new EventEmitter();
   @Input() loading = false;
 

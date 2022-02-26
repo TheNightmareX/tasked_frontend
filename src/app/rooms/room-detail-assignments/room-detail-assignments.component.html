@@ -29,9 +29,9 @@
     [assignment]="assignment"
   ></app-room-detail-assignments-item>
 
-  <app-fetch-more-trigger
+  <app-infinity-scroll-trigger
     *ngIf="!loadingMoreNeeded"
     [loading]="loadingMore"
     (trigger)="fetchMore()"
-  ></app-fetch-more-trigger>
+  ></app-infinity-scroll-trigger>
 </mat-action-list>

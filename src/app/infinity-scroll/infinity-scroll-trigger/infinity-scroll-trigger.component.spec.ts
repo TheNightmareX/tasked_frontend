@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FetchMoreTriggerComponent } from './fetch-more-trigger.component';
+import { InfinityScrollTriggerComponent } from './infinity-scroll-trigger.component';
 
 describe('FetchMoreTriggerComponent', () => {
-  let component: FetchMoreTriggerComponent;
-  let fixture: ComponentFixture<FetchMoreTriggerComponent>;
+  let component: InfinityScrollTriggerComponent;
+  let fixture: ComponentFixture<InfinityScrollTriggerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FetchMoreTriggerComponent],
+      declarations: [InfinityScrollTriggerComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FetchMoreTriggerComponent);
+    fixture = TestBed.createComponent(InfinityScrollTriggerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
