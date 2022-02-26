@@ -9,9 +9,9 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { MaterialModule } from '../material/material.module';
 import { ValidationModule } from '../validation/validation.module';
 import { ContainerComponent } from './container/container.component';
-import { HintDirective } from './hint.directive';
 import { LoadingDirective } from './loading.directive';
 import { UsernameComponent } from './username/username.component';
+import { HelpIconComponent } from './help-icon/help-icon.component';
 
 const modules = [
   CommonModule,
@@ -25,9 +25,9 @@ const modules = [
   ValidationModule,
 ];
 
-const components = [UsernameComponent, ContainerComponent];
+const components = [UsernameComponent, ContainerComponent, HelpIconComponent];
 
-const directives = [LoadingDirective, HintDirective];
+const directives = [LoadingDirective];
 
 @NgModule({
   declarations: [components, directives],

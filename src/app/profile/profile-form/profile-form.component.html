@@ -18,14 +18,11 @@
     <mat-error *ngIf="!username.valid" i18n>
       Must consist of alphanumeric, underscores or hyphens
     </mat-error>
-    <mat-icon
+    <app-help-icon
       matSuffix
-      matTooltip="Credentials for login which is immutable and unique"
-      i18n-matTooltip
-      appHint
-    >
-      help_outline
-    </mat-icon>
+      message="Credentials for login which is immutable and unique"
+      i18n-message
+    ></app-help-icon>
   </mat-form-field>
 
   <mat-form-field appearance="standard">
@@ -40,14 +37,11 @@
       [(ngModel)]="data.nickname"
       (ngModelChange)="propagate()"
     />
-    <mat-icon
+    <app-help-icon
       matSuffix
-      matTooltip="[Optional] Something that will be displayed to others instead of your username and can be updated whenever you like"
-      i18n-matTooltip
-      appHint
-    >
-      help_outline
-    </mat-icon>
+      message="[Optional] Something that will be displayed to others instead of your username and can be updated whenever you like"
+      i18n-message
+    ></app-help-icon>
   </mat-form-field>
 
   <mat-form-field appearance="standard">

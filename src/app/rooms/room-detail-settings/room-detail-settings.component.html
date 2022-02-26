@@ -45,14 +45,10 @@
         >
           <span i18n>Open to public</span>
         </mat-slide-toggle>
-        <mat-icon
-          class="helper"
-          matTooltip="If turned off, others will be unable to join this room"
-          i18n-matTooltip
-          appHint
-        >
-          help_outline
-        </mat-icon>
+        <app-help-icon
+          message="If turned off, others will be unable to join this room"
+          i18n-message
+        ></app-help-icon>
       </div>
     </ng-container>
   </app-room-detail-settings-section>
