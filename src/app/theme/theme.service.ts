@@ -12,7 +12,7 @@ export class ThemeService {
   private $themeColorMeta: HTMLMetaElement;
 
   constructor(storage: ThemeStorage) {
-    this.current = storage.next(this.getPreference());
+    this.current = storage.next(storage.value ?? this.getPreference());
     this.$root = document.documentElement as HTMLHtmlElement;
     this.$themeColorMeta = document.querySelector(
       'meta[name="theme-color"]',
