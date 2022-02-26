@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { LayoutsModule } from '../layouts/layouts.module';
+import { LoadingModule } from '../loading/loading.module';
 import { ProfileModule } from '../profile/profile.module';
 import { SharedModule } from '../shared/shared.module';
 import { ThemeModule } from '../theme/theme.module';
@@ -22,6 +23,7 @@ import { AuthComponent } from './auth.component';
     LayoutsModule,
     ProfileModule,
     ThemeModule,
+    LoadingModule,
   ],
 })
 export class AuthModule {}

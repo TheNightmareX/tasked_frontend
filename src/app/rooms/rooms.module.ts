@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { HelpIconModule } from '../help-icon/help-icon.module';
 import { InfinityScrollModule } from '../infinity-scroll/infinity-scroll.module';
+import { LoadingModule } from '../loading/loading.module';
 import { ModalModule } from '../modal/modal.module';
 import { SharedModule } from '../shared/shared.module';
 import { ThemeModule } from '../theme/theme.module';
@@ -58,6 +59,7 @@ import { RoomsComponent } from './rooms.component';
     InfinityScrollModule,
     ModalModule,
     HelpIconModule,
+    LoadingModule,
   ],
 })
 export class RoomsModule {}

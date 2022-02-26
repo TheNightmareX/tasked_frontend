@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { LoadingModule } from '../loading/loading.module';
 import { ProfileModule } from '../profile/profile.module';
 import { SharedModule } from '../shared/shared.module';
 import { LayoutContentComponent } from './layout-content/layout-content.component';
@@ -13,7 +14,7 @@ import { RefetchButtonComponent } from './refetch-button/refetch-button.componen
     LayoutContentComponent,
     RefetchButtonComponent,
   ],
-  imports: [SharedModule, ProfileModule],
+  imports: [SharedModule, ProfileModule, LoadingModule],
   exports: [
     LayoutComponent,
     LayoutHeaderComponent,
