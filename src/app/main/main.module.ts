@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LayoutsModule } from '../layouts/layouts.module';
 import { ProfileModule } from '../profile/profile.module';
 import { SharedModule } from '../shared/shared.module';
@@ -21,6 +22,7 @@ import { MainRoutingModule } from './main-routing.module';
     SharedModule,
     FlexLayoutModule,
     MainRoutingModule,
+    NgxSkeletonLoaderModule,
     LayoutsModule,
     ProfileModule,
     ThemeModule,

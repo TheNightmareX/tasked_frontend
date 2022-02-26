@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { HelpIconModule } from '../help-icon/help-icon.module';
 import { InfinityScrollModule } from '../infinity-scroll/infinity-scroll.module';
 import { LoadingModule } from '../loading/loading.module';
@@ -61,6 +62,7 @@ import { RoomsComponent } from './rooms.component';
     FormsModule,
     FlexLayoutModule,
     RoomsRoutingModule,
+    NgxSkeletonLoaderModule,
     ThemeModule,
     InfinityScrollModule,
     ModalModule,
