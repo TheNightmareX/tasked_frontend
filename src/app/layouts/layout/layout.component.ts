@@ -19,8 +19,7 @@ import { debounceTime, tap } from 'rxjs/operators';
 })
 export class LayoutComponent implements OnInit, OnDestroy {
   loading$: Observable<boolean>;
-
-  private _loading$ = new BehaviorSubject<boolean>(false);
+  private loading$$ = new BehaviorSubject<boolean>(false);
 
   @ViewChild('spinner')
   private spinnerTemplateRef!: TemplateRef<never>;
@@ -31,7 +30,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     private viewContainerRef: ViewContainerRef,
     private overlay: Overlay,
   ) {
-    this.loading$ = this._loading$.pipe(
+    this.loading$ = this.loading$$.pipe(
       debounceTime(100),
       tap((v) => (v ? this.showSpinner() : this.hideSpinner())),
     );
@@ -48,8 +47,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
     });
 
     this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) this._loading$.next(true);
-      else if (event instanceof NavigationEnd) this._loading$.next(false);
+      if (event instanceof NavigationStart) this.loading$$.next(true);
+      else if (event instanceof NavigationEnd) this.loading$$.next(false);
     });
   }
 

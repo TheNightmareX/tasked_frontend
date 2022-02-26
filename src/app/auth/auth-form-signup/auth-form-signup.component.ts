@@ -22,7 +22,7 @@ export class AuthFormSignupComponent implements OnInit {
     gender: Gender.Unknown,
   };
   loading = false;
-  submit$ = new Subject<Event>();
+  submit$$ = new Subject<Event>();
 
   constructor(
     private router: Router,
@@ -33,7 +33,7 @@ export class AuthFormSignupComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.submit$.pipe(throttleTime(1000)).subscribe(() => this.submit());
+    this.submit$$.pipe(throttleTime(1000)).subscribe(() => this.submit());
   }
 
   private submit() {

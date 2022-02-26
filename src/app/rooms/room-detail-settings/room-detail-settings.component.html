@@ -14,7 +14,7 @@
           [disabled]="!(isCreator$ | async)"
           maxlength="15"
           [(ngModel)]="data.name"
-          (ngModelChange)="change$.next()"
+          (ngModelChange)="change$$.next()"
         />
         <mat-hint align="end">{{ data.name?.length }} / 15</mat-hint>
       </mat-form-field>
@@ -27,7 +27,7 @@
           [disabled]="!(isCreator$ | async)"
           maxlength="100"
           [(ngModel)]="data.description"
-          (ngModelChange)="change$.next()"
+          (ngModelChange)="change$$.next()"
         ></textarea>
         <mat-hint align="end">{{ data.description?.length }} / 100</mat-hint>
       </mat-form-field>
@@ -41,7 +41,7 @@
         <mat-slide-toggle
           [disabled]="!(isCreator$ | async)"
           [(ngModel)]="data.isOpen"
-          (ngModelChange)="change$.next()"
+          (ngModelChange)="change$$.next()"
         >
           <span i18n>Open to public</span>
         </mat-slide-toggle>

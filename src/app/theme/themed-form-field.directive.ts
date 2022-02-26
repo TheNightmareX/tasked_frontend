@@ -17,7 +17,7 @@ export class ThemedFormFieldDirective implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.subscription = this.theme.current.value$.subscribe((theme) => {
+    this.subscription = this.theme.current.value$$.subscribe((theme) => {
       if (this.themed)
         this.matFormField.color = theme == 'light' ? 'primary' : 'accent';
     });

@@ -15,7 +15,7 @@ import { NotificationType } from 'src/app/common/notification-type.enum';
 export class AuthFormLoginComponent implements OnInit {
   data = { username: '', password: '' };
   loading = false;
-  submit$ = new Subject<Event>();
+  submit$$ = new Subject<Event>();
 
   @ViewChild(MatInput) private firstInput?: MatInput;
 
@@ -27,7 +27,7 @@ export class AuthFormLoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.submit$.pipe(throttleTime(1000)).subscribe(() => this.submit());
+    this.submit$$.pipe(throttleTime(1000)).subscribe(() => this.submit());
     setTimeout(() => {
       this.firstInput?.focus();
     });

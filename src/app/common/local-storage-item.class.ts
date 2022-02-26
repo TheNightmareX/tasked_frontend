@@ -2,7 +2,7 @@ import { BehaviorSubject } from 'rxjs';
 
 export class LocalStorageItem<Value> {
   value!: Value;
-  value$!: BehaviorSubject<Value>;
+  value$$!: BehaviorSubject<Value>;
 
   constructor(
     public key: string,
@@ -19,8 +19,8 @@ export class LocalStorageItem<Value> {
    */
   next<Next extends Value>(value: Next): LocalStorageItem<Next> {
     this.value = value;
-    if (this.value$) this.value$.next(value);
-    else this.value$ = new BehaviorSubject<Value>(value);
+    if (this.value$$) this.value$$.next(value);
+    else this.value$$ = new BehaviorSubject<Value>(value);
     return this as unknown as LocalStorageItem<Next>;
   }
 

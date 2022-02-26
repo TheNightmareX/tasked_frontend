@@ -29,7 +29,7 @@ export class RoomDetailSettingsComponent implements OnInit {
     isOpen: false,
   };
 
-  change$ = new Subject();
+  change$$ = new Subject();
   room$!: Observable<Room>;
   isCreator$!: Observable<boolean>;
   modified$!: Observable<boolean>;
@@ -55,7 +55,7 @@ export class RoomDetailSettingsComponent implements OnInit {
       map(([room, user]) => room.creator.id == user!.id),
     );
 
-    this.modified$ = combineLatest([this.room$, this.change$]).pipe(
+    this.modified$ = combineLatest([this.room$, this.change$$]).pipe(
       debounceTime(100),
       map(([room]) => isEmpty(filterKeys(this.data, (v, k) => v != room[k]))),
     );
@@ -67,7 +67,7 @@ export class RoomDetailSettingsComponent implements OnInit {
     this.room$.pipe(first()).subscribe((room) => {
       const currentValues = pick(room, ['name', 'description', 'isOpen']);
       this.data = currentValues;
-      this.change$.next();
+      this.change$$.next();
     });
   }
 
