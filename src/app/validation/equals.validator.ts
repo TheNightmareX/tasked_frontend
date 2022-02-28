@@ -7,18 +7,18 @@ import {
 } from '@angular/forms';
 
 @Directive({
-  selector: '[appEqual]',
+  selector: '[equals]',
   providers: [
-    { provide: NG_VALIDATORS, useExisting: EqualDirective, multi: true },
+    { provide: NG_VALIDATORS, useExisting: EqualsValidator, multi: true },
   ],
 })
-export class EqualDirective implements Validator {
-  @Input() appEqual = '';
+export class EqualsValidator implements Validator {
+  @Input() equals = '';
 
   constructor() {}
 
   validate(control: AbstractControl): ValidationErrors | null {
-    if (control.value == this.appEqual) return null;
-    else return { equal: false };
+    if (control.value == this.equals) return null;
+    else return { equals: false };
   }
 }

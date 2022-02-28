@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 
-import { EqualDirective } from './equal.directive';
+import { EqualsValidator } from './equals.validator';
 
 @NgModule({
-  declarations: [EqualDirective],
+  declarations: [EqualsValidator],
   imports: [],
-  exports: [EqualDirective],
+  exports: [EqualsValidator],
 })
 export class ValidationModule {}

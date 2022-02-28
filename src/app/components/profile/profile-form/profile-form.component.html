@@ -73,7 +73,7 @@
       autocomplete="new-password"
       [disabled]="!password.value"
       required
-      [appEqual]="data.password"
+      [equals]="data.password"
       [(ngModel)]="data.passwordConfirm"
       (ngModelChange)="propagate()"
       #passwordConfirm="ngModel"
