@@ -4,6 +4,7 @@ import { NotifierService } from 'angular-notifier';
 import { combineLatest, forkJoin, Subscription } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 import { NotificationType } from 'src/app/common/notification-type.enum';
+import { ModalComponent } from 'src/app/components/modal/modal/modal.component';
 import {
   AssignmentCreateGQL,
   AssignmentDeleteGQL,
@@ -14,7 +15,6 @@ import {
   TaskAssignmentListGQL,
   TaskAssignmentListQuery,
 } from 'src/app/graphql';
-import { ModalComponent } from 'src/app/components/modal/modal/modal.component';
 
 @Component({
   selector: 'app-room-detail-tasks-item-assign-popup',

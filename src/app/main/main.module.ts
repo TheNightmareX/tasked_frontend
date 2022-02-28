@@ -6,8 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
-import { LayoutModule } from '../layout/layout.module';
 import { ProfileModule } from '../components/profile/profile.module';
+import { LayoutModule } from '../layout/layout.module';
 import { ThemeModule } from '../theme/theme.module';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { MainLayoutSidenavComponent } from './main-layout-sidenav/main-layout-sidenav.component';

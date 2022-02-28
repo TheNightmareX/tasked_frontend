@@ -13,14 +13,14 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router';
 
+import { ThemeModule } from '../../theme/theme.module';
+import { ValidationModule } from '../../validation/validation.module';
 import { ModalModule } from '../modal/modal.module';
+import { UsernameModule } from '../username/username.module';
 import { ProfileBtnComponent } from './profile-btn/profile-btn.component';
 import { ProfileBtnMenuComponent } from './profile-btn-menu/profile-btn-menu.component';
-import { ProfileFormComponent } from './profile-form/profile-form.component';
-import { ThemeModule } from '../../theme/theme.module';
-import { UsernameModule } from '../username/username.module';
-import { ValidationModule } from '../../validation/validation.module';
 import { ProfileBtnMenuEditPopupComponent } from './profile-btn-menu-edit-popup/profile-btn-menu-edit-popup.component';
+import { ProfileFormComponent } from './profile-form/profile-form.component';
 
 @NgModule({
   declarations: [

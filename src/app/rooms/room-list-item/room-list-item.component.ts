@@ -3,12 +3,12 @@ import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { finalize } from 'rxjs/operators';
 import { NotificationType } from 'src/app/common/notification-type.enum';
+import { ModalComponent } from 'src/app/components/modal/modal/modal.component';
 import {
   ApplicationCreateGQL,
   ApplicationListGQL,
   RoomListQuery,
 } from 'src/app/graphql';
-import { ModalComponent } from 'src/app/components/modal/modal/modal.component';
 
 @Component({
   selector: 'app-room-list-item',

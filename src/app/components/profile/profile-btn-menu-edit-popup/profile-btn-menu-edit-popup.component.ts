@@ -7,13 +7,13 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { filterKeys } from 'src/app/common/filter-keys.func';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import { pick } from 'src/app/common/pick.func';
+import { ModalComponent } from 'src/app/components/modal/modal/modal.component';
 import {
   Gender,
   UserFragment,
   UserUpdateGQL,
   UserUpdateInput,
 } from 'src/app/graphql';
-import { ModalComponent } from 'src/app/components/modal/modal/modal.component';
 
 import { ProfileFormData } from '../profile-form/profile-form-data.interface';
 
