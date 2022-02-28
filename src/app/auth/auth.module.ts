@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 
-import { LayoutsModule } from '../layouts/layouts.module';
+import { LayoutModule } from '../layout/layout.module';
 import { LoadingModule } from '../loading/loading.module';
 import { ProfileModule } from '../profile/profile.module';
 import { ThemeModule } from '../theme/theme.module';
@@ -35,7 +35,7 @@ import { AuthRoutingModule } from './auth-routing.module';
     MatFormFieldModule,
     MatCardModule,
     MatButtonModule,
-    LayoutsModule,
+    LayoutModule,
     ProfileModule,
     ThemeModule,
     LoadingModule,

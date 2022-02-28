@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
-import { LayoutsModule } from '../layouts/layouts.module';
+import { LayoutModule } from '../layout/layout.module';
 import { ProfileModule } from '../profile/profile.module';
 import { ThemeModule } from '../theme/theme.module';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
@@ -28,7 +28,7 @@ import { MainRoutingModule } from './main-routing.module';
     MatIconModule,
     MatListModule,
     NgxSkeletonLoaderModule,
-    LayoutsModule,
+    LayoutModule,
     ProfileModule,
     ThemeModule,
   ],

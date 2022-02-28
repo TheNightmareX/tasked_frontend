@@ -50,4 +50,4 @@ import { ThemeButtonComponent } from './theme-button/theme-button.component';
     ThemeButtonComponent,
   ],
 })
-export class LayoutsModule {}
+export class LayoutModule {}
