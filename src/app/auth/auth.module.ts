@@ -6,9 +6,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 
+import { LayoutModule } from '../components/layout/layout.module';
 import { LoadingModule } from '../components/loading/loading.module';
 import { ProfileModule } from '../components/profile/profile.module';
-import { LayoutModule } from '../layout/layout.module';
 import { SharedModule } from '../shared/shared.module';
 import { ThemeModule } from '../theme/theme.module';
 import { AuthComponent } from './auth.component';
