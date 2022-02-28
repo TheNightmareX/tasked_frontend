@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Subject } from 'rxjs';
 import { finalize, throttleTime } from 'rxjs/operators';
-import { AuthService } from 'src/app/features/auth/auth.service';
 import { NotificationType } from 'src/app/common/notification-type.enum';
+import { AuthService } from 'src/app/features/auth/auth.service';
 
 @Component({
   selector: 'app-auth-form-login',

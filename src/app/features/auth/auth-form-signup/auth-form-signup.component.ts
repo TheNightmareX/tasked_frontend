@@ -3,10 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Subject } from 'rxjs';
 import { concatMap, finalize, throttleTime } from 'rxjs/operators';
-import { AuthService } from 'src/app/features/auth/auth.service';
 import { filterKeys } from 'src/app/common/filter-keys.func';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import { ProfileFormData } from 'src/app/components/profile/profile-form/profile-form-data.interface';
+import { AuthService } from 'src/app/features/auth/auth.service';
 import { Gender, UserCreateGQL, UserCreateInput } from 'src/app/graphql';
 
 @Component({
