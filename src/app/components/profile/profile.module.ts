@@ -1,7 +1,4 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -12,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 import { ThemeModule } from '../../theme/theme.module';
 import { ValidationModule } from '../../validation/validation.module';
@@ -30,9 +28,7 @@ import { ProfileFormComponent } from './profile-form/profile-form.component';
     ProfileFormComponent,
   ],
   imports: [
-    CommonModule,
-    FormsModule,
-    FlexLayoutModule,
+    SharedModule,
     RouterModule,
     MatOptionModule,
     MatFormFieldModule,

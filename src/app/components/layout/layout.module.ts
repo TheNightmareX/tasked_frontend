@@ -1,7 +1,5 @@
 import { OverlayModule } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -9,6 +7,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 import { ContainerModule } from '../container/container.module';
 import { LoadingModule } from '../loading/loading.module';
@@ -28,8 +27,7 @@ import { ThemeButtonComponent } from './theme-button/theme-button.component';
     ThemeButtonComponent,
   ],
   imports: [
-    CommonModule,
-    FlexLayoutModule,
+    SharedModule,
     RouterModule,
     OverlayModule,
     MatIconModule,
