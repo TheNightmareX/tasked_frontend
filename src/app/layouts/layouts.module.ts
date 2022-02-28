@@ -17,6 +17,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { LayoutContentComponent } from './layout-content/layout-content.component';
 import { LayoutHeaderComponent } from './layout-header/layout-header.component';
 import { RefetchButtonComponent } from './refetch-button/refetch-button.component';
+import { ThemeButtonComponent } from './theme-button/theme-button.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { RefetchButtonComponent } from './refetch-button/refetch-button.componen
     LayoutHeaderComponent,
     LayoutContentComponent,
     RefetchButtonComponent,
+    ThemeButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -45,6 +47,7 @@ import { RefetchButtonComponent } from './refetch-button/refetch-button.componen
     LayoutHeaderComponent,
     LayoutContentComponent,
     RefetchButtonComponent,
+    ThemeButtonComponent,
   ],
 })
 export class LayoutsModule {}
