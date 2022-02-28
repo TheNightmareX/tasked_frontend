@@ -5,10 +5,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
-import { ContainerModule } from '../components/container/container.module';
-import { InfinityScrollModule } from '../components/infinity-scroll/infinity-scroll.module';
-import { UsernameModule } from '../components/username/username.module';
-import { SharedModule } from '../shared/shared.module';
+import { ContainerModule } from '../../components/container/container.module';
+import { InfinityScrollModule } from '../../components/infinity-scroll/infinity-scroll.module';
+import { UsernameModule } from '../../components/username/username.module';
+import { SharedModule } from '../../shared/shared.module';
 import { ApplicationListComponent } from './application-list/application-list.component';
 import { ApplicationListItemComponent } from './application-list-item/application-list-item.component';
 import { ApplicationsComponent } from './applications.component';

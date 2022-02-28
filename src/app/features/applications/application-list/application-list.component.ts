@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { QueryRef } from 'apollo-angular';
 import { from, Observable } from 'rxjs';
 import { finalize, map, tap } from 'rxjs/operators';
-import { AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from 'src/app/features/auth/auth.service';
 import {
   ApplicationListGQL,
   ApplicationListQuery,

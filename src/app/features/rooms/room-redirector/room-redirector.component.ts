@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { combineLatest } from 'rxjs';
 import { first, map } from 'rxjs/operators';
-import { AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from 'src/app/features/auth/auth.service';
 import { NotificationType } from 'src/app/common/notification-type.enum';
 import { RoomListGQL } from 'src/app/graphql';
 

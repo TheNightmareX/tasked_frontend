@@ -4,7 +4,7 @@ import { Apollo } from 'apollo-angular';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { AuthGQL, AuthMutation, MeGQL, MeQuery } from '../graphql';
+import { AuthGQL, AuthMutation, MeGQL, MeQuery } from '../../graphql';
 import { AuthTokenStorage } from './auth-token.storage';
 
 type User = MeQuery['me'];

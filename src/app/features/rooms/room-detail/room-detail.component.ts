@@ -4,7 +4,7 @@ import { MatDrawerMode } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError, first, map, tap } from 'rxjs/operators';
-import { AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from 'src/app/features/auth/auth.service';
 import { Role, RoomDetailGQL, RoomDetailQuery } from 'src/app/graphql';
 import { ThemeService } from 'src/app/theme/theme.service';
 

@@ -6,11 +6,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 
-import { LayoutModule } from '../components/layout/layout.module';
-import { LoadingModule } from '../components/loading/loading.module';
-import { ProfileModule } from '../components/profile/profile.module';
-import { SharedModule } from '../shared/shared.module';
-import { ThemeModule } from '../theme/theme.module';
+import { LayoutModule } from '../../components/layout/layout.module';
+import { LoadingModule } from '../../components/loading/loading.module';
+import { ProfileModule } from '../../components/profile/profile.module';
+import { SharedModule } from '../../shared/shared.module';
+import { ThemeModule } from '../../theme/theme.module';
 import { AuthComponent } from './auth.component';
 import { AuthFormLayoutComponent } from './auth-form-layout/auth-form-layout.component';
 import { AuthFormLoginComponent } from './auth-form-login/auth-form-login.component';

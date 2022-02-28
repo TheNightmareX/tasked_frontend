@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { debounceTime, finalize, first, map } from 'rxjs/operators';
-import { AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from 'src/app/features/auth/auth.service';
 import { filterKeys } from 'src/app/common/filter-keys.func';
 import { isEmpty } from 'src/app/common/is-empty.func';
 import { NotificationType } from 'src/app/common/notification-type.enum';
