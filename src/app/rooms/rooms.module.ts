@@ -1,7 +1,4 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -23,6 +20,7 @@ import { InfinityScrollModule } from '../components/infinity-scroll/infinity-scr
 import { LoadingModule } from '../components/loading/loading.module';
 import { ModalModule } from '../components/modal/modal.module';
 import { UsernameModule } from '../components/username/username.module';
+import { SharedModule } from '../shared/shared.module';
 import { ThemeModule } from '../theme/theme.module';
 import { RoomCreationComponent } from './room-creation/room-creation.component';
 import { RoomDetailComponent } from './room-detail/room-detail.component';
@@ -72,9 +70,7 @@ import { RoomsRoutingModule } from './rooms-routing.module';
     RoomListItemComponent,
   ],
   imports: [
-    CommonModule,
-    FormsModule,
-    FlexLayoutModule,
+    SharedModule,
     RoomsRoutingModule,
     MatDividerModule,
     MatIconModule,

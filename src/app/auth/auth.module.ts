@@ -1,6 +1,4 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,6 +9,7 @@ import { MatListModule } from '@angular/material/list';
 import { LoadingModule } from '../components/loading/loading.module';
 import { ProfileModule } from '../components/profile/profile.module';
 import { LayoutModule } from '../layout/layout.module';
+import { SharedModule } from '../shared/shared.module';
 import { ThemeModule } from '../theme/theme.module';
 import { AuthComponent } from './auth.component';
 import { AuthFormLayoutComponent } from './auth-form-layout/auth-form-layout.component';
@@ -26,8 +25,7 @@ import { AuthRoutingModule } from './auth-routing.module';
     AuthFormSignupComponent,
   ],
   imports: [
-    CommonModule,
-    FormsModule,
+    SharedModule,
     AuthRoutingModule,
     MatIconModule,
     MatListModule,
