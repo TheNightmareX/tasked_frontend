@@ -14,7 +14,7 @@ import {
   TaskAssignmentListGQL,
   TaskAssignmentListQuery,
 } from 'src/app/graphql';
-import { ModalComponent } from 'src/app/modal/modal/modal.component';
+import { ModalComponent } from 'src/app/components/modal/modal/modal.component';
 
 @Component({
   selector: 'app-room-detail-tasks-item-assign-popup',

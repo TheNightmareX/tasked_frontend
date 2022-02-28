@@ -13,7 +13,7 @@ import {
   UserUpdateGQL,
   UserUpdateInput,
 } from 'src/app/graphql';
-import { ModalComponent } from 'src/app/modal/modal/modal.component';
+import { ModalComponent } from 'src/app/components/modal/modal/modal.component';
 
 import { ProfileFormData } from '../profile-form/profile-form-data.interface';
 
