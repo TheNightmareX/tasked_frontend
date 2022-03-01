@@ -12,7 +12,6 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 ``;
 
-import { ValidationModule } from '../../validation/validation.module';
 import { ModalModule } from '../modal/modal.module';
 import { UsernameModule } from '../username/username.module';
 import { ProfileBtnComponent } from './profile-btn/profile-btn.component';
@@ -39,7 +38,6 @@ import { ProfileFormComponent } from './profile-form/profile-form.component';
     MatDialogModule,
     MatInputModule,
     MatSelectModule,
-    ValidationModule,
     UsernameModule,
     ModalModule,
   ],
