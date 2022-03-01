@@ -21,7 +21,6 @@ import { LoadingModule } from '../../components/loading/loading.module';
 import { ModalModule } from '../../components/modal/modal.module';
 import { UsernameModule } from '../../components/username/username.module';
 import { SharedModule } from '../../shared/shared.module';
-import { ThemeModule } from '../../theme/theme.module';
 import { RoomCreationComponent } from './room-creation/room-creation.component';
 import { RoomDetailComponent } from './room-detail/room-detail.component';
 import { RoomDetailAssignmentsComponent } from './room-detail-assignments/room-detail-assignments.component';
@@ -86,7 +85,6 @@ import { RoomsRoutingModule } from './rooms-routing.module';
     MatSnackBarModule,
     MatSlideToggleModule,
     NgxSkeletonLoaderModule,
-    ThemeModule,
     InfinityScrollModule,
     ModalModule,
     HelpIconModule,

@@ -10,8 +10,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
+``;
 
-import { ThemeModule } from '../../theme/theme.module';
 import { ValidationModule } from '../../validation/validation.module';
 import { ModalModule } from '../modal/modal.module';
 import { UsernameModule } from '../username/username.module';
@@ -41,7 +41,6 @@ import { ProfileFormComponent } from './profile-form/profile-form.component';
     MatSelectModule,
     ValidationModule,
     UsernameModule,
-    ThemeModule,
     ModalModule,
   ],
   exports: [

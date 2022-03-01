@@ -10,7 +10,6 @@ import { LayoutModule } from '../../components/layout/layout.module';
 import { LoadingModule } from '../../components/loading/loading.module';
 import { ProfileModule } from '../../components/profile/profile.module';
 import { SharedModule } from '../../shared/shared.module';
-import { ThemeModule } from '../../theme/theme.module';
 import { AuthComponent } from './auth.component';
 import { AuthFormLayoutComponent } from './auth-form-layout/auth-form-layout.component';
 import { AuthFormLoginComponent } from './auth-form-login/auth-form-login.component';
@@ -35,7 +34,6 @@ import { AuthRoutingModule } from './auth-routing.module';
     MatButtonModule,
     LayoutModule,
     ProfileModule,
-    ThemeModule,
     LoadingModule,
   ],
 })

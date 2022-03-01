@@ -7,7 +7,6 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LayoutModule } from '../../components/layout/layout.module';
 import { ProfileModule } from '../../components/profile/profile.module';
 import { SharedModule } from '../../shared/shared.module';
-import { ThemeModule } from '../../theme/theme.module';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { MainLayoutSidenavComponent } from './main-layout-sidenav/main-layout-sidenav.component';
 import { MainLayoutSidenavRoomsComponent } from './main-layout-sidenav-rooms/main-layout-sidenav-rooms.component';
@@ -28,7 +27,6 @@ import { MainRoutingModule } from './main-routing.module';
     NgxSkeletonLoaderModule,
     LayoutModule,
     ProfileModule,
-    ThemeModule,
   ],
 })
 export class MainModule {}
