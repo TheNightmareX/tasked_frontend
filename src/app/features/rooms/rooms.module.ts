@@ -12,6 +12,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import { ContainerModule } from '../../components/container/container.module';
@@ -84,6 +85,7 @@ import { RoomsRoutingModule } from './rooms-routing.module';
     MatButtonModule,
     MatSnackBarModule,
     MatSlideToggleModule,
+    MatToolbarModule,
     NgxSkeletonLoaderModule,
     InfinityScrollModule,
     ModalModule,
